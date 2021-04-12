@@ -1,0 +1,54 @@
+% 255 = 1, ..., 0 = 0
+\definecolor{lightgray}{rgb}{0.9725,0.9725,0.9725}
+
+\DeclareMathOperator\rank{rank}
+\DeclareMathOperator\Span{Span}
+\DeclareMathOperator\Col{Col}
+\DeclareMathOperator\Row{Row}
+\DeclareMathOperator\Null{Null}
+\DeclareMathOperator\adj{adj}
+\DeclareMathOperator\trace{tr}
+\DeclareMathOperator\diag{diag}
+\DeclareMathOperator\Hom{Hom}
+\DeclareMathOperator\Floor{floor}
+\DeclareMathOperator\Ceil{ceil}
+
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+\newcommand*{\pref}[2]{(#1 \ref{#2})}
+\newcommand*{\defines}{\coloneqq}
+\newcommand*{\bolddot}{\boldsymbol{\cdot}}
+\newcommand*{\setbuild}{\:\middle|\:}
+\newcommand*{\vertbar}{\rule[-1ex]{0.5pt}{2.5ex}}
+\newcommand*{\horzbar}{\rule[.5ex]{2.5ex}{0.5pt}}
+\newcommand*{\proofright}{"$\Rightarrow$" }
+\newcommand*{\proofleft}{"$\Leftarrow$" }
+\newcommand*{\notimplies}{\mathrel{{\ooalign{\hidewidth$\not\phantom{=}$\hidewidth\cr$\implies$}}}}
+\newcommand*{\tolim}[2]{\underset{#1\to#2}{\xrightarrow{\hspace*{1.1cm}}}}
+\newcommand*{\seqinfty}[1]{\tolim{#1}{\infty}}
+\newcommand*{\domain}[1]{\mathcal{D}(#1)}
+\newcommand*{\codomain}[1]{\mathcal{C}(#1)}
+\newcommand*{\image}[1]{\text{Im}(#1)}
+\newcommand*{\kernel}[1]{\text{Ker}(#1)}
+\newcommand*{\grad}[1]{\text{grad}\,#1}
+\newcommand*{\divergence}[1]{\text{div}\,#1}
+\newcommand*{\curl}[1]{\text{curl}\,#1}
+\newcommand*\diff{\mathop{}\!\mathrm{d}}
+\newcommand*{\evalat}[3]{\left.#1\vphantom{\int}\right\rvert_{#2}^{#3}}
+\newcommand*{\hati}{\hat{\imath}}
+\newcommand*{\hatj}{\hat{\jmath}}
+\newcommand*{\hatk}{\hat{k}}
+\newcommand*{\inlinematrix}[1]{\left(\begin{smallmatrix}#1\end{smallmatrix}\right)}
+
+\renewcommand{\Re}{\operatorname{\mathfrak{Re}}}
+\renewcommand{\Im}{\operatorname{\mathfrak{Im}}}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
