@@ -1,0 +1,75 @@
+% !TEX spellcheck=en_US
+\documentclass[a4paper]{article}
+\usepackage[american]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[table]{xcolor}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{csquotes}
+\usepackage{hyperref}
+\usepackage[acronym]{glossaries}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathtools}
+\usepackage[backend=biber,style=phys]{biblatex}
+
+\addbibresource{bibliography.bib}
+
+\include{macros}
+
+\setacronymstyle{short-long}
+\makenoidxglossaries
+
+\include{acronyms}
+
+\begin{document}
+
+\begin{titlepage}
+    \centering
+    {\scshape\Huge Advanced Systems \par}
+    \par\vspace{1cm}
+    \includegraphics[width=0.45\textwidth]{images/logo.png}\par
+    \vspace{3cm}
+    {\huge\bfseries Article Title \par}
+    \vspace{1cm}
+    {\LARGE\itshape Author \par}
+    \vspace{1cm}
+    {\large\today\par}
+    \vfill
+    \begin{abstract}
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut
+        mollis nisl. Quisque eu justo sed risus consectetur ullamcorper. Maecenas
+        at commodo mauris. Nunc id viverra mi. Suspendisse vel lacus in nisi luctus
+        mattis non et eros. Duis nisi lectus, mattis nec nunc vel, consequat iaculis
+        orci. Vestibulum faucibus est efficitur ipsum pellentesque, ut faucibus
+        nisi rutrum.
+    \end{abstract}
+\end{titlepage}
+
+\newpage
+
+\printnoidxglossary[type=\acronymtype]
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+% === Begin Section Includes ===
+
+\include{sections/introduction}
+
+\include{sections/formulas}
+
+% === End Section Includes ====
+
+\newpage
+
+\medskip
+\printbibliography
+
+\end{document}
