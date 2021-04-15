@@ -3,6 +3,7 @@
 \usepackage[american]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{CJKutf8}
 \usepackage{graphicx}
 \usepackage[table]{xcolor}
 \usepackage{caption}
@@ -14,6 +15,7 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{mathtools}
+\usepackage{circuitikz}
 \usepackage[backend=biber,style=phys]{biblatex}
 
 \addbibresource{bibliography.bib}
@@ -33,19 +35,18 @@
     \par\vspace{1cm}
     \includegraphics[width=0.45\textwidth]{images/logo.png}\par
     \vspace{3cm}
-    {\huge\bfseries Article Title \par}
+    {\huge\bfseries Lecture Notes \par}
     \vspace{1cm}
-    {\LARGE\itshape Author \par}
+    \begin{CJK}{UTF8}{song}
+        {\LARGE 間澤東雲 \par}
+    \end{CJK}
     \vspace{1cm}
     {\large\today\par}
     \vfill
     \begin{abstract}
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut
-        mollis nisl. Quisque eu justo sed risus consectetur ullamcorper. Maecenas
-        at commodo mauris. Nunc id viverra mi. Suspendisse vel lacus in nisi luctus
-        mattis non et eros. Duis nisi lectus, mattis nec nunc vel, consequat iaculis
-        orci. Vestibulum faucibus est efficitur ipsum pellentesque, ut faucibus
-        nisi rutrum.
+        This document is a compilation of lecture notes for intermediate mathematics.
+        It is intended to serve as a study guide for members of the Advanced System
+        organization.
     \end{abstract}
 \end{titlepage}
 
@@ -63,7 +64,9 @@
 
 \include{sections/introduction}
 
-\include{sections/formulas}
+\include{sections/logic}
+
+\include{sections/single-variable-calculus}
 
 % === End Section Includes ====
 
