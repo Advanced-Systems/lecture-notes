@@ -1,6 +1,15 @@
 % 255 = 1, ..., 0 = 0
 \definecolor{lightgray}{rgb}{0.9725,0.9725,0.9725}
 
+\newtheorem{definition}{Definition}
+\newtheorem{lemma}{Lemma}
+\theoremstyle{remark}
+\newtheorem{exm}{Example}
+\newtheorem{thm}{Theorem}
+\newtheorem{crl}{Corollary}
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
+
 \DeclareMathOperator\rank{rank}
 \DeclareMathOperator\Span{Span}
 \DeclareMathOperator\Col{Col}
@@ -18,7 +27,7 @@
 \DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 \DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 
-\newcommand*{\pref}[2]{(#1 \ref{#2})}
+\newcommand*{\pref}[2]{#1 (\ref{#2})}
 \newcommand*{\defines}{\coloneqq}
 \newcommand*{\bolddot}{\boldsymbol{\cdot}}
 \newcommand*{\setbuild}{\:\middle|\:}
