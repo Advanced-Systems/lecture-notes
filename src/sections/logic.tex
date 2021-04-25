@@ -1,4 +1,4 @@
-\section{Logic}
+\section{Logic}\label{sec-logic}
 
 % ==============================================================================
 % ==============================================================================
@@ -6,7 +6,45 @@
 
 \subsection{Truth Tables}\label{subsec-truth-table}
 
-% TODO: Add description and explanation here (T=1, F=0)
+Propositional logic is a formal mathematical framework that encodes the truth value
+of one or more propositions. A proposition is a statement that, by itself, is either
+true or false. These propositions can be combined with binary operations to determine
+the truth value of a statement expressed in the vernacular. While every proposition
+is a statement, not every statement is a valid proposition.
+
+\begin{enumerate}
+    \item Questions are invalid propositions.
+    \item Statements where the intention is unclear or ambiguous don't qualify as propositions, either.
+\end{enumerate}
+
+In practice, the variables \(A,B,C,\dots\) are often used to denote propositions.
+Therefore, they are also sometimes referred to as \emph{propositional variables}
+that can take on one of two possible values: \(T\) (true) or \(F\) (false). In
+computer science, \(1\) (true) or \(0\) (false) are commonly used instead. It is
+worth adding that many programming languages interpret any number \(n\neq0\) as
+true\footnote{Take Python or C++ as prominent examples for this behavior.}. While
+propositional logic has its place, inference systems are used in formal reasoning
+instead, though this topic is beyond the scope of this subsection.
+
+\begin{definition}\label{def-axiom}
+    An axiom is a statement that is taken to be true and is confined within the
+    system of logic they define. They establish the premise of reasoning and cannot
+    be formally proved.
+\end{definition}
+
+There are five important axioms from which one can obtain a series of useful logical
+statements that will later be used to formulate mathematical sound proofs. In order
+to make this material more accessible, each axiom will be prefaced by a quote written
+in the vernacular that accurately reflects the statement in question.
+
+\begin{displayquote}
+    ``\emph{It takes courage and strength to be empathetic.}''
+    --- Jacinda Ardern\footnote{New Zealand politician who has been serving as the
+    40th prime minister of New Zealand and leader of the Labour Party since 2017.}
+\end{displayquote}
+
+In this example, a person is said to be empathetic (\(C\)) if one is both
+courageous (\(A\)) \emph{and} strong in character (\(B\)).
 
 \begin{table}[hbt!]
     \centering
@@ -21,6 +59,17 @@
     \caption{Conjunction}\label{table-conjunction}
 \end{table}
 
+\begin{displayquote}
+    ``\emph{So much of life is not about whether you're good or bad, or right or
+    wrong, or can afford or not afford -- it's about timing.}''
+    -- Adrian Anthony Gill\footnote{Scottish writer and critic.}
+\end{displayquote}
+
+In natural languages, a distinction is often drawn implicitly between inclusive
+and exclusive disjunctions. See \pref{table}{table-disjunction} as an example of
+the inclusive disjunction (\emph{or}). The truth table for the exclusive disjunction
+(\emph{xor}) will be introduced later in \pref{subsection}{subsec-circuit-representation}.
+
 \begin{table}[hbt!]
     \centering
     \rowcolors{1}{}{lightgray}
@@ -33,6 +82,18 @@
     \end{tabular}
     \caption{Disjunction}\label{table-disjunction}
 \end{table}
+
+\begin{displayquote}
+    ``\emph{'Awkward' implies both solidarity and implication. Nobody is exempt.}''
+    -- Elif Batuman\footnote{American author, academic, and journalist.}
+\end{displayquote}
+
+One interesting thing to note about \pref{table}{table-subjunction} is that it is
+possible to arrive to true statements even if the premise or assumption turned out
+to be incorrect, an important implication of this being that there are no valuable
+insights to be gained from a false premise. Therefore, it is of utmost importance
+in logical reasoning to verify that the starting arguments have a positively affirmative
+truth value.
 
 \begin{table}[hbt!]
     \centering
@@ -47,6 +108,16 @@
     \caption{Subjunction}\label{table-subjunction}
 \end{table}
 
+\begin{displayquote}
+    ``\emph{One man is equivalent to all Creation. One man is a World in miniature.}''
+    -- Albert Pike\footnote{American author, poet, orator, editor, lawyer, jurist,
+    and prominent member of the Freemasons}
+\end{displayquote}
+
+Logically equivalent statements share the same truth value across all occurring
+propositional variables. They become important later in ring proofs where multiple
+distinct propositions implicate each other in all directions.
+
 \begin{table}[hbt!]
     \centering
     \rowcolors{1}{}{lightgray}
@@ -60,13 +131,31 @@
     \caption{Bisubjunction}\label{table-bisubjunction}
 \end{table}
 
+\begin{exm}\label{exm-logical-equivalent}
+    It is left to the reader as an exercise to use a truth table to verify the
+    following proposition:
+    \begin{equation}
+        \left((A \Rightarrow B) \land (B \Rightarrow A)\right) \Leftrightarrow (A \Leftrightarrow B)
+    \end{equation}
+\end{exm}
+
+\begin{displayquote}
+    ``\emph{No worse fate can befall a young man or woman than becoming prematurely
+    entrenched in prudence and negation.}''
+    -- Knut Hamsun\footnote{Norwegian writer and Nobel Prize winner in Literature
+    in 1920.}
+\end{displayquote}
+
+Negation is one of the simplest unary operations in that it inverts the truth
+value of a propositional variable.
+
 \begin{table}[hbt!]
     \centering
     \rowcolors{1}{}{lightgray}
     \begin{tabular}{*{6}{c}}
-        $(\neg$ & $B)$ & $\rightarrow$ & $C$ \\
-                & T    &               & F   \\
-                & F    &               & T   \\
+        $(\neg B)$ & $\rightarrow$ & $C$ \\
+                 T &               & F   \\
+                 F &               & T   \\
     \end{tabular}
     \caption{Negation}\label{table-negation}
 \end{table}
@@ -75,10 +164,10 @@
 % ==============================================================================
 % ==============================================================================
 
-\subsection{Circuit Representation of Logical Operations}\label{subsec-circuits}
+\subsection{Circuit Representation of Logical Operations}\label{subsec-circuit-representation}
 
 Truth tables are very useful in determining the nature of logic gates.
-In \pref{Table}{subsec-truth-table} find defined the axioms which build the basis for
+In \pref{table}{subsec-truth-table} find defined the axioms which build the basis for
 this section. Take \texttt{XOR}, for instance: this logic gate evaluates to $1$
 if and only if one of both poles receives $1$ as an input as opposed to \texttt{OR}
 which also accepts two positive-valued states favorably.
@@ -191,8 +280,8 @@ the previous sum to be carried over as \texttt{cin} to the next half adder.
     \caption{Circuit of an full adder}\label{circuit-full-adder:1}
 \end{figure}
 
-Circuit (\ref{circuit-full-adder:1}) introduced three additional truth values 
-to make the truth table (\ref{truth-table-full-adder}) for the full adder easier
+Circuit \pref{figure}{circuit-full-adder:1} introduced three additional truth values 
+to make the truth \pref{table}{truth-table-full-adder} for the full adder easier
 to read\footnote{Note that $S:\Leftrightarrow D\texttt{ XOR } C_{in}$ and 
 $C_{out} :\Leftrightarrow E\texttt{ OR }F$}. It is helpful to think of gate $D$
 and gate $F$ as the first half adder.
