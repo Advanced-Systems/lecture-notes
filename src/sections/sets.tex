@@ -1,0 +1,128 @@
+\section{Sets}\label{sec-sets}
+
+% ==============================================================================
+% ==============================================================================
+% ==============================================================================
+
+\begin{definition}\label{def-indicator-function}
+    Let $X$ be a set. For each subset $A \subseteq X$ there is defined the 
+    indicator function\footnote{Sometimes, the term characteristic function is 
+    used to describe the function that indicates membership in a set in other 
+    fields of mathematics. The term indicator function is more prominently used 
+    in probability theory.} $\chi_A:X\rightarrow \{0,1\}$ of the set $A$ as
+    \begin{equation}
+        \chi_A(x) = \begin{cases}
+            1,\;\text{ if } x \in A \\
+            0,\;\text{ if } x \notin A
+        \end{cases}
+    \end{equation}
+    We will write $\chi_A$ instead of $\chi_A(x)$ if the parameter
+    $x$ is unambiguous.
+\end{definition}
+
+\begin{thm}\label{thm-complement-indicator-function}
+    Let $\chi_A$ be an indicator function. Then the complement of $A$ (i.e. 
+    $\overline{A} \defines A^C$) is
+    \begin{equation*}
+        \chi_{\overline{A}} = 1 - \chi_A
+    \end{equation*}
+\end{thm}
+
+\begin{proof}
+    Of \pref{theorem}{thm-complement-indicator-function}.
+    \begin{align*}
+        \chi_{\overline{A}}(x) &= \begin{cases}
+            1,\;\text{ if } \neg(x \in A) \\
+            0,\;\text{ if } \neg(x \notin A)
+        \end{cases} \\
+        &= \begin{cases}
+            1-0,\;\text{ if } x \notin A \\
+            1-1,\;\text{ if } x \in A
+        \end{cases} \\
+        &=1 - \begin{cases}
+            0,\;\text{ if } x \notin A \\
+            1,\;\text{ if } x \in A
+        \end{cases} \\
+        &= 1 - \chi_A(x)
+    \end{align*}
+\end{proof}
+
+\begin{thm}\label{thm-set-cardinality-indicator-function}
+    Let $\chi_A$ be an indicator function with $A$ as a finite set. Then,
+    \begin{equation*}
+        \abs{A} = \sum_{x \in X} \chi_A(x)
+    \end{equation*}
+\end{thm}
+
+\begin{proof}
+    Of theorem (\ref{thm-set-cardinality-indicator-function}).
+    \begin{align*}
+        \abs{A} &=\sum_{x\in A}\underbrace{\chi_A(x)}_{1}\\
+                &=\sum_{x\in A}\chi_A(x)+\sum_{x\in X\setminus A}\underbrace{\chi_A(x)}_{0}\\
+                &=\sum_{x\in (A\cup (X\setminus A))}\chi_A(x)\\
+                &\overset{(\star)}{=}\sum_{x\in X}\chi_A(x).
+    \end{align*}
+    since 
+    \begin{equation*}
+        (\star) :\Leftrightarrow A\cup(X\setminus A)=(A\cup X)\setminus(A\setminus A)=X\setminus \emptyset=X
+    \end{equation*}
+\end{proof}
+
+\begin{thm}\label{thm-cap-indicator-function}
+    Let $\chi_A,\chi_B$ be indicator functions. Then:
+    \begin{equation*}
+        \chi_{A \cap B} = \chi_A\chi_B
+    \end{equation*}
+\end{thm}
+
+\begin{proof}
+    Of \pref{theorem}{thm-cap-indicator-function}.
+    \begin{align*}
+        \chi_{A \cap B} &= \begin{cases}
+            1\;\text{ if } x \in (A \cap B)\\
+            0\;\text{ if } x \notin (A \cap B)
+        \end{cases}\\
+        &= \begin{cases}
+            1\;\text{ if } x \in A \land x \in B\\
+            0\;\text{ if } x \notin A \land x \notin B
+        \end{cases}\\
+        &= \left(\begin{cases}
+            1\;\text{ if } x \in A\\
+            0\;\text{ if } x \notin A
+        \end{cases}\right)\left(\begin{cases}
+            1\;\text{ if } x \in B\\
+            0\;\text{ if } x \notin B
+        \end{cases}\right)\\
+        &= \chi_A\chi_B
+    \end{align*}
+\end{proof}
+
+\begin{thm}\label{thm-cup-indicator-function}
+    Let $\chi_A,\chi_B$ be indicator functions. Then:
+    \begin{equation*}
+        \chi_{A \cup B} = \chi_A + \chi_B - \chi_A\chi_B
+    \end{equation*}
+\end{thm}
+
+\begin{proof}
+    Of \pref{theorem}{thm-cup-indicator-function}.
+    By using the fact that $\overline{\overline{A}}=A$ in combination with 
+    \pref{theorem}{thm-complement-indicator-function} and
+    \pref{theorem}{thm-cap-indicator-function} we get that
+    \begin{align*}
+        \chi_{\overline{\overline{A \cup B}}} 
+        &= 1 - \chi_{\overline{A \cup B}}\\
+        &\overset{(\star)}{=} 1 - \chi_{\overline{A} \cap \overline{B}}\\
+        &= 1 - \chi_{\overline{A}} \chi_{\overline{B}}\\
+        &= 1 - (1 - \chi_A)(1 - \chi_B)\\
+        &= 1 - \left(1 - \chi_B - \chi_A + \chi_A\chi_B\right)\\
+        &= \chi_A - \chi_B + \chi_A\chi_B\\
+    \end{align*}
+    Recall that $(\star)$ uses one of De Morgan's laws which states that
+    \begin{align*}
+        (\star) &\iff \overline{A \cup B}\\
+                &\iff \bigwedge_{x\in X}\{x\notin (A\cup B)\}\\
+                &\iff \bigwedge_{x\in X}\{x\notin A \land x\notin B\}\\
+                &\iff \overline{A} \cap \overline{B}
+    \end{align*}
+\end{proof}
