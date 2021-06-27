@@ -8,14 +8,25 @@
 
 ## Remarks
 
-TODO
+This document is a compilation of lecture notes for intermediate mathematics. It
+is intended to serve as a study guide for members of the Advanced System organization.
 
-## Compilation
+## Compile
 
-You can use these commands to compile a PDf version of this
-document:
+Update all submodules:
 
 ```cli
-chmod u+x ./compile.sh
-bash ./compile.sh document
+git submodule update --init --recursive
+```
+
+Compile a new PDF in `/build`:
+
+```cli
+latexmk src/document.tex -outdir=build -pdf
+```
+
+## Clear Cache
+
+```cli
+latexmk -C -outdir=build
 ```
