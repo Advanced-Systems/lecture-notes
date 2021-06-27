@@ -1,0 +1,3 @@
+[submodule "src/mathmacros"]
+	path = src/mathmacros
+	url = git@github.com:Advanced-Systems/mathmacros.git
