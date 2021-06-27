@@ -3,6 +3,7 @@
 \usepackage[american]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{graphicx}
 \usepackage[table]{xcolor}
 \usepackage{caption}
@@ -14,13 +15,29 @@
 \usepackage{amssymb}
 \usepackage{amsthm}
 \usepackage{mathtools}
+\usepackage{mathmacros/mathmacros}
 \usepackage{tcolorbox}
 \usepackage{circuitikz}
 \usepackage[backend=biber,style=phys]{biblatex}
 
-\addbibresource{bibliography.bib}
+% environments
+\newtheorem{lemma}{Lemma}
+\newtheorem{thm}{Theorem}
+\newtheorem{crl}{Corollary}
+\newtheorem{definition}{Definition}
+\theoremstyle{remark}
+\newtheorem{exm}{Example}
+\theoremstyle{remark}
+\newtheorem{rem}{Remark}
 
-\include{macros}
+% misc macros
+\newcommand*{\pref}[2]{#1 (\ref{#2})}
+\definecolor{lightgray}{rgb}{0.9725,0.9725,0.9725}
+
+% microtype
+\SetTracking{encoding={*}, shape=sc}{0}
+
+\addbibresource{bibliography.bib}
 
 \setacronymstyle{short-long}
 \makenoidxglossaries
@@ -31,13 +48,13 @@
 
 \begin{titlepage}
     \centering
-    {\scshape\Huge Advanced Systems \par}
+    {\scshape\Huge \bfseries{Advanced Systems} \par}
     \par\vspace{1cm}
     \includegraphics[width=0.45\textwidth]{images/logo.png}\par
     \vspace{3cm}
     {\huge\bfseries Lecture Notes \par}
     \vspace{1cm}
-    {\scshape\large Mazawa Shinonome \par}
+    {\LARGE\itshape Mazawa Shinonome \par}
     \vspace{1cm}
     {\large\today\par}
     \vfill
@@ -54,7 +71,9 @@
 
 \newpage
 
+\microtypesetup{protrusion=false}
 \tableofcontents
+\microtypesetup{protrusion=false}
 
 \newpage
 
