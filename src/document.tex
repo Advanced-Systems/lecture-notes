@@ -5,12 +5,12 @@
 \usepackage[utf8]{inputenc}
 \usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{graphicx}
-\usepackage[table]{xcolor}
+\usepackage[table,dvipsnames]{xcolor}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{csquotes}
 \usepackage{hyperref}
-\usepackage[acronym]{glossaries}
+\usepackage[super]{nth}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
@@ -18,6 +18,10 @@
 \usepackage{mathmacros/mathmacros}
 \usepackage{tcolorbox}
 \usepackage{circuitikz}
+\usepackage{tikz}
+\usepackage{pgf}
+\usepackage{pgfplots}
+\usepackage[acronym]{glossaries}
 \usepackage[backend=biber,style=phys]{biblatex}
 
 % environments
@@ -37,12 +41,13 @@
 % microtype
 \SetTracking{encoding={*}, shape=sc}{0}
 
+% pgfplots
+\pgfplotsset{compat=newest}
+
 \addbibresource{bibliography.bib}
 
-\setacronymstyle{short-long}
 \makenoidxglossaries
-
-\include{acronyms}
+\newacronym{dne}{DNE}{does not exist}
 
 \begin{document}
 
@@ -67,11 +72,10 @@
 
 \newpage
 
-\printnoidxglossary[type=\acronymtype]
-
-\newpage
-
 \microtypesetup{protrusion=false}
+\clearpage
+\printnoidxglossaries
+\newpage
 \tableofcontents
 \microtypesetup{protrusion=false}
 
@@ -79,13 +83,21 @@
 
 % === Begin Section Includes ===
 
+\include{sections/acknowledgements}
+
 \include{sections/introduction}
+
+\include{sections/single-variable-calculus}
 
 \include{sections/logic}
 
 \include{sections/sets}
 
-\include{sections/single-variable-calculus}
+\include{sections/functions}
+
+\include{sections/limit-prerequisites}
+
+\include{sections/appendix}
 
 % === End Section Includes ====
 
