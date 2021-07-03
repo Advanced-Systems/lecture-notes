@@ -1,0 +1,150 @@
+\subsection{Limit Prerequisites}\label{subsec-limit-prerequisites}
+
+\begin{definition}\label{def-interval-notation}
+    As opposed to closed intervals, open and half-open intervals contain infinitely
+    many elements. The $\infty$ symbol always needs to be paired with a parenthesis
+    rather than a bracket because it is technically incorrect to think of infinity
+    as a number. So far, we haven't agreed on a formal definition for the concept
+    of infinity, but it will become important later when we discuss limits in more
+    detail.
+    \begin{enumerate}
+        \item $(a,b)\defines\left\{x\setbuild a < x < b\right\}       \quad \text{(Open interval)}$
+        \item $(a,b]\defines\left\{x\setbuild a < x \leq b\right\}    \quad \text{(Half-open interval)}$
+        \item $[a,b)\defines\left\{x\setbuild a \leq x < b\right\}    \quad \text{(Half-closed interval)}$
+        \item $[a,b]\defines\left\{x\setbuild a \leq x \leq b\right\} \quad \text{(Closed interval)}$
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}\label{def-epsilon-neighborhood}
+    Let $a\in\mathbb{R}$ and $\varepsilon > 0$. Then the open interval 
+    $(a-\varepsilon,a+\varepsilon)$ is called the epsilon neighborhood of $a$
+    and is denoted by
+    \begin{equation}
+        \mathcal{U}_\varepsilon(a)\defines
+        \left\{x \setbuild x\in\mathbb{R},\abs{x-a}<\varepsilon \right\}=
+        (a-\varepsilon,a+\varepsilon)
+    \end{equation}
+\end{definition}
+
+\begin{rem}\label{rem-epsilon-neighborhood}
+    In reference to property 8 of theorem (\ref{thm-absolute-value-properties})
+    we can note that
+    \begin{equation}
+        x\in(a-\varepsilon,a+\varepsilon) \iff \abs{x-a} < \varepsilon
+    \end{equation}
+\end{rem}
+
+\begin{definition}\label{def-epsilon-punctured-neighborhood}
+    Let $a\in\mathbb{R}$. For $\varepsilon>0$ we define the punctured epsilon 
+    neighborhood of $a$, denoted by 
+    \begin{equation}
+        \mathcal{U}_{\varepsilon}^{\bolddot}(a)\defines
+        \left\{x \setbuild x\in\mathbb{R}, 0<\abs{x-a}<\varepsilon\right\}=
+        (a-\varepsilon,a+\varepsilon)\setminus\{a\}
+    \end{equation}
+\end{definition}
+
+\begin{definition}\label{def-limit-point}
+    Let $M\subset\mathbb{R}$ and $a\in\mathbb{R}$. Then, $a$ is called a limit 
+    point\footnote{Or cluster point} of $M$ \textit{iff}
+    \begin{equation}
+        \bigwedge_{\varepsilon>0}(M\cap\mathcal{U}_\varepsilon^{\bolddot}\neq\emptyset)
+    \end{equation}
+\end{definition}
+
+\begin{definition}\label{def-isolated-point}
+    In contrast to definition (\ref{def-limit-point}), we call $a$ an isolated point
+    of $M$ \textit{iff}
+    \begin{equation}
+        \neg\bigwedge_{\varepsilon>0}(M\cap\mathcal{U}_\varepsilon^{\bolddot}\neq\emptyset)
+        \iff
+        \bigvee_{\varepsilon>0}(M\cap\mathcal{U}_\varepsilon^{\bolddot}=\emptyset)
+    \end{equation}
+    \textit{i.e.} $a\in M\subset\mathbb{R}$ and $a$ is not a limit point.
+\end{definition}
+
+\begin{rem}
+    If $a$ is an isolated point of $M$, then \cite[p.67]{wuest2009}
+    \begin{align*}
+        a\in M:\mathcal{U}_\varepsilon(a)
+        &=(\{a\}\cup\mathcal{U}_\varepsilon^{\bolddot})\cap M \\
+        &=(\{a\}\cap M)\cup(\mathcal{U}_\varepsilon^{\bolddot}\cap M) \\
+        &=\{a\}
+    \end{align*}
+    Therefore, in the neighborhood of $a$ are no other elements of the set $M$.
+\end{rem}
+
+\begin{exm}\label{exm-limit-points}
+    Find the set of all limit points for
+    \begin{enumerate}
+        \item $A\defines\displaystyle\bigcup_{n\in\mathbb{N}}\left(\frac{1}{n},2-\frac{1}{n}\right)$
+        \item $B\defines\left\{x\in\mathbb{R}\setbuild x=n+\frac{1}{m}\quad\text{($n,m$ appropriate)}\right\}$
+    \end{enumerate}
+    \begin{flushleft}
+        \textbf{\nth{1} Answer:} TODO
+    \end{flushleft}
+    \begin{flushleft}
+        \textbf{\nth{2} Answer:} TODO
+    \end{flushleft}
+\end{exm}
+
+\begin{definition}\label{def-bounded-sets}
+    Let $A \subseteq\mathbb{R}$ be a set.
+    \begin{enumerate}
+        \item Then $A$ is called bounded from above if there exists $M\in\mathbb{R}$ 
+        such that $x\leq M$ for any $x\in A$.
+        \item Similarly, $A$ is bounded from below if there exists $m\in\mathbb{R}$ 
+        such that $x\geq M$ for any $x\in A$.
+        \item Finally, $A$ is called bounded if it is bounded from above and below.
+        \footnote{Notice that the boundary points in this definition
+        lay no claim to uniqueness.}
+    \end{enumerate}
+\end{definition}
+
+\begin{exm}\label{exm-bounded-sets:1}
+    \hfill
+    \begin{enumerate}
+        \item Consider the set of natural numbers: $\mathbb{N}$ is not bounded from above, but 
+        below, \textit{i.e.} $1$ is a lower bound of $\mathbb{N}$.
+        \item Let $A=(-3,2]$. Then this set is bounded from above and below.
+        \item Let $B=\left\{\frac{1}{n}\setbuild n\in\mathbb{N}\right\}$. Then this
+        set is bounded from above by $1$, and bounded from below by $0$.
+    \end{enumerate}
+\end{exm}
+
+\begin{definition}\label{def-supremum-infimum-sets}
+    Let $A\subset\mathbb{R}$ be a set.
+    \begin{enumerate}
+        \item $S$ is called the supremum of $A$ if it is the smallest upper bound 
+        of $A$, and is denoted by $S=\sup(A)$.
+        \item $I$ is called the infimum of $A$ if it is the largest lower bound 
+        of $A$, and is denoted by $I=\inf(A)$.
+    \end{enumerate}
+\end{definition}
+
+\begin{exm}\label{exm-bounded-sets:2}
+    Consider the sets from \pref{example}{exm-bounded-sets:1}. Then\footnote{Remark:
+    $\mathbb{N}\defines\{1,2,3,\dots\}$}
+    \begin{enumerate}
+        \item $\inf(\mathbb{N})=1$
+        \item $\inf(A)=-3$ and $\sup(A)=2$
+        \item $\inf(B)=0$ and $\sup(B)=1$
+    \end{enumerate}
+\end{exm}
+
+\begin{definition}\label{def-maximum-minimum}
+    Let $A\subset\mathbb{R}$ be a set.
+    \begin{enumerate}
+        \item If $S=\sup(A)$, then $S\in A$ is also a maximum of $A$ and is denoted by $S=\max(A)$.
+        \item If $I=\inf(A)$, then $I\in A$ is also a minimum of $A$ and is denoted by $I=\min(A)$.
+    \end{enumerate}
+\end{definition}
+
+\begin{exm}\label{exm-bounded-sets:3}
+    Expanding on the results from example (\ref{exm-bounded-sets:2}), we note that
+    \begin{enumerate}
+        \item $\min(\mathbb{N})=1$
+        \item $\min(A)=\text{\gls{dne}}$ and $\max(A)=2$
+        \item $\min(B)=\text{\gls{dne}}$ and $\max(B)=1$
+    \end{enumerate}
+\end{exm}
