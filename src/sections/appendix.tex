@@ -1,0 +1,87 @@
+\section{Appendix}\label{sec-appendix}
+
+\begin{figure}[ht]
+    \centering
+    \caption{Various plots for $f(x)=x^2-1$ from example (\ref{exm-injective-surjective-bijective})}
+    \label{sktech:exm-1:4}
+    \begin{subfigure}[ht]{0.47\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[
+                xmax=5,
+                xmin=-5,
+                ymax=9,
+                ymin=-4,
+                samples=50,
+                grid=major,
+                xlabel={X Axis},
+                ylabel={Y Axis},
+                title={$f:\mathbb{R}^+\rightarrow\mathbb{R}^+$}
+            ]
+            \addplot[blue,ultra thick,domain=1:5](x,x^2-1);
+        \end{axis}
+        \end{tikzpicture}
+        \label{sketch:exm-1}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[ht]{0.47\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[
+                xmax=5,
+                xmin=-5,
+                ymax=9,
+                ymin=-4,
+                samples=50,
+                grid=major,
+                xlabel={X Axis},
+                ylabel={Y Axis},
+                title={$f:\mathbb{R}^+\rightarrow\mathbb{R}$}
+            ]
+            \addplot[blue,ultra thick,domain=0:5](x,x^2-1);
+        \end{axis}
+        \end{tikzpicture}
+        \label{sketch:exm-2}
+    \end{subfigure}
+    \vfill
+    \begin{subfigure}[ht]{0.47\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[
+                xmax=5,
+                xmin=-5,
+                ymax=9,
+                ymin=-4,
+                samples=50,
+                grid=major,
+                xlabel={X Axis},
+                ylabel={Y Axis},
+                title={$f:\mathbb{R}\rightarrow\mathbb{R}^+$}
+            ]
+            \addplot[blue,ultra thick,domain=-5:-1](x,x^2-1);
+            \addplot[blue,ultra thick,domain=1:5](x,x^2-1);
+        \end{axis}
+        \end{tikzpicture}
+        \label{sketch:exm-3}
+    \end{subfigure}
+    \hfill
+    \begin{subfigure}[ht]{0.47\textwidth}
+        \centering
+        \begin{tikzpicture}[scale=0.7]
+            \begin{axis}[
+                xmax=5,
+                xmin=-5,
+                ymax=9,
+                ymin=-4,
+                samples=50,
+                grid=major,
+                xlabel={X Axis},
+                ylabel={Y Axis},
+                title={$f:\mathbb{R}\rightarrow\mathbb{R}$}
+            ]
+            \addplot[blue, ultra thick,domain=-5:9](x,x^2-1);
+        \end{axis}
+        \end{tikzpicture}
+        \label{sketch:exm-4}
+    \end{subfigure}
+\end{figure}
