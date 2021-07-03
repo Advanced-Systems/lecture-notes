@@ -4,6 +4,7 @@
 ### LaTeX ###
 ## Core latex/pdflatex auxiliary files:
 *.aux
+*.abo
 *.lof
 *.log
 *.lot
