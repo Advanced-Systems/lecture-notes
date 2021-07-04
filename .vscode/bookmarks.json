@@ -1,0 +1,64 @@
+{
+	"files": [
+		{
+			"path": "src/sections/limits.tex",
+			"bookmarks": [
+				{
+					"line": 200,
+					"column": 29,
+					"label": "TODO: Solve example"
+				},
+				{
+					"line": 232,
+					"column": 41,
+					"label": "TODO: Add proof"
+				},
+				{
+					"line": 413,
+					"column": 12,
+					"label": "TODO: Add proof"
+				},
+				{
+					"line": 424,
+					"column": 73,
+					"label": "TODO: Add figure (algebra lecture video 13)"
+				},
+				{
+					"line": 436,
+					"column": 45,
+					"label": "TODO: Add figure (algebra lecture video 13)"
+				}
+			]
+		},
+		{
+			"path": "src/sections/limit-prerequisites.tex",
+			"bookmarks": [
+				{
+					"line": 83,
+					"column": 37,
+					"label": "TODO: Solve example"
+				},
+				{
+					"line": 86,
+					"column": 37,
+					"label": "TODO: Solve example"
+				}
+			]
+		},
+		{
+			"path": "src/sections/functions.tex",
+			"bookmarks": [
+				{
+					"line": 270,
+					"column": 29,
+					"label": "TODO: Solve example"
+				},
+				{
+					"line": 411,
+					"column": 78,
+					"label": "TODO: reference subsection"
+				}
+			]
+		}
+	]
+}
