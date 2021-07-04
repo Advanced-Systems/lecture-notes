@@ -30,3 +30,22 @@ latexmk src/document.tex -outdir=build -pdf
 ```cli
 latexmk -C -outdir=build
 ```
+
+## Misc Notes
+
+This project uses `.editorconfig` to ensure that consisting formatting is applied
+everywhere. If you are using a fresh `texlive` installation, chances are that you
+will encounter the following error message upon invoking `latexindent`:
+
+```cli
+Can't locate YAML/Tiny.pm in @INC (you may need to install the YAML::Tiny module...
+```
+
+In this case, run the following commands:
+
+```cli
+sudo cpan Unicode::GCString
+sudo cpan App::cpanminus
+sudo cpan YAML::Tiny
+sudo perl -MCPAN -e 'Install "File::HomeDir"'
+```
