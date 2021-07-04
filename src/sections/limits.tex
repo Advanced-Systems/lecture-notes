@@ -1,0 +1,563 @@
+\subsection{Limits}\label{subsec-limits}
+
+\begin{definition}\label{def-epsilon-delta-definition-limit}
+    Let $f(x)$ be a function with $a,b\in\mathbb{R}$ with $a$ as a limit point of $\domain{f}$.
+    Then the the function $f$ has the limit $b$ as $x$ approaches $a$, \textit{i.e.}    
+    \begin{equation}
+        \bigwedge_{\varepsilon>0}\bigvee_{\delta>0}\bigwedge_{x\in\domain{f}} 
+        \left(0<\abs{x-a}<\delta\implies\abs{f(x)-b}<\varepsilon\right)
+    \end{equation}
+    The limit of this function is denoted by
+    \begin{equation}
+        \lim_{x\to a}f(x)=b,
+    \end{equation}
+\end{definition}
+
+\begin{rem}
+    The equation $\displaystyle\lim_{x\to a}f(x)=b$ is equivalent to the following
+    expressions:
+    \begin{enumerate}
+        \item For $f$ there exists a limit (point) at $a$.
+        \item This limit of $f$ is equal to $b$.
+    \end{enumerate}
+    In other words, $f$ has a limit at $a$ if
+    \begin{equation*}
+        \bigvee_{b\in\mathbb{R}}\bigwedge_{\varepsilon>0}\bigvee_{\delta>0}\bigwedge_{x\in\domain{f}} 
+        \left(0<\abs{x-a}<\delta \implies \abs{f(x)-b}<\varepsilon\right)
+    \end{equation*}
+\end{rem}
+
+\begin{exm}\label{exm-epsilon-delta-definition-limit:1}
+    Show that 
+    \begin{equation*}
+        \lim_{x\to3}\frac{x-1}{2}=1
+    \end{equation*}
+    by using the epsilon-delta definition for limits.
+    \begin{flushleft}
+        \textbf{Answer}: Let $\varepsilon>0$ and $b\in\mathbb{R}$. Take 
+        $\delta\defines2\varepsilon$; Then $\abs{x-3}<\delta$, which implies
+        \begin{align*}
+            \abs{f(x)-b}&=\abs[\Bigg]{\frac{x-1}{2}-1}\\
+                        &=\frac{\abs{x-3}}{2}\\
+                        &<\frac{\delta}{2}\\
+                        &=\varepsilon
+        \end{align*}
+    \end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-epsilon-delta-definition-limit:2}
+    Show that for some $a\in\mathbb{R}$,
+    \begin{equation*}
+        \lim_{x\to a}\sin(x)=\sin(a)
+    \end{equation*}
+    by using the epsilon-delta definition for limits.
+    \begin{flushleft}
+        \textbf{Answer}: Let $\varepsilon>0$ and $b\in\mathbb{R}$. Take 
+        $\varepsilon\defines\delta$ such that $\abs{x-a}<\delta$. Further, recall that
+        \begin{align*}
+            &\text{(A)}:\forall\alpha\in\mathbb{R}:\abs{\cos(\alpha)}\leq1\\
+            &\text{(B)}:\forall\alpha\in\mathbb{R}:\abs{\sin(\alpha)}\leq\abs{\alpha}
+        \end{align*}
+        \begin{align*}
+            \abs{f(x)-b}&=\abs{\sin(x)-\sin(a)}\\
+                        &=\abs[\Bigg]{2\sin\left(\frac{x-a}{2}\right)\cos\left(\frac{x+a}{2}\right)}\\
+                        &=2\cdot\abs[\Bigg]{\sin\left(\frac{x-a}{2}\right)}\abs[\Bigg]{\cos\left(\frac{x+a}{2}\right)}\\
+                        &\leq 2\cdot\frac{\abs{x-a}}{2} && \text{note (A) \& (B)}\\
+                        &=\varepsilon
+        \end{align*}
+    \end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-epsilon-delta-definition-limit:3}
+    Show \cite[p.69]{wuest2009} that the function $f(x)=\tfrac{x^2-3x+2}{x(x-1)}$
+    with $x\in\mathbb{R}\setminus\{0,1\}$ has the limit $b=-1$ as $x\to1$.
+    \begin{flushleft}
+        \textbf{Answer}: Let $\varepsilon>0$.
+        \begin{align}
+            \abs{f(x)-(-1)}&=\abs[\Bigg]{\frac{x^2-3x+2}{x(x-1)}+1}\nonumber\\
+                           &=\abs[\Bigg]{\frac{(x-2)(x-1)}{x(x-1)}+1}\nonumber\\
+                           &=\abs[\Bigg]{\frac{x-2}{x}+1}\nonumber\\
+                           &=\abs[\Bigg]{\frac{2x-2}{x}}\nonumber\\
+                           &=\frac{2}{\abs{x}}\cdot\abs{x-1}\label{eq3-epsilon-delta-definition-limit:1}
+        \end{align}
+        Since we aim for the neighborhood of $x=1$ we can impose the following
+        restriction on this inequality:
+        \begin{equation}\label{eq3-epsilon-delta-definition-limit:2}
+            0<\abs{x-1}<\frac{1}{2}
+        \end{equation}
+        This in turn implies
+        \begin{align}
+            \abs{x}&=\abs{x-1+1}\nonumber\\
+                   &\geq1-\abs{x-1}\nonumber\\
+                   &>1-\frac{1}{2} && \text{\pref{equation}{eq3-epsilon-delta-definition-limit:2}}\nonumber\\
+                   &=\frac{1}{2}\label{eq3-epsilon-delta-definition-limit:3}
+        \end{align}
+        Hence,
+        \begin{align}
+            \abs{f(x)-b}&=\frac{2}{\abs{x}}\cdot\abs{x-1} && \text{\pref{equation}{eq3-epsilon-delta-definition-limit:1}}\nonumber\\
+                        &<\frac{2}{\tfrac{1}{2}}\cdot\abs{x-1} && \text{\pref{equation}{eq3-epsilon-delta-definition-limit:3}}\nonumber\\
+                        &=4\cdot\abs{x-1}\label{eq3-epsilon-delta-definition-limit:4}
+        \end{align}
+    \end{flushleft}
+    Let $q(\varepsilon)\defines\min\left\{\tfrac{\varepsilon}{4},\tfrac{1}{2}\right\}$.
+    Then for all $\varepsilon>0$ there exists a $\delta\defines q(\varepsilon)$ such that
+    for $x\in\domain{f}$ it follows that
+    \begin{align*}
+        0<\abs{x-1}<\delta \implies \abs{f(x)-(-1)}&<4\cdot\abs{x-1}&&\text{\pref{equation}{eq3-epsilon-delta-definition-limit:4}}\\
+                                                   &<4\cdot\frac{\varepsilon}{4}\\
+                                                   &=\varepsilon
+    \end{align*}
+\end{exm}
+
+\begin{exm}\label{exm-epsilon-delta-definition-limit:4}
+    Show that the function $f(x)=\tfrac{x^2-4x+3}{2x-6}$ with $x\in\mathbb{R}\setminus\{3\}$
+    has the limit $b=1$ as $x\to3$.
+    \begin{flushleft}
+        \textbf{Answer}: Let $\varepsilon>0$. Define $\delta\defines2\varepsilon$,
+        such that $\abs{x-3}<\delta$, wherefore
+        \begin{align*}
+            \abs{f(x)-b}&=\abs[\Bigg]{\frac{x^2-4x+3}{2x-6}-1}\\
+                        &=\abs[\Bigg]{\frac{(x-1)(x-3)}{2(x-3)}-1}\\
+                        &=\abs[\Bigg]{\frac{1}{2}(x-1)-1}\\
+                        &=\abs[\Bigg]{\frac{1}{2}x-\frac{3}{2}}\\
+                        &=\frac{1}{2}\abs{x-3}\\
+                        &<\frac{1}{2}\cdot2\varepsilon\\
+                        &=\varepsilon
+        \end{align*}
+    \end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-epsilon-delta-definition-limit:5}
+    Show that for $a>0$ ($a\in\mathbb{R}$),
+    \begin{equation*}
+        \sqrt{x}\tolim{x}{a}\sqrt{a}
+    \end{equation*}
+    \begin{flushleft}
+        \textbf{Answer}: Let $\varepsilon>0$. When we define $\delta\defines\min\left\{a,\varepsilon\sqrt{a}\right\}$,
+        then $\abs{x-a}<\delta$ implies that
+        \begin{align*}
+            \abs{f(x)-b}&=\abs[\big]{\sqrt{x}-\sqrt{a}}\\
+                        &=\frac{\abs[\big]{\sqrt{x}-\sqrt{a}}\left(\sqrt{x}+\sqrt{a}\right)}{\sqrt{x}+\sqrt{a}}\\
+                        &=\frac{\abs{x-a}}{\sqrt{x}+\sqrt{a}}\\
+                        &<\frac{\abs{x-a}}{\sqrt{a}}\\
+                        &<\frac{\varepsilon\sqrt{a}}{\sqrt{a}}\\
+                        &=\varepsilon
+        \end{align*}
+        Therefore,
+        \begin{equation*}
+            \lim_{x\to a}\sqrt{x}=\sqrt{a}
+        \end{equation*}
+    \end{flushleft}
+\end{exm}
+
+\begin{rem}\label{rem-undefined-limits}
+    Examples of functions where \pref{definition}{def-epsilon-delta-definition-limit} breaks:
+    \begin{enumerate}
+        \item For any $a\in\mathbb{Z}$, the limit of $f(x)=\floor{x}$ does not exists.
+        \item The limit $\displaystyle\lim_{x\to0}\tfrac{1}{x}$ does not exists.
+        \item The limit $\displaystyle\lim_{x\to0}\tfrac{1}{x^2}$ does not exists.
+        \item The limit $\displaystyle\lim_{x\to0}\sin\left(\tfrac{1}{x}\right)$ does not exists.
+    \end{enumerate}
+\end{rem}
+
+\begin{thm}\label{thm-limit-arithmetic}
+    Let $\displaystyle\lim_{x \to a}f(x) = b_1$ and $\displaystyle\lim_{x \to a}g(x) = b_2$
+    be two well-defined limits. Then the following statements hold:
+    \begin{enumerate}
+        \item $c \cdot f(x) \tolim{x}{a} c \cdot b_1 \quad (c\in\mathbb{R})$
+        \item $f(x) + g(x) \tolim{x}{a} b_1 + b_2$
+        \item $f(x) \cdot g(c) \tolim{x}{a} b_1 \cdot b_2$
+        \item $\tfrac{f(x)}{g(x)} \tolim{x}{a} \tfrac{b_1}{b_2} \quad (b_2 \neq 0)$
+    \end{enumerate}
+\end{thm}
+
+
+\begin{proof}
+    Of \pref{theorem}{thm-limit-arithmetic}.
+    \begin{flushleft}
+        \textbf{\nth{2} Property}. From \pref{definition}{def-epsilon-delta-definition-limit}
+        we can note that
+        \begin{align*}
+            &\forall\varepsilon>0\;\exists\delta_1>0:\,\abs{x-a}<\delta_1\implies\abs{f(x)-b_1}<\frac{\varepsilon}{2}\\
+            &\forall\varepsilon>0\;\exists\delta_2>0:\,\abs{x-a}<\delta_2\implies\abs{g(x)-b_2}<\frac{\varepsilon}{2}
+        \end{align*}        
+        Define $\delta\defines\min\{\delta_1,\delta_2\}$ Then, if $\abs{x-a}<\delta$,
+        it follows from the triangle inequality that
+        \begin{align*}
+            \abs{f(x)+g(x)-(b_1+b_2)}&=\abs{(f(x)-b_1)+(g(x)-b_2)}\\
+                                     &\leq\abs{f(x)-b_1}+\abs{g(x)-b_2}\\
+                                     &<\frac{\varepsilon}{2}+\frac{\varepsilon}{2}\\
+                                     &=\varepsilon
+        \end{align*}
+    \end{flushleft}
+\end{proof}
+
+\begin{exm}
+    Find the limit of
+    \begin{equation*}
+        \lim_{x \to 0}\left(\arctan\left(2\sqrt{\frac{\cos(x)}{3x+4}}\right)\right)=\frac{\pi}{4}
+    \end{equation*}
+    \begin{flushleft}
+        \textbf{Answer}: TODO
+    \end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-absolute-value-of-limit:1}
+    If $f(x) \tolim{x}{a} 0$, then this is equivalent to
+    $\abs{f(x)} \tolim{x}{a} 0$.
+\end{thm}
+
+\begin{thm}\label{thm-absolute-value-of-limit:2}
+    Let $b\in\mathbb{R}$. If $f(x) \tolim{x}{a} b$, then 
+    this implies $\abs{f(x)} \tolim{x}{a} \abs{b}$.
+\end{thm}
+
+\begin{rem}
+    Note that the opposite direction of \pref{theorem}{thm-absolute-value-of-limit:2}
+    is in general not true. A counter example for this would be the 
+    \hyperref[def-dirichlet-function]{Dirichlet function}.
+\end{rem}
+
+\begin{proof}
+    Of \pref{theorem}{thm-absolute-value-of-limit:2}.
+    \begin{flushleft}
+        Let $\varepsilon>0$. Then $\abs{x-a}<\delta$ implies that
+        \begin{align*}
+            \abs[\big]{\abs{f(x) - \abs{b}}} &\leq \abs{f(x) - b} \\
+                                             &<\varepsilon
+        \end{align*}
+        by using the reverse triangle inequality for absolute values.
+    \end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-limit-monotonicity}
+    Let $f(x) \geq g(x)$ for any $x\in\mathcal{U}_{\varepsilon}^{\bolddot}(a)$. 
+    If the limit of $f(x)$ and $g(x)$ exist, then
+    \begin{equation*}
+        \lim_{x \to a}f(x) \geq \lim_{x \to a}g(x)
+    \end{equation*}
+\end{thm}
+
+\begin{rem}
+    As for \pref{theorem}{thm-limit-monotonicity}, if $f(x) \geq 0$,
+    then
+    \begin{equation*}
+        \lim_{x \to a}f(x) \geq 0
+    \end{equation*}
+\end{rem}
+
+\begin{rem}
+    \pref{Theorem}{thm-limit-monotonicity} does not hold if we replace the greater
+    than or equal to inequality with a strictly greater than inequality.
+\end{rem}
+
+\begin{thm}\label{thm-unique-limit}
+    If the limit of $\displaystyle\lim_{x\to a}f(x)=b\in\mathbb{R}$ exists, then $b$ is unique.
+\end{thm}
+
+\begin{proof}
+    Of \pref{theorem}{thm-unique-limit}.
+    \begin{flushleft}
+        Assume \gls{wlog} that $b<c$ are both limits of this function. Define
+        $\varepsilon\defines\tfrac{c-b}{3}>0$. Then by 
+        \pref{definition}{def-epsilon-delta-definition-limit} we have that
+        \begin{equation}\label{eq-unique-limit:1}
+            \exists\delta_1\text{ s.t. }a-\delta_1<x<a+\delta_1 \implies b-\varepsilon<f(x)<b+\varepsilon
+        \end{equation}
+        Likewise we know that
+        \begin{equation}\label{eq-unique-limit:2}
+            \exists\delta_2\text{ s.t. }a-\delta_1<x<a+\delta_1 \implies c-\varepsilon<f(x)<c+\varepsilon
+        \end{equation}
+    \end{flushleft}
+    Therefore by \pref{equation}{eq-unique-limit:1} and \pref{equation}{eq-unique-limit:2},
+    it follows that
+    \begin{equation*}
+        \left(f(x)<b+\varepsilon<c+\varepsilon\right)\land\left(c+\varepsilon<f(x)\right)
+    \end{equation*}
+    which is a contradiction. 
+\end{proof}
+
+\begin{thm}\label{def-limit-is-bounded}
+    If the limit of $\displaystyle\lim_{x\to a}f(x)=b\in\mathbb{R}$ exists, then
+    $f$ is bounded in a neighborhood of $a$.
+\end{thm}
+
+\begin{thm}\label{thm-sandwich-theorem}
+    Suppose that for any $x$ in a neighborhood of $a$
+    \begin{equation*}
+        h(x) \leq f(x) \leq g(x)
+    \end{equation*}
+    Further assume that
+    \begin{equation*}
+        \lim_{x \to a}h(x) = b = \lim_{x \to a}g(x)
+    \end{equation*} 
+    Then it follows that
+    \begin{equation*}
+        \lim_{x \to a}f(x) = b
+    \end{equation*}
+\end{thm}
+
+\begin{proof}
+    Of \pref{theorem}{thm-sandwich-theorem}.
+    \begin{flushleft}
+        Let $\varepsilon>0$. Take $\delta\defines\min\{\delta_1,\delta_2\}$ where
+        \begin{align*}
+            &0 < \abs{x - a} < \delta_1 \implies \abs{g(x) - b} < \varepsilon \iff b - \varepsilon < g(x) < b + \varepsilon, \\
+            &0 < \abs{x - a} < \delta_2 \implies \abs{h(x) - b} < \varepsilon \iff b - \varepsilon < h(x) < b + \varepsilon
+        \end{align*}
+        Therefore, if $0 < \abs{x - a} < \delta$,
+        \begin{equation*}
+            b - \varepsilon < h(x) \leq f(x) \leq g(x) < b + \varepsilon
+        \end{equation*}
+        which is equivalent to
+        \begin{equation*}
+            \abs{f(x) - b} < \varepsilon \iff \lim_{x \to a}f(x) = b
+        \end{equation*}
+    \end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-product-of-bounded-zero-limit}
+    If $\displaystyle\lim_{x \to a}f(x) = 0$ and $g(x)$ is bounded in a neighborhood
+    of $a$, then
+    \begin{equation*}
+        \lim_{x \to a} \left(f(x)\cdot g(x)\right) = 0
+    \end{equation*}
+\end{thm}
+
+\begin{proof}
+    Of \pref{theorem}{thm-product-of-bounded-zero-limit}.
+    \begin{flushleft}
+        Since $g(x)$ is bounded, we can write $\abs{g(x)} \leq M$. So,
+        \begin{align*}
+            &-M \leq \abs{g(x)} \leq M\\
+            \implies
+            &-M\cdot\abs{f(x)} \leq \abs{f(x)}\cdot\abs{g(x)} \leq M\cdot \abs{f(x)}\\
+            \implies
+            &-M\cdot \lim_{x \to a}\abs{f(x)} \leq  \lim_{x \to a}\left(\abs{f(x)}\cdot\abs{g(x)}\right) \leq M \cdot \lim_{x \to a}\abs{f(x)}\\
+            \implies
+            &-M \cdot 0 \leq \abs{f(x)}\cdot\abs{g(x)} \leq M \cdot 0 && \text{\pref{theorem}{thm-absolute-value-of-limit:1}} \\
+            \implies
+            & 0 \leq \abs{f(x)}\cdot\abs{g(x)} \leq 0 && \text{\pref{theorem}{thm-limit-arithmetic}}\\
+            \implies
+            &\lim_{x \to a}\left(\abs{f(x)}\cdot\abs{g(x)}\right)=0 && \text{\pref{theorem}{thm-sandwich-theorem}}\\
+            \implies
+            &\lim_{x \to a}\left(f(x)\cdot g(x)\right)=0 && \text{\pref{theorem}{thm-absolute-value-of-limit:1}} \\
+        \end{align*}
+    \end{flushleft}
+\end{proof}
+
+\begin{exm}
+    The limit of the function 
+    \begin{equation*}
+        f(x) = x\cdot\sin\left(\frac{1}{x}\right)
+    \end{equation*}
+    as $x \to 0$ is
+    \begin{equation*}
+        \lim_{x \to 0}\left(x\cdot\sin\left(\frac{1}{x}\right)\right)=0
+    \end{equation*}
+    by \pref{theorem}{thm-product-of-bounded-zero-limit} since $\sin\left(\tfrac{1}{x}\right)$
+    is bounded\footnote{But in and of itself not defined at $x=0$} by $[-1,1]$ 
+    and the left factor of this function is $x=0$ as $x \to 0$.
+\end{exm}
+
+\begin{definition}\label{def-one-sided-limits}
+    We denote the one-sided limit of the function $f(x)$ approached from the right by
+    \begin{equation*}
+        \lim_{x \to a^+}f(x)=b
+    \end{equation*}
+    if and only if
+    \begin{equation}
+        \forall\varepsilon>0\;\exists\delta>0:x\in(a,a+\delta)\implies\abs{f(x)-b}<\varepsilon
+    \end{equation}
+    Conversely, the left-sided limit is denoted by
+    \begin{equation*}
+        \lim_{x \to a^-}f(x)=b
+    \end{equation*}
+    if and only if
+    \begin{equation}
+        \forall\varepsilon>0\;\exists\delta>0:x\in(a-\delta,a)\implies\abs{f(x)-b}<\varepsilon
+    \end{equation}
+\end{definition}
+
+\begin{rem}\label{rem-one-sided-limits}
+    With respect to \pref{definition}{def-one-sided-limits}, note that there exist
+    several equivalent notations. So, the right-sided limit of $f(x)$ can be denoted
+    by
+    \begin{equation*}
+        \lim_{x \to a^+}f(x)=b
+        \iff
+        \lim_{x \underset{x>a}{\to} a}f(x)=b
+        \iff
+        \lim_{x\searrow  a}f(x)=b
+    \end{equation*}
+    Similarly, at times the left-sided limits may be denoted by
+    \begin{equation*}
+        \lim_{x \to a^-}f(x)=b
+        \iff
+        \lim_{x \underset{x<a}{\to} a}f(x)=b
+        \iff
+        \lim_{x \nearrow a}f(x)=b
+    \end{equation*}
+\end{rem}
+
+\begin{thm}\label{thm-limit-exists-one-sided-limits}
+    The limit of $f(x) \to b$ exists as $x \to a$ if and only if the left-sided
+    limit as well as the right-sided limit of $f$ exists with
+    \begin{equation}
+        \lim_{x \to a}f(x)=b \iff \lim_{x \to a^+}f(x)=b=\lim_{x \to a^-}f(x)
+    \end{equation}
+\end{thm}
+
+\begin{proof}
+    Of \pref{theorem}{thm-limit-exists-one-sided-limits}.
+    \begin{flushleft}
+        TODO
+    \end{flushleft}
+\end{proof}
+
+\begin{exm}\label{exm-important-sin-over-x-limit}
+    Show that\footnote{This is a very useful limit that we are going to encounter
+    more often in the near future.}
+    \begin{equation}\label{eq-important-sin-over-x-limit}
+        \lim_{x \to 0}\frac{\sin(x)}{x}=1
+    \end{equation}
+    \begin{flushleft}
+        \textbf{Answer}: From figure (??) we can derive two observations:
+        \begin{equation*}
+            \forall x\in\left(0,\frac{\pi}{2}\right)\implies \sin(x)<x
+        \end{equation*}
+        Notice also that
+        \begin{equation*}
+            x < \tan(x)
+        \end{equation*}
+        So, this implies
+        \begin{equation}\label{eq-important-sin-over-x-limit:1}
+            \sin(x) < x < \tan(x)
+        \end{equation}
+        Furthermore, figure (??) reveals that
+        \begin{equation*}
+            \forall x\in\mathbb{R}:\abs{\sin(x)}\leq\abs{x}
+        \end{equation*}
+        From \pref{equation}{eq-important-sin-over-x-limit:1} follows that for all
+        $\tfrac{\pi}{2}>x>0$:
+        \begin{align*}
+            \implies 
+            &\frac{1}{\sin(x)} > \frac{1}{x} > \frac{1}{\tan(x)} \\
+            \implies 
+            &1 > \frac{\sin(x)}{x} > \cos(x) \\
+            \implies 
+            &1 > \lim_{x \to 0^+}\frac{\sin(x)}{x} > \lim_{x \to 0^+}\cos(x) \\
+            \implies
+            &1 > \lim_{x \to 0^+}\frac{\sin(x)}{x} > 1\\
+            \implies 
+            &\lim_{x \to 0^+}\frac{\sin(x)}{x}=1 && \text{theorem (\ref{thm-sandwich-theorem})}
+        \end{align*}
+        A similar argument can be made for 
+        \begin{align*}
+            \forall x\in\left(-\frac{\pi}{2},0\right):\lim_{x \to 0^-}\frac{\sin(x)}{x}=1
+        \end{align*}
+        Last but not least, \pref{theorem}{thm-limit-exists-one-sided-limits} ensures
+        that the limit in \pref{equation}{eq-important-sin-over-x-limit} exists.
+    \end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-monotone-one-sided-limits}
+    Assume that $f$ is monotone on some interval $[a,b]$. Then $f$ has one-sided
+    limits at every point.
+\end{thm}
+
+\begin{definition}\label{def-infinity-limits}
+    Let $f$ be a function such that\footnote{In other words, $\infty$ is a limit
+    point of the domain of $f$}
+    \begin{equation}
+        \forall c\in\mathbb{R}: (c,\infty)\cap\domain{f}\neq\emptyset
+    \end{equation}
+    Next let $b\in\mathbb{R}$. We say that $f(x) \to b$ for $x \to \infty$ if and only if
+    \footnote{Similarly, we can define the limit for $f(x) \to b$ as $x \to -\infty$}
+    \begin{equation}
+        \bigwedge_{\varepsilon>0}\bigvee_{c\in\mathbb{R}}\bigwedge_{x\in\domain{f}}
+        \left(x>c \implies \abs{f(x) - b}<\varepsilon\right)
+    \end{equation}
+    Then this is equivalent to \cite[p.70]{wuest2009}
+    \begin{equation}
+        \lim_{x \to \infty}f(x)=b
+    \end{equation}
+\end{definition}
+
+\begin{rem}
+    Definition (\ref{def-infinity-limits}) works with all previously encountered theorems.
+\end{rem}
+
+\begin{exm}\label{exm-infinity-limit:1}
+    Let $f$ be defined by \cite[p.71]{wuest2009}
+    \begin{equation*}
+        f(x)\defines\frac{3x^2-2x+1}{x^2+5x}
+    \end{equation*}
+    where $x\in(0,\infty)$. Show that
+    \begin{equation*}
+        \lim_{x \to \infty}f(x)=3
+    \end{equation*} 
+    \begin{flushleft}
+        \textbf{Answer}: First observe, that for very large $x$ the quadratic terms
+        in the numerator and denominator dominate over the other terms in the long
+        run. Keeping this in mind we can make an intelligent guess for the limit point
+        $f(x) \to 3$ as $x \to \infty$. Now for the formal part of this proof: Let $x>0$.
+        Then, for $a(\varepsilon)\defines\max\left\{1,\tfrac{18}{\varepsilon}\right\}$ it
+        follows that
+        \begin{align*}
+            \abs{f(x) - b} &= \abs[\Bigg]{\frac{3x^2-2x+1}{x^2+5x}-3}\\
+                           &= \abs[\Bigg]{\frac{3x^2-2x+1-3x^2-15x}{x^2+5x}}\\
+                           &= \abs[\Bigg]{\frac{-17x+1}{x^2+5x}}\\
+                           &\leq {\frac{\abs{-17x}+\abs{1}}{x^2+5x}}\\
+                           &= \frac{17x}{x^2+5x} + \frac{1}{x^2+5x}\\
+                           &\leq \frac{17x}{x^2} + \frac{1}{x^2}\\
+                           &\leq \frac{18}{x} && \text{if } x\geq1\\
+                           &< \frac{18}{\tfrac{18}{\varepsilon}}\\
+                           &= \varepsilon
+        \end{align*}
+        in other words for every $\varepsilon>0$ there exists a $c\in\mathbb{R}$
+        such that $c\defines a(\varepsilon)$ for which is true that
+        \begin{equation*}
+            x>c \implies \abs{f(x)-b}<\varepsilon
+        \end{equation*}
+        which means that $f(x)$ converges towards $3$ as $x$ approaches infinity.
+    \end{flushleft}
+\end{exm}
+
+\begin{definition}\label{def-infinite-limits}
+    We say a function has an infinite limit at infinity when
+    \begin{equation}
+        \bigwedge_{c\in\mathbb{R}}\bigvee_{\delta>0}
+        \left(\abs{x-a}<\delta \implies f(x)>c\right)
+    \end{equation}
+    which is denoted by
+    \begin{equation}
+        \lim_{x \to a}f(x)=\infty
+    \end{equation}
+    Another frequently used expression to describes this behavior is divergence;
+    limits that exhibit this type behavior are said to diverge. 
+\end{definition}
+
+\begin{exm}\label{exm-infinity-limit:3}
+    Use \pref{definition}{def-infinite-limits} to show that
+    \begin{equation}
+        \lim_{x \to 0}\frac{1}{x^2}=\infty
+    \end{equation}
+    \begin{flushleft}
+        \textbf{Answer}: Let $c\in\mathbb{R}^+$ such that $\delta\defines\tfrac{1}{\sqrt{c}}$.
+        Then, it follows that
+        \begin{equation*}
+            0<\abs{x-0}<\delta \implies \abs{x} < \frac{1}{\sqrt{c}} \implies \frac{1}{x^2} > c
+        \end{equation*}
+    \end{flushleft}
+\end{exm}
+
+\begin{rem}
+    Beware: for $f(x) \to \pm\infty$ not all theorems hold, in particular 
+    \pref{theorem}{thm-limit-arithmetic} is only partially true.
+\end{rem}
+
+\begin{thm}\label{thm-pizza-theorem}
+    If $g(x) \geq f(x)$ in a neighborhood of $a$ and $f(x) \to \infty$ as $x \to a$,
+    then $g(x) \to \infty$ for $x \to a$.
+\end{thm}
