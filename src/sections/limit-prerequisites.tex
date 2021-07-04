@@ -148,3 +148,202 @@
         \item $\min(B)=\text{\gls{dne}}$ and $\max(B)=1$
     \end{enumerate}
 \end{exm}
+
+\begin{definition}\label{def-monotonicity}
+    Let $x,y\in\mathbb{R}$. A function is called
+    \begin{enumerate}
+        \item monotonically increasing, if for all $x,y$ it follows that
+        \begin{equation}\label{eq-monotonically-increasing}
+            x<y \implies f(x)\leq f(y)
+        \end{equation}
+        \item strictly monotonically increasing, if for all $x,y$ follows that
+        \begin{equation}\label{eq-strictly-monotonically-increasing}
+            x<y \implies f(x)<f(y)
+        \end{equation}
+        \item monotonically decreasing, if for all $x,y$ follows that
+        \begin{equation}\label{eq-monotonically-decreasing}
+            x<y \implies f(x)\geq f(y)
+        \end{equation}
+        \item strictly monotonically decreasing, if for all $x,y$ follows that
+        \begin{equation}\label{eq-strictly-monotonically-decreasing}
+            x<y \implies f(x)>f(y)
+        \end{equation}
+    \end{enumerate}
+\end{definition}
+
+\begin{exm}
+    Let $f(x)=\sin(x)$.
+    \begin{enumerate}
+        \item Then $f$ is strictly increasing on $[-\tfrac{\pi}{2},\tfrac{\pi}{2}]$.
+        \item Then $f$ is strictly decreasing on $[\tfrac{\pi}{2},\tfrac{3\pi}{2}]$.
+    \end{enumerate}
+\end{exm}
+
+\begin{definition}\label{def-even-function}
+    Let $f$ be a function. Then, $f$ is called an even function if
+    \begin{equation}
+        \forall x\in\domain{f}:f(x)=f(-x)
+    \end{equation}
+\end{definition}
+
+\begin{exm}
+    See the list below for some even functions:
+    \begin{itemize}
+        \item $x\mapsto\abs{x}$
+        \item $x\mapsto x^2$
+        \item $x\mapsto\cos(x)$
+    \end{itemize}
+\end{exm}
+
+\begin{definition}\label{def-odd-function}
+    Let $f$ be a function. Then, $f$ is called an odd function if
+    \begin{equation}
+        \forall x\in\domain{f}:f(x)=-f(-x)
+    \end{equation}
+\end{definition}
+
+\begin{exm}
+    See the list below for some odd functions:
+    \begin{itemize}
+        \item $x\mapsto x$
+        \item $x\mapsto x^3$
+        \item $x\mapsto\sin(x)$
+    \end{itemize}
+\end{exm}
+
+\begin{definition}
+    Let $f$ be a function. Then, $f$ is called a periodic function if
+    \begin{equation}
+        \forall x\in\domain{f}\,\exists T\in\mathbb{R}: f(x)=f(x+T)
+    \end{equation}
+\end{definition}
+
+\begin{exm}
+    See the list below for some periodic functions:
+    \begin{itemize}
+        \item $x\mapsto\sin(x)$
+        \item $x\mapsto\cos(x)$
+        \item $x\mapsto\tan(x)$
+        \item \hyperref[def-dirichlet-function]{$x\mapsto D(x)$}
+    \end{itemize}
+\end{exm}
+
+\begin{definition}\label{def-bounded-function}
+    Let $f$ be a function. Then, $f$ is called\footnote{This definition extends 
+    the notion of boundaries as defined in \pref{definition}{def-bounded-sets} to 
+    functions.}
+    \begin{enumerate}
+        \item bounded from above if
+        \begin{equation}
+            \forall x\in\domain{f}\,\exists M\in\mathbb{R}:f(x)\leq M
+        \end{equation}
+        \item bounded from below if 
+        \begin{equation}
+            \forall x\in\domain{f}\,\exists m\in\mathbb{R}:f(x)\geq m
+        \end{equation}
+        \item bounded if $f$ is bounded from above and below.
+    \end{enumerate}
+\end{definition}
+
+\begin{exm}
+    The function $f:\mathcal{D}\to\mathbb{R}$ with
+    \begin{itemize}
+        \item $\domain{f}=\mathbb{R}^-:f(x)=x$ is bounded from above but not below
+        \item $\domain{f}=\mathbb{R}:f(x)=x^2$ is bounded from below, but not above
+        \item $\domain{f}=\mathbb{R}^+:f(x)=\sqrt{x}$ is bounded from below, but not above
+        \item $\domain{f}=\mathbb{R}:f(x)=\sin(x)$ is bounded from above and below
+        \item $\domain{f}=\mathbb{R}:f(x)=\ffloor(x)$ is neither bounded from above nor below
+    \end{itemize}
+\end{exm}
+
+\begin{rem}\label{rem-bounded-function}
+    A function $f$ is bounded \textit{iff}
+    \begin{equation}
+        \forall x\in\domain{f}\,\exists B\in\mathbb{R}:\abs{f(x)}\leq B
+    \end{equation}
+    since $\abs{f(x)}\leq B\iff -B\leq f(x) \leq B$ by the \nth{8} property from
+    \pref{theorem}{thm-absolute-value-properties}.
+\end{rem}
+
+\begin{definition}\label{def-supremum-infimum-functions}
+    Let $f$ be a function. Then we define
+    \begin{enumerate}
+        \item the supremum of a function by
+        \begin{equation}
+            \sup_{x\in\mathcal{D}}(f)\defines\sup\left\{f(x)\setbuild x\in\mathcal{D}\right\}
+        \end{equation}
+        \item the infimum of a function by
+        \begin{equation}
+            \inf_{x\in\mathcal{D}}(f)\defines\inf\left\{f(x)\setbuild x\in\mathcal{D}\right\}
+        \end{equation}
+    \end{enumerate}
+\end{definition}
+
+\begin{exm}
+    Let $f(x)=\arctan(x)$. Then,
+    \begin{itemize}
+        \item the supremum of this function is
+        \begin{equation}
+            \sup(f)=\frac{\pi}{2}
+        \end{equation}
+        \item the infimum of this function is
+        \begin{equation}
+            \inf(f)=-\frac{\pi}{2}
+        \end{equation}
+    \end{itemize}
+\end{exm}
+
+\begin{definition}\label{def-function-operations}
+    Let $f$ and $g$ be two functions. Then we define
+    \begin{enumerate}
+        \item the addition between two functions by
+        \begin{equation}
+            (f \pm g)(x) \defines f(x) \pm g(x)
+        \end{equation}
+        \item the multiplication between two functions by
+        \begin{equation}
+            (f \cdot g)(x) \defines f(x) \cdot g(x)
+        \end{equation}
+        \item the division between two functions by\footnote{For $g(x)\neq0$}
+        \begin{equation}
+            \left(\frac{f}{g}\right)(x) \defines \frac{f(x)}{g(x)} 
+        \end{equation}
+        \item the composition between two functions by
+        \begin{equation}
+            (f \circ g)(x) \defines f(g(x))
+        \end{equation}
+    \end{enumerate}
+\end{definition}
+
+\begin{exm}
+    Let $f:\mathbb{R}\to[-1,1],x\mapsto\sin(x)$ and $g:\mathbb{R}\setminus\{0\}\to\mathbb{R},x\mapsto\tfrac{1}{x}$.
+    Then the two compositions for these functions are given by
+    \begin{align*}
+        &(f \circ g):\mathbb{R}\setminus\{0\}\to[-1,1],x\mapsto\sin\left(\frac{1}{x}\right)\\
+        &(g \circ f):\mathbb{R}\setminus\left\{\pi k\setbuild k\in\mathbb{Z}\right\}\to\mathbb{R},x\mapsto\frac{1}{\sin(x)}
+    \end{align*}
+\end{exm}
+
+\begin{rem}\label{rem-monotone-implies-injective}
+    If $f$ is strictly monotone, then $f$ is injective.
+\end{rem}
+
+\begin{rem}\label{rem-elementary-functions}
+    It is advised to remember the following elementary functions by heart:
+    \begin{itemize}
+        \item Polynomial functions\footnote{$a_0$ is the so-called \enquote{free coefficient}}: $p(x)=\sum_{i=0}^na_ix^i$
+        \item Rational functions: $f(x)=\tfrac{p(x)}{q(x)}$ where $p(x)$ and $q(x)$ are well-defined polynomial functions
+        \item Exponential functions: $f(x)=a^x$ for $a>0$ and $a\neq 1$
+        \item Trigonometric functions: for example, $f(x)=\sin(x)$
+        \item Inverse trigonometric functions: for example, $f^{-1}(x)=\arcsin(x)$
+        \item Inverse functions of polynomials, for example $f^{-1}(x)=\sqrt{x}$
+        \item Inverse functions of rationals
+        \item Inverse functions of exponentials: for example, $f^{-1}(x)=\log_a(x)$
+    \end{itemize}
+\end{rem}
+
+\begin{definition}\label{def-elementary-functions}
+    An elementary function is any function obtained from the list in \pref{remark}{rem-elementary-functions},
+    including their combinations using the operations defined in \pref{definition}{def-function-operations}.
+    \footnote{Note that this is not a standard definition.}
+\end{definition}
