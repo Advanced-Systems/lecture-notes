@@ -1,0 +1,244 @@
+\subsection{Derivatives}\label{subsec-derivatives}
+
+\begin{definition}\label{def-differentiable}
+	We say that a function $f$ is differentiable at $x_0$ if the limit in
+	\pref{equation}{eq-differentiable} exists and is finite. The (first) derivative
+	of $f$ at $x_0$ is equal to the result of this limit and is denoted by
+	\begin{equation}\label{eq-differentiable}
+		\lim_{x \to x_0}\frac{f(x)-f(x_0)}{x-x_0} \defines f^\prime(x_0) = \frac{\diff f}{\diff x}(x_0)
+	\end{equation}
+\end{definition}
+
+\begin{rem}\label{rem-differentiable}
+	The limit in \pref{definition}{def-differentiable} is equivalent to
+	\begin{equation}\label{eq-differentiable-alt}
+		f^\prime(x_0)=\lim_{h \to 0}\frac{f(x_0+h)-f(x_0)}{h}
+	\end{equation}
+	You can convince yourself that these definitions are equivalent by substituting
+	$h\defines x-x_0$.
+\end{rem}
+
+\begin{definition}
+	If $f$ is differentiable at $x_0$, then
+	\begin{equation}
+		y = f^\prime(x_0)(x-x_0)+f(x_0)
+	\end{equation}
+	is called the tangent line of $f$ at $x_0$.
+\end{definition}
+
+\begin{exm}\label{exm-derivatives:1}
+	Let $f(x)=c$. For any $x_0\in\domain{f}$,
+	\begin{align*}
+		f^\prime(x_0) & = \lim_{x \to x_0}\frac{c-c}{x-x_0} \\
+		              & = 0
+	\end{align*}
+\end{exm}
+
+\begin{exm}\label{exm-derivatives:2}
+	Let $f(x)=x$. For any $x_0\in\domain{f}$,
+	\begin{align*}
+		f^\prime(x_0) & = \lim_{x \to x_0}\frac{x-x_0}{x-x_0} \\
+		              & = 1
+	\end{align*}
+\end{exm}
+
+\begin{exm}\label{exm-derivatives:3}
+	Let $f(x)=x^2$. For any $x_0\in\domain{f}$,
+	\begin{align*}
+		f^\prime(x_0) & = \lim_{x \to x_0}\frac{x^2-x_0^2}{x-x_0}      \\
+		              & = \lim_{x \to x_0}\frac{(x-x_0)(x+x_0)}{x-x_0} \\
+		              & = \lim_{x \to x_0} \left(x+x_0\right)          \\
+		              & = 2x_0
+	\end{align*}
+\end{exm}
+
+\begin{exm}\label{exm-derivatives:4}
+	Let $f(x)=\sqrt{x}$. For any\footnote{This function in particular is not
+		differentiable in the origin} $x_0\in\domain{f}:x_0>0$,
+	\begin{align*}
+		f^\prime(x_0) & = \lim_{x \to x_0}\frac{\sqrt{x}-\sqrt{x_0}}{x-x_0}                                               \\
+		              & = \lim_{x \to x_0}\frac{(\sqrt{x}-\sqrt{x_0})(\sqrt{x}+\sqrt{x_0})}{(x-x_0)(\sqrt{x}+\sqrt{x_0})} \\
+		              & = \lim_{x \to x_0}\frac{x-x_0}{(x-x_0)(\sqrt{x}+\sqrt{x_0})}                                      \\
+		              & = \lim_{x \to x_0}\frac{1}{\sqrt{x}+\sqrt{x_0}}                                                   \\
+		              & = \frac{1}{2\sqrt{x_0}}
+	\end{align*}
+\end{exm}
+
+\begin{exm}\label{exm-derivatives:5}
+	Let $f(x)=\sin(x)$. For any $x_0\in\domain{f}$,
+	\begin{align*}
+		f^\prime(x_0) & = \lim_{x \to x_0}\frac{\sin(x)-\sin(x_0)}{x-x_0}                                                                                                                                                               \\
+		              & = \lim_{x \to x_0}\frac{2\sin\left(\frac{x-x_0}{2}\right)\cos\left(\frac{x+x_0}{2}\right)}{x-x_0}                                                                                                               \\
+		              & = \lim_{x \to x_0}\left(\frac{\sin\left(\frac{x-x_0}{2}\right)}{\frac{x-x_0}{2}}\right)\lim_{x \to x_0}\left(\cos\left(\frac{x+x_0}{2}\right)\right) &  & \text{definition (\ref{thm-limit-arithmetic})}        \\
+		              & = \cos(x_0)                                                                                                                                          &  & \text{example (\ref{exm-important-sin-over-x-limit})}
+	\end{align*}
+\end{exm}
+
+\begin{rem}\label{rem-euler-limit}
+	We can rewrite theorem (\ref{thm-euler-sequence-monotonicity-increasing}) as
+	function, \textit{i.e.}
+	\begin{equation}
+		\exp(x)\defines\lim_{h \to 0}\left(1+hx\right)^\frac{1}{h}=e
+	\end{equation}
+\end{rem}
+
+\begin{definition}\label{def-euler-alt}
+	An alternative definition of the euler number defines that $e$ is the unique
+	positive number for which $f(x_0)=\exp(x_0)$, and
+	\begin{align}
+		f'(x_0) & = \lim_{h\to0}\frac{f(x_0+h)-f(x_0)}{h}\nonumber                          \\
+		        & = \lim_{h\to0}\frac{\exp(x_0+h)-\exp(x_0)}{h}         &  & x_0=0\nonumber \\
+		        & = \lim_{h\to0}\frac{\exp(h)-1}{h}\label{eq-euler-alt}                     \\
+		        & = 1\nonumber
+	\end{align}
+\end{definition}
+
+\begin{exm}\label{exm-derivatives:6}
+	Let $f(x)=\ln(x)$. For any $x_0\in\domain{f}$,
+	\begin{align*}
+		f^\prime(x_0) & = \lim_{h \to 0}\frac{\ln(x_0+h)-\ln(x_0)}{h}                                                                                                           \\
+		              & = \lim_{h \to 0}\frac{\ln\left(\frac{x+h}{x_0}\right)}{h}                                                                                               \\
+		              & = \ln\left(\lim_{h \to 0}\left(\left(1+\frac{h}{x_0}\right)^{\frac{1}{h}}\right)\right) &  & \text{\pref{theorem}{thm-elementary-functions-continuous}} \\
+		              & = \ln\left(\exp\left(\frac{1}{x_0}\right)\right)                                        &  & \text{\pref{remark}{rem-euler-limit}}                      \\
+		              & = \frac{1}{x_0}
+	\end{align*}
+\end{exm}
+
+\begin{exm}\label{exm-derivatives:7}
+	Let $f(x)=\abs{x}$. For $x=0$ this limit does not exists because
+	\begin{align*}
+		f^\prime(x_0) & = \lim_{x \to 0}\frac{\abs{x}-\abs{0}}{x-0} \\
+		              & = \lim_{x \to 0}\frac{\abs{x}}{x}
+	\end{align*}
+	but notice that this limit doesn't exists since
+	\begin{equation*}
+		\lim_{x \to 0^+}\frac{x}{x} = 1 \neq -1 = \lim_{x \to 0^-}\frac{-x}{x}
+	\end{equation*}
+	wherefore the derivative of the absolute value function \gls{dne} in the origin.
+\end{exm}
+
+\begin{rem}
+	In \pref{example}{exm-derivatives:6} we saw why functions are not differentiable
+	at cusps.
+\end{rem}
+
+\begin{thm}\label{thm-differentiability-implies-continuity}
+	If the function $f$ is differentiable at $x_0$, then $f$ is continuous at $x_0$.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-differentiability-implies-continuity}.
+	\begin{flushleft}
+		One of the prerequisites of this theorem are that the limit stated in
+		\pref{definition}{def-differentiable} exists. Therefore,
+		\begin{align*}
+			\lim_{x \to x_0}\left(f(x)-f(x_0)\right) & = \underbrace{\lim_{x \to x_0}\left(\frac{f(x)-f(x_0)}{x-x_0}\right)}_{=f^\prime(x_0)}\cdot\underbrace{\lim_{x \to x_0}(x-x_0)}_{=0}                                                     \\
+			                                         & =  0                                                                                                                                 &  & \text{\pref{definition}{thm-limit-arithmetic}} \\
+		\end{align*}
+		But this means $f(x)\tolim{x}{x_0}0$.
+		So, by \pref{definition}{def-continuity-at-point-a}, $f$ is continuous at
+		the point $x_0$.
+	\end{flushleft}
+\end{proof}
+
+\begin{rem}\label{rem-continuity-doesnt-imply-differentiability}
+	It is very important to point out that the converse of \pref{theorem}{thm-differentiability-implies-continuity}
+	is false, \textit{i.e.} continuity does not imply differentiability. See \pref{example}{exm-derivatives:6}
+	why this couldn't possibly be true. However, if $f$ is not continuous, then $f$ is not differentiable, either.
+\end{rem}
+
+\begin{definition}\label{def-one-sided-derivatives}
+	Similar to \pref{definition}{def-differentiable}, we can define one-sided derivatives by
+	\begin{equation}\label{eq-right-sided-derivative}
+		f_+^\prime(x)=\lim_{x \to x_0^+}\frac{f(x)-f(x_0)}{x-x_0}
+	\end{equation}
+	\begin{equation}\label{eq-left-sided-derivative}
+		f_-^\prime(x)=\lim_{x \to x_0^-}\frac{f(x)-f(x_0)}{x-x_0}
+	\end{equation}
+	if the limit exists.
+\end{definition}
+
+\begin{thm}\label{thm-derivative-arithmetic}
+	Let $f$ and $g$ be two differentiable functions, and $c\in\mathbb{R}$. Then
+	\begin{enumerate}
+		\item $(c\cdot f)^\prime(x_0) = c \cdot f^\prime(x_0)$
+		\item $(f \pm g)^\prime(x_0) = f^\prime(x_0) \pm g^\prime(x_0)$
+		\item $(f \cdot g)^\prime(x_0) = f^\prime(x_0) \cdot g(x_0) + g^\prime(x_0) \cdot f(x_0)$
+		\item $\left(\tfrac{f}{g}\right)^\prime(x_0) = \tfrac{f^\prime(x_0)\cdot g(x_0) - g^\prime(x_0) \cdot f(x_0)}{g^2(x_0)}$ if $g(x_0)\neq0$
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-derivative-arithmetic}.
+	\begin{flushleft}
+		\textbf{Product Rule}:
+		\begin{align*}
+			(f \cdot g)^\prime(x_0) & = \lim_{h \to 0}\frac{f(x_0+h) g(x_0+h)-f(x_0) g(x_0)}{h}                                                           \\
+			                        & = \lim_{h \to 0}\left(\frac{1}{h}\big( f(x_0+h) g(x_0+h) - f(x_0)(x_0+h) +f(x_0)(x_0+h) - f(x_0) g(x_0)\big)\right) \\
+			                        & = \lim_{h \to 0}\left(g(x_0+h)\frac{f(x_0+h)-f(x_0)}{h}+f(x_0)\frac{g(x_0+h)-g(x_0)}{h}\right)                      \\
+			                        & = g(x_0) \cdot f^\prime(x_0) + f(x_0) \cdot g^\prime(x_0)
+		\end{align*}
+		Notice that in the last step we used the fact that by \pref{theorem}{thm-differentiability-implies-continuity},
+		$g$ is continuous which is an important detail required in this proof that explains why
+		$g(x_0+h)\tolim{h}{0}g(x_0)$.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-chain-rule}
+	If $f$ is differentiable at $x_0$ and $g$ is differentiable at $f(x_a)$, then
+	\begin{equation}\label{eq-chain-rule}
+		(g \circ f)^\prime(x_0) = \underbrace{g^\prime(f(x_0))}_{\text{outer derivative}} \cdot \underbrace{f^\prime(x_0)}_{\text{inner derivative}}
+	\end{equation}
+	This is called the chain rule.
+\end{thm}
+
+\begin{thm}\label{thm-derivative-of-inverse-function}
+	Let $y=f(x)$ be invertible, continuous at a neighborhood of $x_0$, and differentiable
+	at $x_0$. Also assume that $f^\prime(x_0)\neq0$. Then $x=f^{-1}(y)$ is differentiable
+	at $y_0=f(x_0)$, and
+	\begin{equation}\label{eq-derivative-of-inverse-function}
+		\left(f^{-1}\right)^\prime(y_0)=\frac{1}{f^\prime(x_0)}
+	\end{equation}
+\end{thm}
+
+\begin{exm}\label{exm-derivative-of-inverse-function:1}
+	We know that for all $x>0$, $(\ln(x))^\prime=\tfrac{1}{x}$. The inverse function
+	of $y=\ln(x)$ is $x=e^y$. Hence, by \pref{theorem}{thm-derivative-of-inverse-function}
+	we can write
+	\begin{equation*}
+		(e^y)^\prime = \frac{1}{\ln(x)^\prime} = \frac{1}{x^{-1}} = e^y
+	\end{equation*}
+	where we used the result obtained from \pref{example}{exm-derivatives:5}.
+\end{exm}
+
+\begin{exm}\label{exm-derivative-of-inverse-function:2}
+	Let $f(x)=\sin(x)=y$ and $f^{-1}(x)=\arcsin(y)$. Hence, by
+	\pref{theorem}{thm-derivative-of-inverse-function} we can write
+	\begin{align*}
+		(\arcsin(y))^\prime & = \frac{1}{\sin(x)^\prime}     \\
+		                    & = \frac{1}{\cos(x)}            \\
+		                    & = \frac{1}{\sqrt{1-\sin^2(x)}} \\
+		                    & = \frac{1}{\sqrt{1-y^2}}
+	\end{align*}
+\end{exm}
+
+\begin{exm}\label{exm-derivative-of-inverse-function:3}
+	Let $f(x)=\tan(x)=y$ and $f^{-1}(x)=\arctan(y)$. Hence, by
+	\pref{theorem}{thm-derivative-of-inverse-function} we can write TODO
+\end{exm}
+
+\begin{rem}\label{rem-first-derivative-polynomial}
+	Let $f(x)=x^\alpha$ with $\alpha\in\mathbb{R}$ and $x>0$. Define
+	$g(x)\defines \ln(f(x))$. By using the chain rule we get that
+	\begin{equation}\label{eq-first-derivative-polynomial:1}
+		g^\prime(x) = \frac{1}{f(x)} \cdot f^\prime(x)
+	\end{equation}
+	On the other hand,
+	\begin{equation}\label{eq-first-derivative-polynomial:2}
+		g(x) = \ln(x^\alpha) = \alpha\ln(x) \implies g^\prime(x) = \frac{\alpha}{x}
+	\end{equation}
+	So by \pref{equation}{eq-first-derivative-polynomial:1} and \pref{equation}{eq-first-derivative-polynomial:2},
+	\begin{align*}
+		\frac{1}{f(x)} \cdot f^\prime(x) = \frac{\alpha}{x} \implies f^\prime(x) = \alpha \cdot x^{\alpha-1}
+	\end{align*}
+\end{rem}
