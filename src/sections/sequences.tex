@@ -1,0 +1,525 @@
+\subsection{Sequences}\label{subsec-sequences}
+
+\begin{definition}\label{def-sequence}
+	An infinite ordered set of real\footnote{This document restricts the definition
+		to the set of real numbers, but in other courses it can be more abstract than that}
+	numbers is called a sequence, most formally denoted by $\{a_n\}_{n=1}^\infty$,
+	or just $a_n$.
+\end{definition}
+
+\begin{definition}\label{def-sequence-recursive:1}
+	Let $a\in\mathbb{N}$. We define \cite[p.51]{wuest2009}
+	\begin{align*}
+		a_1     & = a + 1   \\
+		a_{n+1} & = a_n + 1
+	\end{align*}
+\end{definition}
+
+\begin{definition}\label{def-sequence-recursive:2}
+	Let $a\in\mathbb{R}\setminus\{0\}$. We define \cite[p.51]{wuest2009}
+	\begin{align*}
+		a^0     & = 1                                                                         \\
+		a^{n+1} & = a^n \cdot n &  & (n\in\mathbb{N}_0\defines\mathbb{N}\cup\{0\}=\mathbb{Z})
+	\end{align*}
+\end{definition}
+
+\begin{definition}\label{def-sequence-recursive:3}
+	Let $n\in\mathbb{N}_0$. We define \cite[p.51]{wuest2009}
+	\begin{align*}
+		0!     & = 1       \\
+		(n+1)! & = n!(n+1)
+	\end{align*}
+	This is known as the faculty.
+\end{definition}
+
+\begin{definition}\label{def-sequence-recursive:4}
+	Let $c\in\mathbb{Z}$ and $\{a_n\}_{n\in\mathbb{Z}_c}$ be sequences. We define \cite[p.51]{wuest2009}
+	\begin{align*}
+		\sum_{k=c}^n a_k     & = a_c                                                \\
+		\sum_{k=c}^{n+1} a_k & = \sum_{k=c}^n a_k + a_{n+1} &  & (n\in\mathbb{Z}_c)
+	\end{align*}
+	This is known as the sum.
+\end{definition}
+
+\begin{definition}\label{def-sequence-recursive:5}
+	Let $c\in\mathbb{Z}$ and $\{a_n\}_{n\in\mathbb{Z}_c}$ be sequences. We define \cite[p.51]{wuest2009}
+	\begin{align*}
+		\prod_{k=c}^n a_k     & = a_c                                                                  \\
+		\prod_{k=c}^{n+1} a_k & = \left(\prod_{k=c}^n a_k\right) \cdot a_{n+1} &  & (n\in\mathbb{Z}_c)
+	\end{align*}
+	This is known as the product.
+\end{definition}
+
+\begin{rem}
+	A sequence can also be written as a function $f:\mathbb{N}\to\mathbb{R}$,
+	where $a_n = f(n)$.
+\end{rem}
+
+\begin{definition}\label{def-sequence-limit}
+	Let $a_n$ be a sequence. We say that
+	\begin{equation*}
+		\lim_{n\to\infty}a_n=b
+	\end{equation*}
+	for $b\in\mathbb{R}$ if and only if
+	\begin{equation*}
+		\forall\varepsilon>0\;\exists N\in\mathbb{N}: n>N \implies \abs{a_n - b}<\varepsilon
+	\end{equation*}
+\end{definition}
+
+\begin{rem}\label{rem-remarkable-sequences}
+	What follows is a short list of some of the more notable sequences that we will
+	get to know over time:
+	\begin{enumerate}
+		\item Linear sequence: $a_n=n$, \textit{e.g.} $1,3,4,5,\dots$
+		\item Harmonic sequence: $a_n=\tfrac{1}{n}$, \textit{e.g.} $1,\tfrac{1}{2},\tfrac{1}{3},\tfrac{1}{4},\tfrac{1}{5},\dots$
+		\item Alternating sequence: $a_n=(-1)^n$, \textit{e.g.} $-1,1,-1,1,-1,\dots$
+		\item Alternating harmonic sequence: $a_n=\tfrac{(1)^{n}}{n}$, \textit{e.g.} $1,-\tfrac{1}{2},\tfrac{1}{3},-\tfrac{1}{4},\tfrac{1}{5},\dots$
+		\item Arithmetic sequence: $a_n=5+2(n-1)$, \textit{e.g.} $5,7,9,11,13,\dots$
+		\item Geometric sequence: $a_n=3\cdot2^{n-1}$, \textit{e.g.} $3,6,12,24,48,\dots$
+		\item Constant sequence: $a_n=2$, \textit{e.g.} $2,2,2,2,2,\dots$
+		\item Case sequence: $a_n=\begin{cases}1\text{ if }n\text{ is even}\\n\text{ else}\end{cases}$, \textit{e.g.} $1,1,3,1,5,\dots$
+		\item Sequence of prime numbers\footnote{To date there exists no known formula for this sequence}, \textit{e.g.} $2,3,5,7,11,\dots$
+		\item Sequence of digital digits of $\pi$, \textit{e.g.} $1,4,1,5,9,\dots$
+		\item Recursive sequence: $a_n=\begin{cases}a_1=2\\a_n=3a_{n-1}^2\end{cases}$, \textit{e.g.} $2,12,432,559.872,\dots$
+	\end{enumerate}
+\end{rem}
+
+\begin{exm}\label{exm-harmonic-sequence}
+	Let $a_n$ be the harmonic sequence. Show that $\tfrac{1}{n}\to0$ as $n\to\infty$.
+	\begin{flushleft}
+		\textbf{Answer}: Let $\varepsilon>0$ and $N>\tfrac{1}{\varepsilon}$. Then,
+		\begin{align*}
+			\abs{f(x) - b} & = \abs[\Bigg]{\frac{1}{n}-0} \\
+			               & = \frac{1}{n}                \\
+			               & < \frac{1}{N}                \\
+			               & < \varepsilon
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}
+	Adding, dropping or changing any finite number of elements in a sequence does
+	not affect the limit.
+\end{rem}
+
+\begin{thm}\label{thm-sequence-unique-limit}
+	If $a_n$ has a limit, then the limit is unique.
+\end{thm}
+
+\begin{thm}\label{thm-sequence-limit-bounded}
+	If $a_n$ has a limit, then $a_n$ is also bounded.
+\end{thm}
+
+\begin{rem}\label{rem-sequence-limit-bounded}
+	\pref{Theorem}{thm-sequence-limit-bounded} only works in one direction; the
+	limit might not exist if the sequence is bounded. Take for instance the alternating
+	sequence as an counter example. Conversely, if the sequence is not bounded, then
+	it has no finite limit.
+\end{rem}
+
+\begin{proof}
+	Of \pref{theorem}{thm-sequence-limit-bounded}.
+	\begin{flushleft}
+		Suppose that $a_n$ has a limit, \textit{i.e.}
+		\begin{equation*}
+			\lim_{n\to\infty}a_n=b
+		\end{equation*}
+		then define
+		\begin{equation*}
+			M\defines\max\left\{b+1,a_1,a_2,\dots,a_N\right\}
+		\end{equation*}
+		for $n>N$ such that $a_n\in(b-1,b+1)$. We define
+		\begin{equation*}
+			m\defines\min\left\{b-1,a_1,a_2,\dots,a_N\right\}
+		\end{equation*}
+		Hence, $m \leq a_n \leq M$ for all $n\in\mathbb{N}$.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-sequence-arithmetic}
+	Let $a_n \seqinfty{n} L$ and $b_n \seqinfty{n} K$ be two limited sequences. Then
+	\begin{enumerate}
+		\item $\forall c\in\mathbb{R}:c \cdot a_n \seqinfty{n} c \cdot L$
+		\item $a_n+b_n \seqinfty{n} L+K$
+		\item $a_n \cdot b_n \seqinfty{n} L \cdot K$
+		\item $\tfrac{a_n}{b_n} \seqinfty{n} \tfrac{L}{K}$ if $b_n \neq 0$ and $K \neq 0$
+	\end{enumerate}
+\end{thm}
+
+\begin{exm}\label{exm-sequence-arithmetic:1}
+	By \pref{example}{exm-harmonic-sequence} and \pref{theorem}{thm-sequence-arithmetic}
+	it immediately follows that
+	\begin{equation*}
+		1+\frac{1}{n} \seqinfty{n} 1
+	\end{equation*}
+\end{exm}
+
+\begin{thm}\label{thm-sequence-sqrt-limit}
+	Let $a_n \seqinfty{n} b$. Assume that for any $a_n\geq0$ ($n\in\mathbb{N}$),
+	\begin{equation*}
+		\sqrt{a_n} \seqinfty{n} \sqrt{b}
+	\end{equation*}
+\end{thm}
+
+\begin{thm}\label{thm-sequence-abs}
+	Let $a_n \seqinfty{n} b$. Then
+	\begin{equation*}
+		\abs{a_n} \seqinfty{n} \abs{b}
+	\end{equation*}
+\end{thm}
+
+\begin{thm}\label{thm-sequence-zero-limit}
+	Let $a_n \seqinfty{n} 0$. Then this is equivalent to
+	\begin{equation*}
+		\abs{a_n} \seqinfty{n} 0
+	\end{equation*}
+\end{thm}
+
+\begin{rem}\label{rem-sequence-abs}
+	Note that for \pref{theorem}{thm-sequence-abs},
+	\begin{equation*}
+		\abs{a_n} \seqinfty{n} \abs{b} \notimplies a_n \seqinfty{n} b
+	\end{equation*}
+	The alternating sequence from \pref{remark}{rem-remarkable-sequences} is a
+	counterexample for this statement.
+\end{rem}
+
+\begin{exm}\label{exm-sequence-arithmetic:2}
+	Find the limit of
+	\begin{equation*}
+		\lim_{n\to\infty}\sqrt{\frac{n+1}{3n-\frac{2}{n}}}
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}: We use the result from \pref{example}{exm-harmonic-sequence},
+		\textit{i.e.} $\tfrac{1}{n} \seqinfty{n} 0$ and some basic algebraic manipulation to get
+		\begin{align*}
+			\lim_{n\to\infty}\sqrt{\frac{n+1}{3n-\frac{2}{n}}}
+			 & = \lim_{n\to\infty}\sqrt{\frac{1+\frac{1}{n}}{3-\frac{2}{n^2}}}                                                                                                                    \\
+			 & = \lim_{n\to\infty}\sqrt{\frac{1+\frac{1}{n}}{3-2\cdot\frac{1}{n}\cdot\frac{1}{n}}}                                                                                                \\
+			 & = \frac{1}{\sqrt{3}}                                                                &  & \text{\pref{theorem}{thm-sequence-arithmetic} \& \pref{theorem}{thm-sequence-zero-limit}}
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-product-of-bounded-zero-sequence}
+	If $a_n \seqinfty{n} 0$ and $b_n$ is a bounded sequence, then\footnote{This is
+		analogous to \pref{theorem}{thm-product-of-bounded-zero-limit}}
+	\begin{equation*}
+		a_n \cdot b_n \seqinfty{n} 0
+	\end{equation*}
+\end{thm}
+
+\begin{thm}\label{thm-sequence-sandwich-theorem}
+	Assume that
+	\begin{equation*}
+		a_n \leq b_n \leq c_n
+	\end{equation*}
+	as well as
+	\begin{equation*}
+		\lim_{n\to\infty} a_n = L = \lim_{n\to\infty} c_n
+	\end{equation*}
+	Then the sandwich theorem for sequences states that
+	\begin{equation*}
+		\lim_{n\to\infty} b_n = L
+	\end{equation*}
+\end{thm}
+
+\begin{exm}
+	Take the sequence $a_n=\tfrac{1}{n}\sin(n)$. We can find lower and upper bounds
+	for this sequence since $\codomain{\sin(n)}=[-1,1]$, such that
+	\begin{equation*}
+		-\frac{1}{n}\leq\frac{\sin(n)}{n}\leq\frac{1}{n}
+	\end{equation*}
+	Notice that by \pref{theorem}{thm-sequence-zero-limit},
+	\begin{equation*}
+		\abs[\Bigg]{-\frac{1}{n}} \seqinfty{n} 0
+	\end{equation*}
+	Hence, by \pref{theorem}{thm-sequence-sandwich-theorem}
+	\begin{equation*}
+		\lim_{n\to\infty}\frac{\sin(n)}{n}=0
+	\end{equation*}
+\end{exm}
+
+\begin{exm}
+	Let $a_n=\tfrac{n!}{n^n}$. We claim that $a_n$ is bounded from above by the
+	sequence $\tfrac{1}{n}$ since
+	\begin{align*}
+		\frac{n!}{n^n}                                                                           & \leq\frac{1}{n}                                         \\
+		\iff
+		n!n                                                                                      & \leq n^n                                                \\
+		\iff
+		n!                                                                                       & \leq n^{n-1}                                            \\
+		\iff
+		\underbrace{n \cdot (n-1) \cdot (n-2) \cdots 3 \cdot 2 \cdot 2 \cdot 1}_{n\text{ times}} & \leq \underbrace{n \cdot n \cdots n}_{n-1\text{ times}} \\
+		\iff
+		\underbrace{n \cdot (n-1) \cdot (n-2) \cdots 3 \cdot 2 \cdot 2}_{n-1\text{ times}}       & \leq \underbrace{n \cdot n \cdots n}_{n-1\text{ times}} \\
+	\end{align*}
+	The sequence is also bounded from below by $0$, so by theorem (\ref{thm-sequence-sandwich-theorem})
+	it follows that
+	\begin{equation*}
+		0\leq\frac{n!}{n^n}\leq\frac{1}{n}\implies\lim_{n\to\infty}\frac{n!}{n^n}=0
+	\end{equation*}
+\end{exm}
+
+\begin{thm}\label{thm-sequence-nth-root}
+	Let $a_n=\sqrt[n]{n}$. Then this sequence converges to
+	\begin{equation*}
+		\sqrt[n]{n} \seqinfty{n} 1
+	\end{equation*}
+\end{thm}
+
+\begin{thm}\label{thm-sequence-nth-root-of-constant}
+	Let $a_n=\sqrt[n]{c}$ for any $c\in\mathbb{R}^+\setminus\{0\}$. Then this
+	sequence converges to
+	\begin{equation*}
+		\sqrt[n]{c} \seqinfty{n} 1
+	\end{equation*}
+\end{thm}
+
+\begin{exm}\label{exm-sequence-nth-root}
+	Consider the sequence
+	\begin{equation*}
+		a_n =\sqrt[n]{3^{2n+1} \cdot n}
+	\end{equation*}
+	Then this is the same as
+	\begin{equation*}
+		a_n = \sqrt[n]{9^n}\sqrt[n]{3}\sqrt[n]{n} = 9\sqrt[n]{3}\sqrt[n]{n}
+	\end{equation*}
+	So, by \pref{theorem}{thm-sequence-nth-root} and \pref{theorem}{thm-sequence-nth-root-of-constant}
+	this implies
+	\begin{equation*}
+		a_n \seqinfty{n} 9
+	\end{equation*}
+\end{exm}
+
+\begin{thm}\label{thm-sequence-converges-positively}
+	Let $a_n\geq0$. Then\footnote{This is still true if we only require $a_n\geq0$
+		for some threshold $n\geq N\in\mathbb{N}$.},
+	\begin{equation*}
+		a_n \seqinfty{n} b \implies b \geq 0
+	\end{equation*}
+\end{thm}
+
+\begin{thm}\label{thm-sequence-limit-greater-than}
+	Suppose that $a_n \geq b_n$. Let $a_n \seqinfty{n} K$ and $b_n \seqinfty{n} L$. Then
+	\footnote{This would be no longer true for strict inequalities, \textit{cf.} the
+		sequence $0<\tfrac{1}{n}\seqinfty{n}0$.},
+	\begin{equation*}
+		K = \lim_{n\to\infty} a_n \geq \lim_{n\to\infty} b_n = L
+	\end{equation*}
+\end{thm}
+
+\begin{thm}\label{thm-sequence-greater-than}
+	If $a_n \seqinfty{n} L$ and $b_n \seqinfty{n} K$ with $L > K$, then there exists
+	a threshold $n>N\in\mathbb{N}$ such that $a_n>b_n$.
+\end{thm}
+
+\begin{definition}\label{def-sequence-divergence}
+	We say\footnote{Also called divergence of a sequence} that $a_n \seqinfty{n} \infty$
+	if for every $M$ there exists an $N\in\mathbb{N}$ such that
+	\begin{equation*}
+		n>N \implies a_n > M
+	\end{equation*}
+\end{definition}
+
+\begin{rem}
+	Here are some sequences that diverge towards infinity:
+	\begin{enumerate}
+		\item $a_n=n!$
+		\item $a_n=2^n$
+		\item $a_n=n^3$
+	\end{enumerate}
+	Another very interesting sequence is $a_n=(-1)^n\cdot n$. It's an unbounded
+	alternating sequence that bounces between $-\infty$ for odd numbers, and
+	$+\infty$ for even numbers.
+\end{rem}
+
+\begin{thm}\label{thm-sequence-infinity-zero}
+	If $a_n \seqinfty{n} \infty$, then $\tfrac{1}{a_n} \seqinfty{n} 0$.
+\end{thm}
+
+\begin{thm}\label{thm-sequence-zero-infinity}
+	If $a_n>0$ for all $n\in\mathbb{N}$ where $a_n \seqinfty{n} 0$, then
+	$\tfrac{1}{a_n} \seqinfty{n} \infty$.
+\end{thm}
+
+\begin{thm}
+	If $a_n \geq b_n$ and $b_n \seqinfty{n} \infty$, then $a_n \seqinfty{n} \infty$.
+\end{thm}
+
+\begin{definition}\label{def-monotonicity-sequences}
+	Let $a_n$ be a sequence. It is called
+	\begin{enumerate}
+		\item monotonically increasing, if $\forall n>N\in\mathbb{N}:a_{n+1} \geq a_n$
+		\item strictly monotonically increasing, if $\forall n>N\in\mathbb{N}:a_{n+1} > a_n$
+		\item monotonically decreasing, if $\forall n>N\in\mathbb{N}:a_{n+1} \leq a_n$
+		\item strictly monotonically decreasing, if $\forall n>N\in\mathbb{N}:a_{n+1} < a_n$
+	\end{enumerate}
+\end{definition}
+
+\begin{exm}\label{exm-monotonicity-sequences:1}
+	We claim that $a_n=\tfrac{n^2}{2^n}$ is a monotonically decreasing sequence for $n>3$.
+	\begin{flushleft}
+		\textbf{Answer}: To prove this, we need to show that $a_{n+1}<a_n$. So,
+		\begin{align*}
+			\frac{a_{n+1}}{a_n} & = \frac{(n+1)^2}{2^{n+1}}\cdot\frac{2^n}{n^2}           \\
+			                    & = \frac{1}{2}\left(\frac{n+1}{n}\right)^2               \\
+			                    & = \frac{1}{2}\left(1+\frac{1}{n}\right)^2               \\
+			                    & < 1                                           & (\star)
+		\end{align*}
+		The inequality in $(\star)$ holds \textit{iff} $n>3:\left(1+\tfrac{1}{n}\right)^2<2$.
+		But then
+		\begin{align*}
+			\frac{1}{n}                  & \leq \frac{1}{3}                  \\
+			\implies
+			1+\frac{1}{n}                & \leq 1+\frac{1}{3}                \\
+			\implies
+			\left(1+\frac{1}{n}\right)^2 & \leq \left(1+\frac{1}{3}\right)^2 \\
+			\implies
+			\left(1+\frac{1}{n}\right)^2 & \leq \frac{16}{9} = 2
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-monotonicity-sequences:2}
+	We claim that $a_n=\tfrac{n!}{n^n}$ is a strictly monotonically decreasing sequence.
+	\begin{flushleft}
+		\textbf{Answer}: To prove this, we need to show that $a_{n+1}<a_n$. So,
+		\begin{align*}
+			\frac{a_{n+1}}{a_n} & = \frac{(n+1)!}{(n+1)^{n+1}}\cdot\frac{n^n}{n!} \\
+			                    & = \frac{(n+1)n^n}{(n+1)^{n+1}}                  \\
+			                    & = \left(\frac{n}{n+1}\right)^n                  \\
+			                    & < 1
+		\end{align*}
+		wherefore $a_{n+1}<a_n$ for any $n\in\mathbb{N}$.
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-euler-sequence-monotonicity-increasing}
+	The sequence $a_n=\left(1+\tfrac{1}{n}\right)^n$ is strictly monotonically increasing.
+\end{thm}
+
+\begin{thm}\label{thm-monotone-bounded-sequence-converges}
+	Every monotone and bounded sequence converges.
+\end{thm}
+
+\begin{rem}\label{rem-euler-sequence}
+	By \pref{theorem}{thm-monotone-bounded-sequence-converges}, the sequence in
+	\pref{theorem}{thm-euler-sequence-monotonicity-increasing} has a limit bounded
+	by $2 \leq a_n \leq 3$ for all $n\in\mathbb{N}$ and is denoted by $e$, which
+	is an irrational number.
+\end{rem}
+
+\begin{proof}
+	Of \pref{theorem}{thm-monotone-bounded-sequence-converges}.
+	\begin{flushleft}
+		Assume \gls{wlog} that the sequence $a_n$ is monotonically increasing.
+		By the axiom of completeness, $a_n$ has a supremum by the virtue of being
+		bounded, denoted by $L=\sup(a_n)$. We claim that
+		\begin{equation*}
+			\lim_{n\to\infty}a_n=L
+		\end{equation*}
+		Let $\varepsilon>0$. Note that $L-\varepsilon$ is not an upper bound of
+		$a_n$. Therefore, for any $n>N\in\mathbb{N}$ we have that
+		\begin{equation*}
+			\exists a_N: L - \varepsilon < a_N < a_n < \sup(a_n) = L < L + \varepsilon
+		\end{equation*}
+		By definition (\ref{def-sequence-limit}),
+		\begin{equation*}
+			L - \varepsilon < a_n < L + \varepsilon \iff \abs{a_n - L} < \varepsilon
+		\end{equation*}
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-monotone-sequence-converges-diverges}
+	Every monotone sequence either converges or diverges towards $-\infty$ or $+\infty$.
+\end{thm}
+
+\begin{rem}
+	Based on \pref{theorem}{thm-euler-sequence-monotonicity-increasing} here are
+	a few notable observations:
+	\begin{equation}
+		\lim_{n\to\infty}\left(1+\frac{a}{n}\right)^n=e^a
+	\end{equation}
+	Additionally, if $a_n\neq0$ for every $n\in\mathbb{N}$ and $a_n \seqinfty{n} \infty$, then
+	\begin{equation}
+		\lim_{n\to\infty}\left(1+\frac{1}{a_n}\right)^{a_n}=e
+	\end{equation}
+\end{rem}
+
+\begin{exm}\label{exm-sequence-limit:1}
+	Consider the sequence
+	\begin{equation*}
+		a_n=\sqrt[n+1]{\left(\frac{n}{n-1}\right)^{n^2-n}}
+	\end{equation*}
+	Find the limit of $a_n$.
+	\begin{flushleft}
+		\textbf{Answer}:
+		\begin{align*}
+			\lim_{n\to\infty}\sqrt[n+1]{\left(\frac{n}{n-1}\right)^{n^2-n}}
+			 & =\lim_{n\to\infty}\left(\frac{n}{n-1}\right)^{\frac{n^2-n}{n+1}}                      \\
+			 & =\lim_{n\to\infty}\left(\frac{n-1+1}{n-1}\right)^{\frac{n(n-1)}{n+1}}                 \\
+			 & =\lim_{n\to\infty}\left(\left(1+\frac{1}{n-1}\right)^{n-1}\right)^{\frac{n+1-1}{n+1}} \\
+			 & =\lim_{n\to\infty}\left(\left(1+\frac{1}{n-1}\right)^{n-1}\right)^{1-\frac{1}{n+1}}   \\
+			 & =e
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-sequence-limit:2}
+	Consider the sequence
+	\begin{equation*}
+		a_n=\begin{cases}
+			a_1=\frac{1}{4} \\
+			a_n=(a_{n-1})^2+\frac{1}{4}
+		\end{cases}
+	\end{equation*}
+	Find the limit of $a_n$.
+	\begin{flushleft}
+		\textbf{Answer}:
+		First we need to show by induction, that the sequence is monotonically increasing
+		and bounded from above by $\tfrac{1}{2}$.
+		\begin{flushleft}
+			\textbf{Monotonically increasing}: The base case holds since
+			\begin{equation*}
+				a_2 = \left(\frac{1}{4}\right)^2+\frac{1}{4} = \frac{1}{2} > \frac{1}{4} = a_1
+			\end{equation*}
+			For the induction hypothesis, assume that $a_{n+1}>a_{n}$. Then this equivalent
+			to $a_{n+1}-a_n>0$. Therefore, the induction step $n \to n+1$ it follows that
+			\begin{align*}
+				a_{n+2}-a_{n+1} & = \left(a_{n+1}^2+\frac{1}{4}\right) - \left(a_n^2+\frac{1}{4}\right)                                  \\
+				                & = a_{n+1}^2 - a_n^2                                                                                    \\
+				                & = (a_{n+1} - a_n)(a_{n+1} + a_n)                                      &  & \text{Induction Hypothesis} \\
+				                & >0
+			\end{align*}
+			Since the assertion works for the base case, and assuming it works for the
+			induction hypothesis as well, the sequence is monotonically increasing for all $n\in\mathbb{N}$
+			by the principle of induction.
+		\end{flushleft}
+		\begin{flushleft}
+			\textbf{Bounded from above}: The base case holds since
+			\begin{equation*}
+				a_1 = \frac{1}{4} < \frac{1}{2}
+			\end{equation*}
+			For the induction hypothesis, assume that $a_{n}<\tfrac{1}{2}$. Then
+			the induction step $n \to n+1$ indicates that
+			\begin{align*}
+				a_{n+1} & = (a_n)^2 + \frac{1}{4}                                                     \\
+				        & < \left(\frac{1}{2}\right)^2 + \frac{1}{4} &  & \text{Induction Hypothesis} \\
+				        & = \frac{1}{2}
+			\end{align*}
+			Since the assertion works for the base case, and assuming it works for the
+			induction hypothesis as well, the sequence is bounded from above by $\tfrac{1}{2}$
+			for all $n\in\mathbb{N}$ by the principle of induction.
+		\end{flushleft}
+		So, by \pref{theorem}{thm-monotone-bounded-sequence-converges}, the sequence
+		converges. Therefore, $a_n \seqinfty{n} L$ and $a_{n-1} \seqinfty{n} L^2+\tfrac{1}{4}$, \textit{i.e.}
+		\begin{align*}
+			 & L = L^2 + \frac{1}{4}   \\
+			\implies
+			 & L - L^2 - \frac{1}{4}=0 \\
+			\implies
+			 & L=\frac{1}{2}
+		\end{align*}
+	\end{flushleft}
+\end{exm}

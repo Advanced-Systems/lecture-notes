@@ -1,0 +1,131 @@
+\subsection{Subsequences}\label{subsec-subsequences}
+
+\begin{definition}\label{def-subsequence}
+	Let $a_n$ be a sequence. A sequence obtained from $a_n$ by deleting some of
+	the elements is called a subsequence.
+\end{definition}
+
+\begin{exm}\label{exm-subsequence:1}
+	Consider the alternating sequence
+	\begin{equation*}
+		a_n = 1,0,1,0,1,0,1,0,\dots
+	\end{equation*}
+	Then we denote its subsequences (odd indices only) by
+	\begin{equation*}
+		\{a_{2k-1}\}_{k=1}^\infty = 1,1,1,1,\dots
+	\end{equation*}
+	and (even indices only) by
+	\begin{equation*}
+		\{a_{2k}\}_{k=1}^\infty = 0,0,0,0,\dots
+	\end{equation*}
+\end{exm}
+
+\begin{exm}\label{exm-subsequence:2}
+	Consider the alternating sequence
+	\begin{equation*}
+		a_n = 1,\frac{1}{2},\frac{1}{3},\frac{1}{4},\frac{1}{5},\frac{1}{6},\dots
+	\end{equation*}
+	Then we denote its subsequence by
+	\begin{equation*}
+		\{a_{k^2}\}_{k=1}^\infty = 1,\frac{1}{4},\frac{1}{9},\frac{1}{16},\frac{1}{25},\dots
+	\end{equation*}
+\end{exm}
+
+\begin{thm}\label{thm-subsequence-converges}
+	If $a_n$ has a limit, then any subsequence of $a_n$ has that same limit, including $\pm\infty$.
+\end{thm}
+
+\begin{definition}\label{def-partial-limit}
+	A limit of a subsequence is called a partial limit.
+\end{definition}
+
+\begin{crl}\label{crl-subsequence-different-limits}
+	If $a_n$ has different partial limits, then $a_n$ diverges.
+\end{crl}
+
+\begin{thm}\label{thm-bolzano-weierstrass}
+	The theorem of Bolzano-Weierstrass states that every bounded sequence has a
+	converging subsequence.
+\end{thm}
+
+\begin{thm}\label{thm-heines-theorem}
+	Heine's theorem states that
+	\begin{equation*}
+		\lim_{x\to a}f(x)=L \iff \forall x_n\neq a: x_n \seqinfty{n} a \implies f(x_n) \seqinfty{n} L
+	\end{equation*}
+\end{thm}
+
+\begin{exm}\label{exm-heine:1}
+	In this example we are proving that a function does not have a limit. For this,
+	consider the following: Let $f(x)=\sin\left(\tfrac{1}{x}\right)$. We will show
+	that the limit of the function
+	\begin{equation}\label{eq-heine-dne}
+		\lim_{x\to0}\sin\left(\frac{1}{x}\right)
+	\end{equation}
+	does not exist. Note that for all $x_n$ we have that
+	\begin{equation*}
+		x_n=\frac{1}{2n\pi+\tfrac{\pi}{2}} \seqinfty{n} 0
+	\end{equation*}
+	Therefore,
+	\begin{equation*}
+		f(x_n)=\sin\left(\frac{1}{x_n}\right)=\sin(2n\pi+\tfrac{\pi}{2})=1
+		\implies f(x_n) \seqinfty{n} 1
+	\end{equation*}
+	Next consider the sequence $\tilde{x}_n\neq0$ with
+	\begin{equation*}
+		\tilde{x}_n=\frac{1}{2n\pi-\tfrac{\pi}{2}} \seqinfty{n} 0
+	\end{equation*}
+	which gives us
+	\begin{equation*}
+		f(\tilde{x}_n)=\sin\left(\frac{1}{\tilde{x}_n}\right)=\sin(2n\pi-\tfrac{\pi}{2})=-1
+		\implies f(\tilde{x}_n) \seqinfty{n} -1
+	\end{equation*}
+	In summary, by Heine's theorem, the limit in equation (\ref{eq-heine-dne}) \gls{dne}.
+\end{exm}
+
+\begin{exm}\label{exm-heine:2}
+	In this example, we are finding a limit of a sequence by using its functions
+	representation. For this, consider the following: Let
+	\begin{equation}\label{eq-heine-find:1}
+		\lim_{n\to\infty}n\sin\left(\tfrac{1}{n}\right)=\lim_{n\to\infty}\frac{\sin\left(\tfrac{1}{n}\right)}{\tfrac{1}{n}}
+	\end{equation}
+	be the sequence of interest. We know from \pref{example}{exm-important-sin-over-x-limit} that
+	\begin{equation}\label{eq-heine-find:2}
+		\frac{\sin(x)}{x} \tolim{x}{0} 1
+	\end{equation}
+	Then take any $x_n\neq0$ such that
+	\begin{equation}
+		x_n=\frac{1}{n}\seqinfty{n}0
+	\end{equation}
+	By Heine's theorem and \pref{equation}{eq-heine-find:2},
+	\begin{equation*}
+		f(x_n)=\frac{\sin\left(\tfrac{1}{n}\right)}{\tfrac{1}{n}}\seqinfty{n}1
+		\iff \lim_{n\to\infty}n\sin\left(\tfrac{1}{n}\right)=1
+	\end{equation*}
+\end{exm}
+
+\begin{exm}\label{exm-heine:3}
+	In this example, we are proving theorems for functions based on previous theorems
+	for sequences. For this, consider the following: Suppose we know that if
+	$a_n \seqinfty{n} 0$ and $b_n$ is bounded, then\footnote{This is exactly
+		\pref{theorem}{thm-product-of-bounded-zero-sequence}}
+	\begin{equation*}
+		a_n \cdot b_n \seqinfty{n} 0
+	\end{equation*}
+	Based on this theorem we want to give an alternative proof of
+	\pref{theorem}{thm-product-of-bounded-zero-limit}. Since $f(x)\tolim{x}{a}0$,
+	it follows by Heine's theorem that
+	\begin{equation*}
+		\forall x_n\neq a: x_n \seqinfty{n} a \implies f(x_n) \seqinfty{n} 0
+	\end{equation*}
+	Therefore, $g(x_n)$ is also a bounded sequence (since $x_n$ in particular is
+	bounded)
+	\begin{equation*}
+		\forall x_n\seqinfty{n}a: f(x_n) \cdot g(x_n) \seqinfty{n} 0
+	\end{equation*}
+	by \pref{theorem}{thm-product-of-bounded-zero-sequence}. Finally, by Heine's
+	theorem it follows from the other direction that
+	\begin{equation*}
+		\lim_{x \to a} f(x) \cdot g(x) = 0
+	\end{equation*}
+\end{exm}
