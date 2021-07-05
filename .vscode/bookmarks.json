@@ -59,6 +59,46 @@
 					"label": "TODO: reference subsection"
 				}
 			]
+		},
+		{
+			"path": "src/sections/single-variable-calculus.tex",
+			"bookmarks": [
+				{
+					"line": 2,
+					"column": 22,
+					"label": "TODO: Add description"
+				}
+			]
+		},
+		{
+			"path": "src/sections/analysis.tex",
+			"bookmarks": [
+				{
+					"line": 2,
+					"column": 21,
+					"label": "TODO: Add description"
+				}
+			]
+		},
+		{
+			"path": "src/sections/continuity.tex",
+			"bookmarks": [
+				{
+					"line": 151,
+					"column": 76,
+					"label": "TODO: Add reference implementation of the bisection method"
+				}
+			]
+		},
+		{
+			"path": "src/sections/derivatives.tex",
+			"bookmarks": [
+				{
+					"line": 226,
+					"column": 64,
+					"label": "TODO: Solve example"
+				}
+			]
 		}
 	]
 }
