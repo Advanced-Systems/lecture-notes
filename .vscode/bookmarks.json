@@ -99,6 +99,46 @@
 					"label": "TODO: Solve example"
 				}
 			]
+		},
+		{
+			"path": "src/document.tex",
+			"bookmarks": [
+				{
+					"line": 54,
+					"column": 16,
+					"label": "TODO: Move these macros to mathtools"
+				}
+			]
+		},
+		{
+			"path": "src/sections/higher-order-derivatives.tex",
+			"bookmarks": [
+				{
+					"line": 164,
+					"column": 38,
+					"label": "TODO: Add proof"
+				}
+			]
+		},
+		{
+			"path": "src/sections/curve-sketching.tex",
+			"bookmarks": [
+				{
+					"line": 71,
+					"column": 23,
+					"label": "TODO: Solve example"
+				}
+			]
+		},
+		{
+			"path": "src/sections/definite-integrals.tex",
+			"bookmarks": [
+				{
+					"line": 430,
+					"column": 44,
+					"label": "TODO: Add figure"
+				}
+			]
 		}
 	]
 }
