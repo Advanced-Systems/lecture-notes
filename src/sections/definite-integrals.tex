@@ -1,0 +1,491 @@
+\subsection{Definite Integrals}\label{subsec-definite-integrals}
+
+\begin{definition}\label{def-partition-of-an-interval}
+	A partition of an interval $[a,b]$ on $\mathbb{R}$ is a finite sequence
+	$x_0,x_1,\dots,x_n$ of real numbers such that
+	\begin{equation}\label{eq-partition-of-an-interval}
+		a = x_0 < x_1 < \dots < x_n = b
+	\end{equation}
+	and is denoted by $P$.
+\end{definition}
+
+\begin{definition}\label{def-max-partition}
+	The biggest interval of the partition is defined by
+	\begin{equation}\label{eq-max-partition}
+		\lambda(P) \defines \max\left\{\Delta x_i \setbuild i\in\mathbb{N}\right\}
+	\end{equation}
+\end{definition}
+
+\begin{definition}\label{def-riemann-sum}
+	Let $P$ be a partition of $[a,b]$, and let $f:[a,b]\to\mathbb{R}$ be bounded.
+	Choose points $x_i^*\in[x_{i-1},x_i]$ for $i\in\mathbb{N}$. Then
+	\begin{equation}\label{eq-riemann-sum}
+		\sum_{i=1}^n f(x_i^*)(x_i-x_{i-1}) = \sum_{i=1}^n f(x_i^*)\Delta x
+	\end{equation}
+	is called the Riemann sum for $f$ determined by the partition $P$.
+\end{definition}
+
+\begin{definition}\label{def-riemann-integrable}
+	Let $f:[a,b]\to\mathbb{R}$ be bounded. We say that $f$ is a Riemann integrable
+	function on $[a,b]$ if there exists an $I\in\mathbb{R}$ such that
+	\begin{equation}
+		\bigwedge_{\varepsilon>0}\bigvee_{\delta>0}\bigwedge_{\lambda(P)<\delta}
+		\abs[\Bigg]{\sum_{i=1}^n f(x_i^*)\Delta x_i - I}<\varepsilon
+	\end{equation}
+	for all $x_i^*$.
+\end{definition}
+
+\begin{definition}\label{def-definite-integral}
+	For a continuous function and bounded function $f:[a,b]\to\mathbb{R}$,
+	the Riemann sum can by computed by
+	\begin{equation}\label{eq-definite-integral}
+		\int_a^b f(x) \diff x = \lim_{n\to\infty}\sum_{i=1}^n f(x_i^*)\Delta x
+	\end{equation}
+	for any choice of the $x_i^*\in[x_{i-1},x_i]$ with $\delta x = \tfrac{b-a}{n}$
+	and $x_i = a + (i-1)\Delta x_i$, \textit{i.e.} $P$ partitions the interval $[a,b]$
+	into subintervals of equal length\footnote{which are also called regular intervals}.
+\end{definition}
+
+\begin{rem}\label{rem-definite-integral}
+	To determine the value of $x_i$, we use the formula
+	\begin{enumerate}
+		\item Left-Hand Rule: $\sum_{i=1}^n f(x_i)\Delta x$
+		\item Midpoint Rule: $\sum_{i=1}^n f(x_{i+1})\Delta x$
+		\item Right-Hand Rule: $\sum_{i=1}^n f\left(\frac{x_i+x_{i+1}}{2}\right)\Delta x$
+	\end{enumerate}
+\end{rem}
+
+\begin{exm}\label{exm-riemann-sum:1}
+	Consider the constant function $f(x)=c$ on the interval $[a,b]$. For any $P$
+	and choice off $c_i$ we get
+	\begin{align*}
+		\sum_{i=1}^n c \Delta x & = c \sum_{i=1}^n \Delta x \\
+		                        & = c (b-a)
+	\end{align*}
+	Hence,
+	\begin{equation*}
+		\int_a^b c \diff x = c(b-a)
+	\end{equation*}
+\end{exm}
+
+\begin{exm}\label{exm-riemann-sum:2}
+	Consider the linear function $f(x)=x$ on the interval $[0,1]$. For any $P$
+	and choice off $c_i$ we partition the interval into subintervals of length $n$
+	using the right-hand rule, so $\Delta x = \frac{1}{n}$, and
+	\begin{equation*}
+		x_i = 0 + ((i+1)-1)\Delta x = \frac{i}{n}
+	\end{equation*}
+	Then the Riemann sum of this function is
+	\begin{align*}
+		\sum_{i=1}^n f(x_{i+1}) \Delta x & = \sum_{i=1}^n f\left(\frac{i}{n}\right)\Delta x \\
+		                                 & = \frac{1}{n^2} \sum_{i=1}^n i                   \\
+		                                 & = \frac{1}{n^2} \cdot \frac{n(n+1)}{2}           \\
+		                                 & = \frac{n+1}{2n}
+	\end{align*}
+	Hence,
+	\begin{equation*}
+		\int_0^1 x \diff x = \lim_{n\to\infty}\frac{n+1}{2n} = \frac{1}{2}
+	\end{equation*}
+\end{exm}
+
+\begin{exm}\label{exm-riemann-sum:3}
+	Compute the Riemann sum of $f(x)=4x-x^2$ on $[0,4]$ with regular partitions
+	$16$ using the left and right-hand rule from \pref{remark}{rem-definite-integral}.
+	\begin{flushleft}
+		\textbf{Answer}: Note that $a=0$ and $b=4$. From \pref{definition}{def-definite-integral}
+		we have that for the right-hand rule,
+		\begin{align*}
+			\Delta x & = \frac{4-0}{16} = \frac{1}{4}      \\
+			x_i      & = 0 + ((i+1)-1)\Delta x = i\Delta x
+		\end{align*}
+		Using the left-hand rule we get
+		\begin{align*}
+			\sum_{i=1}^{16} f(x_{i+1})\Delta x & = \sum_{i=1}^{16} f(i\Delta x)\Delta x                               \\
+			                                   & = \sum_{i=1}^{16} \left(4 i \Delta x - i^2 \Delta x^2\right)\Delta x \\
+			                                   & = 4 \Delta x^2 \sum_{i=1}^{16} i - \Delta x^3 \sum_{i=1}^{16} i^2    \\
+			                                   & = 10.625
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}
+	If $I\defines \int_a^b f(x) \diff x$ in \pref{definition}{def-definite-integral}
+	exists, then it is unique.
+\end{rem}
+
+\begin{definition}\label{def-definite-integral-properties}
+	The following properties of the definite integral can be deduced from the
+	Riemann sum approach to integration:
+	\begin{enumerate}
+		\item Additive properties:
+		      \begin{align}
+			      \int_a^c f(x) \diff x & = \int_a^b f(x) \diff x + \int_b^c f(x) \diff x \\
+			      \int_a^a f(x) \diff x & = 0                                             \\
+			      \int_a^b f(x) \diff x & = -\int_b^a f(x) \diff x
+		      \end{align}
+	\end{enumerate}
+\end{definition}
+
+\begin{thm}\label{thm-continuous-monotone-integrable}
+	If $f$ is piecewise continuous or piecewise monotone, then $f$ is (Riemann)
+	integrable.
+\end{thm}
+
+\begin{thm}\label{thm-definite-integral-theorems}
+	Let $f:[a,b]\to\mathbb{R}$ be a bounded function.
+	\begin{enumerate}
+		\item If $f$ is integrable on $[a,b]$, then it is integrable on any $[c,d]\subseteq[a,b]$.
+		\item If $f$ and $g$ are integrable on $[a,b]$ and $\alpha,\beta\in\mathbb{R}$, then $\alpha f(x)+ \beta g(x)$ is integrable, and
+		      \begin{equation}\label{eq-definite-integral-linearity}
+			      \int_a^b \left(\alpha f(x)+ \beta g(x)\right) \diff x = \alpha \int_a^b f(x) \diff x + \beta \int_a^b g(x) \diff x
+		      \end{equation}
+		\item If $f$ and $g$ are integrable on $[a,b]$, then $(f \circ g)(x)$ is also integrable.
+		\item If $f$ is integrable on $[a,b]$, then so is $\abs{f}$, and the following inequality holds:
+		      \begin{equation}\label{eq-definite-integral-triangle-inequality}
+			      \abs[\Bigg]{\int_a^b f(x) \diff x} \leq \int_a^b \abs{f(x)} \diff x
+		      \end{equation}
+		\item If $f$ is integrable on $[a,b]$ and $f(x)\geq0$ for every $x\in\domain{f}$, then\footnote{If $f(x_0)>0$ for some $x_0$,
+			      $\int_a^b f(x) \diff x$ need not to strictly greater than zero. However, one can correct this by demanding continuity for $f$.}
+		      \begin{equation}\label{eq-definite-integral-positvity}
+			      \int_a^b f(x) \diff x \geq 0
+		      \end{equation}
+		\item If $f$ and $g$ are integrable on $[a,b]$ and $f(x)\geq g(x)$ for all $x\in\domain{f}$, then
+		      \begin{equation}\label{eq-definite-integral-monotonicity}
+			      \int_a^b f(x) \diff x \geq \int_a^b g(x) \diff x
+		      \end{equation}
+		\item If $f$ is integrable on $[a,b]$ and $m \leq f(x) \leq M$ for all $x\in\domain{f}$, then
+		      \begin{equation}\label{eq-definite-integral-bounded}
+			      m(b-a) \leq \int_a^b f(x) \diff x \leq M(b-a)
+		      \end{equation}
+		\item If $f$ is integrable on $[a,b]$ and continuous, there exists a $c\in[a,b]$ such that
+		      \footnote{This is also called the intermediate value theorem for integrals, \textit{cf.} \pref{theorem}{thm-intermediate-value-theorem}}
+		      \begin{equation}\label{eq-intermediate-value-theorem-for-theorems}
+			      \int_a^b f(x) \diff x = f(c)(b-a)
+		      \end{equation}
+		\item If $f$ is integrable on $[a,b]$ and $\tilde{f}$ differs from $f$ at finitely many points, then $\tilde{f}$ is integrable and
+		      \begin{equation}\label{eq-change-points-retain-integral}
+			      \int_a^b f(x) \diff x =  \int_a^b \tilde{f}(x) \diff x
+		      \end{equation}
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Of \pref{equation}{eq-intermediate-value-theorem-for-theorems} in \pref{theorem}{thm-definite-integral-theorems}.
+	\begin{flushleft}
+		By \pref{equation}{eq-definite-integral-bounded} we know that
+		\begin{equation*}
+			m(b-a) \leq \int_a^b f(x) \diff x \leq M(b-a)
+		\end{equation*}
+		Then this implies
+		\begin{align*}
+			m \leq \frac{1}{b-a}\int_a^b f(x) \diff x \leq M
+		\end{align*}
+		So, by the intermediate value \pref{theorem}{thm-intermediate-value-theorem},
+		there exists a $c$ such that
+		\begin{equation*}
+			f(c) =  \frac{1}{b-a}\int_a^b f(x) \diff x
+		\end{equation*}
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-integrable-continuous}
+	If $f$ is integrable on $[a,b]$, then
+	\begin{equation}
+		F(x) = \int_a^x f(t) \diff t
+	\end{equation}
+	is continuous on $[a,b]$.
+\end{thm}
+
+\subsubsection{The Fundamental Theorem of Calculus}\label{subsubsec-the-fundamental-theorem-of-calculus}
+
+\begin{thm}\label{thm-the-fundamental-theorem-of-calculus}
+	Suppose that $f:[a,b]\to\mathbb{R}$ is continuous. Define
+	\begin{equation*}
+		F(x) = \int_a^x f(t) \diff t
+	\end{equation*}
+	Then $F$ is differentiable. Moreover,
+	\begin{equation}
+		F'(x) = f(x)
+	\end{equation}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-the-fundamental-theorem-of-calculus}.
+	\begin{flushleft}
+		For any $x_0\in[a,b]$,
+		\begin{align*}
+			F_+'(x_0) & = \lim_{x \to x_0^+} \frac{F(x)-F(x_0)}{x-x_0}                                       &  & \text{\pref{theorem}{thm-integrable-continuous}}                   \\
+			          & = \lim_{x \to x_0^+} \frac{\int_a^x f(t) \diff t - \int_a^{x_0} f(t) \diff t}{x-x_0}                                                                         \\
+			          & = \lim_{x \to x_0^+} \frac{\int_{x_0}^x f(t) \diff t}{x-x_0}                         &  & \text{\pref{equation}{eq-intermediate-value-theorem-for-theorems}} \\
+			          & = \lim_{x \to x_0^+} \frac{f(c_x)(x-x_0)}{x-x_0}                                                                                                             \\
+			          & = \lim_{x \to x_0^+} f(c_x)                                                          &  & \text{\pref{definition}{def-continuity-at-point-a}}                \\
+			          & = f(x_0)
+		\end{align*}
+	\end{flushleft}
+\end{proof}
+
+\begin{crl}\label{crl-continuity-implies-anti-derivative}
+	Every continuous function has an anti-derivative.
+\end{crl}
+
+\begin{rem}\label{rem-continuity-implies-anti-derivative}
+	Although the anti-derivative is not always an elementary function.
+\end{rem}
+
+\begin{crl}\label{crl-newton-leibniz-formula}
+	Let $f:[a,b]\to\mathbb{R}$ be continuous and let $F(x)$ be an anti-derivative
+	of $f$. Then
+	\begin{equation}\label{eq-newton-leibniz-formula}
+		\int_a^b f(x) \diff x = F(b) - F(a) = \evalat{F}{a}{b}
+	\end{equation}
+\end{crl}
+
+\begin{exm}\label{exm-newton-leibniz-formula:1}
+	Find the definite integral of
+	\begin{equation*}
+		f(x) = 2 + \cos(x) - \frac{x^2}{2}
+	\end{equation*}
+	from $0$ to $\tfrac{\pi}{2}$ with respect to $x$.
+	\begin{flushleft}
+		\textbf{Answer}:
+		\begin{align*}
+			\int_0^{\frac{\pi}{2}} f(x) \diff x & = \evalat{\left(2x+\sin(x)-\frac{x^3}{3}\right)}{0}{\frac{\pi}{2}}                                       \\
+			                                    & = \left(2\cdot\frac{\pi}{2}+\sin\left(\frac{\pi}{2}\right)-\frac{\left(\frac{\pi}{2}\right)^3}{3}\right)
+			- \left(2\cdot0+\sin(0)-\frac{0^3}{3}\right)                                                                                                   \\
+			                                    & = \pi+1-\frac{\pi^3}{24}
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{proof}
+	Of \pref{corollary}{crl-newton-leibniz-formula}.
+	\begin{flushleft}
+		Define $G(x)=\int_a^x f(t) \diff t$. By \pref{theorem}{thm-the-fundamental-theorem-of-calculus},
+		$G'(x)=f(x)$. Hence, there exists a constant $C\in\mathbb{R}$ such that $F(x)=G(x)+C$.
+		Therefore,
+		\begin{align*}
+			F(b) - F(a) & = (G(b)+c) - (G(a)+c)                                                                                           \\
+			            & = G(b) - G(a)                                                                                                   \\
+			            & = \int_a^b f(x) \diff x - \int_a^a f(x) \diff x &  & \text{\pref{definition}{def-definite-integral-properties}} \\
+			            & = \int_a^b f(x) \diff x
+		\end{align*}
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}\label{exm-newton-leibniz-formula:2}
+	Evaluate the following expression:
+	\begin{equation*}
+		\lim_{x\to0}\frac{1}{x^3}\int_0^x \sin^2(3t) \diff t
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}:
+		\begin{align*}
+			\lim_{x\to0}\frac{1}{x^3}\int_0^x \sin^2(3t) \diff t
+			 & = \lim_{x\to0}\frac{\int_0^x \sin^2(3t) \diff t}{x^3} &  & \text{\pref{theorem}{thm-lhopitals-rule}, (\ref{thm-the-fundamental-theorem-of-calculus})} \\
+			 & = \lim_{x\to0}\frac{3\sin^2(3x)}{3\cdot3x^2}          &  & \text{\pref{equation}{eq-important-sin-over-x-limit}}                                      \\
+			 & = 1
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-newton-leibniz-formula:3}
+	Let $G(x)=\int_0^{x+x^2}\sin(t)\diff t$. Find the first derivative of $G$.
+	\begin{flushleft}
+		\textbf{Answer}: By \pref{theorem}{thm-the-fundamental-theorem-of-calculus},
+		that
+		\begin{equation*}
+			F(x)=\int_0^{x}\sin(t)\diff t \implies G'(x) = \sin(x)
+		\end{equation*}
+		Note that $G(x)=F(x+x^2)$, so
+		\begin{align*}
+			G'(x) & = F'(x+x^2)(1+2x)   \\
+			      & = \sin(x+x^2)(1+2x)
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}\label{rem-newton-leibniz-formula}
+	The implication below makes sense when $f$ is continuous, but when we drop this
+	condition we will suddenly see that there are integrable function that are not
+	continuous - take, for instance, the function
+	\begin{equation*}
+		f(x) = \begin{cases}
+			1\text{ if } x\geq0 \\
+			0\text{ else }
+		\end{cases}
+	\end{equation*}
+	Obviously, $f(x)$ is piecewise integrable because it is piecewise continuous,
+	but it doesn't have an anti-derivative on the entire interval since it has a
+	jump discontinuity in the origin. So, it is not continuous at $x=0$ which
+	violates \pref{definition}{def-indefinite-integral}. Therefore, in general
+	\begin{equation}\label{eq-rem-newton-leibniz-formula:ltr}
+		\text{$f$ is integrable} \notimplies \text{$f$ has an anti-derivative}
+	\end{equation}
+	Conversely, the other direction also doesn't hold:
+	\begin{equation}\label{eq-rem-newton-leibniz-formula:rtl}
+		\text{$f$ has an anti-derivative} \notimplies \text{$f$ is integrable}
+	\end{equation}
+	A function can be unbounded but still have an anti-derivative; but if the
+	function is not bounded, then it is not integrable. For example, the function
+	\begin{equation*}
+		f:(0,1)\to\mathbb{R},x\mapsto\frac{1}{x}
+	\end{equation*}
+	is not bounded, which is why it is not integrable. This is the reason why we
+	demand continuity in the fundamental theorem of \pref{calculus}{thm-the-fundamental-theorem-of-calculus}.
+\end{rem}
+
+\subsubsection{Integration by Parts}\label{subsubsec-integration-by-parts-definite-integrals}
+
+\begin{thm}\label{thm-integration-by-parts-definite-integrals}
+	If $u(x)$ and $v(x)$ have continuous derivatives on $[a,b]$ (\textit{cf.}
+	\pref{definition}{def-integration-by-parts}), then
+	\begin{equation}\label{eq-integration-by-parts-definite-integrals}
+		\int_a^b u(x) v'(x) \diff x = \evalat{u(x)v(x)}{a}{b} - \int_a^b u'(x) v(x) \diff x
+	\end{equation}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-integration-by-parts-definite-integrals}.
+	\begin{flushleft}
+		From the product rule in \pref{theorem}{thm-derivative-arithmetic} we know that
+		\begin{equation*}
+			(u(x)v(x))' = u(x)v'(x) + u'(x)v(x)
+		\end{equation*}
+		So, because the derivatives are continuous we can write
+		\begin{align*}
+			\int_a^b (u(x)v(x))' \diff x & = \int_a^b u(x)v'(x) \diff x + \int_a^b u'(x)v(x) \diff x                                                          \\
+			\implies
+			\evalat{u(x)v(x)}{a}{b}      & = \int_a^b u(x)v'(x) \diff x + \int_a^b u'(x)v(x) \diff x &  & \text{\pref{corollary}{crl-newton-leibniz-formula}} \\
+			\implies
+			\int_a^b u(x)v'(x) \diff x   & = \evalat{u(x)v(x)}{a}{b} -  \int_a^b u'(x)v(x) \diff x
+		\end{align*}
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}\label{exm-integration-by-parts-definite-integrals}
+	Find the definite integral of
+	\begin{equation*}
+		f(x) = x\sin(x)
+	\end{equation*}
+	from $0$ to $\pi$ with respect to $x$.
+	\begin{flushleft}
+		\textbf{Answer}: Let $u(x)=x$ and $v'(x)=\sin(x)$. Then by
+		\pref{theorem}{thm-integration-by-parts-definite-integrals}), (with $u'(x)=1$
+		and $v(x)=-\cos(x)$) it follows that
+		\begin{align*}
+			\int_0^\pi x\sin(x) \diff x & = \evalat{-x\cos(x)}{0}{\pi} + \int_0^\pi \cos(x) \diff x                                                          \\
+			                            & = \pi - \evalat{\sin(x)}{0}{\pi}                          &  & \text{\pref{corollary}{crl-newton-leibniz-formula}} \\
+			                            & = \pi
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}
+	So there are two methods to solve definite integrals:
+	\begin{enumerate}
+		\item[a)] Find an anti-derivative and then use \pref{corollary}{crl-newton-leibniz-formula}
+		\item[b)] Only use theorems for definite integral to simplify the expression and then use \pref{corollary}{crl-newton-leibniz-formula}
+	\end{enumerate}
+\end{rem}
+
+\subsubsection{Integration by Subsitution}\label{subsubsec-integration-by-substitution-definite-integrals}
+
+\begin{thm}\label{thm-integration-by-substitution-definite-integrals}
+	Let $f:[a,b]\to\mathbb{R}$ be a continuous function, and let $\varphi:[\alpha,\beta]\to[a,b]$
+	be differentiable such that $\varphi(\alpha)=a$ and $\varphi(\beta)=b$. Then
+	\begin{equation}
+		\int_a^b f(x) \diff x = \int f(\varphi(t))\varphi'(t) \diff t
+	\end{equation}
+\end{thm}
+
+\begin{exm}\label{exm-integration-using-substitution-definite-integrals}
+	Find the definite integral of
+	\begin{equation*}
+		f(x)=\sqrt{1-x^2}
+	\end{equation*}
+	from $0$ to $1$ with respect to $x$ by using \pref{theorem}{thm-integration-by-substitution-definite-integrals}.
+	\begin{flushleft}
+		\textbf{Answer}: Let $x=\cos(t)$. Then $\diff x = -\sin(t) \diff t$, and
+		\begin{align*}
+			\int_0^1 \sqrt{1-x^2} \diff x
+			 & = \int_{\frac{\pi}{2}}^0 \sqrt{1-\cos^2(t)}\cdot(-\sin(t)) \diff t         &  & \text{\pref{definition}{def-definite-integral-properties}} \\
+			 & = \int_0^{\frac{\pi}{2}} \sin^2(t) \diff t                                                                                                 \\
+			 & = \frac{1}{2}\int_0^{\frac{\pi}{2}} (1-\cos(2t)) \diff t                                                                                   \\
+			 & = \evalat{\frac{1}{2}\left(t-\frac{1}{2}\sin(2t)\right)}{0}{\frac{\pi}{2}}                                                                 \\
+			 & = \frac{\pi}{4}
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\subsubsection{Arc Length}\label{subsubsec-arc-length}
+
+\begin{flushleft}
+	In this section we are going to take a closer look at the arc length of any
+	continuous function $f(x)$ bounded by the closed interval $[a,b]$. We are
+	also going to assume that the derivative is continuous on this interval as
+	well. A first glance a very rough approximation of an arc length can be obtained
+	by dividing the curve into line segments. To keep things short and clear, the
+	plot below shows an estimation for $n=3$ next to the original function:
+\end{flushleft}
+
+% TODO: Add tikz figure of arc segments here
+
+\begin{flushleft}
+	The distance between two points is given by
+	\begin{align}
+		L & \approx\sum_{i=1}^n\sqrt{(x_i-x_{i-1})^2+(y_i-y_{i-1})^2}\nonumber       \\
+		  & =\sum_{i=1}^n\sqrt{\Delta x^2 + \Delta y_i^2}\label{eq-arc-length-tmp:1}
+	\end{align}
+\end{flushleft}
+
+\begin{flushleft}
+	By the \hyperref[thm-mean-value-theorem]{Mean Value Theorem} we know there
+	is a number $x_i^*$ such that $x_i^*\in(x_{i-1},x_i)$, i.e.
+	\begin{equation}
+		f(x_i)-f(x_{i-1}) = f'(x_i^*)\cdot(x_i-x_{i-1})
+		\implies
+		\Delta y_i=f'(x_i^*)\Delta x\label{eq-arc-length-tmp:2}
+	\end{equation}
+	From \pref{equation}{eq-arc-length-tmp:1} and \pref{equation}{eq-arc-length-tmp:2}
+	then follows that
+	\begin{align}
+		L & \approx\sum_{i=1}^n \sqrt{\Delta x_i^2 + \left[f'(x_i^*)\Delta x_i\right]^2}\nonumber \\
+		  & = \sum_{i=1}^n \sqrt{1+\left[f'(x_i^*)\right]^2}\Delta x_i\label{eq-arc-length-tmp:3}
+	\end{align}
+	For $n\rightarrow\infty$ and $x\in[a,b]$ we can estimate the arc length more
+	precisely, so taking the limit for \pref{equation}{eq-arc-length-tmp:3} yields:
+	\begin{align}
+		L & =\lim_{n\rightarrow\infty}\sum_{i=1}^n \sqrt{1+\left[f'(x_i^*)\right]^2}\Delta x_i      &  & \text{\pref{definition}{def-definite-integral}} \nonumber \\
+		  & =\int_a^b \sqrt{1+\left[f'(x)\right]^2}\diff x\nonumber                                                                                                \\
+		  & =\int_a^b \sqrt{1+\left(\frac{\diff y}{\diff x}\right)^2}\diff x\label{eq-arc-length-x}
+	\end{align}
+	The second to last step used the definition of the definite integral since
+	the initial function was well-defined from the beginning. The length of a
+	curve can also be written with respect to $y$ using the same chain of
+	arguments for a function $g(y)=x$ with $y\in[c,d]$:
+	\begin{align}
+		L & =\lim_{n\rightarrow\infty}\sum_{i=1}^n \sqrt{1+\left[g'(y_i^*)\right]^2}\Delta y_i      &  & \text{\pref{definition}{def-definite-integral}}\nonumber \\
+		  & =\int_c^d \sqrt{1+\left[g'(y)\right]^2}\diff y\nonumber                                                                                               \\
+		  & =\int_c^d \sqrt{1+\left(\frac{\diff x}{\diff y}\right)^2}\diff y\label{eq-arc-length-y}
+	\end{align}
+\end{flushleft}
+
+\begin{exm}\label{exm-arc-length-x}
+	Take the function $f(x)=\sqrt{1-x^2}$ on $[-1,1]$. Then the derivative of this function is
+	\begin{equation*}
+		f'(x) = \frac{1}{2}\cdot\frac{-2x}{\sqrt{1-x^2}} = -\frac{x}{\sqrt{1-x^2}}
+	\end{equation*}
+	Now we can use \pref{equation}{eq-arc-length-x} to find the arc length of $f$, \textit{i.e.}
+	\begin{align*}
+		\int_{-1}^1 \sqrt{1+\left(-\frac{x}{\sqrt{1-x^2}}\right)^2} \diff x
+		 & = \int_{-1}^1 \sqrt{1+\frac{x^2}{1-x^2}} \diff x \\
+		 & = \int_{-1}^1 \frac{1}{\sqrt{1-x^2}} \diff x     \\
+		 & = \evalat{\arcsin(x)}{-1}{1}                     \\
+		 & = \frac{\pi}{2} - \left(-\frac{\pi}{2}\right)    \\
+		 & = \pi
+	\end{align*}
+\end{exm}
+
+% "We are so excited every time we have the opportunity to draw the dirichlet 
+% function, right? But that's as far as fun can go." 
+% - Aviv Censor 
