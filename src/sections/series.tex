@@ -1,0 +1,902 @@
+\subsection{Series}\label{subsec-series}
+
+\begin{flushleft}
+	Suppose we have a non-negative continuous function such that for all $x\in\domain{f}$,
+	$f(x)\geq0$. Moreover, assume that the integral $\int_0^\infty f(x) \diff x$
+	converges. Is it necessarily true that $f(x) \tolim{x}{\infty} 0$? As far as
+	we have seen in previous examples, this seems to be in the realm of possibilities.
+	But contrary to our suspicion, the answer is no.
+\end{flushleft}
+
+\begin{equation*}
+	\int_0^\infty f(x) \diff x = \sum_{n=1}^\infty \frac{1}{2^{n-1}} \cdot \frac{1}{2} = \sum_{n=1}^\infty \frac{1}{2^n} = 1
+\end{equation*}
+
+\begin{definition}\label{def-series-partial-sum}
+	Let $a_k$ be a sequence. Then the infinite sum
+	\begin{equation}\label{eq-series-definition}
+		\sum_{k=1}^\infty a_k = a_1 + a_2 + a_3 + \cdots
+	\end{equation}
+	is called a series. The finite sum
+	\begin{equation}\label{eq-partial-sum-definition}
+		S_n = \sum_{k=1}^n a_k
+	\end{equation}
+	is called a partial sum of the series.
+\end{definition}
+
+\begin{definition}\label{def-series-converges-diverges}
+	We say that the series $\sum_{k=1}^\infty a_k$ converges if there exists a
+	finite limit of the partial sums, \textit{i.e.} $\lim_{n\to\infty}S_n$. In
+	other cases we say that the series diverges.
+\end{definition}
+
+\begin{exm}\label{exm-sequence-series:1}
+	In addition to \pref{definition}{def-series-partial-sum}\, remark the following:
+	\begin{equation}\label{eq-exm-geometric-sequence}
+		\sum_{k=1}^\infty \frac{1}{3^k} = \overbrace{\frac{1}{3} + \frac{1}{9} + \frac{1}{27}}^{S_3} + \underbrace{\frac{1}{81}}_{a_4} + \cdots + \underbrace{\frac{1}{3^k}}_{a_k} + \cdots
+	\end{equation}
+	The expression in \pref{equation}{eq-exm-geometric-sequence} is called a geometric series
+	and has a formula for the partial sum of the first $n$-terms:
+	\begin{equation}
+		S_n = a_1\cdot\frac{1-q^n}{1-q}
+	\end{equation}
+	where $q$ is the common ratio. So, for \pref{equation}{eq-exm-geometric-sequence}
+	we can also write
+	\begin{equation*}
+		S_n = \frac{1}{3}\cdot\frac{1-\frac{1}{3^n}}{1-\frac{1}{3}} \implies S_n \seqinfty{\infty} \frac{1}{2}
+	\end{equation*}
+\end{exm}
+
+\begin{exm}\label{exm-sequence-series:2}
+	The general form of a geometric sequence is given by
+	\begin{equation}\label{eq-geometric-sequence}
+		\sum_{k=1}^\infty a_1 q^{k-1}
+	\end{equation}
+	If $\abs{q}\leq1$, then
+	\begin{equation}\label{eq-geometric-series-formula}
+		\lim_{n\to\infty} S_n = \frac{a_1}{1-q}
+	\end{equation}
+	Conversely, if $\abs{q}\geq1$, the series converges.
+\end{exm}
+
+\begin{exm}\label{exm-sequence-series:3}
+	Does the series $\sum_{k=1}^\infty (-1)^k$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: The sequence of partial sums is
+		\begin{align*}
+			S_n = \begin{cases}
+				-1\text{ if } n \text{ is even} \\
+				0\text{ else}
+			\end{cases}
+		\end{align*}
+		Since this alternating sequence does not have a limit as $n\to\infty$,
+		the series diverges.
+	\end{flushleft}
+\end{exm}
+
+
+\begin{exm}\label{exm-sequence-series:4}
+	Does the series $\sum_{k=1}^\infty k$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: This series obviously diverges.
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-sequence-series:5}
+	Does the series $\sum_{k=1}^\infty \frac{1}{k(k+1)}$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: Observe that\footnote{This result is obtained from using \gls{pfd}}
+		\begin{equation*}
+			\frac{1}{k(k+1)} = \frac{1}{k} - \frac{1}{k+1}
+		\end{equation*}
+		Therefore,
+		\begin{align*}
+			S_n & = \sum_{k=1}^n \frac{1}{k(k+1)}                                                                                                                                                      \\
+			    & = \sum_{k=1}^n \left(\frac{1}{k} - \frac{1}{k+1}\right)                                                                                                                              \\
+			    & = \underbrace{1-\frac{1}{2}}_{a_1} + \underbrace{\frac{1}{2}-\frac{1}{3}}_{a_2} + \underbrace{\frac{1}{3}-\frac{1}{4}}_{a_3} + \cdots + \underbrace{\frac{1}{n}-\frac{1}{n+1}}_{a_n} \\
+			    & = 1 - \frac{1}{n+1}
+		\end{align*}
+		When these sorts of cancellations occur in a partial sum, it give rise to
+		a new term, called telescopic sum. Taking the limit of $S_n$ shows that
+		the series converges to:
+		\begin{equation*}
+			\lim_{n\to\infty} \left(1 - \frac{1}{n+1}\right) = 1
+		\end{equation*}
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-series-converges-sequence-zero}
+	If the series $\sum_{k=1}^\infty a_k$ converges, then $a_k \seqinfty{k} 0$.
+\end{thm}
+
+\begin{rem}\label{rem-series-converges-sequence-zero}
+	It is very important to note that the converse of \pref{theorem}{thm-series-converges-sequence-zero}
+	is false\footnote{An counter example for this statement would be $\sum_{k=1}^\infty \tfrac{1}{k}$
+		by \pref{theorem}{thm-divergent-geometric-series}.}:
+	\begin{equation*}
+		a_k \seqinfty{k} 0 \notimplies \sum_{k=1}^\infty a_k \text{ converges}
+	\end{equation*}
+\end{rem}
+
+\begin{proof}
+	Of \pref{theorem}{thm-series-converges-sequence-zero}.
+	\begin{flushleft}
+		Note that $a_k = S_k - S_{k-1}$. Then
+		\begin{equation*}
+			S_k - S_{k-1} \seqinfty{k} L - L = 0
+		\end{equation*}
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}\label{exm-sequence-series:6}
+	Does the series $\sum_{k=1}^\infty \frac{1}{\sqrt[k]{k}}$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: Since
+		\begin{align*}
+			a_k & = \frac{1}{\sqrt[k]{k}} \seqinfty{k} = 1 \neq 0 &  & \text{\pref{theorem}{thm-sequence-nth-root}}
+		\end{align*}
+		the original series diverges by \pref{theorem}{thm-series-converges-sequence-zero}.
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-sequence-series:7}
+	Does the series $\sum_{k=1}^\infty \left(\frac{k}{k+1}\right)^k$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: When we rewrite the sequence
+		\begin{align*}
+			\left(\frac{k}{k+1}\right)^k
+			 & = \frac{1}{\left(\frac{k+1}{k}\right)^k} \\
+			 & = \frac{1}{\left(1+\frac{1}{k}\right)^k}
+		\end{align*}
+		Therefore, by \pref{remark}{rem-euler-limit} we have that
+		\begin{equation*}
+			\frac{1}{\left(1+\frac{1}{k}\right)^k} \seqinfty{k} \frac{1}{e}
+		\end{equation*}
+		so since $a_k \seqinfty{k} e^{-1} \neq 0$ the original series diverges
+		by \pref{theorem}{thm-series-converges-sequence-zero}.
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-series-properties}
+	If $\sum_{k=1}^\infty a_k$ and $\sum_{k=1}^\infty b_k$ converge, then
+	\begin{align}
+		\sum_{k=1}^\infty c \cdot a_k & = c \cdot \sum_{k=1}^\infty a_k                                                &  & c\in\mathbb{R} \label{eq-series-properties:1} \\
+		\sum_{k=1}^\infty (a_k + b_k) & = \sum_{k=1}^\infty a_k + \sum_{k=1}^\infty b_k \label{eq-series-properties:2}
+	\end{align}
+\end{thm}
+
+\begin{exm}\label{exm-sequence-series:8}
+	Does the series $\sum_{k=1}^\infty \frac{(-1)^{k+1}+3^{k-1}}{5^k}$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: By \pref{theorem}{thm-series-properties} we can write
+		\begin{align*}
+			\sum_{k=1}^\infty \frac{(-1)^{k+1}+3^{k-1}}{5^k}
+			 & = \sum_{k=1}^\infty \frac{(-1)^3}{5}\cdot\left(-\frac{1}{5}\right)^{k-1} + \sum_{k=1}^\infty \frac{1}{5}\cdot\left(\frac{3}{5}\right)^{k-1} &  & \text{\pref{equation}{eq-geometric-series-formula}} \\
+			 & = \frac{-\frac{1}{5}}{1+\frac{1}{5}} + \frac{\frac{1}{5}}{1-\frac{3}{5}}                                                                                                                             \\
+			 & = -\frac{1}{6} + \frac{1}{2}                                                                                                                                                                         \\
+			 & = \frac{1}{3}
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\subsubsection{Positive Series}\label{subsubsec-positive-series}
+
+\begin{definition}\label{def-positive-series}
+	A series $\sum_{k=1}^\infty a_k$ is called positive, if $a_k>0$ for all $k\in\mathbb{N}^\times$.
+\end{definition}
+
+\begin{thm}\label{thm-positive-series-bounded}
+	If $\sum_{k=1}^\infty a_k$ is a positive series, then $S_n$ is monotonically increasing,
+	and hence\footnote{In conclusion, a positive series converges \textit{iff} $S_n$ is bounded.}
+	\begin{equation}
+		\lim_{n\to\infty} S_n = \begin{cases}
+			L \text{ if } S_n \text{ is bounded} \\
+			\infty \text{ else }
+		\end{cases}
+	\end{equation}
+\end{thm}
+
+\begin{exm}\label{exm-positive-series:1}
+	From \pref{example}{exm-sequence-series:5} we already know that the the series
+	$\sum_{k=1}^\infty \frac{1}{k(k+1)}$ converges. Using an index shift we can
+	rewrite this series as
+	\begin{equation*}
+		\sum_{k=1}^\infty \frac{1}{k(k+1)} = \sum_{k=2}^\infty \frac{1}{k(k-1)}
+	\end{equation*}
+	Then by \pref{theorem}{thm-positive-series-bounded} this means that the sequence
+	of partial sum is bounded, so
+	\begin{equation*}
+		S_n = \sum_{k=2}^n \frac{1}{k(k-1)} \leq M
+	\end{equation*}
+	for any $n\in\mathbb{N}$. Therefore,
+	\begin{equation*}
+		\frac{1}{k^2} \leq \frac{1}{k(k-1)} \implies T_n = \sum_{k=2}^n \frac{1}{k^2} \leq \sum_{k=2}^n \frac{1}{k(k-1)} \leq M
+	\end{equation*}
+	for any $k\geq2$. But if $T_n$ is bounded, this series converges by
+	\pref{theorem}{thm-positive-series-bounded}, and so does $\sum_{k=1}^n \frac{1}{k^2}$.
+\end{exm}
+
+\subsubsection{Direct Comparison Test}\label{subsubsec-direct-comparison-test-series}
+
+\begin{thm}\label{thm-direct-comparison-test-series}
+	If $b_k \geq a_k \geq 0$ for all $k\in\mathbb{N}^\times$, then the direct comparison test
+	for series states that\footnote{This theorem is a dual to \pref{theorem}{thm-comparison-test}}
+	\begin{equation*}
+		\sum_{k=1}^\infty b_k \text{ converges} \implies \sum_{k=1}^\infty a_k \text{ converges}
+	\end{equation*}
+	Similarly,
+	\begin{equation*}
+		\sum_{k=1}^\infty a_k \text{ diverges} \implies \sum_{k=1}^\infty b_k \text{ diverges}
+	\end{equation*}
+\end{thm}
+
+\begin{exm}\label{exm-positive-series:2}
+	The series
+	\begin{equation*}
+		\sum_{k=1}^\infty \frac{1}{k^3}
+	\end{equation*}
+	converges since $\tfrac{1}{k^2}\geq\frac{1}{k^3}\geq0$ for all $k\in\mathbb{N}^\times$,
+	by \pref{theorem}{thm-direct-comparison-test-series} and \pref{example}{exm-positive-series:1}.
+\end{exm}
+
+\begin{exm}\label{exm-positive-series:3}
+	The series
+	\begin{equation*}
+		\sum_{k=1}^\infty \frac{1}{\sqrt{k}}
+	\end{equation*}
+	diverges since $\tfrac{1}{\sqrt{k}}\geq\frac{1}{k}\geq0$ for all $k\in\mathbb{N}^\times$,
+	by \pref{theorem}{thm-direct-comparison-test-series} because $ \sum_{k=1}^\infty\tfrac{1}{k}$ diverges
+	by \pref{theorem}{thm-divergent-geometric-series}.
+\end{exm}
+
+\begin{thm}\label{thm-divergent-geometric-series}
+	The series $\sum_{k=1}^\infty \tfrac{1}{k^\alpha}$ converges\footnote{The
+		\hyperref[proof-divergent-geometric-series]{proof} follows a few pages later.}
+	\textit{iff} $\alpha>1$.
+\end{thm}
+
+\subsubsection{Limit Comparison Test}\label{subsubsec-limit-comparison-test-series}
+
+\begin{thm}\label{thm-limit-comparison-test-series}
+	Let $\sum_{k=1}^\infty a_k$ and $\sum_{k=1}^\infty b_k$ be two positive series.
+	If $L\in(0,\infty)$ and
+	\begin{equation*}
+		\lim_{k\to\infty}\frac{a_k}{b_k} = L,
+	\end{equation*}
+	then the limit comparison test states that either both converge or or both diverge.
+\end{thm}
+
+\begin{rem}\label{rem-limit-comparison-test-series}
+	Note: This remark also applies to \pref{theorem}{thm-limit-comparison-test}.
+	\begin{itemize}
+		\item If $L=0$, then
+		      \begin{equation*}
+			      \sum_{k=1}^\infty b_k \text{ converges} \implies \sum_{k=1}^\infty a_k \text{ converges}
+		      \end{equation*}
+		\item If $L=\infty$, then
+		      \begin{equation*}
+			      \sum_{k=1}^\infty b_k \text{ diverges} \implies \sum_{k=1}^\infty a_k \text{ diverges}
+		      \end{equation*}
+	\end{itemize}
+\end{rem}
+
+\begin{exm}\label{exm-positive-series:4}
+	Does the series $\sum_{k=1}^\infty \frac{1}{\sqrt{3k^2+1}}$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: Note that
+		\begin{align*}
+			\lim_{k\to\infty}\frac{\frac{1}{\frac{1}{\sqrt{3k^2+1}}}}{\frac{1}{k}}
+			 & = \lim_{k\to\infty}\sqrt{\frac{k}{3k^2+1}}          \\
+			 & = \lim_{k\to\infty}\sqrt{\frac{1}{3+\frac{1}{k^2}}} \\
+			 & =\frac{1}{\sqrt{3}}
+		\end{align*}
+		Therefore, by the \hyperref[thm-limit-comparison-test-series]{limit comparison test},
+		and by \pref{theorem}{thm-divergent-geometric-series} we know that $\sum_{k=1}^\infty\tfrac{1}{k}$
+		diverges, so the original sequence diverges as well.
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}
+	What follows are two new convergence tests that \textit{don't} have a dual for
+	integral convergence tests.
+\end{rem}
+
+\subsubsection{Ratio Test}\label{subsubsec-ratio-test-series}
+
+\begin{thm}\label{thm-ratio-test-series}
+	For a positive series $\sum_{k=1}^\infty a_k$, the ratio test by D'Alembert
+	states that if\footnote{Even though we haven't used it yet, know that there
+		also exists a dual ratio test for sequences.}
+	\begin{equation*}
+		\lim_{k\to\infty}\frac{a_{k+1}}{a_k} = q
+	\end{equation*}
+	then
+	\begin{enumerate}
+		\item $q > 1 \implies \sum_{k=1}^\infty a_k$ diverges
+		\item $q < 1 \implies \sum_{k=1}^\infty a_k$ converges
+		\item $q = 1$ means that the result of the ratio test is undetermined
+	\end{enumerate}
+\end{thm}
+
+\begin{exm}\label{exm-positive-series:5}
+	Does the series $\sum_{k=1}^\infty \frac{2^k}{k!}$ converge?\footnote{The ratio
+		test is especially useful when you see factorials in the series definition.}
+	\begin{flushleft}
+		\textbf{Answer}: This series converges, since by the \hyperref[thm-ratio-test-series]{ratio test}
+		it follows that
+		\begin{align*}
+			\lim_{k\to\infty} \frac{2^{k+1}}{(k+1)!}\cdot\frac{k!}{2^k}
+			 & = \lim_{k\to\infty} \frac{2}{k+1} \\
+			 & = 0                               \\
+			 & < 1
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-positive-series:6}
+	Does the series $\sum_{k=1}^\infty \frac{2^k}{k}$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: This series diverges, since by the \hyperref[thm-ratio-test-series]{ratio test}
+		it follows that
+		\begin{align*}
+			\lim_{k\to\infty} \frac{2^{k+1}}{k+1}\cdot\frac{k}{2^k}
+			 & = \lim_{k\to\infty} \frac{2k}{k+1}          \\
+			 & = \lim_{k\to\infty} \frac{2}{1+\frac{1}{k}} \\
+			 & > 1
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}\label{rem-ratio-test}
+	If the series $\sum_{k=1}^\infty a_k$ diverges by the ratio test, then $a_k$
+	doesn't go to zero.
+\end{rem}
+
+\subsubsection{Root Test}\label{subsubsec-root-test-series}
+
+\begin{thm}\label{thm-root-test-series}
+	For a positive series $\sum_{k=1}^\infty a_k$, the root test by Cauchy
+	states that if
+	\begin{equation*}
+		\lim_{k\to\infty}\sqrt[k]{a_k} = q
+	\end{equation*}
+	then
+	\begin{enumerate}
+		\item $q > 1 \implies \sum_{k=1}^\infty a_k$ diverges
+		\item $q < 1 \implies \sum_{k=1}^\infty a_k$ converges
+		\item $q = 1$ means that the result of the root test is undetermined
+	\end{enumerate}
+\end{thm}
+
+\begin{exm}\label{exm-positive-series:7}
+	Does the series $\sum_{k=1}^\infty \frac{1}{(\ln(k))^k}$ converge?\footnote{The root
+		test is especially useful when you see powers in the series definition.}
+	\begin{flushleft}
+		\textbf{Answer}: This series converges, since by the \hyperref[thm-root-test-series]{root test}
+		it follows that
+		\begin{align*}
+			\lim_{k\to\infty} \sqrt[k]{\frac{1}{(\ln(k))^k}}
+			 & = \lim_{k\to\infty} \frac{1}{\ln(k)} \\
+			 & = 0                                  \\
+			 & < 1
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-positive-series:8}
+	Does the series $\sum_{k=1}^\infty \frac{2^k}{k^2}$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: This series diverges, since by the \hyperref[thm-root-test-series]{root test}
+		it follows that
+		\begin{align*}
+			\lim_{k\to\infty} \sqrt[k]{\frac{2^k}{k^2}}
+			 & = \lim_{k\to\infty} \frac{2}{\sqrt[k]{k^2}}                                                     \\
+			 & = \lim_{k\to\infty} \frac{2}{(\sqrt[k]{k})^2} &  & \text{\pref{theorem}{thm-sequence-nth-root}} \\
+			 & = 2                                                                                             \\
+			 & > 1
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}\label{rem-root-ratio-test}
+	If the series $\sum_{k=1}^\infty a_k$ diverges by the \hyperref[thm-root-test-series]{root}
+	or \hyperref[thm-ratio-test-series]{ratio test}, then $a_k$ doesn't converge to zero.
+\end{rem}
+
+\subsubsection{Integral Test}\label{subsubsec-integral-test-series}
+
+\begin{thm}\label{thm-integral-test-series}
+	Let $f(x)$ be a positive monotonically decreasing function defined on $[1,\infty)$.
+	Define a sequence $a_n=f(n)$ where $n\in\mathbb{N}$. Then
+	\begin{equation*}
+		\int_1^\infty f(x) \diff x \text{ converges} \iff \sum_{n=1}^\infty a_n \text{ converges}
+	\end{equation*}
+\end{thm}
+
+\begin{crl}\label{crl-integral-test}
+	If $f(x)=\tfrac{1}{x^\alpha}$ where $\alpha>0$ on $[1,\infty)$, then by
+	\pref{theorem}{thm-integral-test-series} it follows that
+	\begin{equation*}
+		\sum_{n=1}^\infty \frac{1}{n^\alpha}\text{ converges}
+		\iff \int_1^\infty \frac{1}{x^\alpha} \diff x
+		\iff \alpha>1
+	\end{equation*}
+\end{crl}
+
+\begin{proof}\label{proof-divergent-geometric-series}
+	Of \pref{theorem}{thm-divergent-geometric-series}.
+	\begin{flushleft}
+		This follows immediately from \pref{corollary}{crl-integral-test} in
+		combination with \pref{theorem}{thm-geometric-improper-integral}. In particular,
+		\begin{equation*}
+			\sum_{k=1}^\infty \frac{1}{k}
+		\end{equation*}
+		diverges since $\alpha=1$.
+	\end{flushleft}
+\end{proof}
+
+\begin{rem}\label{rem-divergent-geometric-series}
+	Fun fact: As for \pref{theorem}{thm-divergent-geometric-series}, you need
+	about $200$ million terms in order to exceed $20$.
+\end{rem}
+
+\subsubsection{General Series}\label{subsubsec-general-series}
+
+\begin{definition}\label{def-general-converges-absolutely}
+	We say that $\sum_{k=1}^\infty a_k$ converges absolutely if  $\sum_{k=1}^\infty \abs{a_k}$
+	converges.
+\end{definition}
+
+\begin{thm}\label{thm-general-absolute-convergence-implies-convergence}
+	Absolute convergence implies convergence.
+\end{thm}
+
+\begin{rem}\label{rem-general-absolute-convergence-implies-convergence}
+	In other words, if a series $\sum_{k=1}^\infty a_k$ is convergent but
+	$\sum_{k=1}^\infty \abs{a_k}$ is divergent, we call the series conditionally
+	convergent. An counter example for the reverse direction of
+	\pref{theorem}{thm-general-absolute-convergence-implies-convergence} would
+	be the alternating harmonic series.
+\end{rem}
+
+\subsubsection{Leibniz Test}\label{subsubsec-leibniz-test}
+
+\begin{thm}\label{thm-leibniz-test}
+	Let $a_k$ be a positive sequence such that
+	\begin{enumerate}
+		\item $a_k$ is monotonically decreasing
+		\item $a_k \seqinfty{k} 0$
+	\end{enumerate}
+	Then the alternating series of $a_k$
+	\begin{equation*}
+		\sum_{k=1}^\infty (-1)^{k+1} a_k
+	\end{equation*}
+	converges.
+\end{thm}
+
+\begin{exm}\label{exm-leibniz-test:1}
+	Does the series $\sum_{k=1}^\infty \frac{(-1)^k}{k}$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: Since $a_k=\tfrac{1}{k}$ is monotonically decreasing,
+		positive, and $a_k \seqinfty{k} 0$ it follows by \pref{theorem}{thm-leibniz-test}
+		that the original series converges.
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-leibniz-test:2}
+	Does the series $\sum_{k=1}^\infty \frac{\cos(k\pi)}{k^\frac{2}{3}}$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: Note that $\cos(k\pi)=(-1)^k$. Since $a_k=\tfrac{1}{k^\frac{2}{3}}$
+		is monotonically decreasing, positive, and $a_k \seqinfty{k} 0$ it follows by
+		\pref{theorem}{thm-leibniz-test} that the original series converges.
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-leibniz-test:3}
+	Does the series $\sum_{k=1}^\infty (-1)^k \tan\left(\frac{1}{k}\right)$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: Since $\tan\left(\tfrac{1}{k}\right)$ is monotonically decreasing,
+		positive, and $a_k \seqinfty{k} 0$ it follows by \pref{theorem}{thm-leibniz-test}
+		that the original series converges.
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}\label{rem-leibniz-test:1}
+	Sometimes the series in \pref{example}{exm-leibniz-test:1} and \pref{example}{exm-leibniz-test:2}
+	and \pref{example}{exm-leibniz-test:3} are even called a leibniz series because
+	they satisfy the conditions of the test of \pref{theorem}{thm-leibniz-test}.
+\end{rem}
+
+\begin{rem}\label{rem-leibniz-test:2}
+	If $S$ is the sum of a leibniz series, then $S\in(0,a_1)$\footnote{Or  $S\in(a_1,0)$.}.
+\end{rem}
+
+\begin{thm}\label{thm-general-series-converges-absolutely-change-order}
+	If a series $\sum_{k=1}^\infty a_k$ converges absolutely, then any series
+	obtained from it by changing the order of summation would also converge absolutely
+	to the same sum.
+\end{thm}
+
+\begin{thm}\label{thm-general-series-converges-conditionally-dont-change-order}
+	If a series $\sum_{k=1}^\infty a_k$ converges conditionally, then changing the
+	order of summation would make it converge to any arbitrary number or diverge.
+\end{thm}
+
+\begin{exm}\label{exm-leibniz-test:4}
+	Does the series $\sum_{k=1}^\infty \frac{(-3)^k k!}{k^k}$ converge?
+	\begin{flushleft}
+		\textbf{Answer}: By the ratio test from \pref{theorem}{thm-ratio-test-series} we get that
+		\begin{align*}
+			\lim_{k\to\infty}\frac{\abs{a_{k+1}}}{\abs{a_k}}
+			 & = \lim_{k\to\infty}\frac{3^{k+1}(k+1)!}{(k+1)^{k+1}}\cdot\frac{k^k}{3^k k!} \\
+			 & = 3\lim_{k\to\infty}\left(\frac{k}{k+1}\right)^k                            \\
+			 & = 3\lim_{k\to\infty}\frac{1}{\left(1+\frac{1}{k}\right)^k}                  \\
+			 & = \frac{3}{e}                                                               \\
+			 & > 1
+		\end{align*}
+		Therefore, $\sum_{k=1}^\infty \abs{a_k}$ diverges but it seems like we
+		can't make any certain statements about the original series yet. However,
+		recall that by \pref{remark}{rem-root-ratio-test} we can conclude that if an
+		absolute series diverges, it's sequence won't converge to zero, either.
+		Hence, by \pref{theorem}{thm-series-converges-sequence-zero} the original
+		series diverges as well\footnote{What's interesting about this series is that
+			if you were to replace the $-3$ in the original series by $-2$, it would
+			end up being a convergent series after all.}.
+	\end{flushleft}
+\end{exm}
+
+\subsubsection{Power Series}\label{subsubsec-power-series}
+
+\begin{definition}\label{def-power-series}
+	A power series is an infinite series of the form
+	\begin{equation}
+		\sum_{n=0}^\infty a_n (x-c)^n
+	\end{equation}
+	where $a_n$ represents the coefficient of the $n$-th term and $c\in\mathbb{R}$
+	is a constant.
+\end{definition}
+
+\begin{rem}\label{rem-power-series}
+	For any fixed $x=x_0$ we get a regular infinite series. Moreover, we think of
+	a power series as a polynomial of an infinite degree.
+\end{rem}
+
+\begin{exm}\label{exm-power-series:1}
+	Consider the power series
+	\begin{equation*}
+		\sum_{n=0}^\infty \frac{1}{n}x^n = x + \frac{x^2}{2} + \frac{x^3}{3} + \frac{x^4}{4} + \cdots
+	\end{equation*}
+	In this case ($c=0$), the coefficients are given by $\tfrac{1}{n}$. Moreover,
+	we can observe that
+	\begin{enumerate}
+		\item for $x_0=-1$, this series becomes the alternating harmonic series (and converges)
+		\item for $x_0=0$, this series converges
+		\item for $x_0=\tfrac{1}{3}$, this series converges
+		\item for $x_0=1$, this series becomes the harmonic series (and diverges)
+		\item for $x_0=2$, this series diverges
+	\end{enumerate}
+\end{exm}
+
+\begin{exm}\label{exm-power-series:2}
+	Consider the power series
+	\begin{equation*}
+		\sum_{n=0}^\infty \frac{1}{n!}x^n = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!}+ \cdots
+	\end{equation*}
+	In this case ($c=0$), the coefficients are given by $\tfrac{1}{n!}$. Moreover,
+	we can observe that
+	\begin{enumerate}
+		\item for $x_0<0$, this series converges absolutely
+		\item for $x_0=0$, this series converges
+		\item for $x_0>0$, this series converges\footnote{to zero by the ratio test}
+	\end{enumerate}
+\end{exm}
+
+\begin{definition}\label{def-domain-of-convergence}
+	The collection of $x$'s where the power series converges is called the domain
+	of convergence.
+\end{definition}
+
+\subsubsection{Radius of Convergence}\label{subsubsec-radius-of-convergence}
+
+\begin{thm}\label{thm-radius-of-convergence}
+	There exists a $0 \leq R \leq \infty$ called the radius of convergence such that for
+	any $\abs{x}<R$ the power series converges, and for any $\abs{x}>R$ the power
+	series diverges\footnote{If $R=0$, then power series converges only at $0$.}.
+\end{thm}
+
+\begin{thm}\label{thm-radius-of-convergence-formula}
+	The radius of convergence of a power series $\sum_{n=0}^\infty a_n x^n$ is
+	given by the formulas
+	\begin{equation}\label{eq-radius-of-convergence-formula:1}
+		R=\frac{1}{\lim\limits_{n\to\infty}\sqrt[n]{\abs{a_n}}}
+	\end{equation}
+	and
+	\begin{equation}\label{eq-radius-of-convergence-formula:2}
+		R=\frac{1}{\lim\limits_{n\to\infty}\frac{\abs{a_{n+1}}}{\abs{a_n}}}
+	\end{equation}
+	provided both limits exists.
+\end{thm}
+
+\begin{exm}\label{exm-radius-of-convergence:1}
+	The radius of convergence in \pref{example}{exm-power-series:1} is $R=1$ and
+	the domain of convergence is $[-1,1)$ since
+	\begin{align*}
+		R & = \frac{1}{\lim\limits_{n\to\infty}\sqrt[n]{\abs{a_n}}}               \\
+		  & = \frac{1}{\lim\limits_{n\to\infty}\sqrt[n]{\abs[\big]{\frac{1}{n}}}} \\
+		  & = \frac{1}{\lim\limits_{n\to\infty}\frac{1}{\sqrt[n]{n}}}             \\
+		  & = 1
+	\end{align*}
+\end{exm}
+
+\begin{exm}\label{exm-radius-of-convergence:2}
+	The radius of convergence in \pref{example}{exm-power-series:2} is $R=\infty$ and
+	the domain of convergence is $(-\infty,\infty)$ since
+	\begin{align*}
+		R & = \frac{1}{\lim\limits_{n\to\infty}\frac{\abs{a_{n+1}}}{\abs{a_n}}}                               \\
+		  & = \frac{1}{\lim\limits_{n\to\infty}\frac{\abs[\big]{\frac{1}{(n+1)!}}}{\abs[\big]{\frac{1}{n!}}}} \\
+		  & = \frac{1}{\lim\limits_{n\to\infty}\frac{1}{n+1}}                                                 \\
+		  & = \infty
+	\end{align*}
+\end{exm}
+
+\begin{exm}\label{exm-power-series:3}
+	Consider the power series
+	\begin{equation*}
+		\sum_{n=1}^\infty \frac{\ln(n+1)}{n+1}(x-2)^n
+	\end{equation*}
+	Denote $y \defines x-2$.
+	\begin{align*}
+		R & = \frac{1}{\lim\limits_{n\to\infty}\frac{\abs{a_{n+1}}}{\abs{a_n}}}                                   \\
+		  & = \frac{1}{\lim\limits_{n\to\infty}\frac{\ln(n+2)}{n+2}\cdot\frac{n+1}{\ln(n+1)}}                     \\
+		  & = \frac{1}{\lim\limits_{n\to\infty}\frac{\ln(n+2)}{\ln(n+1)}\cdot\frac{1+\frac{1}{n}}{1+\frac{2}{n}}}
+	\end{align*}
+	Notice that by \hyperref[thm-heines-theorem]{Heine's theorem} we can convert this
+	sequence to a function so that we can make use the rule of \lhoptial\, from
+	\pref{theorem}{thm-lhopitals-rule} to simplify this expression to
+	\begin{equation*}
+		\lim_{x\to\infty}\frac{\ln(x+2)}{\ln(x+1)} = \lim_{x\to\infty}\frac{\frac{1}{x+2}}{\frac{1}{x+1}} = 1
+	\end{equation*}
+	Therefore, the radius of convergence is $R=1$ in $y$. Hence, the power series
+	in $y$ converges between $-1<y<1$, so
+	\begin{equation*}
+		-1 < x-2 < 1 \implies 1 < x < 3
+	\end{equation*}
+	But we still have to check what happens at the endpoints: At $x=1$ we examine the series
+	\begin{align*}
+		\sum_{n=1}^\infty \frac{\ln(n+1)}{n+1}(-1)^n
+	\end{align*}
+	By \hyperref[thm-heines-theorem]{Heine's theorem} we have that
+	\begin{align*}
+		\lim_{x\to\infty}\frac{\ln(x+1)}{x+1} = \lim_{x\to\infty}\frac{1}{x+1} = 0 \implies \lim_{n\to\infty}\frac{\ln(n+1)}{n+1} = 0
+	\end{align*}
+	So, $\tfrac{\ln(n+1)}{n+1}>0$ is decreasing since $\tfrac{\ln(x+1)}{x+1}$ is
+	decreasing as a function because by \pref{theorem}{thm-differentiable-strictly-monotone}
+	it follows that
+	\begin{align*}
+		f'(x) & = \frac{\diff}{\diff x}\left(\frac{\ln(x+1)}{x+1}\right)                                 \\
+		      & = \frac{\frac{1}{x+1}(x+1)-\ln(x+1)\cdot1}{(x+1)^2}                                      \\
+		      & = \frac{1-\ln(x+1)}{(x+1)^2}                                                             \\
+		      & < 0                                                      &  & \text{(at some threshold)}
+	\end{align*}
+	which is why we can use \hyperref[thm-leibniz-test]{Leibniz' theorem}
+	to argue that the series converges. Next, at $x=3$ we examine the series
+	\begin{align*}
+		\sum_{n=1}^\infty \frac{\ln(n+1)}{n+1}(+1)^n = \sum_{n=1}^\infty \frac{\ln(n+1)}{n+1}
+	\end{align*}
+	but the inequality
+	\begin{equation*}
+		\frac{\ln(n+1)}{n+1} > \frac{1}{n+1} > 0
+	\end{equation*}
+	suggests that because $\sum_{n=1}\frac{1}{n+1}$ diverges by \pref{theorem}{thm-divergent-geometric-series},
+	then by the \hyperref[thm-direct-comparison-test-series]{direct comparison test} the original series at
+	$x=3$ diverges, too. In summary, the domain of convergence becomes $[1,3)$.
+\end{exm}
+
+\begin{definition}\label{def-power-series-function}
+	For any $x_0$ in the domain of convergence we get a converging series defined by the function
+	\begin{equation}\label{eq-power-series-function}
+		f(x)=\sum_{n=0}^\infty a_n x^n
+	\end{equation}
+\end{definition}
+
+\begin{rem}
+	Power series are specific cases of a more general theory called function series.
+	The theorems that we are going to mention soon are a direct consequence of this
+	theory, which is why we will skip many proofs in the subsection.
+\end{rem}
+
+\begin{thm}\label{thm-power-series-continuous}
+	Let $\sum_{n=0}^\infty a_n x^n$ be a power series with a radius of convergence $R>0$.
+	Then the function in \pref{definition}{def-power-series-function} is continuous on
+	the domain $(-R,R)$. If the power series converges at the endpoints, then $f$ is
+	continuous at $-R$ from the left, or $f$ is continuous at $R$ from the right.
+\end{thm}
+
+\begin{definition}\label{def-power-series-taylor-maclaurin-series}
+	Given a function $f(x)$, the power series $\sum_{n=0}^\infty a_n x^n$ where
+	$a_n=\tfrac{f^{(n)}(0)}{n!}$ is called the Taylor (or Maclaurin) series of $f$.
+\end{definition}
+
+\begin{thm}\label{thm-power-series-converges-to-taylor}
+	If there exists a power series which converges to $f$ in an symmetric interval $(-R,R)$,
+	then it is unique and is precisely the Taylor series.
+\end{thm}
+
+\begin{rem}\label{rem-power-series-converges-to-taylor}
+	A necessary condition of \pref{theorem}{thm-power-series-converges-to-taylor}
+	is that $f$ must be differentiable infinitely many times, although this is not
+	a sufficient condition. Take for instance the function
+	\begin{equation*}
+		f(x)=\begin{cases}
+			\exp\left(-\frac{1}{x^2}\right) & \text{for }x\neq0 \\
+			0                               & \text{for }x=0
+		\end{cases}
+	\end{equation*}
+	has derivatives $f^{(n)}(x_0=0)=0$ for all $n\in\mathbb{N}$ but the Taylor
+	(or rather Maclaurin) series is $p_n(f,x_0)(x)=0$; the Taylor series doesn't
+	converge to the function if $x\neq0$. Therefore, this is not a sufficient condition.
+\end{rem}
+
+\begin{exm}\label{exm-power-series-converges-to-taylor:1}
+	We have seen in \pref{example}{exm-exp-taylor-series} that
+	\begin{equation*}
+		\exp(x) = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots = \sum_{n=0}^\infty \frac{x^n}{n!}
+	\end{equation*}
+	What's more, in \pref{example}{exm-radius-of-convergence:2} we also found
+	the radius of convergence to be $R=\infty$, so the domain of convergence is
+	well-defined for any $x\in\mathbb{R}$.
+\end{exm}
+
+\begin{exm}\label{exm-power-series-converges-to-taylor:2}
+	We have seen in \pref{example}{exm-sin-taylor-series} that
+	\begin{equation*}
+		\sin(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!} \mp \cdots = \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{(2n+1)!}
+	\end{equation*}
+	where the radius of convergence is also $R=\infty$. The formula doesn't really
+	give it away but note that the coefficients for this power series actually are
+	\begin{equation*}
+		\{a_k\}_{k=0}^\infty=\left\{0,1,0,-\frac{1}{3!},0,\frac{1}{5!},\dots\right\}
+	\end{equation*}
+\end{exm}
+
+\begin{exm}\label{exm-power-series-converges-to-taylor:3}
+	We have seen in \pref{example}{exm-ln-taylor-series} that
+	\begin{equation*}
+		\ln(1+x) = x - \frac{x^2}{2} + \frac{x^3}{3} \mp \cdots = \sum_{n=1}^\infty \frac{(-1)^{n+1} x^n}{n}
+	\end{equation*}
+	where the radius of convergence is $R=1$, \textit{i.e.} $\abs{x}<1$.
+\end{exm}
+
+\begin{exm}\label{exm-power-series-converges-to-taylor:4}
+	Another important example is the geometric series written as
+	\begin{equation*}
+		\frac{1}{1-x} = 1 + x + x^2 + x^3 + \cdots = \sum_{n=0}^\infty x^n
+	\end{equation*}
+	where the radius of convergence is $R=1$, \textit{i.e.} $\abs{x}<1$.
+\end{exm}
+
+\subsubsection{Term by Term Differentiation}\label{subsubsec-term-by-term-differentiation}
+
+\begin{thm}\label{thm-term-by-term-differentiation}
+	Let $f(x)=\sum_{n=0}^\infty a_n x^n$ with a radius of convergence $R>0$. Then,
+	for any $\abs{x}<R$, we can use term-by-term differentiation to find
+	\begin{equation}\label{eq-term-by-term-differentiation}
+		f'(x) = \sum_{n=1}^\infty a_n nx^{n-1}
+	\end{equation}
+	where $f'$ retains its predecessor radius of convergence.
+\end{thm}
+
+\begin{exm}\label{exm-term-by-term-differentiation:1}
+	We can use \pref{theorem}{thm-term-by-term-differentiation} to find the first
+	derivative of the power series in \pref{example}{exm-power-series-converges-to-taylor:4} as
+	\begin{align*}
+		f'(x) & = \frac{\diff}{\diff x}\left(\frac{1}{1-x}\right)         \\
+		      & = \frac{\diff}{\diff x}\left(\sum_{n=0}^\infty x^n\right) \\
+		      & = \sum_{n=1}^\infty nx^{n-1}                              \\
+		      & = \frac{1}{(1-x)^2}
+	\end{align*}
+\end{exm}
+
+\begin{rem}\label{rem-term-by-term-differentiation}
+	Note that for \pref{example}{exm-power-series-converges-to-taylor:4}, if we
+	plug in $\abs{x}=\tfrac{1}{3}<1$ we get
+	\begin{equation*}
+		\sum_{n=0}^\infty \frac{1}{3^n} = \frac{1}{1-\frac{1}{3}} = \frac{3}{2}
+	\end{equation*}
+	without having to rely on any convergence tests. Be aware that one could lose
+	convergence at the endpoints.
+\end{rem}
+
+\begin{exm}\label{exm-term-by-term-differentiation:2}
+	We can use \pref{theorem}{thm-term-by-term-differentiation} to find the first
+	derivative of the power series in \pref{example}{exm-power-series-converges-to-taylor:2} as
+	\begin{align*}
+		f'(x) & = \frac{\diff}{\diff x}\left(\sin(x)\right)                                           \\
+		      & = \frac{\diff}{\diff x}\left(\sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{(2n+1)!}\right) \\
+		      & = \sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{(2n)!}                                       \\
+		      & = \cos(x)
+	\end{align*}
+	where the domain of convergence is $x\in\mathbb{R}$.
+\end{exm}
+
+\subsubsection{Term by Term Integration}\label{subsubsec-term-by-term-integration}
+
+\begin{thm}\label{thm-term-by-term-integration}
+	Let $f(x)=\sum_{n=0}^\infty a_n x^n$ with a radius of convergence $R>0$. Then,
+	for any $\abs{x}<R$, we can use term-by-term integration to find
+	\begin{equation}\label{eq-term-by-term-integration}
+		\int_0^x f(t) \diff t = \sum_{n=0}^\infty a_n \evalat{\frac{t^{n+1}}{n+1}}{0}{x} = \sum_{n=0}^\infty \frac{a_n x^{n+1}}{n+1}
+	\end{equation}
+	where $f$ retains its successors radius of convergence.
+\end{thm}
+
+\begin{exm}\label{exm-term-by-term-integration:1}
+	We can use \pref{theorem}{thm-term-by-term-differentiation} to find the definite
+	integral of the power series in \pref{example}{exm-power-series-converges-to-taylor:4},
+	such that\footnote{Substitute $x\defines-t^2$}
+	\begin{equation*}
+		\frac{1}{1+t^2} = \sum_{n=0}^\infty (-1)^n t^{2n}
+	\end{equation*}
+	provided that $\abs{-t^2}<1\implies\abs{t}<1$. Then,
+	\begin{align*}
+		\int_0^x  \frac{1}{1+t^2} \diff t
+		 & = \evalat{\arctan(t)}{0}{x}                                     \\
+		 & = \arctan(x)                                                    \\
+		 & = \sum_{n=0}^\infty (-1)^n \evalat{\frac{t^{2n+1}}{2n+1}}{0}{x} \\
+		 & = \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{2n+1}
+	\end{align*}
+	where the domain of convergence is $x\in\mathbb{R}$.
+\end{exm}
+
+\begin{rem}\label{rem-term-by-term-integration}
+	The power series of $\arctan(x)$ converges for $-1 \leq x \leq 1$. So, after
+	integration you may gain additional convergence at the endpoints as opposed
+	to term-by-term differentiation (\textit{cf.} \pref{remark}{rem-term-by-term-differentiation}).
+\end{rem}
+
+\begin{rem}\label{rem-power-series-taylor-convergence}
+	The power series $\sum_{n=0}^\infty a_n x^n$ converges to $f(x)$ \textit{iff}
+	\begin{equation*}
+		\forall x\in(-R,R): \underbrace{\sum_{n=0}^n a_n x^n}_{p_N(f,0)(x)} = S_N(x) \seqinfty{N} f(x)
+	\end{equation*}
+	which is equivalent to\footnote{See also \pref{theorem}{thm-infinite-taylor-lagrange-remainder-theorem}}
+	\begin{equation*}
+		\forall x\in(-R,R): S_N(x)-f(x) \seqinfty{N} 0 \iff R_N(x) \seqinfty{N} 0
+	\end{equation*}
+\end{rem}
+
+\begin{thm}\label{thm-power-series-taylor-convergence}
+	If $f$ is differentiable infinitely many times on $[-R,R]$ and there exists a
+	$M$ such that $\abs{f^{(n)}(x)} \leq M$ for all $x\in[-R,R]$ and $n\in\mathbb{N}$,
+	then\footnote{See also \pref{remark}{rem-power-series-converges-to-taylor}}
+	$R_n(x) \seqinfty{n} 0$.
+\end{thm}
+
+\begin{thm}\label{thm-power-series-taylor-convergence-properties}
+	Suppose that the power series $\sum_{n=0}^\infty a_n x^n$ converges to $f(x)$
+	and $\sum_{n=0}^\infty b_n x^n$ converges to $g(x)$ for all $x\in(-R,R)$. Then,
+	\begin{enumerate}
+		\item $\sum\limits_{n=0}^\infty c a_n x^n=cf(x)$
+		\item $\sum\limits_{n=0}^\infty (a_n \pm b_n)x^n = f(x) \pm g(x)$
+		\item Define $c_n = \sum\limits_{n=0}^\infty a_k b_{n-k}$. Then $\sum\limits_{n=0}^\infty c_n x^n=f(x)g(x)$.
+	\end{enumerate}
+\end{thm}
+
+\begin{exm}\label{exm-find-power-series:1}
+	Let $f(x)=\tfrac{1}{x^2+2x-3}$. Find the power series corresponding to this function.
+	\begin{flushleft}
+		\textbf{Answer}: Using \gls{pfd} we get
+		\begin{align}
+			\frac{1}{x^2+2x-3}
+			 & = \frac{1}{4}\left(\frac{1}{x-1}-\frac{1}{x+3}\right)\nonumber                                                                            \\
+			 & = \frac{1}{4}\left(-\frac{1}{1-x}-\frac{1}{3}\frac{1}{1+\frac{x}{3}}\right)\nonumber                                                      \\
+			 & = \frac{1}{4}\left(-\sum_{n=0}^\infty x^n - \frac{1}{3}\sum_{n=0}^\infty \left(-\frac{x}{3}\right)^n\right)\label{eq-find-power-series:1} \\
+			 & = \frac{1}{4}\left(-\sum_{n=0}^\infty x^n - \frac{1}{3}\sum_{n=0}^\infty \frac{(-1)^n x^n}{3^n} \right)\nonumber                          \\
+			 & = -\frac{1}{4}\sum_{n=0}^\infty \left(1+\frac{(-1)^n}{3^{n+1}}\right)x^n\label{eq-find-power-series:2}
+		\end{align}
+		The domain of convergence for the left sum in \pref{equation}{eq-find-power-series:1}
+		is $\abs{x}\leq1$, and for the right sum it is $\abs[\big]{\tfrac{x}{3}}\leq1\implies\abs{x}\leq3$,
+		so the domain of convergence for \pref{equation}{eq-find-power-series:2} is the lesser of both,
+		\textit{i.e.} $\abs{x}\leq1$.
+	\end{flushleft}
+\end{exm}

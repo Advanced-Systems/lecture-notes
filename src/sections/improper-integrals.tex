@@ -1,0 +1,321 @@
+\subsection{Improper Integrals}\label{subsec-improper-integrals}
+
+\begin{definition}\label{def-improper-integral}
+	Let $f[a,\infty)\to\mathbb{R}$ be a function which is integrable on $[a,M]$
+	for every $M>a$. We define
+	\begin{equation}\label{eq-improper-integral:1}
+		\int_a^\infty f(x) \diff x \defines \lim_{M\to\infty} \int_a^M f(x) \diff x
+	\end{equation}
+	provided that the limit on the right-hand side exists\footnote{This removes the
+		restriction that the integral only works with bounded functions}. If the limit,
+	however, doesn't exists, we say that the integral diverges or does not exits (\gls{dne}).
+\end{definition}
+
+\begin{exm}\label{exm-improper-integral:1}
+	Compute the improper integral
+	\begin{equation*}
+		\int_0^\infty e^{-x} \diff x
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}: By \pref{definition}{def-improper-integral} we have that
+		\begin{align*}
+			\int_0^\infty e^{-x} \diff x
+			 & = \lim_{M\to\infty} \int_0^M e^{-x} \diff x             \\
+			 & = \lim_{M\to\infty} \left(\evalat{-e^{-x}}{0}{M}\right) \\
+			 & = \lim_{M\to\infty} \left(-e^{-M}-(-1)\right)           \\
+			 & = 1
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-improper-integral:2}
+	Compute the improper integral
+	\begin{equation*}
+		\int_0^\infty \cos(x) \diff x
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}: By \pref{definition}{def-improper-integral} we have that
+		\begin{align*}
+			\int_0^\infty \cos(x) \diff x
+			 & = \lim_{M\to\infty}\int_0^M \cos(x) \diff x \\
+			 & = \lim_{M\to\infty}\evalat{\sin(x)}{0}{M}   \\
+			 & = \text{\gls{dne}}
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}\label{rem-improper-integral}
+	We similarly define
+	\begin{equation}\label{eq-improper-integral:2}
+		\int_{-\infty}^a f(x) \diff x \defines \lim_{m\to-\infty} \int_m^a f(x) \diff x
+	\end{equation}
+	Additionally, if $f:\mathbb{R}\to\mathbb{R}$ we further define
+	\begin{equation}\label{eq-improper-integral:3}
+		\int_{-\infty}^\infty f(x) \diff x \defines \int_{-\infty}^a f(x) \diff x + \int_a^\infty f(x) \diff x
+	\end{equation}
+	provided that both integrals on the right-hand side exist.
+\end{rem}
+
+\begin{exm}\label{exm-improper-integral:3}
+	Compute the improper integral
+	\begin{equation*}
+		\int_1^\infty \frac{1}{x} \diff x
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}: By \pref{definition}{def-improper-integral} we have that
+		\begin{align*}
+			\int_1^\infty \frac{1}{x} \diff x
+			 & = \lim_{M\to\infty} \int_1^M \frac{1}{x} \diff x       \\
+			 & = \lim_{M\to\infty} \left(\evalat{\ln(x)}{1}{M}\right) \\
+			 & = \text{\gls{dne}}
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-improper-integral:4}
+	Compute the improper integral
+	\begin{equation*}
+		\int_1^\infty \frac{1}{x^\alpha} \diff x
+	\end{equation*}
+	for $\alpha\neq1$.
+	\begin{flushleft}
+		\textbf{Answer}: By \pref{definition}{def-improper-integral} we have that
+		\begin{align*}
+			\int_1^\infty \frac{1}{x} \diff x
+			 & = \lim_{M\to\infty} \int_1^M \frac{1}{x^\alpha} \diff x                       \\
+			 & = \lim_{M\to\infty} \left(\evalat{\frac{x^{1-\alpha}}{1-\alpha}}{1}{M}\right) \\
+			 & = \lim_{M\to\infty} \frac{1}{1-\alpha}\left(M^{1-\alpha}-1\right)             \\
+			 & = \begin{cases}
+				-\frac{1}{1-\alpha}\text{ if }\alpha>1 \\
+				\text{\gls{dne} if }\alpha<1
+			\end{cases}
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-geometric-improper-integral}
+	The improper integral
+	\begin{equation*}
+		\int_1^\infty \frac{1}{x^\alpha} \diff x
+	\end{equation*}
+	converges \textit{iff} $\alpha>1$, \textit{i.e.}
+	\begin{equation}\label{eq-geometric-improper-integral:1}
+		\int_1^\infty \frac{1}{x^\alpha} \diff x = \lim_{M\to\infty} \int_1^M \frac{1}{x^\alpha} \diff x = \frac{1}{\alpha-1}
+	\end{equation}
+\end{thm}
+
+\begin{definition}\label{def-integral-of-unbounded-functions}
+	Suppose that $f:[a,b)\to\mathbb{R}$ is integrable on $[a,b-\varepsilon]$ for
+	any $\varepsilon>0$ such that $a<b-\varepsilon$. We define
+	\begin{equation}\label{eq-integral-of-unbounded-functions:1}
+		\int_a^b f(x) \diff x = \lim_{\varepsilon\to0^+}\int_a^{b-\varepsilon} f(x) \diff x
+	\end{equation}
+	provided that the limit on the right-hand side exists.
+\end{definition}
+
+\begin{rem}\label{rem-integral-of-unbounded-functions}
+	We similarly define
+	\begin{equation}\label{eq-integral-of-unbounded-functions:2}
+		\int_a^b f(x) \diff x = \lim_{\varepsilon\to0^+}\int_{a+\varepsilon}^b f(x) \diff x
+	\end{equation}
+	In the event that the function is not bounded in the neighborhood of $a$, the
+	prerequisites for this definitions follows analogous to \pref{definition}{def-integral-of-unbounded-functions}.
+\end{rem}
+
+\begin{exm}\label{exm-integral-of-unbounded-functions:1}
+	Compute the unbounded integral
+	\begin{equation*}
+		\int_{-1}^1 \frac{1}{x^2} \diff x
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}: By \pref{definition}{def-integral-of-unbounded-functions} we have that
+		\begin{equation}\label{eq-integral-of-unbounded-functions}
+			\int_{-1}^1 \frac{1}{x^2} \diff x = \int_{-1}^0 \frac{1}{x^2} \diff x + \int_0^1 \frac{1}{x^2} \diff x
+		\end{equation}
+		but since
+		\begin{align*}
+			\int_0^1 \frac{1}{x^2} \diff x
+			 & = \lim_{\varepsilon\to0^+} \int_\varepsilon^1 \frac{1}{x^2} \diff x           \\
+			 & = \lim_{\varepsilon\to0^+} \left(\evalat{-\frac{1}{x}}{\varepsilon}{1}\right) \\
+			 & = \lim_{\varepsilon\to0^+} \left(-1+\frac{1}{\varepsilon}\right)              \\
+			 & = \text{\gls{dne}}
+		\end{align*}
+		the integral in equation (\ref{eq-integral-of-unbounded-functions}) diverges as well.
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-geometric-unbounded-integral}
+	The unbounded integral
+	\begin{equation*}
+		\int_0^1 \frac{1}{x^\alpha} \diff x
+	\end{equation*}
+	converges \textit{iff} $\alpha<1$, \textit{i.e.}
+	\begin{equation}\label{eq-geometric-improper-integral:2}
+		\int_0^1 \frac{1}{x^\alpha} \diff x = \lim_{\varepsilon\to0^+} \int_\varepsilon^1 \frac{1}{x^\alpha} \diff x = \frac{1}{1-\alpha}
+	\end{equation}
+\end{thm}
+
+\begin{exm}\label{exm-integral-of-unbounded-functions:2}
+	Compute the unbounded integral
+	\begin{equation*}
+		\int_0^1 \frac{1}{\sqrt{x}} \diff x
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}: By \pref{definition}{def-integral-of-unbounded-functions} we have that
+		\begin{align*}
+			\int_0^1 \frac{1}{\sqrt{x}} \diff x
+			 & = \lim_{\varepsilon\to0^+} \int_\varepsilon^1 \frac{1}{\sqrt{x}} \diff x                                                                    \\
+			 & = \lim_{\varepsilon\to0^+} \left(\evalat{2\sqrt{x}}{\varepsilon}{1}\right)                                                                  \\
+			 & = \lim_{\varepsilon\to0^+} 2\left(1-\sqrt{\varepsilon}\right)              &  & \text{\pref{example}{exm-epsilon-delta-definition-limit:5}} \\
+			 & = 2
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-comparison-test}
+	Let $f$ and $g$ be \textit{non-negative} on $[a,\infty)$ and integrable on
+	$[a,M]$ for every $M$. Furthermore, assume that $g(x) \geq f(x) \geq 0$ for
+	every $x \geq a$. Then the comparison test states that
+	\begin{equation}
+		\int_a^\infty g(x) \diff x \text{ converges } \implies \int_a^\infty f(x) \diff x \text{ converges }
+	\end{equation}
+\end{thm}
+
+\begin{rem}\label{rem-comparison-test:1}
+	Another way of saying \pref{theorem}{thm-comparison-test} is
+	\begin{equation}
+		\int_a^\infty f(x) \diff x \text{ diverges } \implies \int_a^\infty g(x) \diff x \text{ diverges }
+	\end{equation}
+\end{rem}
+
+\begin{rem}\label{rem-comparison-test:3}
+	There is a theorem similar to \pref{theorem}{thm-comparison-test} for unbounded functions.
+\end{rem}
+
+\begin{exm}\label{exm-comparison-test:2}
+	Find out whether the following integral converges or not by using the comparison test:
+	\begin{equation*}
+		\int_0^1 \frac{1}{x^2+5x} \diff x
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}: For $0 < x \leq 1$,
+		\begin{equation*}
+			x \geq x^2 \implies 6x \geq x^2 + 5x \implies 0 \leq \frac{1}{6x} \leq \frac{1}{x^2+5x}
+		\end{equation*}
+		By \pref{theorem}{thm-geometric-unbounded-integral}, the integral
+		\begin{equation*}
+			\int_0^1 \frac{1}{6x} \diff x = \frac{1}{6} \int_0^1 \frac{1}{x} \diff x
+		\end{equation*}
+		diverges, therefore so does
+		\begin{equation*}
+			\int_0^1 \frac{1}{x^2+5x} \diff x
+		\end{equation*}
+		by \pref{remark}{rem-comparison-test:1} and \pref{remark}{rem-comparison-test:3}.
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-limit-comparison-test}
+	Let $f$ and $g$ be \textit{non-negative} on $[a,\infty)$ and integrable on
+	$[a,M]$ for every $M$. Furthermore, assume that
+	\begin{equation*}
+		\lim_{x\to\infty}\frac{f(x)}{g(x)} \defines L
+	\end{equation*}
+	for every $L\in(0,\infty)$. Then the limit comparison test states that
+	$\int_a^\infty f(x) \diff x$ and $\int_a^\infty g(x) \diff x$ bother either
+	converge \textit{or} diverge.
+\end{thm}
+
+\begin{exm}\label{exm-limit-comparison-test:1}
+	Find out whether the following integral converges or not by using the limit comparison test:
+	\begin{equation*}
+		\int_0^\frac{1}{2} \frac{1}{x\sqrt{1-x}} \diff x
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}: Since
+		\begin{equation*}
+			\lim_{x\to0} \frac{\frac{1}{x\sqrt{x-1}}}{\frac{1}{x}} = \lim_{x\to0} \frac{1}{\sqrt{1-x}} = 1
+		\end{equation*}
+		and by \pref{theorem}{thm-geometric-unbounded-integral}, the integral
+		\begin{equation*}
+			\int_0^\frac{1}{2} \frac{1}{x} \diff x
+		\end{equation*}
+		diverges, and by the limit comparison test in \pref{theorem}{thm-limit-comparison-test},
+		the original integral diverges as well.
+	\end{flushleft}
+\end{exm}
+
+\begin{definition}\label{def-converges-absolutely}
+	We say that $\int_a^\infty f(x) \diff x$ converges absolutely, if $\int_a^\infty \abs{f(x)}\diff x$
+	converges.
+\end{definition}
+
+\begin{thm}\label{thm-converges-absolutely-implies-convergence}
+	Absolute convergence implies convergence\footnote{The converse of this theorem
+		is not true, see \pref{remark}{rem-exm-comparison-test:5-diverges} for an counter
+		example.}.
+\end{thm}
+
+\begin{exm}\label{exm-comparison-test:3}
+	Find out whether the following integral converges or not by using the comparison test:
+	\begin{equation*}
+		\int_1^\infty \frac{\abs{\cos(x)}}{x^2} \diff x
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}: First notice that for all $x\in[1,\infty)$,
+		\begin{equation*}
+			0 \leq \frac{\abs{\cos(x)}}{x^2} \leq \frac{1}{x^2}
+		\end{equation*}
+		Since by \pref{theorem}{thm-geometric-improper-integral}, the integral
+		$\int_1^\infty \frac{1}{x^2} \diff x$ converges, we can use the
+		\hyperref[thm-comparison-test]{comparison test} to deduce that the original
+		improper integral converges as well.
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-comparison-test:4}
+	Find out whether the following integral converges or not:
+	\begin{equation*}
+		\int_1^\infty \frac{\cos(x)}{x^2} \diff x
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}: Since $\cos(x)$ is not a non-negative function, the neither the
+		comparison test nor the limit comparison test can be applied on this improper
+		integral. Prior to this we saw in \pref{example}{exm-comparison-test:3} that the
+		integrand converges absolutely. However, by \pref{theorem}{thm-converges-absolutely-implies-convergence}
+		we know that absolute convergence implies convergence, wherefore the original
+		integral does converge.
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}
+	Every theorem we state for improper integrals has dual versions for unbounded integrals,
+	except where otherwise explicitly specified.
+\end{rem}
+
+\begin{exm}\label{exm-comparison-test:5}
+	Find out whether the following integral converges or not:
+	\begin{equation*}
+		\int_1^\infty \frac{\sin(x)}{x} \diff x
+	\end{equation*}
+	\begin{flushleft}
+		\textbf{Answer}: Let $u(x)=\tfrac{1}{x}$ and $v'(x)=\sin(x)$. Then $v(x)=-\cos(x)$
+		and $u'(x)=-\tfrac{1}{x^2}$, so by \hyperref[thm-integration-by-parts-definite-integrals]{integration by parts}
+		we have that
+		\begin{align*}
+			\int_1^\infty \frac{\sin(x)}{x} \diff x
+			 & = \lim_{M\to\infty}\left(\int_1^M \frac{\sin(x)}{x} \diff x\right)                                                                                                                       \\
+			 & = \lim_{M\to\infty}\left(\evalat{-\frac{\cos(x)}{x}}{1}{M}-\int_1^M\frac{\cos(x)}{x^2}\diff x\right)                                   &  & \text{\pref{example}{exm-comparison-test:4}} \\
+			 & = \lim_{M\to\infty}\left(\underbrace{-\frac{\cos(M)}{M}}_{\to0}+\cos(1)-\underbrace{\int_1^M\frac{\cos(x)}{x^2}\diff x}_{\to L}\right)
+		\end{align*}
+		Hence, the original integral converges conditionally\footnote{Converging
+			conditionally is the opposite of converging absolutely.}.
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}\label{rem-exm-comparison-test:5-diverges}
+	One can show that the integral
+	\begin{equation*}
+		\int_1^\infty \abs[\Bigg]{\frac{\sin(x)}{x}} \diff x
+	\end{equation*}
+	diverges.
+\end{rem}
