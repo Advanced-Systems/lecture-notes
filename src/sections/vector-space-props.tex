@@ -1,0 +1,515 @@
+\subsection{Vector Space Properties}\label{subsec-vector-space-properties}
+
+\begin{definition}\label{def-finite-dimensional-vector-space}
+	A vector space is called finite-dimensional if it has a finite basis.
+\end{definition}
+
+\begin{thm}\label{thm-vector-space-dimension}
+	Let $\mathcal{V}$ be a finite-dimensional vector space. Then, any two basis
+	of $\mathcal{V}$ have the same number of vectors.
+\end{thm}
+
+\begin{definition}\label{def-vector-space-dimension}
+	The number of elements in a basis $\mathcal{B}$ for a finite-dimensional
+	vector space $\mathcal{V}$ is called the dimension of $\mathcal{V}$ and is
+	denoted by $\dim(\mathcal{V})$.
+\end{definition}
+
+\begin{exm}
+	Here are a few sample dimensions for some basic vector spaces we have
+	encountered so far:
+	\begin{itemize}
+		\item $\dim(\mathbb{R}^3)=3$.
+		\item $\dim(\mathcal{F}^n)=n$
+		\item $\dim(\mathbb{R}[t]_{\leq n})=n+1$
+		\item $\dim(\mathcal{M}_{m \times n}(\mathcal{F}))=m\cdot n$
+		\item $\dim(\mathbb{R}[t])$ is \textit{not} a finite-dimensional vector space
+	\end{itemize}
+\end{exm}
+
+\begin{thm}\label{thm-vector-base-properties}
+	Let $\mathcal{V}$ be a finite-dimensional vector space. Then the following are
+	equivalent:
+	\begin{enumerate}
+		\item $\mathcal{B}$ is a basis for $\mathcal{V}$\label{thm-vector-base-properties:1}
+		\item $\mathcal{B}$ is a maximal linearly independent set\label{thm-vector-base-properties:2}
+		\item $\mathcal{B}$ is a minimal spanning set\label{thm-vector-base-properties:3}
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}\footnote{These kind of proofs are called \textit{Ringschluss} in German}
+	Of theorem (\ref{thm-vector-base-properties}).
+	\begin{flushleft}
+		$(1)\implies(2)$:
+		If $\mathcal{B}$ is a basis for $\mathcal{V}$, then $\mathcal{B}$ is by
+		\pref{definition}{def-vector-space-base} linearly independent. If we add
+		an another element $w$ to $\mathcal{B}$, then $w$ is a linear combination
+		of the elements of $\mathcal{B}$ since $\mathcal{B}$ is a spanning set.
+		Therefore, $\mathcal{B}\cup\{w\}$ is no longer linearly independent, so
+		$\mathcal{B}$ has been a maximal linearly independent from the beginning.
+	\end{flushleft}
+	\begin{flushleft}
+		$(2)\implies(3)$:
+		If $\mathcal{B}$ is a maximal linearly independent set, then any vector
+		$w$ that we add to $\mathcal{B}$ would make it linearly dependent,
+		\textit{cf.} statement 2 in \pref{theorem}{thm-linear-dependency-linear-combinations}.
+		Therefore there is an element which is a linear combination of its predecessors,
+		and that has to be $w$. Hence, $\mathcal{B}$ spans $\mathcal{V}$. But if
+		we remove a $v_i$ from $\mathcal{B}$, then $\mathcal{B}$ no longer spans
+		$\mathcal{V}$ since $v_i$ is not a linear combination of the other elements
+		in $\mathcal{B}$ which was supposed to be a maximal linearly independent
+		set. So $\mathcal{B}$ is also a minimal spanning set.
+	\end{flushleft}
+	\begin{flushleft}
+		$(3)\implies(1)$:
+		Now we start with the assumption that $\mathcal{B}$ is a minimal spanning set.
+		If $\mathcal{B}$ is linearly dependent, then it means that there's a vector $v_j$
+		that is a linear combination of the others. But this is a contradiction
+		to our initial assumption that $\mathcal{B}$ is a \textit{minimal} spanning
+		set. Therefore, $\mathcal{B}$ is a basis for $\mathcal{V}$.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-basis-equality}
+	If $\mathcal{V}$ is a finite-dimensional vector space, then any two basis
+	have the same number of elements.
+\end{thm}
+
+\subsubsection{Steinitz' Exchange Lemma}\label{subsubsec-steinitz-echange-lemma}
+
+\begin{lemma}\label{steinitz-exchange-lemma}
+	The Steinitz exchange lemma\footnote{German: \textit{Steinitzsche Austauschsatz}}.
+	\begin{flushleft}
+		Let $\mathcal{V}$ be a finite-dimensional vector space. Then the number
+		of vectors in any spanning set is greater than or equal to the number of
+		vectors in any linearly independent set.
+	\end{flushleft}
+\end{lemma}
+
+\begin{proof}
+	Of \pref{lemma}{steinitz-exchange-lemma}.
+	\begin{flushleft}
+		Without loss of generality suppose that $A=\{v_1,\dots,v_n\}$ is a set
+		of vectors that span $\mathcal{V}$, and $B=\{w_1,\dots,w_m\}$ is a set
+		of linearly independent elements where $n < m$. We will show that this
+		cannot happen\footnote{proof by contradiction}:
+	\end{flushleft}
+	\begin{flushleft}
+		Consider $A_1=A\cup\{w_1\}=\{w_1,v_1,\dots,v_n\}$. Then this new set $A_1$
+		also spans $\mathcal{V}$, which means that $w_1$ is a linear combination
+		of any elements in $A$ (since it is a spanning set). Thus $A_1$ is
+		linearly dependent. As a matter of fact we also know that $w_1$ cannot
+		be the zero vector since according to \pref{theorem}{thm-zero-vector-linearly-dependent}
+		any set that contains the zero vector is linearly dependent, but $B$ was
+		supposed to be a set of linearly independent vectors so that cannot be
+		the case. In addition to that by \pref{theorem}{thm-linear-dependency-linear-combinations}
+		we can also say that if $A_1$ is linearly dependent, then one of the
+		vectors is a linear combination of its predecessors. Since $w_1$ doesn't have
+		any predecessors it must an element in $A$. Without loss of generality
+		assume that this vector in question is $v_2$.
+	\end{flushleft}
+	\begin{flushleft}
+		Now let us continue the exchange by defining a new set that excludes $v_2$
+		from the newly defined set since it doesn't anything to the span by being
+		linearly dependent, i.e. $A_2=\{w_1,v_1,v_3,\dots,v_n\}$. Note that $A_2$
+		again is still a spanning set for $\mathcal{V}$. Next add another element
+		from $B$ to $A_2$, namely $w_2$ so that the new set becomes
+		$A_3=\{w_1,w_2,v_1,v_3,\dots,v_n\}$. Since $w_1$ and $w_2$ came originally
+		from $B$ which is a linearly independent set, they cannot be a linear combination
+		of each other. Therefore either $v_1,v_3,\dots,v_n$ has to contain an element
+		that is a linear combination of its predecessors by the aforementioned theorem.
+	\end{flushleft}
+	\begin{flushleft}
+		By this logic if we continue this proof by induction we will reach a point
+		where $A_{n-1}=\{w_1,\dots,w_n,v_n\}$ is a set that spans $\mathcal{V}$ and is linearly
+		dependent. Then $A_n=\{w_1,\dots,w_n\}$ spans also $\mathcal{V}$ which
+		implies that any vector in $\mathcal{V}$ is a linear combination of the
+		vectors in $A_n$, in particular $w_m$. But that's a contradiction because
+		we started out by assuming that $B$ is linearly independent.
+	\end{flushleft}
+\end{proof}
+
+\begin{proof}
+	Of \pref{theorem}{thm-basis-equality}.
+	\begin{flushleft}
+		Let $\mathcal{B}_1$ and $\mathcal{B}_2$ be two basis of $\mathcal{V}$.
+		Since $\mathcal{B}_1$ is linearly independent and $\mathcal{B}_2$ is a
+		spanning set for $\mathcal{V}$ by \pref{theorem}{thm-vector-base-properties},
+		the number of elements in $\mathcal{B}_2$ is greater than or equal to the
+		number of elements in $\mathcal{B}_1$ by Steinitz' exchange
+		\pref{lemma}{steinitz-exchange-lemma}. Likewise, since $\mathcal{B}_2$ is a
+		linearly independent set and $\mathcal{B}_1$ a spanning set, the number
+		of elements in $\mathcal{B}_1$ is greater than or equal to the number of
+		elements in $\mathcal{B}_2$. Therefore, both basis have the same number
+		of elements.
+	\end{flushleft}
+\end{proof}
+
+\subsubsection{Dimension Properties}\label{subsubsec-dimension-properties}
+
+\begin{thm}\label{thm-dimension-properties}
+	Let $\mathcal{V}$ be a finite-dimensional vector space with $\dim(\mathcal{V})=n$.
+	\begin{enumerate}
+		\item Then any spanning set with $n$ elements is a basis.
+		\item Any linearly independent set with $n$ elements is a basis.
+		\item Any spanning set has at least $n$ elements.
+		\item Any linearly independent set has at most $n$ elements.
+		\item Any linearly independent set can be completed to form a basis.
+	\end{enumerate}
+\end{thm}
+
+\begin{exm}
+	Let $A_1=\inlinematrix{1&2\\3&4}$ and $A_2=\inlinematrix{1&0\\0&6}$ where
+	$A_1,A_2\in\mathcal{M}_2(\mathbb{R})$. Then $\dim(A_1)=\dim(A_2)=4$ since
+	by \pref{theorem}{thm-vector-linearly-dependent-scalar-multiple} they
+	obviously are not linearly dependent. The set can be completed by adding
+	two more vectors to form a basis:
+	\begin{align}
+		 & \begin{pmatrix}
+			1 & 2 & 3 & 4 \\
+			1 & 0 & 0 & 6 \\
+			0 & 0 & 1 & 0 \\
+			0 & 0 & 0 & 1
+		\end{pmatrix}\label{exm-row-echolon:1} \\
+		\xRightarrow{\substack{L_{21}(-1)}}
+		 & \begin{pmatrix}
+			1 & 2  & 3  & 4 \\
+			0 & -2 & -3 & 2 \\
+			0 & 0  & 1  & 0 \\
+			0 & 0  & 0  & 1
+		\end{pmatrix}\label{exm-row-echolon:2}
+	\end{align}
+	Since there are zero-rows in the row-echelon form in \pref{example}{exm-row-echolon:2},
+	the rows are linearly independent by
+	\pref{theorem}{thm-non-zero-rows-echelon-form-linearly-independent}. Therefore,
+	by theorem (\ref{thm-row-equivalent-matrices-linearly-dependent})\footnote{
+		i.e. the converse of this theorem} the rows in \pref{example}{exm-row-echolon:1}
+	are also linearly independent. Thus,
+	\begin{equation*}
+		\mathcal{B}=\left\{
+		\begin{pmatrix}
+			1 & 2 \\
+			3 & 4
+		\end{pmatrix},
+		\begin{pmatrix}
+			1 & 0 \\
+			0 & 6
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 0 \\
+			1 & 0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 0 \\
+			0 & 1
+		\end{pmatrix}
+		\right\}
+	\end{equation*}
+	is a basis for $\mathcal{M}_2(\mathbb{R})$ that includes $A_1$ and $A_2$.
+\end{exm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-dimension-properties}.
+	\begin{flushleft}
+		$(4)$:
+		Let $\mathcal{V}$ be a finite-dimensional vector space with
+		$\dim(\mathcal{V})=n$. Then by \pref{definition}{def-vector-space-dimension}
+		any basis of this vector space has exactly $n$ elements. Furthermore,
+		by \pref{theorem}{thm-vector-base-properties} this is also then a maximal
+		linearly independent set as well as a minimal spanning set. Next, by
+		\hyperref[steinitz-exchange-lemma]{steinitz exchange lemma} any linearly
+		independent set has less than or equal to $n$ elements.
+	\end{flushleft}
+	\begin{flushleft}
+		$(3)$:
+		Any basis of $\mathcal{V}$ has $n$ elements and is linearly independent.
+		By steinitz exchange lemma any spanning set has greater than or equal to
+		$n$ elements.
+	\end{flushleft}
+	\begin{flushleft}
+		$(2)$:
+		Let $\mathcal{B}$ be a linearly independent set with $n$ elements.
+		Then according to property (4) of this theorem this is in particular
+		a maximal linearly independent set. Thus by \pref{theorem}{thm-vector-base-properties},
+		$\mathcal{B}$ forms a basis for $\mathcal{V}$.
+	\end{flushleft}
+	\begin{flushleft}
+		$(1)$:
+		Let $\mathcal{B}$ be a spanning set with $n$ elements. By property (3)
+		of this theorem, $\mathcal{B}$ is a minimal spanning set. Therefore,
+		according to \pref{theorem}{thm-vector-base-properties}, $\mathcal{B}$
+		is also basis.
+	\end{flushleft}
+	\begin{flushleft}
+		$(5)$:
+		Let $\mathcal{B}=\{v_1,\dots,v_m\}$ be a linearly independent set. If
+		$m=n$ this already completes the proof. By property (4) of this theorem,
+		however, this set can only have at most $n$ elements, wherefore we can
+		exclude the case in which $m>n$. If $m<n$, then $\mathcal{B}$ is not a
+		basis because it would no longer be a spanning set by property (3) of
+		this theorem, so $\mathcal{B}$ is not maximal linearly independent by
+		\pref{theorem}{thm-vector-base-properties}. Therefore we can add some
+		vector $v_{m+1}$ while maintaining the property of linearly independence.
+		We can repeat this argument until the $\mathcal{B}$ is a maximal spanning
+		set, i.e. the number of elements of this set become equal to $n$.
+	\end{flushleft}
+\end{proof}
+
+\subsubsection{Bases and Dimensions of Subspaces}\label{subsubsec-bases-dim-subspaces}
+
+\begin{flushleft}
+	We will begin this subsection by looking at a few examples.
+\end{flushleft}
+
+\begin{exm}
+	Let $\mathcal{V}=\mathcal{M}_2(\mathbb{R})$. Then $\dim(\mathcal{V})=4$.
+	Let also $\mathcal{U}$ be a subspace of $\mathcal{V}$ such that
+	\begin{equation*}
+		\mathcal{U}=\left\{A\in\mathcal{V}\setbuild A=\begin{pmatrix}
+			a  & b   \\
+			-b & a+b
+		\end{pmatrix}\text{ where }a,b\in\mathbb{R}\right\}
+	\end{equation*}
+	A spanning set for this subspace $\mathcal{U}$ is given by
+	\begin{equation*}
+		\mathcal{B}_\mathcal{U}=\left\{\begin{pmatrix}1&0\\0&1\end{pmatrix},
+		\begin{pmatrix}0&1\\-1&1\end{pmatrix}\right\}
+	\end{equation*}
+	since any element in $\mathcal{U}$ can be written as a linear combination
+	of these two matrices:
+	\begin{equation*}
+		\begin{pmatrix}
+			a  & b   \\
+			-b & a+b
+		\end{pmatrix} =
+		a\begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{pmatrix} +
+		b\begin{pmatrix}
+			0  & 1 \\
+			-1 & 1
+		\end{pmatrix}
+	\end{equation*}
+	Then $\mathcal{B}_\mathcal{U}$ is also linearly independent, wherefore
+	it forms a basis for $\mathcal{U}$ implying that $\dim(\mathcal{U})=2$.
+\end{exm}
+
+\begin{exm}
+	Let $\mathcal{V}=\mathcal{M}_2(\mathbb{R})$, and $\mathcal{W}$ be the span of
+	\begin{equation*}
+		\mathcal{W}=\fspan\left\{\begin{pmatrix}
+			1 & 2 \\
+			3 & 4
+		\end{pmatrix},
+		\begin{pmatrix}
+			1 & 0 \\
+			0 & 5
+		\end{pmatrix},
+		\begin{pmatrix}
+			1 & 4 \\
+			6 & 3
+		\end{pmatrix}\right\}
+	\end{equation*}
+	So while these three matrices are a spanning set for $\mathcal{W}$ we need
+	to check for linear independency:
+	\begin{align*}
+		 & \begin{pmatrix}
+			1 & 2 & 3 & 4 \\
+			1 & 0 & 0 & 5 \\
+			1 & 4 & 6 & 3
+		\end{pmatrix}     \\
+		\xRightarrow{\substack{L_{21}(-1) \\ L_{31}(-1)}}
+		 & \begin{pmatrix}
+			1 & 2  & 3  & 4  \\
+			0 & -2 & -3 & 1  \\
+			0 & 2  & 3  & -1
+		\end{pmatrix}     \\
+		\xRightarrow{\substack{L_{32}(1)  \\ L_{31}(-1)}}
+		 & \begin{pmatrix}
+			1 & 2  & 3  & 4 \\
+			0 & -2 & -3 & 1 \\
+			0 & 0  & 0  & 0
+		\end{pmatrix}
+	\end{align*}
+	Then by \pref{theorem}{thm-non-zero-rows-echelon-form-linearly-independent}
+	only the non-zero rows in row-echelon form are linearly independent. From
+	these two facts we can conclude that $\dim(\mathcal{W})=2$, \textit{i.e.}
+	the third matrix is not necessary to form a basis. Therefore,
+	\begin{equation*}
+		\mathcal{B}_\mathcal{W}=\left\{
+		\begin{pmatrix}
+			1 & 2 \\
+			3 & 4
+		\end{pmatrix},
+		\begin{pmatrix}
+			1 & 0 \\
+			0 & 5
+		\end{pmatrix}
+		\right\}
+	\end{equation*}
+\end{exm}
+
+\begin{thm}\label{thm-subspace-dimension-equation}
+	If $\mathcal{U}\subseteq\mathcal{V}$ is a vector subspace, then
+	$\dim(\mathcal{U})\leq\dim(\mathcal{V})$, and
+	$\dim(\mathcal{U})=\dim(\mathcal{V})$ \textit{iff} $\mathcal{U}=\mathcal{V}$.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-subspace-dimension-equation}.
+	\begin{flushleft}
+		If $\dim(\mathcal{U})>\dim(\mathcal{V})$, then a basis for $\mathcal{U}$
+		is linearly independent set with more than $n=\dim(\mathcal{V})$ elements.
+		But by statement 4 of \pref{theorem}{thm-dimension-properties}, a linearly
+		independent set has at most $n$ elements. But this cannot be true because
+		$\mathcal{U}$ is a vector subspace of $\mathcal{V}$ which is in contradiction
+		to the aforementioned theorem.
+	\end{flushleft}
+	\begin{flushleft}
+		Furthermore, we need to proof that
+		\begin{equation*}
+			\dim(\mathcal{U})=\dim(\mathcal{V})\Leftrightarrow\mathcal{U}=\mathcal{V}
+		\end{equation*}
+		\proofright: By statement 2 of \pref{theorem}{thm-dimension-properties},
+		every linearly independent set with $n$ elements is a basis; thus if
+		$\dim(\mathcal{U})=\dim(\mathcal{V})$, then a basis of $\mathcal{U}$ has
+		$n$ elements and by statement 2 of the same theorem which says that any
+		linearly independent set with $n$ elements is a basis (since
+		$\mathcal{U}\subseteq\mathcal{V}$), so any element in $\mathcal{V}$ is
+		already in $\mathcal{U}$, \textit{i.e.} $\mathcal{V}\subseteq\mathcal{U}$.
+		Hence, $\mathcal{U}=\mathcal{V}$.
+	\end{flushleft}
+	\begin{flushleft}
+		\proofleft: This is obviously true.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-dimension-subspaces-equations}
+	Let $\mathcal{U},\mathcal{W}\subseteq\mathcal{V}$ be subspaces. Then,
+	\begin{equation}
+		\dim(\mathcal{U}+\mathcal{W})=\dim(\mathcal{U})+\dim(\mathcal{W})-\dim(\mathcal{U}\cap\mathcal{W})
+	\end{equation}
+	If $\mathcal{U}+\mathcal{W}$ is a \hyperref[def-direct-sum]{direct sum} \textit{iff}
+	\footnote{This follows from \pref{theorem}{thm-direct-sum}}
+	\begin{equation}
+		\dim(\mathcal{U}\oplus\mathcal{W})=\dim(\mathcal{U})+\dim(\mathcal{W})
+	\end{equation}
+\end{thm}
+
+\begin{exm}
+	Let $\mathcal{V}=\mathcal{M}_2(\mathbb{R})$ and
+	\begin{align*}
+		\mathcal{U} & =\left\{A\in\mathcal{V}\setbuild A=\begin{pmatrix}
+			a  & b   \\
+			-b & a+b
+		\end{pmatrix}\text{ where }a,b\in\mathbb{R}\right\}, \\
+		\mathcal{W} & =\left\{A\setbuild A=A^T\right\}
+	\end{align*}
+	We have seen in a previous example that $\dim(\mathcal{U})=2$ and that
+	\begin{equation*}
+		\mathcal{B}_\mathcal{U}=\left\{\begin{pmatrix}1&0\\0&1\end{pmatrix},
+		\begin{pmatrix}0&1\\-1&1\end{pmatrix}\right\}
+	\end{equation*}
+	A general matrix in $\mathcal{W}$ is of the form $\inlinematrix{a&b\\b&c}$,
+	so a spanning set for $\mathcal{W}$ is
+	\begin{equation*}
+		\fspan(\mathcal{W})=\left\{
+		\begin{pmatrix}
+			1 & 0 \\
+			0 & 0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 1 \\
+			1 & 0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 0 \\
+			0 & 1
+		\end{pmatrix}
+		\right\}
+	\end{equation*}
+	But this is also a basis for $\mathcal{W}$ because
+	\begin{equation*}
+		\begin{pmatrix}
+			1 & 0 & 0 & 0 \\
+			0 & 1 & 1 & 0 \\
+			0 & 0 & 0 & 1
+		\end{pmatrix}
+	\end{equation*}
+	is in row-echelon form with linearly independent rows everywhere. Therefore
+	$\mathcal{B}_\mathcal{W}=\fspan(\mathcal{W})$ is a basis and $\dim(\mathcal{W})=3$.
+	As for the sum of $\mathcal{U}+\mathcal{W}$ we have a spanning that of the form
+	\begin{equation*}
+		\mathcal{U}+\mathcal{W}=\mathcal{B}_\mathcal{U}\cup\mathcal{B}_\mathcal{W}
+		=\left\{A_1,A_2,A_3,A_4,A_5\right\}
+	\end{equation*}
+	Since the ambient space has a dimension of $\dim(\mathcal{M}_2(\mathbb{R}))=4$
+	this set is at least one element too big to be already a basis of $\mathcal{V}$.
+	\begin{align*}
+		 & \begin{pmatrix}
+			1 & 0 & 0  & 1 \\
+			0 & 1 & -1 & 1 \\
+			1 & 0 & 0  & 0 \\
+			0 & 1 & 1  & 0 \\
+			0 & 0 & 0  & 1
+		\end{pmatrix}     \\
+		\xRightarrow{\substack{L_{31}(-1) \\ L_{42}(-1}}
+		 & \begin{pmatrix}
+			1 & 0 & 0  & 1  \\
+			0 & 1 & -1 & 1  \\
+			0 & 0 & 0  & -1 \\
+			0 & 0 & 2  & -1 \\
+			0 & 0 & 0  & 1
+		\end{pmatrix}     \\
+		\xRightarrow{\substack{L_{53}(1)  \\ T_{34}}}
+		 & \begin{pmatrix}
+			1 & 0 & 0  & 1  \\
+			0 & 1 & -1 & 1  \\
+			0 & 0 & 2  & -1 \\
+			0 & 0 & 0  & -1 \\
+			0 & 0 & 0  & 0
+		\end{pmatrix}
+	\end{align*}
+	The basis therefore becomes
+	\begin{equation*}
+		\mathcal{B}_{\mathcal{U}+\mathcal{W}}=\left\{
+		\begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{pmatrix},
+		\begin{pmatrix}
+			0  & 1 \\
+			-1 & 1
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 0  \\
+			2 & -1
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 0  \\
+			0 & -1
+		\end{pmatrix}
+		\right\}
+	\end{equation*}
+	From $\dim(\mathcal{U}+\mathcal{W})=4$ follows that $\mathcal{U}+\mathcal{W}=\mathcal{V}$.
+	is a direct sum. As for the intersection of $\mathcal{U}$ and $\mathcal{W}$
+	we can use \pref{theorem}{thm-dimension-subspaces-equations} to deduce
+	\begin{align*}
+		\dim(\mathcal{U}+\mathcal{W})             & =\dim(\mathcal{U})+\dim(\mathcal{W})-\dim(\mathcal{U}\cap\mathcal{W}) \\
+		\implies \dim(\mathcal{U}\cap\mathcal{W}) & =\dim(\mathcal{U})+\dim(\mathcal{W})-\dim(\mathcal{U}+\mathcal{W})    \\
+		\implies \dim(\mathcal{U}\cap\mathcal{W}) & =2+3-4                                                                \\
+		\implies \dim(\mathcal{U}\cap\mathcal{W}) & =1
+	\end{align*}
+	Since $\dim(\mathcal{U}\cap\mathcal{W})\neq0$ this also implies that
+	$\mathcal{U}+\mathcal{W}$ is not a direct sum. Indeed, elements in the intersection
+	are of the form $\inlinematrix{1&0\\0&1}$, so
+	\begin{equation*}
+		\mathcal{B}_{\mathcal{U}\cap\mathcal{W}}=\left\{
+		\begin{pmatrix}
+			1 & 0 \\
+			0 & 1
+		\end{pmatrix}
+		\right\}
+	\end{equation*}
+\end{exm}

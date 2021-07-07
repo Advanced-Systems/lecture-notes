@@ -1,0 +1,274 @@
+\subsection{Dimensions of Row(A) and Col(A)}\label{subsec-dim-row-col}
+
+\begin{rem}
+	Recall that by \pref{definition}{def-matrix-cols-rows}, the row-space of a
+	matrix $A$ is the linear combination of the rows of $A$. By the same notion,
+	the column-space of $A$ is the linear combination of the columns of $A$.
+\end{rem}
+
+\begin{thm}\label{thm-dim-row-rank}
+	Let $A$ be a matrix. Then
+	\begin{equation}
+		\frank(A)=\dim(\frow(A))
+	\end{equation}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-dim-row-rank}.
+	\begin{flushleft}
+		Let $A$ be a matrix and $B$ be a matrix in row-echelon which is row-equivalent
+		to $A$. Then by \pref{definition}{def-matrix-rank} there are precisely $\frank(A)$
+		non-zero rows in $B$ since row-equivalent matrices share the same rank by
+		\pref{theorem}{thm-row-equivalent-matrices}. Furthermore, by
+		\pref{theorem}{thm-non-zero-rows-echelon-form-linearly-independent} the
+		non-zero rows of a matrix in row-echelon form are linearly independent.
+		Clearly, these rows span $\frow(B)$. On top of that the non-zero rows of
+		$B$ satisfy the definition for a basis (\textit{c.f.} \pref{definition}{def-vector-space-base}).
+		Therefore, $\frank(A)=\dim(\frow(B))=\dim(\frow(A))$.
+	\end{flushleft}
+\end{proof}
+
+\begin{rem}
+	This theorem describes precisely the method we use to find a basis for $\frow(A)$.
+\end{rem}
+
+\begin{exm}
+	Let $A=\inlinematrix{1&2&3&4\\2&-1&1&0\\3&-2&1&2}$. Then the row-echelon form
+	of this matrix is
+	$B=\inlinematrix{1&0&1&0\\0&1&1&0\\0&0&0&1}$. Therefore,
+	\begin{equation*}
+		\mathcal{B}=\left\{\begin{pmatrix}
+			1 & 0 & 1 & 0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 1 & 1 & 0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 1 & 1 & 1
+		\end{pmatrix}\right\}
+	\end{equation*}
+	is a basis for $\frow(B)$, and by extension, $\frow(A)$. Note that in this
+	example, the rows of $A$ itself are another basis for $\frow(A)$.
+\end{exm}
+
+\begin{exm}
+	Suppose
+	\begin{equation*}
+		\mathcal{W}=\left\{\begin{pmatrix}
+			1 & 2 \\
+			3 & 4
+		\end{pmatrix},
+		\begin{pmatrix}
+			1 & 0 \\
+			0 & 5
+		\end{pmatrix},
+		\begin{pmatrix}
+			1 & 4 \\
+			6 & 3
+		\end{pmatrix}
+		\right\}\subseteq\mathcal{M}_2(\mathbb{R})
+	\end{equation*}
+	forms a basis for $\mathcal{W}$. Then after performing the elementary row-operations
+	the row-echelon form can be found as
+	\begin{equation*}
+		A=\begin{pmatrix}
+			1 & 2 & 3 & 4 \\
+			1 & 0 & 0 & 5 \\
+			1 & 4 & 6 & 3
+		\end{pmatrix} \implies \cdots \implies
+		\begin{pmatrix}
+			1 & 2  & 3  & 4 \\
+			0 & -2 & -3 & 1 \\
+			0 & 0  & 0  & 0
+		\end{pmatrix}=B
+	\end{equation*}
+	so $\frank(A)=\dim(\frow(B)=2$. The basis for $\frow(A)$ then can be described by
+	\begin{equation*}
+		\mathcal{B}_A=\left\{
+		\begin{pmatrix}
+			1 & 2 & 3 & 4
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & -2 & -3 & 1
+		\end{pmatrix}
+		\right\}
+	\end{equation*}
+	Therefore, by \pref{theorem}{thm-vector-coordinates-linear-independence} the
+	basis of $\mathcal{W}$ is
+	\begin{equation*}
+		\mathcal{B}_\mathcal{W}=\left\{
+		\begin{pmatrix}
+			1 & 2 \\
+			3 & 4
+		\end{pmatrix},
+		\begin{pmatrix}
+			0  & -2 \\
+			-3 & 1
+		\end{pmatrix}
+		\right\}
+	\end{equation*}
+\end{exm}
+
+\begin{rem}\label{rem-row-col-relation}
+	The reason for which we were interested mostly in row-operations and in
+	$\frow(A)$ is the relation to systems of equations. Note that all theorems
+	that mention row-operations have column analogous because $\fcol(A)=\frow(A^T)$.
+	Moreover, the rank of $A^T$ is the number of columns in the column-echelon
+	form of $A$.
+\end{rem}
+
+\begin{thm}\label{thm-rank-row-col-equality}
+	For a matrix $A$ the rank by rows is the same as the rank by columns, \textit{i.e.}
+	\begin{equation}
+		\frank(A)=\frank(A^T)
+	\end{equation}
+\end{thm}
+
+\begin{crl}\label{crl-dim-row-col}
+	\begin{equation}
+		\dim(\frow(A))=\dim(\fcol(A))
+	\end{equation}
+\end{crl}
+
+\begin{proof}
+	Of \pref{corollary}{crl-dim-row-col}.
+	\begin{flushleft}
+		It follows from the two previous theorems that
+		\begin{align*}
+			\dim(\fcol(A)) & =\frank(A)        &  & \text{\pref{theorem}{thm-dim-row-rank}}          \\
+			               & =\frank(A^T)      &  & \text{\pref{theorem}{thm-rank-row-col-equality}} \\
+			               & =\dim(\frow(A^T)) &  & \text{\pref{theorem}{thm-dim-row-rank}}          \\
+			               & =\dim(\fcol(A))   &  & \text{\pref{remark}{rem-row-col-relation}}
+		\end{align*}
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}
+	Let
+	\begin{equation*}
+		A=\begin{pmatrix}
+			1   & 0        \\
+			0   & 3        \\
+			2   & 1        \\
+			\pi & 4        \\
+			5   & \sqrt{2}
+		\end{pmatrix}\in\mathcal{M}_{5\times2}(\mathbb{R})
+	\end{equation*}
+	Then $\frank(A)=2$ since by \pref{theorem}{thm-rank-row-col-equality},
+	one can see at once that $\frank(A^T)=2$ where
+	\begin{equation*}
+		A^T=\begin{pmatrix}
+			1 & 0 & 2 & \pi & 5        \\
+			0 & 3 & 1 & 4   & \sqrt{2}
+		\end{pmatrix}\in\mathcal{M}_{2\times5}(\mathbb{R})
+	\end{equation*}
+\end{exm}
+
+\subsubsection{The Rank-Nullity Theorem}\label{subsubsec-rank-nullity-theorem}
+
+\begin{definition}\label{def-null-space}
+	Let $Ax=0$ be a homogeneous system of linear equations. The solutions to $Ax=0$
+	form a subspace of $\mathcal{F}^n$ where $n$ is the number of unknown variables
+	in the solution vector. Then the null-space of $A$ is the set of solutions of
+	$Ax=0$.
+\end{definition}
+
+\begin{thm}\label{thm-dim-null-space}
+	Let $Ax=0$ be a homogeneous system of linear equations with $n$ unknowns.
+	Then, the dimension of the null-space is\footnote{This was also the number
+		of degrees of freedom for a general system of equations, \textit{c.f.} statement 3
+		in \pref{theorem}{thm-rank}} $n-\frank(A)$.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-dim-null-space}.
+	\begin{flushleft}
+		Denote $k \defines n - \frank(A)$ where $k$ is the number of degrees of
+		freedom, \textit{i.e.} $x_1,x_2,\dots,x_k$. A solution vector for this looks
+		like
+		\begin{equation*}
+			x = \begin{pmatrix}
+				x_1                   \\
+				x_2                   \\
+				\vdots                \\
+				x_k                   \\
+				\sum_i^k \alpha_i x_i \\
+				\sum_i^k \beta_i x_i  \\
+				\vdots                \\
+				\sum_i^k \zeta_i x_i
+			\end{pmatrix} =
+			x_1 \begin{pmatrix}
+				1        \\
+				0        \\
+				\vdots   \\
+				0        \\
+				\alpha_1 \\
+				\beta_1  \\
+				\vdots   \\
+				\zeta_1
+			\end{pmatrix} +
+			x_2 \begin{pmatrix}
+				0        \\
+				1        \\
+				\vdots   \\
+				0        \\
+				\alpha_2 \\
+				\beta_2  \\
+				\vdots   \\
+				\zeta_2
+			\end{pmatrix} + \cdots +
+			x_k \begin{pmatrix}
+				0        \\
+				0        \\
+				\vdots   \\
+				1        \\
+				\alpha_k \\
+				\beta_k  \\
+				\vdots   \\
+				\zeta_k
+			\end{pmatrix}
+		\end{equation*}
+		where the components below $x_k$ are a linear combination of $x_1,x_2,\dots,x_k$.
+		For convenience we introduce new variables such that
+		\begin{equation*}
+			x = x_1w_1 + x_2w_2 + \cdots + x_kw_k
+		\end{equation*}
+		Then, $\{w_1,w_2,\dots,w_k\}$ spans the set of the solutions. Observe that
+		these vectors are linearly independent because of the first $k$ entries.
+		Therefore, this set is also a basis. So the set of solutions, which we could
+		the null-set of $A$, has a basis with $k$ vectors and has a dimension of $k$.
+	\end{flushleft}
+\end{proof}
+
+\begin{crl}\label{thm-rank-nullity-theorem}
+	Let $Ax=0$ be a homogeneous system of linear equations with $n$ unknowns. Then
+	the rank-nullity theorem says that
+	\begin{align}
+		n & = \frank(A) + n-\frank(A)\nonumber \\
+		  & = \dim(\frow(A)) + \dim(\fnull(A))
+	\end{align}
+\end{crl}
+
+\begin{thm}\label{thm-lin-system-properties}
+	Let $A,B\in\mathcal{M}_{m\times n}(\mathcal{F})$.
+	\begin{enumerate}
+		\item If $Av=0$ for every $v\in\mathcal{F}^n$, then $A=0$.
+		\item If $Av=Bv$ for every $v$, then $A=B$.
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-lin-system-properties}.
+	\begin{flushleft}
+		\textbf{Part 1.} If every $v$ is a solution to $Ax=0$, then the set of solutions
+		is the null-space of $A$ (which is all of $\mathcal{F}^n$) and has the dimension
+		$n$. But by the rank-nullity theorem, $\frank(A)=0$. Therefore, $A=0$.
+	\end{flushleft}
+	\begin{flushleft}
+		\textbf{Part 2.}  If $Av=Bv$ for every $v$, then
+		\begin{equation*}
+			Av-Bv=0 \implies (A-B)v=0 \implies A-B=0
+		\end{equation*}
+		by part 1. But then, $A-B=0 \Leftrightarrow A=B$.
+	\end{flushleft}
+\end{proof}

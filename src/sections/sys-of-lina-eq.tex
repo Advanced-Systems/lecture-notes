@@ -1,0 +1,524 @@
+\subsection{Systems of Linear Equations}\label{subsec-system-of-linear-equations}
+
+\begin{definition}\label{def-linear-equation-system}
+	A system of linear equations over a field $\mathcal{F}$ with $n$ equations in
+	$m$ unknowns $x_1, x_2, \dots, x_m$ is of the form
+	\begin{align*}
+		a_{11}x_1 + \dots + a_{1m}x_m & = b_1  \\
+		a_{21}x_1 + \dots + a_{2m}x_m & = b_2  \\
+		                              & \vdots \\
+		a_{n1}x_1 + \dots + a_{nm}x_m & = b_n
+	\end{align*}
+	which is equivalent to
+	\begin{equation*}
+		A\vec{x}=\vec{b}
+	\end{equation*}
+	for $A=[a_{ij}]\in\mathcal{M}_{n \times m}(\mathcal{F})$ on the left-hand side and
+	$\vec{b}=[b_i]\in\mathcal{M}_{n \times 1}(\mathcal{F})$ on the right-hand side.
+	This system of linear equations is called homogeneous if $\vec{b}=\vec{0}$, else
+	inhomogeneous. Any $\hat{x}\in\mathcal{M}_{n \times 1}(\mathcal{F})$ that solves
+	$A\hat{x}=\vec{b}$ is called a solution for the system of linear equations. The
+	set of all solutions is called the solution set for the system of linear equations.
+	We will denote this set with $\mathcal{L}(A,\vec{b})$ \cite[p.77]{liesenMehrmann2015}
+	\footnote{We can also denote homogeneous systems by
+		$(\vec{b}=\vec{0})\implies\mathcal{L}(A,\vec{0})$}.
+\end{definition}
+
+\begin{exm}\label{exm-system-of-linear-equations}
+	Consider the following system of linear equations:
+	\begin{align*}
+		x_1 + 2x_2 + 3x_3 + 4x_4  & = 13 \\
+		2x_1 -  x_2 +  x_3        & = 8  \\
+		3x_1 - 2x_2 +  x_3 + 2x_4 & = 13
+	\end{align*}
+	By \pref{definition}{def-linear-equation-system}, this can be rewritten as
+	\begin{equation*}
+		\underbrace{
+			\begin{pmatrix}
+				1 & 2  & 3 & 4 \\
+				2 & -1 & 1 & 0 \\
+				3 & -2 & 1 & 2
+			\end{pmatrix}
+		}_{\textnormal{coefficient matrix}} \cdot
+		\underbrace{
+			\begin{pmatrix}
+				x_1 \\
+				x_2 \\
+				x_3 \\
+				x_4
+			\end{pmatrix}
+		}_{\textnormal{solution vector}} =
+		\underbrace{
+			\begin{pmatrix}
+				13 \\
+				8  \\
+				13
+			\end{pmatrix}
+		}_{\textnormal{constants}} \Leftrightarrow A \cdot \vec{x} = \vec{b}
+	\end{equation*}
+	This system has infinite many solutions. Note that their are more unknown
+	variables than equation. Hence, $x_1$ is also called a degree of freedom.
+	The (general) solution vector for this system of linear equations is
+	$\vec{b}=\inlinematrix{x_1\\x_1-3\\5-x_1\\1}$.
+	You can think of this example as a system of equations on which were put three
+	constraints. When we substitute $x_1$ with a specific value we can easily
+	obtain a specific solution for this system, e.g. $x_1=2$ yields
+	$\vec{b}=\inlinematrix{2\\-1\\3\\1}$. In
+	general, a linear system of equations can have either exactly one, many or
+	infinitely many solutions.
+\end{exm}
+
+\begin{definition}\label{def-equivalent-systems}
+	Two systems are equivalent if they have the same solution set.
+\end{definition}
+
+\begin{definition}\label{def-elementary-matrices}
+	The solution set of a system of linear equations remains the same if
+	\begin{enumerate}
+		\item $T_{ij}$: two equations are swapped (row $i$ swaps with row $j$)
+		\item $D_i(m)$: an equation is multiplied by a non-zero scalar $m$ on row $i$
+		\item $L_{ij}(m)$: row $j$ is multiplied by a scalar $m$ and then added
+		      to the equation on row $i$
+	\end{enumerate}
+	These three operations are called elementary row-operations.
+	\footnote{Note that this not a standard notation; in fact, as far as I am
+		aware there is no standard shorthand notation for elementary matrices.}
+	\begin{align}
+		T_{ij}    & = \begin{pmatrix}
+			1 &        &   &        &   &        &   \\
+			  & \ddots &   &        &   &        &   \\
+			  &        & 0 &        & 1 &        &   \\
+			  &        &   & \ddots &   &        &   \\
+			  &        & 1 &        & 0 &        &   \\
+			  &        &   &        &   & \ddots &   \\
+			  &        &   &        &   &        & 1
+		\end{pmatrix}\label{eq-row-swap}            \\
+		D_i(m)    & = \begin{pmatrix}
+			1 &        &   &   &   &        &   \\
+			  & \ddots &   &   &   &        &   \\
+			  &        & 1 &   &   &        &   \\
+			  &        &   & m &   &        &   \\
+			  &        &   &   & 1 &        &   \\
+			  &        &   &   &   & \ddots &   \\
+			  &        &   &   &   &        & 1
+		\end{pmatrix}\label{eq-row-multiplication} \\
+		L_{ij}(m) & = \begin{pmatrix}
+			1 &        &   &        &   &        &   \\
+			  & \ddots &   &        &   &        &   \\
+			  &        & 1 &        &   &        &   \\
+			  &        &   & \ddots &   &        &   \\
+			  &        & m &        & 1 &        &   \\
+			  &        &   &        &   & \ddots &   \\
+			  &        &   &        &   &        & 1
+		\end{pmatrix}\label{eq-row-addition}
+	\end{align}
+\end{definition}
+
+\begin{definition}\label{def-row-equivalent}
+	Two matrices $A$ and $A$ are called \textbf{row-equivalent} if one can be
+	derived from the other by a finite number of elementary row-operations.
+\end{definition}
+
+\begin{definition}\label{def-augmented-matrix}
+	The augmented matrix of the system $A\vec{x}=\vec{b}$ is denoted by
+	$(A\vert\vec{b})=:A^*$.
+\end{definition}
+
+\begin{definition}\label{def-gauss-jordan-elimination}
+	The method of row-reduction or Gauss-Jordan Elimination\footnote{Sometimes
+		also referred to as \textit{Gaussian Elimination} (German: Gau{\ss}sches
+		Eliminations- verfahren)} is an algorithm for solving systems of linear equations
+	that uses elementary matrices by turning it into the row-echelon form or, by
+	extension, the reduced row-echelon form. A detailed walkthrough can be found
+	in \pref{example}{exm-gauss-jordan-elimination}.
+\end{definition}
+
+\begin{exm}\label{exm-gauss-jordan-elimination}
+	Using the system of linear equations in \pref{example}{exm-system-of-linear-equations},
+	we can apply \pref{definition}{def-augmented-matrix} to express this system
+	as an augmented matrix:
+	\begin{equation*}
+		\begin{pmatrix}[cccc|c]
+			1 & 2  & 3 & 4 & 13 \\
+			2 & -1 & 1 & 0 & 8  \\
+			3 & -2 & 1 & 2 & 13
+		\end{pmatrix}
+	\end{equation*}
+	What we want to do next is to convert the augmented matrix into its row-echelon
+	form\footnote{This is not a unique form. There are many possible variations.
+		Above all it is important that the number of leading zeroes strictly increases
+		from row to row.} by successively multiplying the elementary matrices:
+	\begin{align*}
+		\xRightarrow{\substack{D_2(\frac{1}{2})}}
+		 & \begin{pmatrix}[cccc|c]
+			1 & 2            & 3           & 4 & 13 \\[4pt]
+			1 & -\frac{1}{2} & \frac{1}{2} & 0 & 4  \\[4pt]
+			3 & -2           & 1           & 2 & 13
+		\end{pmatrix}            \\
+		\xRightarrow{\substack{L_{21}(-1)}}
+		 & \begin{pmatrix}[cccc|c]
+			1 & 2            & 3            & 4  & 13 \\[4pt]
+			0 & -\frac{5}{2} & -\frac{5}{2} & -4 & -9 \\[4pt]
+			3 & -2           & 1            & 2  & 13
+		\end{pmatrix}            \\
+		\xRightarrow{\substack{D_3(\frac{1}{3})}}
+		 & \begin{pmatrix}[cccc|c]
+			1 & 2            & 3            & 4           & 13           \\[4pt]
+			0 & -\frac{5}{2} & -\frac{5}{2} & -4          & -9           \\[4pt]
+			1 & -\frac{2}{3} & \frac{1}{3}  & \frac{2}{3} & \frac{13}{3}
+		\end{pmatrix}            \\
+		\xRightarrow{\substack{L_{31}(-1)}}
+		 & \begin{pmatrix}[cccc|c]
+			1 & 2            & 3            & 4             & 13            \\[4pt]
+			0 & -\frac{5}{2} & -\frac{5}{2} & -4            & -9            \\[4pt]
+			0 & -\frac{8}{3} & -\frac{8}{3} & -\frac{10}{3} & -\frac{26}{3}
+		\end{pmatrix}            \\
+		\xRightarrow{\substack{D_2(-\frac{2}{5}) \\ D_3(-3)}}
+		 & \begin{pmatrix}[cccc|c]
+			1 & 2 & 3 & 4           & 13           \\[4pt]
+			0 & 1 & 1 & \frac{8}{5} & \frac{18}{5} \\[4pt]
+			0 & 8 & 8 & 10          & 26
+		\end{pmatrix}            \\
+		\xRightarrow{\substack{L_{32}(-8)}}
+		 & \begin{pmatrix}[cccc|c]
+			1 & 2 & 3 & 4             & 13            \\[4pt]
+			0 & 1 & 1 & \frac{8}{5}   & \frac{18}{5}  \\[4pt]
+			0 & 0 & 0 & -\frac{14}{5} & -\frac{14}{5}
+		\end{pmatrix}            \\
+		\xRightarrow{\substack{D_{3}(-\frac{5}{14})}}
+		 & \begin{pmatrix}[cccc|c]
+			\boxed{1} & 2         & 3 & 4           & 13           \\[2pt]
+			0         & \boxed{1} & 1 & \frac{8}{5} & \frac{18}{5} \\[2pt]
+			0         & 0         & 0 & \boxed{1}   & 1
+		\end{pmatrix}
+	\end{align*}
+	From here on we can go even further and turn this into the reduced row-echelon
+	form:
+	\begin{align*}
+		\xRightarrow{\substack{L_{23}(-\frac{8}{5})}}
+		 & \begin{pmatrix}[cccc|c]
+			1 & 2 & 3 & 4 & 13 \\
+			0 & 1 & 1 & 0 & 2  \\
+			0 & 0 & 0 & 1 & 1  \\
+		\end{pmatrix} \\
+		\xRightarrow{\substack{L_{12}(-2)}}
+		 & \begin{pmatrix}[cccc|c]
+			1 & 0 & 1 & 4 & 9 \\
+			0 & 1 & 1 & 0 & 2 \\
+			0 & 0 & 0 & 1 & 1 \\
+		\end{pmatrix} \\
+		\xRightarrow{\substack{L_{13}(-4)}}
+		 & \begin{pmatrix}[cccc|c]
+			1 & \boxed{0} & 1 & \boxed{0} & 5 \\
+			0 & 1         & 1 & \boxed{0} & 2 \\
+			0 & 0         & 0 & 1         & 1 \\
+		\end{pmatrix}
+	\end{align*}
+	What's special about this form\footnote{Sometimes also referred to as the
+		canonical form} is that all the leading coefficients are equal to $1$, while
+	all the other elements in their columns are $0$. Remember that using elementary
+	matrices as main operations ensured that this matrix is still row-equivalent
+	to the original matrix that we started with in \pref{example}{exm-system-of-linear-equations}.
+	Hence, this is equivalent to its simple form:
+	\begin{align*}
+		x_1 + x_3 & = 5 \\
+		x_2 + x_3 & = 2 \\
+		x_4       & = 1
+	\end{align*}
+	In conclusion, the general solution vector for this system is again
+	$\vec{b}=\inlinematrix{x_1\\x_1-3\\5-x_1\\1}$.
+	In contrast to the row-echelon form, the canonical form is unique. This
+	characteristic is so important that it has its own theorem which we will come
+	to later.
+\end{exm}
+
+\begin{definition}\label{def-matrix-rank}
+	Let $A$ be a matrix. The number of non-zero rows of a matrix in row-echelon
+	form obtained from $A$ using elementary row-operations is called the rank
+	\footnote{Matrices that correspond to equivalent systems have the
+		same rank.} of $A$, denoted by $\frank(A)$.
+\end{definition}
+
+\begin{thm}\label{thm-rank}
+	Let $A\vec{x}=\vec{b}$ be a system of $n$ equations in $m$ unknowns. Then:
+	\begin{enumerate}
+		\item The system has a unique solution if and only if $\frank(A)=\frank(A^*)=m$
+		\item If $\frank(A)\neq\frank(A^*)$, then there is no solution
+		\item If $\frank(A)=\frank(A^*)<m$, then the system has infinitely many
+		      solutions with $m-\frank(A)$ degrees of freedom.
+	\end{enumerate}
+\end{thm}
+
+\begin{exm}\label{exm-rank-of-system}
+	Consider the following system of equations:
+	\begin{align*}
+		\lambda x + y + z & =1          \\
+		x + \lambda y + z & = \lambda   \\
+		x + y + \lambda z & = \lambda^2
+	\end{align*}
+	Here we have $n=3$ equations in $m=3$ unknowns, namely $x,y$ and $z$. In
+	addition to that there is also a parameter $\lambda$.
+	\begin{flushleft}
+		\textbf{Question}: For which values of $\lambda$ are there:
+		\begin{enumerate}
+			\item[i.)] a unique solution?
+			\item[ii.)] infinitely many solutions?
+			\item[iii.)] no solutions?
+		\end{enumerate}
+	\end{flushleft}
+	\begin{flushleft}
+		\textbf{Answer}: To answer this question we will first have to find the
+		rank of the augmented matrix as noted in the previous theorem:
+		\begin{align}
+			A^*=
+			 & \begin{pmatrix}[ccc|c]
+				\lambda & 1       & 1       & 1         \\
+				1       & \lambda & 1       & \lambda   \\
+				1       & 1       & \lambda & \lambda^2
+			\end{pmatrix}\nonumber      \\
+			\xRightarrow{\substack{T_{13}}}
+			 & \begin{pmatrix}[ccc|c]
+				1       & 1       & \lambda & \lambda^2 \\
+				1       & \lambda & 1       & \lambda   \\
+				\lambda & 1       & 1       & 1
+			\end{pmatrix}\nonumber      \\
+			\xRightarrow{\substack{L_{21}(-1)           \\L_{31}(-\lambda)}}
+			 & \begin{pmatrix}[ccc|c]
+				1 & 1         & \lambda     & \lambda^2         \\
+				0 & \lambda-1 & 1-\lambda   & \lambda-\lambda^2 \\
+				0 & 1-\lambda & 1-\lambda^2 & 1-\lambda^3
+			\end{pmatrix}\nonumber      \\
+			\Longrightarrow
+			 & \begin{pmatrix}[ccc|c]
+				1 & 1            & \lambda                 & \lambda^2                         \\
+				0 & \lambda-1    & -(\lambda-1)            & -\lambda(\lambda-1)               \\
+				0 & -(\lambda-1) & -(\lambda-1)(\lambda+1) & -(\lambda-1)(\lambda^2+\lambda+1)
+			\end{pmatrix}\label{case12}
+		\end{align}
+		From here on we have to consider two different cases in order to carry
+		out the next strongly implied division:
+		\begin{align}
+			\xRightarrow{\substack{\lambda \neq 1       \\ D_2(\frac{1}{\lambda-1}) \\ D_3(\frac{1}{\lambda-1})}}
+			 & \begin{pmatrix}[ccc|c]
+				1 & 1  & \lambda      & \lambda^2              \\
+				0 & 1  & -1           & -\lambda               \\
+				0 & -1 & -(\lambda+1) & -(\lambda^2+\lambda+1)
+			\end{pmatrix}\nonumber      \\
+			\xRightarrow{\substack{L_{23}(1)}}
+			 & \begin{pmatrix}[ccc|c]
+				1 & 1 & \lambda    & \lambda^2             \\
+				0 & 1 & -1         & -\lambda              \\
+				0 & 0 & -\lambda-2 & -\lambda^2-2\lambda-1
+			\end{pmatrix}\label{case34} \\
+			\xRightarrow{\substack{\lambda \neq -2      \\ D_3(\frac{1}{-\lambda-2})}}
+			 & \begin{pmatrix}[ccc|c]
+				1         & 1         & \lambda & \lambda^2                                \\
+				\boxed{0} & 1         & -1      & -\lambda                                 \\
+				\boxed{0} & \boxed{0} & 1       & \frac{-\lambda^2-2\lambda-1}{-\lambda-2}
+			\end{pmatrix}\nonumber
+		\end{align}
+		Since we divided by $-\lambda-2$ in the last step we had to throw in yet
+		another assumption to ensure that we don't accidentally divide by $0$.
+		In this case, if $\lambda\neq 1 \land \lambda \neq -2$, then
+		$\frank(A)=\frank(A^*)=3$. This puts us in the first situation of
+		\pref{theorem}{thm-rank}; this system has under these circumstances a unique
+		solution as we will see in a minute. Turning our attention to the second
+		case we can immediately see that
+		\begin{equation*}
+			(\ref{case12})\xRightarrow{\substack{\lambda=1}}
+			\begin{pmatrix}[ccc|c]
+				1 & 1 & 1 & 1 \\
+				0 & 0 & 0 & 0 \\
+				0 & 0 & 0 & 0
+			\end{pmatrix}\implies x+y+z=1
+		\end{equation*}
+		In this case we are left with one equation ($n=1$) in three unknowns
+		$m=3$, so $\frank(A)=\frank(A^*)=1<3$, i.e. this case provides infinitely
+		many solutions. In particular, we can note that there are $3-\frank(A)=2$
+		degrees of freedom. Thus, the solution vector becomes
+		$\vec{b}=\inlinematrix{x\\y\\1-x-y}$
+		for $z=1-x-y$. Last but not least, we have to consider case 4:
+		\begin{equation*}
+			(\ref{case34})\xRightarrow{\substack{\lambda=-2}}
+			\begin{pmatrix}[ccc|c]
+				1 & 1 & -2 & 4  \\
+				0 & 1 & -1 & 2  \\
+				0 & 0 & 0  & -1
+			\end{pmatrix}\implies 2=\frank(A)\neq\frank(A^*)=3
+		\end{equation*}
+		The rank inequality of the original and augmented matrix caused by
+		$0x+0y+0z=-1$ implies that this system where $\lambda=-2$ has no solution.
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-trivial-solution}
+	A homogeneous systems always has one solution, called the trivial solution,
+	i.e. $\vec{x}=\vec{0}$.
+\end{thm}
+
+\begin{exm}\label{exm-homogeneous-system}
+	Consider the system of linear equations taken from \pref{example}{exm-system-of-linear-equations}.
+	This system becomes homogeneous if we change the constants to $\vec{b}=\vec{0}$:
+	\begin{equation*}
+		\begin{pmatrix}
+			1 & 2  & 3 & 4 \\
+			2 & -1 & 1 & 0 \\
+			3 & -2 & 1 & 2
+		\end{pmatrix}\cdot
+		\begin{pmatrix}
+			x_1 \\
+			x_2 \\
+			x_3 \\
+			x_4
+		\end{pmatrix}=
+		\begin{pmatrix}
+			0 \\
+			0 \\
+			0
+		\end{pmatrix}
+	\end{equation*}
+\end{exm}
+
+\begin{thm}\label{thm-homogeneous-inf-solutions}
+	If a homogeneous system has a non-zero solution, then it has infinitely many
+	solutions.
+\end{thm}
+
+\begin{thm}\label{thm-homogeneous-solutions}
+	The homogeneous and inhomogeneous solutions of the same coefficient matrix
+	are related in a way such that:\footnote{The converse to this theorem
+		is not true.}
+	\begin{enumerate}
+		\item If $A\vec{x}=\vec{b}$ has infinitely many solutions, then so does
+		      $A\vec{x}=\vec{0}$.
+		\item If $A\vec{x}=\vec{b}$ has a unique solutions, then so does
+		      $A\vec{x}=\vec{0}$.
+	\end{enumerate}
+\end{thm}
+
+\begin{exm}\label{exm-homogeneous-solution}
+	Back to \pref{example}{exm-system-of-linear-equations} we have already established
+	the fact that this system has the solution vector
+	$\mathcal{L}(A,\vec{b})=\inlinematrix{x\\x-3\\5-x\\1}$.
+	Recall that after transforming the augmented matrix to its reduced row-echelon
+	got us
+	\begin{equation*}
+		\begin{pmatrix}[cccc|c]
+			1 & 2  & 3 & 4 & 13 \\
+			2 & -1 & 1 & 0 & 8  \\
+			3 & -2 & 1 & 2 & 13
+		\end{pmatrix}
+		\implies\cdots\implies
+		\begin{pmatrix}[cccc|c]
+			1 & 0 & 1 & 0 & 5 \\
+			0 & 1 & 1 & 0 & 2 \\
+			0 & 0 & 0 & 1 & 1
+		\end{pmatrix}
+	\end{equation*}
+	Following the exact same steps for the homogeneous system produces the
+	reduced row-echelon form of:
+	\begin{equation*}
+		\begin{pmatrix}[cccc|c]
+			1 & 2  & 3 & 4 & 0 \\
+			2 & -1 & 1 & 0 & 0 \\
+			3 & -2 & 1 & 2 & 0
+		\end{pmatrix}
+		\implies\cdots\implies
+		\begin{pmatrix}[cccc|c]
+			1 & 0 & 1 & 0 & 0 \\
+			0 & 1 & 1 & 0 & 0 \\
+			0 & 0 & 0 & 1 & 0
+		\end{pmatrix}
+	\end{equation*}
+	This again can be transcribed in system form as:
+	\begin{align*}
+		x_1 + x_3 & = 0 \\
+		x_2 + x_3 & = 0 \\
+		x_4       & = 0
+	\end{align*}
+	Thus, if we take $x_1$ as our independent variable,
+	\begin{equation*}
+		\vec{b}_0=
+		\begin{pmatrix}
+			-x_3 \\
+			-x_3 \\
+			-x_1 \\
+			0
+		\end{pmatrix}\overset{x\defines x_1}{\Longrightarrow}\mathcal{L}(A,\vec{0})=
+		\begin{pmatrix}
+			x  \\
+			x  \\
+			-x \\
+			0
+		\end{pmatrix}
+	\end{equation*}
+\end{exm}
+
+\begin{thm}\label{thm-homogeneous-inhomogeneous-solution-sets}
+	If $\vec{x}_0$ is a specific solution of $A\vec{x}=\vec{b}$, then
+	\begin{equation*}
+		\mathcal{L}(A,\vec{b})=\vec{x}_0+\mathcal{L}(A,\vec{0})
+	\end{equation*}
+\end{thm}
+
+\begin{exm}
+	From \pref{example}{exm-homogeneous-solution} we can observe that
+	\begin{equation*}
+		\underbrace{
+			\begin{pmatrix}
+				x   \\
+				x-3 \\
+				5-x \\
+				1
+			\end{pmatrix}
+		}_{\mathcal{L}(A,\vec{b})}=
+		\underbrace{
+			\begin{pmatrix}
+				0  \\
+				-3 \\
+				5  \\
+				1
+			\end{pmatrix}
+		}_{\vec{x}_0}+
+		\underbrace{
+			\begin{pmatrix}
+				x  \\
+				x  \\
+				-x \\
+				0
+			\end{pmatrix}
+		}_{\mathcal{L}(A,\vec{0})}
+	\end{equation*}
+\end{exm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-homogeneous-inhomogeneous-solution-sets}.
+	\begin{flushleft}
+		\proofright:
+		Let $\vec{y}_0=\mathcal{L}(A,\vec{0})$. We first show that $\vec{x}_0+\vec{y}_0$ is
+		a solution of $A\vec{x}=\vec{b}$. Since $\vec{x}_0$ is a specific solution of
+		the inhomogeneous system, $A\vec{x}_0=\vec{b}$ and
+		\begin{equation*}
+			A(\vec{x}_0+\vec{y}_0)=A\vec{x}_0+A\vec{y}_0=\vec{b}+\vec{0}=\vec{b}
+		\end{equation*}
+	\end{flushleft}
+	\begin{flushleft}
+		\proofleft: If $\vec{x}_1$ is any solution of $A\vec{x}=\vec{b}$,
+		then there is a solution $\vec{y}_1$ of $A\vec{x}=\vec{0}$ such that
+		$\vec{x}_1=\vec{x}_0+\vec{y}_1$. This implies $\vec{y}_1=\vec{x}_1-\vec{x}_0$,
+		hence
+		\begin{equation*}
+			A\vec{y}_1=A(\vec{x}_1-\vec{x}_0)=A\vec{x}_1-A\vec{x}_0=\vec{b}-\vec{b}=\vec{0}
+		\end{equation*}
+	\end{flushleft}
+\end{proof}
+
+\begin{crl}
+	If we know the solution to $A\vec{x}=\vec{b}$, then we can find the solution
+	to $A\vec{x}=\vec{0}$ by
+	\begin{equation*}
+		\mathcal{L}(A,\vec{0})=\mathcal{L}(A,\vec{b})-\vec{x}_0
+	\end{equation*}
+	so solving the inhomogeneous system is sufficient for retrieving the
+	solution set to the homogeneous system.
+\end{crl}
