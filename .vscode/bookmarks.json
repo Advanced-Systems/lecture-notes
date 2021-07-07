@@ -104,7 +104,7 @@
 			"path": "src/document.tex",
 			"bookmarks": [
 				{
-					"line": 54,
+					"line": 63,
 					"column": 16,
 					"label": "TODO: Move these macros to mathtools"
 				}
@@ -137,6 +137,101 @@
 					"line": 430,
 					"column": 44,
 					"label": "TODO: Add figure"
+				}
+			]
+		},
+		{
+			"path": "src/sections/lina.tex",
+			"bookmarks": [
+				{
+					"line": 2,
+					"column": 0,
+					"label": "TODO: Add description"
+				}
+			]
+		},
+		{
+			"path": "src/sections/vector-space-props.tex",
+			"bookmarks": [
+				{
+					"line": 88,
+					"column": 13,
+					"label": "TODO: Redo sloppy proof"
+				}
+			]
+		},
+		{
+			"path": "src/sections/coord-vectors.tex",
+			"bookmarks": [
+				{
+					"line": 182,
+					"column": 6,
+					"label": "TODO: Add proof"
+				}
+			]
+		},
+		{
+			"path": "src/sections/adjugate.tex",
+			"bookmarks": [
+				{
+					"line": 139,
+					"column": 35,
+					"label": "TODO: Add proof"
+				}
+			]
+		},
+		{
+			"path": "src/sections/cramers-rule.tex",
+			"bookmarks": [
+				{
+					"line": 78,
+					"column": 11,
+					"label": "TODO: Add remark about time complexity"
+				}
+			]
+		},
+		{
+			"path": "src/sections/linear-maps.tex",
+			"bookmarks": [
+				{
+					"line": 367,
+					"column": 16,
+					"label": "TODO: Add reference figure here"
+				},
+				{
+					"line": 388,
+					"column": 15,
+					"label": "TODO: Add reference figure here"
+				},
+				{
+					"line": 425,
+					"column": 15,
+					"label": "TODO: Add reference to figure here for T(1,0)=(cos,sin)"
+				},
+				{
+					"line": 1552,
+					"column": 50,
+					"label": "NOTE: If all v: Av=Bv => A=B (c.f. thm-lin-system-properties)"
+				}
+			]
+		},
+		{
+			"path": "src/sections/diagonalization.tex",
+			"bookmarks": [
+				{
+					"line": 791,
+					"column": 11,
+					"label": "NOTE: This remark is a theorem but beyond the scope of this course"
+				}
+			]
+		},
+		{
+			"path": "src/sections/inner-product-space.tex",
+			"bookmarks": [
+				{
+					"line": 186,
+					"column": 38,
+					"label": "TODO: Solve example"
 				}
 			]
 		}
