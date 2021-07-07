@@ -20,10 +20,19 @@
 \usepackage{tcolorbox}
 \usepackage{circuitikz}
 \usepackage{tikz}
+\usepackage{tikz-cd}
 \usepackage{pgf}
 \usepackage{pgfplots}
 \usepackage[acronym]{glossaries}
 \usepackage[backend=biber,style=phys]{biblatex}
+
+\makeatletter 
+% extension method for amsmath matrix environments
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
 
 % environments
 \newtheorem{lemma}{Lemma}
@@ -92,6 +101,44 @@
 \include{sections/acknowledgements}
 
 \include{sections/introduction}
+
+\include{sections/lina}
+
+\include{sections/matrices}
+
+\include{sections/sys-of-lina-eq}
+
+\include{sections/vector-spaces}
+
+\include{sections/lina-comb}
+
+\include{sections/lina-inde}
+
+\include{sections/vector-space-props}
+
+\include{sections/coord-vectors}
+
+\include{sections/dim-row-col}
+
+\include{sections/invert-matrices}
+
+\include{sections/determinants}
+
+\include{sections/adjugate}
+
+\include{sections/cramers-rule}
+
+\include{sections/linear-maps}
+
+\include{sections/morphism}
+
+\include{sections/sim-matrices}
+
+\include{sections/diagonalization}
+
+\include{sections/inner-product-space}
+
+\include{sections/normed-vector-spaces}
 
 \include{sections/analysis}
 
