@@ -1,0 +1,284 @@
+\subsection{Invertible Matrices}\label{subsec-invertible-matrices}
+
+\begin{flushleft}
+	In this subsection we will attempt to find answers to the following questions:
+	\begin{itemize}
+		\item What are inverse matrices?
+		\item How do we know if a matrix is invertible?
+		\item How can we find inverse matrices?
+		\item What are inverse matrices good for?
+	\end{itemize}
+\end{flushleft}
+
+\begin{definition}\label{def-invertible-matrix}
+	Let $A$ be a square matrix. $A$ is called invertible if there exists another
+	matrix $B$ such that $AB=I$.
+\end{definition}
+
+\begin{thm}\label{thm-invertible-matrices-commutativity}
+	If $AB=I$, then $BA=I$.
+\end{thm}
+
+\begin{thm}\label{thm-inverse-matrix-unique}
+	If $A$ is invertible, then its inverse $B$ is unique.
+\end{thm}
+
+\begin{rem}
+	The inverse matrix is denoted by $A^{-1}$.
+\end{rem}
+
+\begin{exm}
+	Let $A=\inlinematrix{2&1\\4&5}$. Verify its
+	inverse matrix
+	$A^{-1}=\inlinematrix{\frac{5}{6}&-\frac{1}{6}\\-\frac{2}{3}&\frac{1}{3}}$.
+	\begin{flushleft}
+		\textbf{Answer}: Following the definition of an inverse matrix we see that
+		\begin{align*}
+			AA^{-1} & = \begin{pmatrix}
+				2 & 1 \\
+				4 & 5
+			\end{pmatrix}\begin{pmatrix}
+				\frac{5}{6}  & -\frac{1}{6} \\[4pt]
+				-\frac{2}{3} & \frac{1}{3}
+			\end{pmatrix} \\
+			        & = \begin{pmatrix}
+				2\cdot\frac{5}{6}+1\cdot\left(-\frac{2}{3}\right) & 2\cdot\left(-\frac{1}{6}\right)+1\cdot\frac{1}{3} \\[4pt]
+				4\cdot\frac{5}{6}+5\cdot\left(-\frac{2}{3}\right) & 4\cdot\left(-\frac{1}{6}\right)+5\cdot\frac{1}{3}
+			\end{pmatrix}                          \\
+			        & = \begin{pmatrix}
+				\frac{5}{3}-\frac{2}{3}   & -\frac{1}{3}+\frac{1}{3} \\[4pt]
+				\frac{10}{3}-\frac{10}{3} & -\frac{2}{3}+\frac{5}{3}
+			\end{pmatrix}                          \\
+			        & = \begin{pmatrix}
+				1 & 0 \\
+				0 & 1
+			\end{pmatrix}                         \\
+			        & = I_2
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}
+	Show that the matrix $A=\inlinematrix{1&1\\2&2}$ is
+	not invertible.
+	\begin{flushleft}
+		\textbf{Answer}: Let $A^{-1}=\inlinematrix{a&b\\c&d}$.
+		Then,
+		\begin{align*}
+			\begin{pmatrix}
+				1 & 0 \\
+				0 & 1
+			\end{pmatrix} & =
+			\begin{pmatrix}
+				1 & 1 \\
+				2 & 2
+			\end{pmatrix}\begin{pmatrix}
+				a & b \\
+				c & d
+			\end{pmatrix}     \\
+			                           & =\begin{pmatrix}
+				a+c    & b+d    \\
+				2(a+c) & 2(b+d)
+			\end{pmatrix}
+		\end{align*}
+		This system of equations looks like
+		\begin{equation*}
+			\begin{cases}
+				\text{(1):} & a+c=1    \\
+				\text{(2):} & b+d=0    \\
+				\text{(3):} & 2(a+c)=0 \\
+				\text{(4):} & 2(a+c)=1 \\
+			\end{cases}
+		\end{equation*}
+		But this system does not have a solution because the equations (1) and (3)
+		as well as (2) and (4) contradict each other. Therefore, the matrix $A$
+		is not invertible.
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-product-of-inverse-matrices}
+	If both $A$ and $B$ are invertible, then their product $AB$ is also invertible.
+	More specifically,
+	\begin{equation}
+		(AB)^{-1}=B^{-1}A^{-1}
+	\end{equation}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-product-of-inverse-matrices}.
+	\begin{flushleft}
+		Using the associativity property for matrix multiplication from
+		\pref{lemma}{lemma-matrix-multiplication}:
+		\begin{align*}
+			(AB)(B^{-1}A^{-1}) & =A(BB^{-1})A^{-1} \\
+			                   & =AA^{-1}          \\
+			                   & =I
+		\end{align*}
+		so that means that $AB$ is invertible, and that its inverse is $B^{-1}A^{-1}$.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-transposed-inverse-matrix}
+	If $A$ is invertible, then $A^T$ is invertible and
+	\begin{equation}
+		(A^T)^{-1}=(A^{-1})^T
+	\end{equation}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-transposed-inverse-matrix}.
+	\begin{flushleft}
+		From \pref{lemma}{lemma-transpose-matrices} the product of two transposed
+		matrices can be rewritten as
+		\begin{align*}
+			(A^T)(A^{-1})^T & =(A^{-1}A)^T \\
+			                & =I^T         \\
+			                & =I
+		\end{align*}
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-square-matrix-properties}
+	Let $A$ be a square matrix. Then the following are equivalent:
+	\begin{enumerate}
+		\item $A$ is invertible.
+		\item The matrix has full rank, \textit{i.e.} $\frank(A)=n$.
+		\item $A$ is row-equivalent to $I$.
+		\item For any vector $b\in\mathcal{F}^n$ the system $Ax=b$ has a unique solution.
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-square-matrix-properties}.
+	\begin{flushleft}
+		$(1)\implies(4)$: Let $A$ be invertible matrix and $b\in\mathcal{F}^n$.
+		We want to show that the system $Ax=b$ has a unique solution. Therefore,
+		take $x=A^{-1}b$. Then,
+		\begin{equation*}
+			Ax = A(A^{-1}b)=b
+		\end{equation*}
+		So this is a solution to this system. The solution is unique since if
+		$x$ and $y$ satisfy $Ax=b=Ay$, then by \pref{remark}{rem-invertible-matrix-implication}
+		it follows that $x=y$.
+	\end{flushleft}
+	\begin{flushleft}
+		$(4)\implies(1)$: If for any $b\in\mathcal{F}^n$ the system $Ax=b$ has a
+		solution, then in particular
+		\begin{equation*}
+			Ac_1=\begin{pmatrix}
+				1      \\
+				0      \\
+				0      \\
+				\vdots \\
+				0
+			\end{pmatrix},
+			Ac_2=\begin{pmatrix}
+				0      \\
+				1      \\
+				0      \\
+				\vdots \\
+				0
+			\end{pmatrix},
+			\dots,
+			Ac_n=\begin{pmatrix}
+				0      \\
+				0      \\
+				\vdots \\
+				0      \\
+				1
+			\end{pmatrix}
+		\end{equation*}
+		have unique solution, denoted by $c_i$. Define $C$ to be the matrix
+		whose columns are the $c_i$'s. Then $C=A^{-1}$, since $AC=I$.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-finding-inverse-matrices}
+	If $A$ is invertible, then the elementary row-operations which transform $A$
+	to $I$, transform $I$ to $A^{-1}$.
+\end{thm}
+
+\begin{exm}
+	Let $A=\inlinematrix{2&1\\4&5}$. We write
+	$(A|I)$ and do the row-operations that transform $A$ to $i$:
+	\begin{align*}
+		 & \begin{pmatrix}[cc|cc]
+			2 & 1 & 1 & 0 \\
+			4 & 5 & 0 & 1
+		\end{pmatrix} \\
+		\xRightarrow{\substack{D_1\left(\frac{1}{2}\right)}}
+		 & \begin{pmatrix}[cc|cc]
+			1 & \frac{1}{2} & \frac{1}{2} & 0 \\[4pt]
+			4 & 5           & 0           & 1
+		\end{pmatrix} \\
+		\xRightarrow{\substack{L_{21}(-4)}}
+		 & \begin{pmatrix}[cc|cc]
+			1 & \frac{1}{2} & \frac{1}{2} & 0 \\[4pt]
+			0 & 3           & -2          & 1
+		\end{pmatrix} \\
+		\xRightarrow{\substack{D_2\left(\frac{1}{3}\right)}}
+		 & \begin{pmatrix}[cc|cc]
+			1 & \frac{1}{2} & \frac{1}{2}  & 0           \\[4pt]
+			0 & 1           & -\frac{2}{3} & \frac{1}{3}
+		\end{pmatrix} \\
+		\xRightarrow{\substack{L_{12}\left(-\frac{1}{2}\right)}}
+		 & \begin{pmatrix}[cc|cc]
+			1 & 0 & \frac{5}{3}  & -\frac{1}{6} \\[4pt]
+			0 & 1 & -\frac{2}{3} & \frac{1}{3}
+		\end{pmatrix}
+	\end{align*}
+	So by \pref{theorem}{thm-finding-inverse-matrices} the inverse matrix is
+	$A^{-1}=\inlinematrix{\frac{5}{3}&-\frac{1}{6}\\-\frac{2}{3}&\frac{1}{3}}$.
+	Now suppose we want to solve the following system of linear equations:
+	\begin{equation*}
+		\begin{cases}
+			2x+y=3 \\
+			4x+5y=2
+		\end{cases}\Leftrightarrow
+		\begin{pmatrix}
+			2 & 1 \\
+			4 & 5
+		\end{pmatrix}\begin{pmatrix}
+			x \\
+			y
+		\end{pmatrix}=
+		\begin{pmatrix}
+			3 \\
+			2
+		\end{pmatrix}
+	\end{equation*}
+	If we now that $A$ is invertible, then
+	\begin{align*}
+		Ax                  & = b       \\
+		\implies A^{-1}(Ax) & = A^{-1}b \\
+		\implies (A^{-1}A)x & = A^{-1}b \\
+		\implies          x & = A^{-1}b \\
+	\end{align*}
+	So for this reason we can determine the solution vector by
+	\begin{equation*}
+		\begin{pmatrix}
+			x \\y
+		\end{pmatrix}=
+		\begin{pmatrix}
+			\frac{5}{3}  & -\frac{1}{6} \\[4pt]
+			-\frac{2}{3} & \frac{1}{3}
+		\end{pmatrix}\begin{pmatrix}
+			3 \\2
+		\end{pmatrix}=
+		\begin{pmatrix}
+			\frac{13}{6} \\[4pt]
+			-\frac{4}{3}
+		\end{pmatrix}
+	\end{equation*}
+\end{exm}
+
+\begin{rem}\label{rem-invertible-matrix-implication}
+	In general, there is no cancellation, meaning
+	\begin{equation*}
+		AB=AC \notimplies B=C
+	\end{equation*}
+	\textit{but} if $A$ is invertible, then
+	\begin{equation*}
+		AB=AC \implies B=C
+	\end{equation*}
+\end{rem}

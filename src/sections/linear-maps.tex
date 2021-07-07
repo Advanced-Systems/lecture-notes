@@ -1,0 +1,1655 @@
+\subsection{Linear Map}\label{subsec-linear-maps}
+
+\begin{definition}\label{def-linear-maps}
+	Let $\mathcal{V}$ and $\mathcal{W}$ be two vector spaces over the field $\mathcal{F}$.
+	A function $f:\mathcal{V}\to\mathcal{W}$ is called a linear map if it satisfies
+	(for all $v,w\in\mathcal{V}$ and $\lambda\in\mathcal{F}$)
+	\begin{enumerate}
+		\item $f(\lambda\cdot v)=\lambda\cdot f(v)$
+		\item $f(v+w)=f(v)+f(w)$
+	\end{enumerate}
+\end{definition}
+
+\begin{rem}\label{rem-linear-maps}
+	Henceforth, the set of all linear maps will be denoted by $\fhom(\mathcal{V},\mathcal{W})$.
+	Moreover, such a function is also called a linear transformation (or vector
+	space homomorphism). Additionally, any bijective linear transformation is called
+	an isomorphism. In case that $f$ is bijective, its vector spaces are are to
+	be considered isomorphic \cite[p.141]{liesenMehrmann2015}, \textit{i.e.}
+	$\mathcal{V}\cong\mathcal{W}$.
+\end{rem}
+
+\begin{exm}\label{exm-derivative-map}
+	Let $\mathcal{V}=\mathbb{R}[x]_{\leq3}$ and $\mathcal{W}=\mathbb{R}[x]_{\leq2}$
+	(see also \pref{remark}{rem-polynomial-vector-space} for an explanation to
+	this set notation). Verify that the function $T:\mathcal{V}\to\mathcal{W}$ with
+	$p(x)\mapsto p^\prime(x)$ is a linear map.
+	\begin{flushleft}
+		\textbf{Answer}: We can check the conditions based on previous results
+		from Single Variable Calculus that proved the rules for taking the
+		derivative of a function:
+		\begin{enumerate}
+			\item Operation of addition:
+			      \begin{align*}
+				      T(\lambda\cdot p(x)) & =(\lambda\cdot p(x))^\prime \\
+				                           & =\lambda\cdot p^\prime(x)   \\
+				                           & =\lambda\cdot T(p(x))
+			      \end{align*}
+			\item Operation of scalar multiplication:
+			      \begin{align*}
+				      T(p(x)+q(x)) & =(p(x)+q(x))^\prime      \\
+				                   & =p^\prime(x)+q^\prime(x) \\
+				                   & =T(p(x))+T(q(x))
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-matrix-map}
+	Let $T:\mathbb{R}^n\to\mathbb{R}^m$ be a linear map with rule $T(v):Av$
+	where $A$ is a $m \times n$ matrix. Show that the conditions laid out in
+	\pref{definition}{def-linear-maps} are indeed satisfied.
+	\begin{flushleft}
+		\textbf{Answer}: Using the rules for matrix multiplication and addition,
+		for all $u,v\in\mathbb{R}^n$ and $\lambda\in\mathbb{R}$ we have that
+		\begin{enumerate}
+			\item Operation of addition:
+			      \begin{align*}
+				      T(u+v) & = A(u+v)    \\
+				             & = Au + Av   \\
+				             & = T(u)+T(v)
+			      \end{align*}
+			\item Operation of scalar multiplication:
+			      \begin{align*}
+				      T(\lambda\cdot u) & = A(\lambda\cdot u) \\
+				                        & = \lambda\cdot Av   \\
+				                        & = \lambda\cdot T(v)
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}
+	In \pref{example}{exm-matrix-map} we have seen that in general, any
+	linear transformation between two vector spaces can be encoded in terms of a
+	matrix.
+\end{rem}
+
+\begin{exm}
+	Let us discuss \pref{example}{exm-matrix-map} a little more in detail
+	by going through these properties by means of a more specific example:
+	\begin{flushleft}
+		Take the linear transformation $T:\mathbb{R}^2\to\mathbb{R}^2$ with rule
+		\begin{equation*}
+			T\left(\begin{pmatrix}
+				x \\ y
+			\end{pmatrix}\right)=\begin{pmatrix}
+				1 & 2  \\
+				0 & -1
+			\end{pmatrix}\begin{pmatrix}
+				x \\ y
+			\end{pmatrix}
+		\end{equation*}
+		\begin{enumerate}
+			\item Operation of addition:
+			      \begin{align*}
+				      T\left(\begin{pmatrix}
+					      x \\ y
+				      \end{pmatrix}+
+				      \begin{pmatrix}
+					      z \\ w
+				      \end{pmatrix}\right)
+				       & =\begin{pmatrix}
+					      1 & 2  \\
+					      0 & -1
+				      \end{pmatrix}\begin{pmatrix}
+					      x + z \\
+					      y + w
+				      \end{pmatrix}   \\
+				       & =\begin{pmatrix}
+					      x+z+2(y+w) \\
+					      -(y+w)
+				      \end{pmatrix}                             \\
+				       & =\begin{pmatrix}
+					      x + 2y \\
+					      -y
+				      \end{pmatrix}+
+				      \begin{pmatrix}
+					      z + 2w \\
+					      - w
+				      \end{pmatrix}                                 \\
+				       & = \begin{pmatrix}
+					      1 & 2  \\
+					      0 & -1
+				      \end{pmatrix}\begin{pmatrix}
+					      x \\ y
+				      \end{pmatrix}+
+				      \begin{pmatrix}
+					      1 & 2  \\
+					      0 & -1
+				      \end{pmatrix}\begin{pmatrix}
+					      z \\ w
+				      \end{pmatrix}       \\
+				       & = T\left(\begin{pmatrix}
+					      x \\ y
+				      \end{pmatrix}\right)+
+				      T\left(\begin{pmatrix}
+					      z \\ w
+				      \end{pmatrix}\right)
+			      \end{align*}
+			\item Operation of scalar multiplication:
+			      \begin{align*}
+				      T\left(\lambda \begin{pmatrix}
+					      x \\ y
+				      \end{pmatrix}\right)
+				       & =\begin{pmatrix}
+					      1 & 2  \\
+					      0 & -1
+				      \end{pmatrix}\begin{pmatrix}
+					      \lambda x \\ \lambda y
+				      \end{pmatrix}  \\
+				       & = \begin{pmatrix}
+					      \lambda x + 2\lambda y \\
+					      -\lambda y
+				      \end{pmatrix}                           \\
+				       & = \lambda \begin{pmatrix}
+					      x + 2y \\
+					      - y
+				      \end{pmatrix}                   \\
+				       & =\lambda\cdot T\left(\begin{pmatrix}
+					      x \\ y
+				      \end{pmatrix}\right)
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}\label{rem-linear-map-matrix-shorthand}
+	We might sometimes write
+	\begin{equation*}
+		T\begin{pmatrix}
+			x \\ y
+		\end{pmatrix}\defines
+		T\left(\begin{pmatrix}
+			x \\ y
+		\end{pmatrix}\right)
+	\end{equation*}
+	as a shorthand if the context of this equation is clear. Such means are also
+	known as \enquote{abusive notation}.
+\end{rem}
+
+\begin{exm}
+	Let $T:\mathbb{R}^2\to\mathbb{R}^2$ be function with rule
+	\begin{equation*}
+		T\begin{pmatrix}
+			x \\ y
+		\end{pmatrix}=\begin{pmatrix}
+			x \\ 1
+		\end{pmatrix}
+	\end{equation*}
+	While this is a map, it violates the operation of addition property for linear
+	maps as is shown below:
+	\begin{align*}
+		T\left(\begin{pmatrix}
+			x \\ y
+		\end{pmatrix} + \begin{pmatrix}
+			z \\ w
+		\end{pmatrix}\right)
+		 & = \begin{pmatrix}
+			x + z \\ 1
+		\end{pmatrix}                               \\
+		 & \neq \begin{pmatrix}
+			x + z \\ 2
+		\end{pmatrix}                            \\
+		 & =\begin{pmatrix}
+			x \\ 1
+		\end{pmatrix} +
+		\begin{pmatrix}
+			z \\ 1
+		\end{pmatrix}                                    \\
+		 & =T\begin{pmatrix}
+			x \\ y
+		\end{pmatrix} + T\begin{pmatrix}
+			z \\ w
+		\end{pmatrix}
+	\end{align*}
+\end{exm}
+
+\begin{thm}\label{thm-linear-map-properties}
+	If $T:\mathcal{V}\to\mathcal{W}$ is a linear map, then
+	\begin{enumerate}
+		\item $T(0)=0$
+		\item $T(-v)=-T(v)$ for all $v\in\mathcal{V}$
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-linear-map-properties}.
+	\begin{flushleft}
+		\textbf{Property 1}: We know from property 2 of
+		\pref{definition}{def-linear-maps} that $T(\lambda\cdot v)=\lambda T(v)$
+		for all $\lambda\in\mathcal{F}$. In particular, for $\lambda=0$ it follows
+		that
+		\begin{align*}
+			T(0) & = T(0\cdot v)  \\
+			     & = 0 \cdot T(v) \\
+			     & = 0
+		\end{align*}
+	\end{flushleft}
+	\begin{flushleft}
+		\textbf{Property 2}: For the same reason, if $\lambda=-1$ then
+		\begin{align*}
+			T(-v) & = T(-1\cdot v)  \\
+			      & = -1 \cdot T(v) \\
+			      & = -T(v)
+		\end{align*}
+	\end{flushleft}
+\end{proof}
+
+\subsubsection{Kernel and Image of Linear Maps}\label{subsubsec-ker-im-linear-maps}
+
+\begin{definition}\label{def-kernel-linear-map}
+	The kernel of a linear transformation $T:\mathcal{V}\to\mathcal{W}$ is
+	described by the set
+	\begin{equation}
+		\fker{T}=\left\{v\in\mathcal{V}\setbuild T(v)=0\right\}
+	\end{equation}
+\end{definition}
+
+\begin{definition}\label{def-image-linear-map}
+	The image of a linear transformation $T:\mathcal{V}\to\mathcal{W}$ is
+	described by the set\footnote{This is essentially the same definition as the
+		image for generic maps as described in \pref{equation}{eq-image} of
+		\pref{definition}{def-image-preimage}.}
+	\begin{equation}
+		\fim{T}=\left\{T(v)\setbuild v\in\mathcal{V}\right\}
+	\end{equation}
+\end{definition}
+
+\begin{exm}\label{exm-zero-map}
+	The zero map $T:\mathcal{V}\to\mathcal{W}$ is defined as $T(v)=0$. It's a
+	linear transformation since
+	\begin{enumerate}
+		\item $T(v+w)=0=0+0=T(v)+T(w)$ for all $v,w\in\mathcal{V}$
+		\item $T(\lambda\cdot v)=0$ using the same arguments as shown in
+		      \pref{theorem}{thm-linear-map-properties}
+	\end{enumerate}
+	The kernel of the zero map is $\fker{T}=\mathcal{V}$ by its own definition.
+	The image of the zero map is the singleton $\fim{T}=\{0\}$.
+\end{exm}
+
+\begin{exm}\label{exm-identity-map}
+	The identity map $I:\mathcal{V}\to\mathcal{V}$ is defined as $I(v)=v$. It's a
+	linear transformation since
+	\begin{enumerate}
+		\item $I(v+w)=v+w=I(v)+I(w)$ for all $v,w\in\mathcal{V}$
+		\item $I(\lambda\cdot v)=\lambda\cdot v = \lambda\cdot I(v)$ for all
+		      $\lambda\in\mathcal{F}$
+	\end{enumerate}
+	The kernel of the identity map is $\fker{T}=\{0\}$ by its own definition.
+	The image of the zero map is the singleton $\fim{T}=\mathcal{V}$.
+\end{exm}
+
+\begin{exm}
+	Using the linear transformation from \pref{example}{exm-derivative-map},
+	the kernel and image of $p(x)\mapsto p^\prime(x)$ are
+	\begin{align*}
+		\fker{T} & =\left\{p(x)\setbuild \deg(p(x))=0\right\} \\
+		\fim{T}  & =\mathbb{R}[x]_{\leq2}
+	\end{align*}
+	all constant polynomials and the range of $T$, respectively. As for
+	\pref{example}{exm-matrix-map}, the kernel is the solution of the homogeneous system
+	of linear equations:
+	\begin{align*}
+		\fker{T} & =\left\{\begin{pmatrix}
+			x \\ y
+		\end{pmatrix}\in\mathbb{R}^2\setbuild\begin{pmatrix}
+			1 & 2  \\
+			0 & -1
+		\end{pmatrix}\begin{pmatrix}
+			x \\ y
+		\end{pmatrix}=\begin{pmatrix}
+			0 \\ 0
+		\end{pmatrix}\right\} \\
+		         & =\left\{\begin{pmatrix}
+			x \\ y
+		\end{pmatrix}\in\mathbb{R}^2\setbuild
+		\begin{pmatrix}
+			x+2y \\ -y
+		\end{pmatrix}=\begin{pmatrix}
+			0 \\ 0
+		\end{pmatrix}\right\}                                                                                                \\
+		         & =\left\{\begin{pmatrix}
+			0 \\ 0
+		\end{pmatrix}\right\}
+	\end{align*}
+	As for the image of this linear map we have that
+	\begin{align*}
+		\fim{T} & =\left\{\begin{pmatrix}
+			z \\ w
+		\end{pmatrix}\in\mathbb{R}^2\setbuild\text{there exists}\begin{pmatrix}
+			x \\ y
+		\end{pmatrix}\text{s.t.}\begin{pmatrix}
+			1 & 2  \\
+			0 & -1
+		\end{pmatrix}\begin{pmatrix}
+			x \\ y
+		\end{pmatrix}=\begin{pmatrix}
+			z \\ w
+		\end{pmatrix}\right\} \\
+		        & =\left\{\begin{pmatrix}
+			z \\ w
+		\end{pmatrix}\in\mathbb{R}^2\right\}                                                                                                                                                 \\
+		        & =\mathbb{R}^2
+	\end{align*}
+	where this system has a solution \textit{iff} $\frank(A)=\frank(A^*)=2$ as is
+	described in the first statement of \pref{theorem}{thm-rank}, so for any
+	$\inlinematrix{z\\w}$ there is going to be a solution which solves this system.
+\end{exm}
+
+\begin{exm}\label{exm-linear-map-2d-projection}
+	So far we haven't discussed many examples related to geometry in this lecture.
+	But one interesting linear transformation is
+	\begin{equation}
+		T:\mathbb{R}^3\to\mathbb{R}^3,
+		\begin{pmatrix}
+			x \\ y \\ z
+		\end{pmatrix}\mapsto
+		\begin{pmatrix}
+			x \\ y \\ 0
+		\end{pmatrix}
+	\end{equation}
+	which is called the projection onto the $xy$-plane. Here the geometric
+	interpretation of the kernel is that of the $z$-axis:
+	\begin{equation*}
+		\fker{T}=\left\{\begin{pmatrix}
+			0 \\ 0 \\ z
+		\end{pmatrix}\setbuild z\in\mathbb{R}\right\}
+	\end{equation*}
+	In the same fashion we can see from the illustration that the image describes
+	the $xy$-plane:
+	\begin{equation*}
+		\fim{T}=\left\{\begin{pmatrix}
+			x \\ y \\ 0
+		\end{pmatrix}\setbuild x,y\in\mathbb{R}\right\}
+	\end{equation*}
+\end{exm}
+
+\begin{exm}\label{exm-linear-map-yz-reflection}
+	Another interesting linear transformation with an geometric interpretation
+	is given by
+	\begin{equation}
+		T:\mathbb{R}^3\to\mathbb{R}^3,
+		\begin{pmatrix}
+			x \\ y \\ z
+		\end{pmatrix}\mapsto
+		\begin{pmatrix}
+			-x \\ y \\ z
+		\end{pmatrix}
+	\end{equation}
+	that reflects a point in space with respect to the $yz$-plane. Note that the
+	only points that can be mirrored to the origin is the origin itself. Therefore
+	the kernel becomes
+	\begin{equation*}
+		\fker{T}=\left\{\begin{pmatrix}
+			0 \\ 0 \\ 0
+		\end{pmatrix}\right\}
+	\end{equation*}
+	Likewise, every point is a reflection of its image. Hence,
+	\begin{equation*}
+		\fim{T}=\mathbb{R}^3
+	\end{equation*}
+\end{exm}
+
+\begin{exm}\label{exm-linear-map-rotation}
+	Finally, another useful linear map is defined by
+	\begin{equation}
+		T:\mathbb{R}^2\to\mathbb{R}^2,
+		\begin{pmatrix}
+			x \\ y
+		\end{pmatrix}\mapsto
+		\begin{pmatrix}
+			x\cos(\theta)-y\sin(\theta) \\
+			x\sin(\theta)+y\cos(\theta)
+		\end{pmatrix}
+	\end{equation}
+	where $\theta\in[0,2\pi]$. This linear transformation can also be written as
+	\begin{equation}
+		T\begin{pmatrix}
+			x \\ y
+		\end{pmatrix}=\begin{pmatrix}
+			\cos(\theta) & -\sin(\theta) \\
+			\sin(\theta) & \cos(\theta)
+		\end{pmatrix}\begin{pmatrix}
+			x \\ y
+		\end{pmatrix}
+	\end{equation}
+	Note that by \pref{theorem}{exm-matrix-map} we have already a proof that this
+	is indeed a linear transformation. In general, this transformation rotates a
+	vector $\inlinematrix{x\\y}$ counterclockwise by $\theta$ degrees. As for the
+	kernel and image, it should be pretty obvious by now that they can be found as
+	\begin{align*}
+		\fker{T} & =\left\{\begin{pmatrix}
+			0 \\ 0
+		\end{pmatrix}\right\} \\
+		\fim{T}  & =\mathbb{R}^2
+	\end{align*}
+\end{exm}
+
+\begin{rem}
+	Observe that if $T$ is a linear map, then every component of $T(v)$ is a linear
+	combination of the components of $v$. Turns out that this statement is already
+	hinting at our next theorem.
+\end{rem}
+
+\begin{thm}\label{thm-kernel-image-subspace}
+	Let $T:\mathcal{V}\to\mathcal{W}$ be a linear transformation. Then
+	\begin{enumerate}
+		\item $\fker{T}$ is a subspace of $\mathcal{V}$
+		\item $\fim{T}$ is a subspace of $\mathcal{W}$
+		\item $T$ is injective \textit{iff} $\fker{T}=\{0\}$
+		\item $T$ is surjective \textit{iff} $\fim{T}=\mathcal{W}$\footnote{This is
+			      not really part of this theorem since this its a definition but for the sake
+			      of completeness it has been mentioned here on more time.}
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-kernel-image-subspace}.
+	\begin{flushleft}
+		\textbf{Statement 1}: By \pref{theorem}{thm-supspace} it suffices to show
+		that the kernel is not empty, and that it is closed under addition and
+		multiplication by a scalar. From \pref{theorem}{thm-linear-map-properties}
+		we already know that the kernel is not empty since $0\in\fker{T}$.
+		\begin{itemize}
+			\item If $u,v\in\fker{T}$, then $T(u)=T(v)=0$. Because
+			      $T$ is a linear transformation we can use the operation of addition
+			      property to show that
+			      \begin{equation*}
+				      T(u+v)=T(u)+T(v)=0+0=0\implies (u+v)\in\fker{T}
+			      \end{equation*}
+			\item Likewise, if $v\in\fker{T}$ and $T(v)=0$, then
+			      \begin{equation*}
+				      T(\lambda\cdot v)=\lambda\cdot T(v) = \lambda\cdot 0 = 0 \implies (\lambda\cdot v)\in\fker{T}
+			      \end{equation*}
+			      for all $\lambda\in\mathcal{F}$.
+		\end{itemize}
+	\end{flushleft}
+	\begin{flushleft}
+		\textbf{Statement 2}: Since $T$ is linear we know that it follows from
+		\pref{theorem}{thm-linear-map-properties} that $0=T(0)\in\fim{T}$.
+		\begin{itemize}
+			\item If $w_1,w_2\in\fim{T}$ then there exists $u_1,u_2\in\mathcal{V}$
+			      s.t. $T(u_1)=w_1$ and $T(u_2)=w_2$. By being a linear transformation
+			      we can show that
+			      \begin{equation*}
+				      w_1+w_2=T(u_1)+T(u_2)=T(u_1+u_2)\implies T(u_1+u_2)\in\fim{T}
+			      \end{equation*}
+			\item Let $w\in\fim{T}$ s.t. $w=T(u)$ and $\lambda\in\mathcal{F}$, then
+			      by the property of scalar multiplication we have that
+			      \begin{equation*}
+				      \lambda\cdot w=\lambda\cdot T(u)=T(\lambda\cdot u) \implies T(\lambda\cdot u)\in\fim{T}
+			      \end{equation*}
+		\end{itemize}
+	\end{flushleft}
+	\begin{flushleft}
+		\textbf{Statement 3}:
+		\begin{flushleft}
+			\proofright: Assume that $T$ is an injective function. Then by
+			\pref{definition}{def-injective}
+			\begin{equation*}
+				T(u)=T(v)\implies u=v
+			\end{equation*}
+			Let $v\in\fker{T}$, then $T(v)=0=T(0)$ by \pref{theorem}{thm-linear-map-properties}.
+			Since $T$ is injective and a linear transformation it follows that $v=0$.
+			Therefore, the kernel is trivial.
+		\end{flushleft}
+		\begin{flushleft}
+			\proofleft: Let $\fker{T}=\{0\}$. Take $u,v\in\mathcal{V}$ s.t.
+			$T(u)=T(v)$. Then
+			\begin{equation*}
+				T(u-v)=T(u+(-v))=T(u)+T(-v)=T(u)-T(v)=0
+			\end{equation*}
+			From $0=T(u-v)\in\fker{T}$ follows that $u-v=0 \implies u=v$. Hence,
+			$T$ is an injective function.
+		\end{flushleft}
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-linear-map-span}
+	Let $T:\mathcal{V}\to\mathcal{W}$ be a linear transformation. If
+	$\{v_1,v_2,\dots,v_n\}$ spans $\mathcal{V}$, then $\{T(v_1),T(v_2),\dots,T(v_n)\}$
+	spans $\fim{T}\subseteq\mathcal{W}$.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-linear-map-span}.
+	\begin{flushleft}
+		Let $T(v)\in\fim{T}$. Since $\{v_1,v_2,\dots,v_n\}$ spans $\mathcal{V}$,
+		we can write $v$ as a linear combination:
+		\begin{equation*}
+			v = \lambda_1 v_1 + \lambda_2 v_2 + \cdots + \lambda_n v_n
+		\end{equation*}
+		Using the properties of $T$ being a linear transformation it follow that
+		\begin{align*}
+			T(v) & =T(\lambda_1 v_1 + \lambda_2 v_2 + \cdots + \lambda_n v_n)       \\
+			     & =T(\lambda_1 v_1) + T(\lambda_2 v_2) + \cdots + T(\lambda_n v_n) \\
+			     & =\lambda_1T(v_1) + \lambda_2T( v_2) + \cdots + \lambda_nT(v_n)
+		\end{align*}
+		and we are done.
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}
+	Let $T:\mathcal{M}_2(\mathbb{R})\to\mathbb{R}[x]_{\leq2}$ where
+	\begin{equation*}
+		T\begin{pmatrix}
+			a & b \\ c & d
+		\end{pmatrix}=(a+b)+(c+2d)x+(2c+4d)x^2
+	\end{equation*}
+	It is left to the reader to verify that this function is a linear map. As for
+	the kernel we can see that
+	\begin{align*}
+		\fker{T} & =\left\{\begin{pmatrix}
+			a & b \\ c & d
+		\end{pmatrix}\setbuild a+b=0 \land c+2d=0\right\}      \\
+		         & =\left\{\begin{pmatrix}
+			a & -a \\ c & -\frac{c}{2}
+		\end{pmatrix}\right\}                                  \\
+		         & =\fspan\left\{\begin{pmatrix}
+			1 & -1 \\ 0 & 0
+		\end{pmatrix},\begin{pmatrix}
+			0 & 0 \\ 1 & -\frac{1}{2}
+		\end{pmatrix}\right\}
+	\end{align*}
+	The two elements in the span are linearly independent; therefore this is
+	also a basis for the kernel. In this instance we can also observe that
+	$\dim(\fker{T})=2$. By the previous \pref{theorem}{thm-linear-map-span} we
+	can find the image of $T$ by using the canonical basis of the domain and mapping
+	the elements to $\mathcal{W}=\mathbb{R}[x]_{\leq2}$:
+	\begin{align*}
+		\mathcal{B}_{\fker{T}} & =\left\{
+		\begin{pmatrix}
+			1 & 0 \\ 0 & 0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 1 \\ 0 & 0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 0 \\ 1 & 0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 0 \\ 0 & 1
+		\end{pmatrix}
+		\right\}                                                                         \\
+		                       & \implies \fspan\left\{1,1,x+2x^2,2x+4x^2\right\}        \\
+		                       & \implies \mathcal{B}_{\fim{T}} =\left\{1,x+2x^2\right\}
+	\end{align*}
+	From this we can see that $\dim(\fim{T})=2$. While we are at it, not that
+	\begin{equation*}
+		\dim(\mathcal{M}_2(\mathbb{R}))=\dim(\fker{T})+\dim(\fim{T})=4
+	\end{equation*}
+	adds up to the dimension of the domain of the linear transformation.
+\end{exm}
+
+\begin{definition}\label{def-rank-of-linear-map}
+	The rank of a linear map $T$ is defined by
+	\begin{equation}
+		\frank(T)=\dim(\fim{T})
+	\end{equation}
+\end{definition}
+
+\begin{thm}\label{thm-linear-map-matrix-relations}
+	Let $A\in\mathcal{M}_{m \times n}(\mathcal{F})$. Define
+	\begin{align*}
+		T: & \mathcal{F}^m\to\mathcal{F}^m \\
+		   & T(v)=Av
+	\end{align*}
+	Then
+	\begin{enumerate}
+		\item $T$ is linear (proved in \pref{example}{exm-matrix-map}) \label{thm-linear-map-matrix-relations:1}
+		\item $\fim{T}=\fcol(A)$\label{thm-linear-map-matrix-relations:2}
+		\item $\frank(T)=\frank(A)$\label{thm-linear-map-matrix-relations:3}
+		\item $\fker{T}=\fnull(A)$\label{thm-linear-map-matrix-relations:4}
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-linear-map-matrix-relations}.
+	\begin{flushleft}
+		\textbf{Statement 2}: Let
+		\begin{equation*}
+			\mathcal{E}_{\mathcal{F}^n}=
+			\left\{e_1, e_2, \dots, e_n\right\}=
+			\left\{
+			\begin{pmatrix}
+				1 \\ 0 \\ 0 \\ \vdots \\ 0
+			\end{pmatrix},
+			\begin{pmatrix}
+				0 \\ 1 \\ 0 \\ \vdots \\ 0
+			\end{pmatrix},
+			\dots,
+			\begin{pmatrix}
+				0 \\ 0 \\ \vdots \\ 0 \\ 1
+			\end{pmatrix}
+			\right\}
+		\end{equation*}
+		be the standard basis of the domain space. Then by \pref{theorem}{thm-linear-map-span}
+		the set
+		\begin{equation*}
+			\left\{T(e_1),T(e_2),\dots,T(e_n)\right\}
+		\end{equation*}
+		spans the image. These transformations map the elements to the $j$'th column
+		of $A$:
+		\begin{align*}
+			T(e_1) & =Ae_1=\begin{pmatrix}
+				a_{11} & a_{12} & \cdots & a_{1n} \\
+				a_{21} & a_{22} & \cdots & a_{2n} \\
+				\vdots & \vdots & \ddots & \vdots \\
+				a_{m1} & a_{m2} & \cdots & a_{mn}
+			\end{pmatrix}\begin{pmatrix}
+				1 \\ 0 \\ 0 \\ \vdots \\ 0
+			\end{pmatrix}=\begin{pmatrix}
+				a_{11} \\ a_{21} \\ \vdots \\ a_{m1}
+			\end{pmatrix} \\
+			T(e_2) & =Ae_2=\begin{pmatrix}
+				a_{11} & a_{12} & \cdots & a_{1n} \\
+				a_{21} & a_{22} & \cdots & a_{2n} \\
+				\vdots & \vdots & \ddots & \vdots \\
+				a_{m1} & a_{m2} & \cdots & a_{mn}
+			\end{pmatrix}\begin{pmatrix}
+				0 \\ 1 \\ 0 \\ \vdots \\ 0
+			\end{pmatrix}=\begin{pmatrix}
+				a_{12} \\ a_{22} \\ \vdots \\ a_{m2}
+			\end{pmatrix} \\
+			       & \vdots                                                                                   \\
+			T(e_n) & =Ae_n=\begin{pmatrix}
+				a_{11} & a_{12} & \cdots & a_{1n} \\
+				a_{21} & a_{22} & \cdots & a_{2n} \\
+				\vdots & \vdots & \ddots & \vdots \\
+				a_{m1} & a_{m2} & \cdots & a_{mn}
+			\end{pmatrix}\begin{pmatrix}
+				0 \\ 0 \\ \vdots \\ 0 \\ 1
+			\end{pmatrix}=\begin{pmatrix}
+				a_{1n} \\ a_{2n} \\ \vdots \\ a_{mn}
+			\end{pmatrix}
+		\end{align*}
+		Therefore by induction, $\fim{T}=\fcol(A)$.
+	\end{flushleft}
+	\begin{flushleft}
+		\textbf{Statement 3}: Based on previous result we can can show that
+		\begin{align*}
+			\frank(T) & =\dim(\fim{T})  &  & \text{\pref{definition}{def-rank-of-linear-map})}                  \\
+			          & =\dim(\fcol(A)) &  & \text{statement (\hyperref[thm-linear-map-matrix-relations:2]{2})} \\
+			          & =\dim(\frow(A)) &  & \text{\pref{corollary}{crl-dim-row-col}}                           \\
+			          & =\frank(A)      &  & \text{\pref{theorem}{thm-dim-row-rank}}
+		\end{align*}
+	\end{flushleft}
+	\begin{flushleft}
+		\textbf{Statement 4}: By definition of the kernel and null space we know
+		it automatically follows that
+		\begin{align*}
+			\fker{T} & =\left\{v\in\mathcal{F}^n\setbuild T(v)=0\right\} \\
+			         & =\left\{v\setbuild Av=0\right\}                   \\
+			         & =\fnull(A)
+		\end{align*}
+	\end{flushleft}
+\end{proof}
+
+\subsubsection{The Rank-Nullity Theorem revised}\label{subsec-rank-nullity-theorem-revised}
+
+\begin{thm}\label{thm-rank-nullity-theorem-alt}
+	Let $Ax=0$ be a homogeneous system of linear equations in $n$ unknowns.
+	Then the Rank-Nullity Theorem for matrices can be rewritten as a linear
+	transformation $T:\mathcal{F}^n\to\mathcal{F}^m,v\mapsto Av$ and
+	\begin{align}
+		n                                   & = \underbrace{\frank(A)}_{\frank(T)} + \dim(\fnull(A))\nonumber \\
+		\Leftrightarrow \dim(\mathcal{F}^n) & = \dim(\fim{T}) + \dim(\fker{T})                                \\
+		\Leftrightarrow \dim(\mathcal{V})   & = \dim(\fim{T}) + \dim(\fker{T})
+	\end{align}
+	This theorem used the results of \pref{theorem}{thm-linear-map-matrix-relations}.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-rank-nullity-theorem-alt}.
+	\begin{flushleft}
+		Denote $n=\dim(\mathcal{V})$ and $k=\dim(\fker{T})$. If we can show that
+		$n-k=\dim(\fim{T})$ then this would prove the theorem.
+	\end{flushleft}
+	\begin{flushleft}
+		Let $\{v_1,v_2,\dots,v_k\}$ be a basis for $\fker{T}$ by \pref{theorem}{thm-kernel-image-subspace}.
+		Additionally, by \pref{theorem}{thm-dimension-properties}, statement 5,
+		we can complete this set to form a basis for the entire space $\mathcal{V}$,
+		\textit{i.e.} $\{v_1,v_2,\dots,v_k,v_{k+1},\dots,v_n\}$. We know that
+		$T(v_1)=T(v_2)=\cdots=T(v_k)=0$. Therefore,
+		\begin{equation*}
+			\left\{T(v_1),T(v_2),\dots,T(v_k),T(v_{k+1}),\dots,T(v_n)\right\}
+		\end{equation*}
+		spans the image by \pref{theorem}{thm-linear-map-span}. But since the first
+		$k$ elements don't contribute anything, it is not a minimal spanning set
+		unless we exclude these elements, so
+		\begin{equation*}
+			\left\{T(v_{k+1}),\dots,T(v_n)\right\}.
+		\end{equation*}
+		Then by linearity of $T$ it follows that
+		\begin{align*}
+			0 & =\lambda_{k+1}T(v_{k+1})+\lambda_{k+2}T(v_{k+2})+\cdots+\lambda_nT(v_n) \\
+			  & =T(\lambda_{k+1}v_{k+1})+T(\lambda_{k+2}v_{k+2})+\cdots+T(\lambda_nv_n) \\
+			  & =T(\lambda_{k+1}v_{k+1}\lambda_{k+2}v_{k+2}+\cdots+\lambda_nv_n)
+		\end{align*}
+		which implies
+		\begin{equation*}
+			\left(\lambda_{k+1}v_{k+1}\lambda_{k+2}v_{k+2}+\cdots+\lambda_nv_n\right)\in\fker{T}
+		\end{equation*}
+		Therefore these elements can be written as a linear combination of $\{v_1,v_2,\dots,v_k\}$:
+		\begin{equation*}
+			\lambda_1v_1+\cdots\lambda_kv_k=\lambda_{k+1}v_{k+1}+\cdots+\lambda_nv_n
+		\end{equation*}
+		for some $\lambda_1,\lambda_2,\dots,\lambda_k\in\mathcal{F}$. When we move
+		the right-hand side of this equation to the right-hand side we get
+		\begin{equation*}
+			\lambda_1v_1+\cdots\lambda_kv_k-\lambda_{k+1}v_{k+1}-\cdots-\lambda_nv_n=0
+		\end{equation*}
+		which in turn implies that $\lambda_k=\lambda_{k+1}=\cdots=\lambda_n=0$ because
+		the linear combination of $v_1,v_2,\dots,v_n\in\mathcal{V}$ (that is equal to
+		zero) only contains elements of the basis of $\mathcal{V}$. So,
+		$\left\{T(v_{k+1}),\dots,T(v_n)\right\}$ is also linearly independent, and
+		forms a basis for the image of $T$ by \pref{theorem}{thm-vector-base-properties}
+		with $n-k$ vectors.
+	\end{flushleft}
+\end{proof}
+
+\begin{crl}\label{crl-bijective-linear-map}
+	If $T:\mathcal{V}\to\mathcal{W}$ is a bijective linear map, then
+	\begin{equation}
+		\dim(\mathcal{V})=\dim(\mathcal{W})
+	\end{equation}
+\end{crl}
+
+\begin{proof}
+	Of \pref{corollary}{crl-bijective-linear-map}.
+	\begin{flushleft}
+		By \pref{theorem}{thm-kernel-image-subspace}, if $T$ is bijective then
+		\begin{enumerate}
+			\item $T$ is injective \textit{iff} the kernel is trivial
+			\item $T$ is surjective \textit{iff} that the image is equal to the range
+		\end{enumerate}
+		Hence,
+		\begin{align*}
+			\dim(\mathcal{V}) & +\dim(\underbrace{\fker{T}}_{\{0\}})+\dim(\underbrace{\fim{T}}_{\mathcal{W}}) &  & \text{\pref{theorem}{thm-rank-nullity-theorem-alt}} \\
+			                  & =\dim(\mathcal{W})                                                            &  & \text{\pref{theorem}{thm-kernel-image-subspace}}
+		\end{align*}
+	\end{flushleft}
+\end{proof}
+
+\begin{crl}\label{crl-injective-surjective-linear-map}
+	If $\dim(\mathcal{V})=\dim(\mathcal{W})$ and $T:\mathcal{V}\to\mathcal{W}$ is
+	a linear transformation, then $T$ is injective \textit{iff} $T$ is surjective.
+\end{crl}
+
+\begin{proof}
+	Of \pref{corollary}{crl-injective-surjective-linear-map}.
+	\begin{flushleft}
+		\proofright: If $T$ is injective, then the kernel is trivial by
+		\pref{theorem}{thm-kernel-image-subspace}. Therefore the dimension of the kernel
+		is zero. Thus, by \pref{theorem}{thm-rank-nullity-theorem-alt} it follows
+		that $\dim(\mathcal{W})=\dim(\mathcal{V})=\dim(\fim{T})$. Hence, $T$
+		is surjective by statement 4 of \pref{theorem}{thm-kernel-image-subspace}.
+	\end{flushleft}
+	\begin{flushleft}
+		\proofleft: If $T$ is surjective, then $\dim(\mathcal{W})=\dim(\fim{T})$
+		and by the assumption of this theorem, $\dim(\mathcal{V})=\dim(\mathcal{W})$.
+		Then again the it follows from the rank-nullity theorem that the kernel is
+		trivial. Thus, by \pref{theorem}{thm-kernel-image-subspace}, $T$ is injective.
+	\end{flushleft}
+\end{proof}
+
+\subsubsection{Matrix Representation of Linear Maps}\label{subsubsec-matrix-rep-linear-maps}
+
+\begin{thm}\label{thm-unique-bijective-linear-map}
+	Let $\mathcal{V}$ and $\mathcal{W}$ be vector spaces over the field $\mathcal{F}$.
+	In addition to that let $\mathcal{B}=\{v_1,\dots,v_n\}$ be a basis for
+	$\mathcal{V}$ and $A=\{w_1,\dots,w_n\}$ be any subset of $\mathcal{W}$. Define
+	\begin{equation*}
+		T(\lambda_1v_1+\cdots+\lambda_nv_n)=\lambda_1w_1\cdots+\lambda_nw_n
+	\end{equation*}
+	be a function from $\mathcal{V}$ to $\mathcal{W}$. Then,
+	\begin{enumerate}
+		\item $T$ is a linear map
+		\item If $A$ is a basis for $\mathcal{W}$, then $T$ is bijective
+		\item $T$ is the unique map s.t. $T(v_i)=w_i$ for all $i\in\{1,\dots,n\}$
+	\end{enumerate}
+\end{thm}
+
+\begin{exm}\label{exm-matrix-rep-linear-map}
+	Let $T:\mathbb{R}^2\to\mathbb{R}^3$ be a linear map s.t.
+	\begin{align*}
+		T\begin{pmatrix}
+			1 \\ 0
+		\end{pmatrix} & =\begin{pmatrix}
+			\sqrt{2} \\ -1 \\ e
+		\end{pmatrix} \\
+		T\begin{pmatrix}
+			0 \\ 1
+		\end{pmatrix} & =\begin{pmatrix}
+			1 \\ \pi \\ 2
+		\end{pmatrix}
+	\end{align*}
+	To find the rule that describes this linear transformation we take a general
+	element of the domain and write it as a linear combination of its the basis.
+	Then we use linearity and the constraints stated above to find $T$ s.t. it
+	enforces these constraints not only on its basis elements, but all elements
+	in general as well:
+	\begin{align*}
+		T\begin{pmatrix}
+			a \\ b
+		\end{pmatrix} & =
+		T\left(a\begin{pmatrix}
+			1 \\ 0
+		\end{pmatrix}+b\begin{pmatrix}
+			0 \\ 1
+		\end{pmatrix}\right)                     \\
+		                             & =aT\begin{pmatrix}
+			1 \\ 0
+		\end{pmatrix}+bT\begin{pmatrix}
+			0 \\ 1
+		\end{pmatrix} \\
+		                             & =a\begin{pmatrix}
+			\sqrt{2} \\ -1 \\ e
+		\end{pmatrix}+b\begin{pmatrix}
+			1 \\ \pi \\ 2
+		\end{pmatrix}   \\
+		                             & =\begin{pmatrix}
+			\sqrt{2}a + b \\
+			-a + \pi b    \\
+			ae +2b
+		\end{pmatrix}                                 \\
+		                             & =\begin{pmatrix}
+			\sqrt{2} & 1   \\
+			-1       & \pi \\
+			e        & 2
+		\end{pmatrix}\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}
+	\end{align*}
+\end{exm}
+
+\begin{rem}
+	Statement 3 of \pref{theorem}{thm-unique-bijective-linear-map} means that if we take
+	a basis $\mathcal{B}$ for $\mathcal{V}$ and define what $T$ does to basis
+	elements, then this fixes $T$ and makes it unique:
+	\begin{equation*}
+		T(\lambda_1v_1+\cdots+\lambda_nv_n)=\lambda_1T(v_1)\cdots+\lambda_nT(v_n)
+	\end{equation*}
+\end{rem}
+
+\begin{proof}
+	Of \pref{theorem}{thm-unique-bijective-linear-map}.
+	\begin{flushleft}
+		\textbf{Statement 1}: Let $u_1,u_2\in\mathcal{V}$ and $\lambda,\mu\in\mathcal{F}$. Then
+		\begin{enumerate}
+			\item Operation of addition:
+			      \begin{align*}
+				      T(u_1+u_2) & =T(\lambda_1v_1+\cdots+\lambda_nv_n+\mu_1v_1+\cdots+\mu_nv_n)    \\
+				                 & =T\big((\lambda_1+\mu_1)v_1+\cdots(\lambda_n+\mu_n)v_n\big)      \\
+				                 & =(\lambda_1+\mu_1)w_1+\cdots+(\lambda_n+\mu_n)w_n                \\
+				                 & =\lambda_1w_1+\cdots+\lambda_nw_n+\mu_1w_1+\cdots+\mu_nw_n       \\
+				                 & =T(\lambda_1v_1+\cdots+\lambda_nv_n)+T(\mu_1v_1+\cdots+\mu_nv_n) \\
+				                 & =T(u_1)+T(u_2)
+			      \end{align*}
+			\item Operation of scalar multiplication:
+			      \begin{align*}
+				      T(\mu u) & =T\big(\mu(\lambda_1v_1+\cdots+\lambda_nv_n)\big) \\
+				               & =T(\mu\lambda_1v_1+\cdots+\mu\lambda_nv_n)        \\
+				               & =\mu\lambda_1w_1+\cdots+\mu\lambda_nw_n           \\
+				               & =\mu(\lambda_1w_1+\cdots+\lambda_nw_n)            \\
+				               & =\mu T(\lambda_1v_1+\cdots+\lambda_nv_n)          \\
+				               & =\mu T(u)
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+	\begin{flushleft}
+		\textbf{Statement 2}: Here we have to prove two things: First, that $T$
+		is injective, and secondly, that $T$ is surjective:
+		\begin{enumerate}
+			\item \textbf{Injectivity}: Let $u\in\fker{T}$. Then
+			      \begin{align*}
+				      T(u) & =0                                   \\
+				           & =T(\lambda_1v_1+\cdots+\lambda_nv_n) \\
+				           & =\lambda_1w_1+\cdots+\lambda_nw_n    \\
+			      \end{align*}
+			      Since $A=\{w_1,\dots,w_n\}$ is supposed to be a basis of $\mathcal{W}$,
+			      they are linearly independent, \textit{i.e.} $\lambda_1=\cdots=\lambda_n=0$.
+			      So, by statement 3 of \pref{theorem}{thm-kernel-image-subspace},
+			      \begin{equation*}
+				      \left(u=0 \implies \fker{T}=\{0\}\right) \Leftrightarrow T \text{ is injective}
+			      \end{equation*}
+			\item \textbf{Surjectivity}: Since $T$ is injective and $\dim(\mathcal{V})=\dim(\mathcal{W})$,
+			      then by \pref{theorem}{crl-injective-surjective-linear-map} $T$ is also
+			      surjective.
+		\end{enumerate}
+	\end{flushleft}
+	\begin{flushleft}
+		\textbf{Statement 3}: If $T(v_i)=w_i$ is linear, then
+		\begin{align*}
+			T(\lambda_1v_1+\cdots+\lambda_nv_n) & =\lambda_1T(v_1)+\cdots+\lambda_nT(v_n) \\
+			                                    & =\lambda_1w_1+\cdots+\lambda_nw_n
+		\end{align*}
+	\end{flushleft}
+\end{proof}
+
+\begin{crl}\label{crl-matrix-rep-linear-map}
+	Any linear map $T:\mathcal{F}^n\to\mathcal{F}^m$ is of the form $T(v)=Av$
+	for some matrix $A\in\mathcal{M}_{m \times n}(\mathcal{F})$.
+\end{crl}
+
+\begin{proof}
+	Of \pref{corollary}{crl-matrix-rep-linear-map}.
+	\begin{flushleft}
+		Let $\mathcal{E}=\{e_1,\dots,e_n\}$ be the canonical basis of $\mathcal{F}^n$.
+		Denote $T(e_i)=w_i$. Since $T$ is linear we can write the linear combination
+		of a general element $v$ as
+		\begin{align*}
+			T(v) & =T(\lambda_1e_1+\cdots+\lambda_ne_n)                                              \\
+			     & =\lambda_1T(e_1)+\cdots+\lambda_nT(e_n)                                           \\
+			     & =\lambda_1w_1+\cdots+\lambda_nw_n                                                 \\
+			     & =\lambda_1\begin{pmatrix}
+				w_{11} \\ w_{21} \\ \vdots \\ w_{m1}
+			\end{pmatrix}+\cdots+\lambda_n\begin{pmatrix}
+				w_{1n} \\ w_{2n} \\ \vdots \\ w_{mn}
+			\end{pmatrix} \\
+			     & =\begin{pmatrix}
+				w_{11} & w_{12} & \cdots & w_{1n} \\
+				w_{21} & w_{22} & \dots  & w_{2n} \\
+				\vdots & \vdots & \ddots & \cdots \\
+				w_{m1} & w_{m2} & \cdots & w_{mn}
+			\end{pmatrix}\begin{pmatrix}
+				\lambda_1 \\
+				\lambda_2 \\
+				\cdots    \\
+				\lambda_n
+			\end{pmatrix}                           \\
+			     & =Av
+		\end{align*}
+		where the columns of $A$ are composed of all the $w_i$'s and the rows in $v$
+		are given by coefficients $\lambda_i$. The idea to this proof is the general
+		case of \pref{example}{exm-matrix-rep-linear-map}.
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}
+	Given a linear map $T:\mathbb{R}[x]_{\leq3}\to\mathbb{R}[x]_{\leq3}$, we want to find a matrix
+	$A$ such that in some sense $T(v)=Av$\footnote{By the way, a map from a space
+		to itself is often called a \textit{linear operator}.}. In this example, let
+	$T(p(x))=p^\prime(x)$. Then choose the canonical basis as a basis for the domain
+	denoted by $\mathcal{E}=\{e_1,\dots,e_4\}=\{x^3,x^2,x,1\}$. A general polynomial
+	of this vector space is of the form
+	\begin{align*}
+		p(x)                       & =ax^3 + bx^2 + cx + d        \\
+		\implies[p(x)]_\mathcal{E} & =\begin{pmatrix}
+			a \\ b \\ c \\ d
+		\end{pmatrix} \\
+	\end{align*}
+	Since the linear transformation is the first derivative of $p(x)$ we get
+	\begin{align*}
+		p^\prime(x)                        & =3ax^2+2bx + c               \\
+		\implies [p^\prime(x)]_\mathcal{E} & =\begin{pmatrix}
+			0 \\ 3a \\ 2b \\ c
+		\end{pmatrix}
+	\end{align*}
+	What we are looking for is the matrix representation of $T$ such that
+	\begin{equation*}
+		A\begin{pmatrix}
+			a \\ b \\ c \\ d
+		\end{pmatrix}=\begin{pmatrix}
+			0 \\ 3a \\ 2b \\ c
+		\end{pmatrix}\implies A=\begin{pmatrix}
+			0 & 0 & 0 & 0 \\
+			3 & 0 & 0 & 0 \\
+			0 & 2 & 0 & 0 \\
+			0 & 0 & 1 & 0
+		\end{pmatrix}
+	\end{equation*}
+	The equation above is generally denoted by $[T]_\mathcal{E}$ and satisfies
+	\begin{equation*}
+		[T]_\mathcal{E}[v]_\mathcal{E}=[T(v)]_\mathcal{E}
+	\end{equation*}
+	In this case it was rather easy to find $A$, but this is not always the case.
+	Therefore we are interested in a general approach for finding such matrices.
+	In general we can use the in \pref{remark}{rem-matrix-rep-linear-operator}
+	described procedure to find the coefficients of $A$ by
+	\begin{align*}
+		T(e_1) & =0x^3 + 3x^2 + 0x + 0\cdot1 \\
+		T(e_2) & =0x^3 + 0x^2 + 2x + 0\cdot1 \\
+		T(e_3) & =0x^3 + 0x^2 + 0x + 1\cdot1 \\
+		T(e_4) & =0x^3 + 0x^2 + 0x + 0\cdot1
+	\end{align*}
+	Transposing these coefficients yields
+	\begin{align*}
+		[T]_\mathcal{E}=\begin{pmatrix}
+			0 & 0 & 0 & 0 \\
+			3 & 0 & 0 & 0 \\
+			0 & 2 & 0 & 0 \\
+			0 & 0 & 1 & 0
+		\end{pmatrix}
+	\end{align*}
+\end{exm}
+
+\begin{rem}\label{rem-matrix-rep-linear-operator}
+	Let $T:\mathcal{V}\to\mathcal{V}$ be a linear operator and $\mathcal{E}=\{e_1,\dots,e_n\}$
+	be a basis for $\mathcal{V}$. Then the transposed coefficients of this system of equations
+	\begin{align*}
+		T(e_1) & =a_{11}e_1+a_{21}e_2+\cdots+a_{n1}e_n \\
+		T(e_i) & =a_{12}e_1+a_{22}e_2+\cdots+a_{n2}e_n \\
+		       & \vdots                                \\
+		T(e_i) & =a_{1i}e_1+a_{2i}e_2+\cdots+a_{ni}e_n \\
+		       & \vdots                                \\
+		T(e_n) & =a_{1n}e_1+a_{2n}e_2+\cdots+a_{nn}e_n
+	\end{align*}
+	is is the matrix representation of $T$ such that
+	\begin{equation*}
+		A=\begin{pmatrix}
+			a_{11} & a_{12} & \cdots & a_{1n} \\
+			a_{21} & a_{22} & \cdots & a_{2n} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			a_{n1} & a_{n2} & \cdots & a_{nn}
+		\end{pmatrix}=[T]_\mathcal{E}
+	\end{equation*}
+\end{rem}
+
+\begin{exm}
+	Let $T:\mathcal{M}_2({\mathbb{R}})\to\mathbb{R}[x]_{\leq2}$ be a linear map
+	defined by
+	\begin{equation*}
+		T\begin{pmatrix}
+			a & b \\
+			c & d
+		\end{pmatrix}=(a+2b+3c+4d)x^2 + (2a-b+c)x + (3a-2b+c+2d)
+	\end{equation*}
+	Then let $\mathcal{V}\defines\mathcal{M}_2({\mathbb{R}})$ be the domain with basis
+	\begin{equation*}
+		\mathcal{E}_\mathcal{V}=\left\{
+		\begin{pmatrix}
+			1 & 0 \\
+			0 & 0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 1 \\
+			0 & 0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 0 \\
+			1 & 0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 & 0 \\
+			0 & 1
+		\end{pmatrix}
+		\right\}=\{e_1,\dots,e_4\}
+	\end{equation*}
+	and let $\mathcal{W}\defines\mathbb{R}[x]_{\leq2}$ be the range of $T$ with basis
+	\begin{equation*}
+		\mathcal{F}_\mathcal{W}=\left\{
+		x^2,x,1
+		\right\}=\{f_1,f_2,f_3\}
+	\end{equation*}
+	Then $T$ written in terms of $\mathcal{E}_\mathcal{V}$ is
+	\begin{align*}
+		T(e_1) & =  x^2 + 2x + 3 \\
+		T(e_2) & = 2x^2 -  x - 2 \\
+		T(e_3) & = 3x^2 +  x + 1 \\
+		T(e_4) & = 4x^2      + 2
+	\end{align*}
+	Then in \textit{resemblance} of \pref{remark}{rem-matrix-rep-linear-operator}
+	we can write matrix representation of $T$ as
+	\begin{equation*}
+		[T]_\mathcal{E}^\mathcal{F}=\begin{pmatrix}
+			1 & 2  & 3 & 4 \\
+			2 & -1 & 1 & 0 \\
+			3 & -2 & 1 & 2
+		\end{pmatrix}
+	\end{equation*}
+\end{exm}
+
+\begin{thm}\label{thm-matrix-rep-linear-operator}
+	Let $T:\mathcal{V}\to\mathcal{W}$ be a linear map and
+	\begin{equation*}
+		\mathcal{E}\defines\mathcal{B}_\mathcal{V}=\{e_1,\dots,e_n\}
+	\end{equation*}
+	be a basis for $\mathcal{V}$, and
+	\begin{equation*}
+		\mathcal{F}\defines\mathcal{B}_\mathcal{W}=\{f_1,\dots,f_m\}
+	\end{equation*}
+	be a basis for $\mathcal{W}$.
+	Then the transposed coefficients of this system of equations
+	\begin{equation}
+		T(e_i)=a_{1i}f_1+a_{2i}f_{2}+\cdots+a_{mi}f_m
+	\end{equation}
+	is is the matrix representation of $T$ for all $i\in\{1,\dots,n\}$ such that
+	\begin{equation}
+		A=\begin{pmatrix}
+			a_{11} & a_{12} & \cdots & a_{1n} \\
+			a_{21} & a_{22} & \cdots & a_{2n} \\
+			\vdots & \vdots & \ddots & \vdots \\
+			a_{m1} & a_{m2} & \cdots & a_{mn}
+		\end{pmatrix}=[T]_\mathcal{E}
+	\end{equation}
+	that satisfies the equation
+	\begin{equation}
+		[T]_\mathcal{E}^\mathcal{F}[v]_\mathcal{E}=[T(v)]_\mathcal{F}
+	\end{equation}
+\end{thm}
+
+\subsubsection{Operations on Linear Maps}\label{subsubsec-operations-on-linear-maps}
+
+\begin{definition}\label{def-linear-maps-operations}
+	Let $T:\mathcal{V}\to\mathcal{W}$ and $S:\mathcal{V}\to\mathcal{W}$
+	be two linear maps, and $\lambda\in\mathcal{F}$. Then,
+	\begin{enumerate}
+		\item $(T+S)(v)=T(v)+S(v)$
+		\item $(\lambda\cdot T)(v)=\lambda\cdot T(v)$
+	\end{enumerate}
+\end{definition}
+
+\begin{exm}\label{exm-linear-maps-operations}
+	Let $T\inlinematrix{a\\b}=\inlinematrix{1&2\\0&-1}\inlinematrix{a\\b}$,
+	and $S\inlinematrix{a\\b}=\inlinematrix{0&3\\1&-1}\inlinematrix{a\\b}$. Then
+	\begin{align*}
+		(T+S)\begin{pmatrix}
+			a \\ b
+		\end{pmatrix} & =T\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}+S\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}                                                     \\
+		                                 & =\begin{pmatrix}
+			1 & 2  \\
+			0 & -1
+		\end{pmatrix}\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}+\begin{pmatrix}
+			0 & 3  \\
+			1 & -1
+		\end{pmatrix}\begin{pmatrix}
+			a \\ b
+		\end{pmatrix} \\
+		                                 & =\left(
+		\begin{pmatrix}
+			1 & 2  \\
+			0 & -1
+		\end{pmatrix}+
+		\begin{pmatrix}
+			0 & 3  \\
+			1 & -1
+		\end{pmatrix}
+		\right)\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}                                                                                                                \\
+		                                 & =\begin{pmatrix}
+			1 & 5  \\
+			1 & -2
+		\end{pmatrix}\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}
+	\end{align*}
+\end{exm}
+
+\begin{definition}\label{def-composition-of-linear-maps}
+	Let $T:\mathcal{W}\to\mathcal{U}$ and $S:\mathcal{V}\to\mathcal{W}$
+	be two linear maps. Then
+	\begin{equation}
+		(TS)(v)=T(S(v))
+	\end{equation}
+	is called the composition of $T$ and $S$\footnote{Although this uses the
+		notation for multiplication it's not the same, which is why it sometimes
+		written as $(T \circ S)(v)$ to avoid confusion.}.
+	\begin{figure}[ht!]
+		\centering
+		\begin{tikzcd}
+			\mathcal{V}
+			\arrow[rrr, "S"]
+			\arrow[rrrrrr, "T \circ S", bend left] &  &  &
+			\mathcal{W}
+			\arrow[rrr, "T"] &  &  &
+			\mathcal{U}
+		\end{tikzcd}
+		\caption{Commutative diagram of linear compositions}
+		\label{commutative-diagram:linear-composition}
+	\end{figure}
+\end{definition}
+
+\begin{thm}\label{thm-composition-is-linear}
+	The composition of $T$ and $S$ in \pref{definition}{def-composition-of-linear-maps}
+	is a linear map.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-composition-is-linear}.
+	\begin{flushleft}
+		We use \pref{definition}{def-composition-of-linear-maps} to show that the
+		composition of $T$ and $S$ is also a linear map at every step of this proof.
+		\begin{enumerate}
+			\item Operation of Addition:
+			      \begin{align*}
+				      (T \circ S)(u+v) & = T(S(u+v))                       \\
+				                       & = T(S(u)+S(v))                    \\
+				                       & = T(S(u)) + T(S(v))               \\
+				                       & = (T \circ S)(u) + (T \circ S)(v)
+			      \end{align*}
+			\item Operation of scalar multiplication:
+			      \begin{align*}
+				      (T \circ S)(\lambda \cdot v) & = T(S(\lambda \cdot v))        \\
+				                                   & = T(\lambda \cdot S(v))        \\
+				                                   & = \lambda \cdot T(S(v))        \\
+				                                   & = \lambda \cdot (T \circ S)(v)
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}\label{exm-linear-composition:1}
+	We use the linear maps from \pref{example}{exm-linear-maps-operations} to
+	find a composition of linear maps:
+	\begin{align*}
+		(T \circ S)\begin{pmatrix}
+			a \\ b
+		\end{pmatrix} & =T\left(S\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}\right)                          \\
+		                                       & =T\Bigg(\begin{pmatrix}
+			0 & 3  \\
+			1 & -1
+		\end{pmatrix}\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}\Bigg) \\
+		                                       & =\begin{pmatrix}
+			1 & 2  \\
+			0 & -1
+		\end{pmatrix}\Bigg(
+		\begin{pmatrix}
+			0 & 3  \\
+			1 & -1
+		\end{pmatrix}\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}
+		\Bigg)                                                                                                        \\
+		                                       & =\Bigg(
+		\begin{pmatrix}
+			1 & 2  \\
+			0 & -1
+		\end{pmatrix}
+		\begin{pmatrix}
+			1 & 2  \\
+			0 & -1
+		\end{pmatrix}
+		\Bigg)\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}                                                                             \\
+		                                       & = \begin{pmatrix}
+			2  & 1 \\
+			-1 & 1
+		\end{pmatrix}\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}
+	\end{align*}
+	So, the composition of linear maps seems to be compatible with matrix multiplication.
+	Very similar to this example we can also find this composition in reverse order, \textit{i.e.}
+	\begin{equation*}
+		(S \circ T)\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}=\begin{pmatrix}
+			0 & -3 \\
+			1 & 3
+		\end{pmatrix}\begin{pmatrix}
+			a \\ b
+		\end{pmatrix}
+	\end{equation*}
+	Note that the composition of two linear maps is not commutative, since we just
+	found an example where $(T \circ S)(v) \neq (S \circ T)(v)$). From
+	\pref{figure}{commutative-diagram:linear-composition} we can even see that a
+	composition in the other direction doesn't even have to be defined in the first
+	place if $\mathcal{V}\neq\mathcal{U}$, and even that is often not sufficient.
+\end{exm}
+
+\begin{exm}\label{exm-linear-composition:2}
+	Take for instance the following linear functions:
+	\begin{align*}
+		 & S\begin{pmatrix}
+			a & b \\
+			c & d
+		\end{pmatrix}\defines\begin{pmatrix}
+			a+b \\
+			0   \\
+			c+d \\
+			0
+		\end{pmatrix}            \\
+		 & T\begin{pmatrix}
+			\alpha \\
+			\beta  \\
+			\gamma \\
+			\delta
+		\end{pmatrix}\defines(\beta+\delta)x^3 + \delta x^2 + \beta
+	\end{align*}
+	See \pref{figure}{commutative-diagram:linear-composition:2} for the commutative
+	diagrams of these linear maps.
+	\begin{figure}[ht!]
+		\centering
+		\begin{tikzcd}
+			\mathcal{M}_2(\mathbb{R})
+			\arrow[rrr, "S"]
+			\arrow[rrrrrr, "T \circ S", bend left] &  &  &
+			\mathbb{R}^4
+			\arrow[rrr, "T"] &  &  &
+			\mathbb{R}[x]_{\leq3}
+		\end{tikzcd}
+		\caption{Commutative diagram where $T \circ S$ is the only defined composition}
+		\label{commutative-diagram:linear-composition:2}
+	\end{figure}
+	\begin{equation*}
+		(T \circ S)\begin{pmatrix}
+			a & b \\
+			c & d
+		\end{pmatrix}=T\begin{pmatrix}
+			a+b \\
+			0   \\
+			c+d \\
+			0
+		\end{pmatrix}=0
+	\end{equation*}
+	Here, the composition $T \circ S$ is the zero map, \textit{i.e.} it maps all
+	domain elements to zero. The other direction, as we can see here, is not defined
+	since $S$ cannot accept polynomials as arguments.
+\end{exm}
+
+\begin{exm}\label{exm-linear-composition:3}
+	Take for instance the following linear functions:\footnote{See also \pref{example}{exm-linear-map-2d-projection}
+		and \pref{example}{exm-linear-map-yz-reflection} where we first encountered
+		these transformations.}
+	\begin{align*}
+		 & S\begin{pmatrix}
+			x \\ y \\ z
+		\end{pmatrix}\defines\begin{pmatrix}
+			x \\ y \\ 0
+		\end{pmatrix} \\
+		 & T\begin{pmatrix}
+			x \\ y \\ z
+		\end{pmatrix}\defines\begin{pmatrix}
+			-x \\ y \\ z
+		\end{pmatrix}
+	\end{align*}
+	See \pref{figure}{commutative-diagram:linear-composition:3} for the commutative
+	diagrams of these linear maps.
+	\begin{figure}[ht!]
+		\centering
+		\begin{tikzcd}
+			\mathbb{R}^3
+			\arrow[rrr, "S"]
+			\arrow[rrrrrr, "T \circ S", bend left] &  &  &
+			\mathbb{R}^3
+			\arrow[rrr, "T"] &  &  &
+			\mathbb{R}^3
+			\arrow[llllll, "S \circ T", bend left]
+		\end{tikzcd}
+		\caption{Commutative diagram where the composition in both directions is defined}
+		\label{commutative-diagram:linear-composition:3}
+	\end{figure}
+	\begin{itemize}
+		\item LTR:
+		      \begin{equation*}
+			      (T \circ S)\begin{pmatrix}
+				      x \\ y \\ z
+			      \end{pmatrix}=T\Bigg(S\begin{pmatrix}
+				      x \\ y \\ z
+			      \end{pmatrix}\Bigg)
+			      =T\begin{pmatrix}
+				      x \\ y \\ 0
+			      \end{pmatrix}
+			      =\begin{pmatrix}
+				      -x \\ y \\ 0
+			      \end{pmatrix}
+		      \end{equation*}
+		\item RTL:
+		      \begin{equation*}
+			      (S \circ T)\begin{pmatrix}
+				      x \\ y \\ z
+			      \end{pmatrix}=S\Bigg(T\begin{pmatrix}
+				      x \\ y \\ z
+			      \end{pmatrix}\Bigg)
+			      =S\begin{pmatrix}
+				      -x \\ y \\ z
+			      \end{pmatrix}
+			      =\begin{pmatrix}
+				      -x \\ y \\ 0
+			      \end{pmatrix}
+		      \end{equation*}
+	\end{itemize}
+	In this example, $T \circ S$ and $S \circ T$ coincide.
+\end{exm}
+
+\begin{definition}\label{def-inverse-map}
+	Let $T:\mathcal{V}\to\mathcal{V}$ be an bijective linear operator. As a function,
+	$T$ has its inverse function defined, denoted by $T^{-1}$. The inverse satisfies
+	\begin{equation}
+		T \circ T^{-1} = T^{-1} \circ T = I
+	\end{equation}
+	where $I$ is the \hyperref[exm-identity-map]{identity map}.
+\end{definition}
+
+\begin{thm}\label{thm-linear-inverse-map}
+	The inverse function $T^{-1}$ (when defined) is a linear map.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-linear-inverse-map}.
+	\begin{flushleft}
+		Since $T$ is bijective, we can denote $v_1=T(w_1)$ and $v_2=T(w_2)$ as
+		unique pairs.
+		\begin{enumerate}
+			\item Operation of Addition:
+			      \begin{align*}
+				      T^{-1}(v_1 + v_2) & = T^{-1}(T(w_1) + T(w_2))   &  & \text{denotation}                                    \\
+				                        & = T^{-1}(T(w_1 + w_2))      &  & \text{\pref{definition}{def-linear-maps-operations}} \\
+				                        & = w_1 + w_2                 &  & \text{\pref{definition}{def-inverse-map}}            \\
+				                        & = T^{-1}(v_1) + T^{-1}(v_2)
+			      \end{align*}
+			\item Operation of scalar multiplication:
+			      \begin{align*}
+				      T^{-1}(\lambda \cdot v) & = T^{-1}(\lambda \cdot T(w)) &  & \text{denotation}                                    \\
+				                              & = T^{-1}(T(\lambda \cdot w)) &  & \text{\pref{definition}{def-linear-maps-operations}} \\
+				                              & = \lambda \cdot w            &  & \text{\pref{definition}{def-inverse-map}}            \\
+				                              & = \lambda \cdot T^{-1}(v)
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}\label{exm-linear-inverse-map}
+	\begin{flushleft}
+		Take the linear map from \pref{example}{exm-linear-map-yz-reflection} that projects
+		an element with respect to the $yz$-plane. Then the inverse function is defined and
+		can be found as $T=T^{-1}$ since $T$ is bijective.
+	\end{flushleft}
+	\begin{flushleft}
+		We previously discussed in \pref{example}{exm-linear-map-2d-projection} the linear
+		map the projects an element to the $xy$-plane. This linear map, however, is not
+		surjective. Therefore it does not have an inverse function.
+	\end{flushleft}
+	\begin{flushleft}
+		Let $T(v)=Av$ where $A=\inlinematrix{1&2\\0&-1}$.Then $T^{-1}$ is represented by
+		$A^{-1}$ (since $A$ is invertible) and can be found as $A^{-1}=\inlinematrix{1&2\\0&-1}$.
+		Coincidently, in this example we also have that $A^{-1}=A$. One can verify that
+		this is indeed the inverse function since
+		\begin{equation*}
+			T\begin{pmatrix}
+				a \\ b
+			\end{pmatrix}=\begin{pmatrix}
+				a+2b \\
+				-b
+			\end{pmatrix}\implies
+			T^{-1}\begin{pmatrix}
+				a+2b \\
+				-b
+			\end{pmatrix}=\begin{pmatrix}
+				a \\ b
+			\end{pmatrix}
+		\end{equation*}
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-linear-operator-invertible}
+	If $T:\mathcal{V}\to\mathcal{V}$ is a linear operator, then $T$ is invertible
+	\textit{iff} $T$ is injective or $T$ is surjective.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-linear-operator-invertible}.
+	\begin{flushleft}
+		Since $T$ is a linear operator we know that the dimension of the domain
+		and the range are the same. By \pref{corollary}{crl-injective-surjective-linear-map}
+		$T$ is injective \textit{iff} $T$ is surjective. So by
+		\pref{definition}{def-inverse-map} $T$ is invertible.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-invertible-composition}
+	If $T$ and $S$ are invertible, then $T \circ S$ are invertible, and
+	\begin{equation}
+		(T \circ S)^{-1} = S^{-1} \circ T^{-1}
+	\end{equation}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-invertible-composition}.
+	\begin{flushleft}
+		To complete this proof we just need to show that $S^{-1} \circ T^{-1}$
+		is the inverse of $(T \circ S)^{-1}$ (\textit{cf.} \pref{figure}{commutative-diagram:linear-composition:4}):
+		\begin{align*}
+			(T \circ S)(S^{-1} \circ T^{-1})(v)
+			 & = (T \circ S)(S^{-1}(T^{-1}(v))) &  & \text{\pref{definition}{def-composition-of-linear-maps}} \\
+			 & = T(S(S^{-1}(T^{-1}(v))))        &  & \text{\pref{definition}{def-composition-of-linear-maps}} \\
+			 & = T(T^{-1}(v))                   &  & \text{\pref{definition}{def-inverse-map}}                \\
+			 & = I(v)                           &  & \text{\pref{definition}{def-inverse-map}}                \\
+			 & = v
+		\end{align*}
+		Hence, $(T \circ S)^{-1} = S^{-1} \circ T^{-1}$.
+		\begin{figure}[ht!]
+			\centering
+			\begin{tikzcd}
+				\mathcal{V}
+				\arrow[rrr, "S"']
+				\arrow[rrrrrr, "T \circ S", bend left] &  &  &
+				\mathcal{V} \arrow[rrr, "T"]
+				\arrow[lll, "S^{-1}", bend right] &  &  &
+				\mathcal{V}
+				\arrow[llllll, "(T \circ S)^{-1}", bend left]
+				\arrow[lll, "T^{-1}"', bend left]
+			\end{tikzcd}
+			\caption{Commutative diagram that illustrates this proof}
+			\label{commutative-diagram:linear-composition:4}
+		\end{figure}
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-linear-operators-matrix-rep}
+	Let $T,S:\mathcal{V}\to\mathcal{W}$ be linear maps. Take $\mathcal{E}$
+	and $\mathcal{F}$ as bases for $\mathcal{V}$ and $\mathcal{W}$, respectively.
+	\begin{enumerate}
+		\item $[T+S]_\mathcal{E}^\mathcal{F}=[T]_\mathcal{E}^\mathcal{F}+[S]_\mathcal{E}^\mathcal{F}$
+		\item $[\lambda \cdot T]_\mathcal{E}^\mathcal{F}=\lambda \cdot [T]_\mathcal{E}^\mathcal{F}$
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-linear-operators-matrix-rep}.
+	\begin{flushleft}
+		For any $v\in\mathcal{V}$ we can show the following:
+		\begin{enumerate}
+			\item Operation of addition:
+			      \begin{align*}
+				      [T+S]_\mathcal{E}^\mathcal{F}[v]_\mathcal{E}
+				       & = [(T+S)(v)]_\mathcal{F}                                                                  &  & \text{\pref{theorem}{thm-matrix-rep-linear-operator}}   \\
+				       & = [T(v)+S(v)]_\mathcal{F}                                                                 &  & \text{\pref{definition}{def-linear-maps-operations}}    \\
+				       & = [T(v)]_\mathcal{F} + [S(v)]_\mathcal{F}                                                 &  & \text{\pref{theorem}{thm-coordinate-vector-properties}} \\
+				       & = [T]_\mathcal{E}^\mathcal{F}[v]_\mathcal{E} + [S]_\mathcal{E}^\mathcal{F}[v]_\mathcal{E} &  & \text{\pref{theorem}{thm-matrix-rep-linear-operator}}   \\
+				       & = \left([T]_\mathcal{E}^\mathcal{F} + [S]_\mathcal{E}^\mathcal{F}\right) [v]_\mathcal{E}  &  & \text{matrix distributivity}                            \\
+			      \end{align*}
+			\item Operation of scalar multiplication:
+			      \begin{align*}
+				      [\lambda \cdot T]_\mathcal{E}^\mathcal{F}[v]_\mathcal{E}
+				       & = [\lambda \cdot T(v)]_\mathcal{F}                         &  & \text{\pref{theorem}{thm-matrix-rep-linear-operator}}      \\
+				       & = \lambda \cdot [T(v)]_\mathcal{F}                         &  & \text{\pref{definition}{thm-coordinate-vector-properties}} \\
+				       & = \lambda \cdot [T]_\mathcal{E}^\mathcal{F}[v]_\mathcal{E} &  & \text{\pref{theorem}{thm-matrix-rep-linear-operator}}
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-composition-linear-operators-matrix-rep}
+	Let $S:\mathcal{V}\to\mathcal{U}$ and $T:\mathcal{U}\to\mathcal{W}$ be two
+	linear maps. Take $\mathcal{B}_\mathcal{V}\defines\mathcal{E}$,
+	$\mathcal{B}_\mathcal{U}\defines\mathcal{F}$, and
+	$\mathcal{B}_\mathcal{W}\defines\mathcal{G}$ as bases for these vector spaces.
+	Then,
+	\begin{equation}
+		[T \circ S]_\mathcal{E}^\mathcal{G}=[T]_\mathcal{F}^\mathcal{G}\cdot[S]_\mathcal{E}^\mathcal{F}
+	\end{equation}
+	\begin{figure}[ht!]
+		\centering
+		\begin{tikzcd}
+			\mathcal{V}
+			\arrow[rr, "S"]
+			\arrow[d, no head, dotted]
+			\arrow[rrrr, "T \circ S", bend left] &  &
+			\mathcal{U}
+			\arrow[rr, "T"]
+			\arrow[d, no head, dotted] &  &
+			\mathcal{W}
+			\arrow[d, no head, dotted] \\
+			\mathcal{E}                                                                                 &  & \mathcal{F}                                            &  & \mathcal{G}
+		\end{tikzcd}
+		\caption{Commutative diagram for \pref{theorem}{thm-composition-linear-operators-matrix-rep}}
+		\label{commutative-diagram:linear-composition:5}
+	\end{figure}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-composition-linear-operators-matrix-rep}.
+	\begin{flushleft}
+		For any $v\in\mathcal{V}$ we have
+		\begin{align*}
+			[T \circ S]_\mathcal{E}^\mathcal{G}[v]_\mathcal{E}
+			 & = [(T \circ S)(v)]_\mathcal{G}                                           &  & \text{\pref{theorem}{thm-matrix-rep-linear-operator}} \\
+			 & = [T(S(v))]_\mathcal{G}                                                  &  & \text{\pref{definition}{def-linear-maps-operations}}  \\
+			 & = [T]_\mathcal{F}^\mathcal{G}\cdot [S(v)]_\mathcal{F}                    &  & \text{\pref{theorem}{thm-matrix-rep-linear-operator}} \\
+			 & = [T]_\mathcal{F}^\mathcal{G} [S]_\mathcal{E}^\mathcal{F}[v]_\mathcal{E} &  & \text{\pref{theorem}{thm-matrix-rep-linear-operator}}
+		\end{align*}
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-identity-linear-operator-matrix-rep}
+	Let $I:\mathcal{V}\to\mathcal{V}$ be the identity map and $\mathcal{E}$ be a
+	basis for $\mathcal{V}$. Then,
+	\begin{equation}
+		[I]_\mathcal{E} = I
+	\end{equation}
+\end{thm}
+
+\begin{thm}\label{thm-inverse-linear-operator-matrix-rep}
+	Let $T:\mathcal{V}\to\mathcal{V}$ be an invertible linear operator, and let
+	$\mathcal{E}$ be a basis for $\mathcal{V}$. Then,
+	\begin{equation}
+		[T^{-1}]_\mathcal{E}=[T]_\mathcal{E}^{-1}
+	\end{equation}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-inverse-linear-operator-matrix-rep}.
+	\begin{flushleft}
+		\begin{align*}
+			[T]_\mathcal{E} \cdot  [T^{-1}]_\mathcal{E}
+			 & = [T \cdot T^{-1}]_\mathcal{E} &  & \text{\pref{theorem}{thm-composition-linear-operators-matrix-rep}} \\
+			 & = [I]_\mathcal{E}              &  & \text{\pref{definition}{def-inverse-map}}                          \\
+			 & = I                            &  & \text{\pref{theorem}{thm-identity-linear-operator-matrix-rep}}
+		\end{align*}
+	\end{flushleft}
+\end{proof}

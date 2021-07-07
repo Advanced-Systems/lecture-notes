@@ -1,0 +1,348 @@
+\subsection{Matrices}\label{subsec-matrices}
+
+\begin{definition}\label{def-matrices}
+	A matrix is a set of $m \times n$ quantities arranged in a rectangular array
+	of $m$ rows and $n$ column. Matrices are commonly denoted by a single capital
+	letter and are of the form
+	\begin{equation}\label{eq-general-matrix}
+		A = \begin{pmatrix}
+			a_{11} & a_{12} & a_{13} & \cdots & a_{1n} \\
+			a_{21} & a_{22} & a_{23} & \cdots & a_{2n} \\
+			\vdots & \vdots & \vdots & \ddots & \vdots \\
+			a_{m1} & a_{m2} & a_{m3} & \cdots & a_{mn}
+		\end{pmatrix}=[a_{ij}]\in\mathcal{M}_{m \times n}(\mathcal{F})
+	\end{equation}
+	The individual quantities $a_{jk}$ are called the elements of the matrix
+	in a field $\mathcal{F}$ \cite[p.297]{stephenson1998}.
+\end{definition}
+
+\begin{exm}
+	For instance, an matrix over the complex field could look like that:
+	\begin{equation*}
+		B = \begin{pmatrix}
+			1        & 0 & \pi \\
+			\sqrt{2} & i & -3
+		\end{pmatrix}
+	\end{equation*}
+\end{exm}
+
+\begin{exm}
+	In this case, $B\in\mathcal{M}_{2 \times 3}(\mathbb{C})$ is a matrix with
+	two rows ($m = 2$) and three columns ($n = 3$).
+\end{exm}
+
+\begin{definition}\label{def-size-of-matrix}
+	The size of a matrix is denoted by two numbers, namely its rows and
+	column.
+\end{definition}
+
+\begin{exm}
+	In case of the previously discussed matrix $B$, the size is $2 \times 3$.
+\end{exm}
+
+\begin{definition}\label{def-square-matrix}
+	If $m = n$, then $A\in\mathcal{M}_n(\mathcal{F})$ is called a square matrix.
+\end{definition}
+
+\begin{exm}
+	The square matrix $C\in\mathcal{M}_2(\mathcal{F})$ is of the form
+	\begin{equation*}
+		C = \begin{pmatrix}
+			c_{11} & c_{12} \\
+			c_{21} & c_{22}
+		\end{pmatrix}
+	\end{equation*}
+\end{exm}
+
+\begin{definition}\label{def-main-diagonal}
+	The main diagonal of a matrix consists of all elements where the
+	row and column indices are the same.
+\end{definition}
+
+\begin{exm}
+	Using the matrix $C$ from the previous example, the main diagonal of $C$
+	consists of the two elements $c_{11}$ and $c_{22}$.
+\end{exm}
+
+\begin{definition}\label{def-zero-matrix}
+	The zero matrix is an matrix where all elements are equal to zero.
+\end{definition}
+
+\begin{definition}\label{def-identity-matrix}
+	The identity matrix is a square matrix where all elements of the main diagonal
+	are equal to one, and all non-diagonal elements are equal to zero.
+\end{definition}
+
+\begin{exm}
+	If $A\in\mathcal{M}_3(\mathbb{R})$, then
+	\begin{equation*}
+		I_3 = \begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix}
+	\end{equation*}
+	is the corresponding identity matrix. The identity matrix is usually denoted
+	by the letter $I$.
+\end{exm}
+
+\begin{definition}\label{def-diagonal-matrix}
+	The diagonal matrix is the matrix where all off-diagonal elements are equal
+	to zero, i.e. $a_{ij}=0$ for all $i \neq j$.
+\end{definition}
+
+\begin{exm}
+	By this definition it is evident that the general identity matrix $I_n$ is
+	also a diagonal matrix.
+\end{exm}
+
+\begin{definition}\label{def-scalar-matrix}
+	The scalar matrix is a special case of the diagonal matrix, adding the condition
+	that $a_{ii} = \lambda\in\mathcal{F}$ for all $i$.
+\end{definition}
+
+\begin{exm}
+	If $D\in\mathcal{M}_4(\mathbb{C})$ is a scalar matrix with $\lambda = i$,
+	then
+	\begin{equation*}
+		D = \begin{pmatrix}
+			i & 0 & 0 & 0 \\
+			0 & i & 0 & 0 \\
+			0 & 0 & i & 0 \\
+			0 & 0 & 0 & i
+		\end{pmatrix}
+	\end{equation*}
+\end{exm}
+
+\begin{definition}\label{def-transposed-matrix}
+	The transposed matrix reverses the role of the columns and rows in a matrix
+	and is denoted by $(A^T)_{ij}=(A)_{ji}$.
+\end{definition}
+
+\begin{exm}
+	If $E\in\mathcal{M}_{3 \times 2}(\mathcal{F})$ and
+	\begin{equation*}
+		E = \begin{pmatrix}
+			a_{11} & a_{12} \\
+			a_{21} & a_{22} \\
+			a_{31} & a_{32}
+		\end{pmatrix}
+	\end{equation*}
+	then
+	\begin{equation*}
+		E^T = \begin{pmatrix}
+			a_{11} & a_{21} & a_{31} \\
+			a_{12} & a_{22} & a_{32} \\
+		\end{pmatrix}
+	\end{equation*}
+	is the transposed matrix of $E$.
+\end{exm}
+
+\begin{definition}\label{def-symmetric-matrix}
+	The symmetric matrix is a matrix that is invariant under the transpose operation
+	and satisfies the requirement that $A=A^T$.
+\end{definition}
+
+\begin{exm}
+	The matrix
+	\begin{equation*}
+		F = \begin{pmatrix}
+			1 & 2 & 3 \\
+			2 & 4 & 8 \\
+			3 & 8 & 9
+		\end{pmatrix}
+	\end{equation*}
+	is symmetric. Note that every symmetric matrix is a square matrix, but not
+	every square matrix is necessarily a symmetric matrix.
+\end{exm}
+
+\begin{definition}\label{def-matrix-addition}
+	The sum of two matrices $A$ and $B$ (assuming both have the same dimension)
+	is defined by
+	\begin{align*}
+		 & + : \mathcal{M}_{n \times m}(\mathcal{F}) \times
+		\mathcal{M}_{n \times m}(\mathcal{F}) \rightarrow
+		\mathcal{M}_{n \times m}(\mathcal{F}),              \\
+		 & (A,B) \mapsto A + B\defines[a_{ij} + b_{ij}]
+	\end{align*}
+\end{definition}
+
+\begin{exm}
+	\begin{equation*}
+		A + B = \begin{pmatrix}
+			1  & -2 & 3  \\
+			0  & 1  & -4 \\
+			-5 & 6  & 7
+		\end{pmatrix} +
+		\begin{pmatrix}
+			6 & -2 & 8 \\
+			1 & -5 & 4 \\
+			7 & 3  & 9
+		\end{pmatrix} =
+		\begin{pmatrix}
+			7 & -4 & 11 \\
+			1 & -3 & 0  \\
+			2 & 9  & 16
+		\end{pmatrix}
+	\end{equation*}
+\end{exm}
+
+\begin{definition}\label{def-scalar-multiplication}
+	The multiplication of a matrix $A$ with a scalar $\lambda$ is defined by
+	\begin{align*}
+		 & \cdot : \mathcal{F} \times \mathcal{M}_{n \times m}(\mathcal{F})
+		\rightarrow \mathcal{M}_{n \times m}(\mathcal{F}),                  \\
+		 & (\lambda, A) \mapsto \lambda \cdot A\defines[\lambda a_{ij}]
+	\end{align*}
+\end{definition}
+
+\begin{exm}
+	\begin{equation*}
+		\lambda \cdot A = 2 \cdot \begin{pmatrix}
+			1 & 2 \\
+			3 & 0
+		\end{pmatrix} =
+		\begin{pmatrix}
+			2 & 4 \\
+			6 & 0
+		\end{pmatrix}
+	\end{equation*}
+\end{exm}
+
+\begin{definition}\label{def-matrix-multiplication}
+	The product of two matrices $A$ and $B$ is defined by
+	\begin{align*}
+		 & * : \mathcal{M}_{n \times m}(\mathcal{F}) \times
+		\mathcal{M}_{m \times s}(\mathcal{F}) \rightarrow
+		\mathcal{M}_{n \times s}(\mathcal{F}),                                              \\
+		 & (A,B) \mapsto A \cdot B\defines[c_{ij}], c_{ij}\defines\sum_{k=1}^m a_{ik}b_{kj}
+	\end{align*}
+\end{definition}
+
+\begin{exm}
+	\begin{align*}
+		A * B & = \begin{pmatrix}
+			1 & 2 & 3 \\
+			4 & 5 & 6 \\
+			7 & 8 & 9
+		\end{pmatrix} *
+		\begin{pmatrix}
+			1 & 4 & 7 \\
+			2 & 5 & 8 \\
+			3 & 6 & 9
+		\end{pmatrix}             \\
+		      & = \begin{pmatrix}
+			1+4+9   & 4+10+18  & 7+16+27  \\
+			4+10+18 & 16+25+36 & 28+40+54 \\
+			7+16+27 & 28+40+54 & 49+64+81
+		\end{pmatrix}   \\
+		      & = \begin{pmatrix}
+			14 & 32  & 50  \\
+			32 & 77  & 122 \\
+			50 & 122 & 194
+		\end{pmatrix}
+	\end{align*}
+\end{exm}
+
+\begin{definition}\label{def-skew-symmetric}
+	A matrix is called skew-symmetric if and only if $A=-A^T$
+	\footnote{$a_{ij}=-a_{ji}$ implies $a_{ii}=0$ for all $i$.}.
+\end{definition}
+
+\begin{exm}
+	Given the matrix
+	$G = \inlinematrix{0&-7\\7&0}$, then
+	\begin{align*}
+		-G^T & = -\begin{pmatrix}
+			0 & -7 \\
+			7 & 0
+		\end{pmatrix}^T \\
+		     & = \begin{pmatrix}
+			0  & 7 \\
+			-7 & 0
+		\end{pmatrix}^T  \\
+		     & = \begin{pmatrix}
+			0 & -7 \\
+			7 & 0
+		\end{pmatrix}    \\
+		     & = G
+	\end{align*}
+	satisfies all conditions of a skew-symmetric matrix.
+\end{exm}
+
+\begin{definition}\label{def-matrix-multiplication-shorthand}
+	Let $A\in\mathcal{M}_{n}(\mathcal{F})$. Then we define the following
+	shorthand notation:
+	\begin{equation*}
+		A^n\defines\underbrace{A * A * \cdots * A}_{l\textnormal{-times}}
+	\end{equation*}
+	for $l\in\mathbb{N}$, and $A^0\defines I_n$.
+\end{definition}
+
+\begin{lemma}\label{lemma-matrix-multiplication}
+	Let $A, \hat{A}\in\mathcal{M}_{n\times m}(\mathcal{F})$,
+	$B,\hat{B}\in\mathcal{M}_{m\times l}(\mathcal{F})$ and
+	$C\in\mathcal{M}_{l\times k}(\mathcal{F})$. Then,
+	\begin{enumerate}
+		\item $A * (B * C) = (A * B) * C$               \label{lemma1-matrices:1}
+		\item $(A + \hat{A}) * B = A * B + \hat{A} * B$ \label{lemma1-matrices:2}
+		\item $A * (B + \hat{B}) = A * B + A * \hat{B}$ \label{lemma1-matrices:3}
+		\item $I_n * A = A * I_m = A$                   \label{lemma1-matrices:4}
+	\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+	Of \pref{property}{lemma1-matrices:1}, \pref{lemma}{lemma-matrix-multiplication}.
+	\begin{flushleft}
+		Let $A\in\mathcal{M}_{n\times m}(\mathcal{F}), B\in\mathcal{M}_{m\times l}(\mathcal{F})$,
+		and $C\in\mathcal{M}_{l\times k}(\mathcal{F})$ as well as
+		$[d_{ij}]\defines(A * B) * C$ and $[\hat{d}_{ij}]\defines A * (B * C)$ \cite[p.43]{liesenMehrmann2015}. Then,
+		\begin{align*}
+			d_{ij} & = \sum_{s=1}^l\left(\sum_{t=1}^m a_{it}b_{ts}\right)c_{sj}   \\
+			       & = \sum_{s=1}^l \sum_{t=1}^m (a_{it}b_{ts})c_{sj}             \\
+			       & = \sum_{s=1}^l \sum_{t=1}^m a_{it}(b_{ts}c_{sj})             \\
+			       & = \sum_{t=1}^m a_{it} \left(\sum_{s=1}^l b_{ts}c_{sj}\right) \\
+			       & = \hat{d}_{ij}
+		\end{align*}
+		by using the distributivity and associativity in $\mathcal{F}$ for
+		$1 \leq i \leq n, 1 \leq j \leq k$.
+	\end{flushleft}
+\end{proof}
+
+\begin{proof}
+	Of \pref{property}{lemma1-matrices:2}, \pref{lemma}{lemma-matrix-multiplication}.
+	\begin{flushleft}
+		Let $A,B\in\mathcal{M}_{n\times m}(\mathcal{F}), C\in\mathcal{M}_{m\times l}(\mathcal{F})$,
+		and $[d_{ij}]\defines A * C + B * C$ and $[\hat{d}_{ij}]\defines (A + B) * C$. Then,
+		\begin{align*}
+			d_{ij} & = \sum_{k=1}^m a_{ik}c_{kj} +\sum_{k=1}^m b_{ik}c_{kj} \\
+			       & = \sum_{k=1}^m \left(a_{ik}c_{kj}+b_{ik}c_{kj}\right)  \\
+			       & = \sum_{k=1}^m \left((a_{ik}+b_{ik})c_{kj}\right)      \\
+			       & = \hat{d}_{ij}
+		\end{align*}
+		by using the distributivity in $\mathcal{F}$ for
+		$1 \leq i \leq n, 1 \leq j \leq l$.
+	\end{flushleft}
+\end{proof}
+
+\begin{lemma}\label{lemma-scalar-multiplication}
+	Let $A,B\in\mathcal{M}_{n\times m}(\mathcal{F}), C\in\mathcal{M}_{m\times l}(\mathcal{F})$,
+	and $\lambda,\mu\in\mathcal{F}$. Then,
+	\begin{enumerate}
+		\item $(\lambda \cdot \mu) \cdot A = \lambda \cdot (\mu \cdot A)$
+		\item $(\lambda + \mu) \cdot A = \lambda \cdot A + \mu \cdot A$
+		\item $\lambda \cdot (A + B) = \lambda \cdot A + \lambda \cdot B$
+		\item $(\lambda \cdot A) * C = \lambda \cdot (A * C) = A * (\lambda \cdot C)$
+	\end{enumerate}
+\end{lemma}
+
+\begin{lemma}\label{lemma-transpose-matrices}
+	Let $A,\hat{A}\in\mathcal{M}_{n\times m}(\mathcal{F}), B\in\mathcal{M}_{m\times l}(\mathcal{F})$,
+	and $\lambda\in\mathcal{F}$. Then,
+	\begin{enumerate}
+		\item $(A^T)^T = A$
+		\item $(A + \hat{A})^T = A^T + \hat{A}^T$
+		\item $(\lambda \cdot A)^T = \lambda \cdot A^T$
+		\item $(A * B)^T = B^T \cdot A^T$
+	\end{enumerate}
+\end{lemma}

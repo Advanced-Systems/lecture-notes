@@ -1,0 +1,427 @@
+\subsection{Vector Spaces}\label{subsec-vector-spaces}
+
+\begin{flushleft}
+	From here on, we will drop the arrows above all vectors if we discuss them
+	in a more general sense. The previous notation often indicates vectors in
+	two- or three-dimensional vector spaces and will still be used like that in
+	examples to follow.
+\end{flushleft}
+
+\begin{definition}\label{def-vector-space}
+	A vector space\footnote{Sometimes also called linear spaces.}
+	$(\mathcal{V},+,\cdot)$ is a set $\mathcal{V}$ over a field $\mathcal{F}$
+	that defines the following two operations \footnote{An element in $\mathcal{V}$
+		is called a vector, and an element in $\mathcal{F}$ is called a scalar.}:
+	\begin{align}
+		+     & :\mathcal{V}\times\mathcal{V}\rightarrow\mathcal{V},\quad(v,w)\mapsto v+w\quad\text{(Addition)}\label{def-vector-addition}                                           \\
+		\cdot & :\mathcal{F}\times\mathcal{V}\rightarrow\mathcal{V},\quad(\lambda,v)\mapsto\lambda\cdot v\quad\text{(Scalar Multiplication)}\label{def-vector-scalar-multiplication}
+	\end{align}
+	which in turn satisfy all rules listed down below
+	\cite[p.119]{liesenMehrmann2015}:
+	\begin{enumerate}
+		\item[(V1)] $(\mathcal{V},+)$ is an abelian group
+		\item[(V2)] Furthermore, for all $v,w\in\mathcal{V}$ and $\lambda,\mu\in\mathcal{F}$ apply the axioms:
+			\begin{enumerate}
+				\item[(a)] $\lambda\cdot v\in\mathcal{V}$
+				\item[(b)] $1\cdot v=v$
+				\item[(c)] $\lambda\cdot(v+w)=\lambda\cdot v +\lambda\cdot w$
+				\item[(d)] $(\lambda+\mu)\cdot v=\lambda\cdot v +\mu\cdot v$
+				\item[(e)] $(\lambda\cdot\mu)\cdot v=\lambda\cdot(\mu\cdot v)$
+			\end{enumerate}
+	\end{enumerate}
+\end{definition}
+
+\begin{exm}
+	See below a short list of common vector spaces:
+	\begin{enumerate}
+		\item $\mathbb{R}^n$
+		\item $\mathcal{M}_{m \times n}(\mathbb{R})$
+		\item $\mathcal{F}^n$
+		\item $\mathcal{M}_{m \times n}(\mathcal{F})$
+		\item $\mathcal{F}[x]$
+		\item $\{f:\mathbb{R}\rightarrow\mathbb{R}\}$
+		\item The set of all continuos functions
+		\item The set of all differentiable functions
+	\end{enumerate}
+\end{exm}
+
+\begin{thm}\label{thm-zero-vector}
+	Let $\mathcal{V}$ be a vector space over $\mathcal{F}$. Then,
+	for all $ v \in\mathcal{V}$ and $\lambda\in\mathcal{F}$:
+	\begin{enumerate}
+		\item $0 \cdot v = 0$
+		\item $\lambda\cdot 0 = 0$
+		\item $\lambda\cdot v = 0 \implies \lambda=0 \lor v=0$
+	\end{enumerate}
+\end{thm}
+
+\begin{definition}\label{def-vector-subspace}
+	Let $\mathcal{V}$ be a vector space and $\mathcal{W}$ a subset of $\mathcal{V}$,
+	i.e. $\mathcal{W}\subseteq\mathcal{V}$. Then $\mathcal{W}$ is also a vector
+	subspace if $\mathcal{W}$ is a vector space with respect to the operations
+	from $\mathcal{V}$.
+\end{definition}
+
+\begin{exm}\label{exm-vector-subspaces}
+	Consider the situations described below as examples of vector subspaces:
+	\begin{enumerate}
+		\item Let $\mathcal{W}=\mathcal{F}[x]_{\leq n}$ and $\mathcal{V}=\mathcal{F}[x]$.
+		\item Let $\mathcal{W}$ be the set of all functions subject to the restriction
+		      that $f(1)=0$, and let $\mathcal{V}=\{f:\mathbb{R}\rightarrow\mathbb{R}\}$.
+		\item The trivial subset $\mathcal{W}=\mathcal{V}$.
+		\item Let $\mathcal{W}=\{0\}$, and $\mathcal{V}=\mathcal{F}^n$.
+		\item Let $W=\left\{x\in\mathbb{R}\setbuild\begin{pmatrix}x\\0\\0\end{pmatrix}\right\}$
+		      and $\mathcal{V}=\mathbb{R}^3$.
+		\item Let $W=\left\{x,y\in\mathbb{R}\setbuild\begin{pmatrix}x\\y\\0\end{pmatrix}\right\}$
+		      and $\mathcal{V}=\mathbb{R}^3$.
+	\end{enumerate}
+	In contrast to the previous examples, the list below describes situations in
+	which $\mathcal{W}$ is not a vector subspace:
+	\begin{enumerate}
+		\item Let $\mathcal{W}=\mathcal{F}[x]_n$ and $\mathcal{V}=\mathcal{F}[x]$.
+		\item Let $\mathcal{W}=\mathbb{R}^2$ and $\mathcal{V}=\mathbb{R}^3$
+		\item Let $W=\left\{x,y,z\in\mathbb{Z}\setbuild\begin{pmatrix}x\\y\\z\end{pmatrix}\right\}$
+		      and $\mathcal{V}=\mathbb{R}^3$.
+	\end{enumerate}
+	In the first example of the second list, $\mathcal{W}$ is not a vector subspace
+	because it is not closed under addition. As for the second example, $\mathcal{W}$
+	is not even a subset of $\mathcal{V}$. Finally, in the third example $\mathcal{W}$
+	is not closed under scalar multiplication (since its domain is limited to the
+	integers which is also the reason why $\mathbb{Z}$ is not a field).
+\end{exm}
+
+\begin{exm}\label{exm-vector-subspace}
+	Let $\mathcal{W}=\left\{\begin{pmatrix}x\\y\\z\end{pmatrix}\setbuild x+2y-z=0\right\}$
+	and $\mathcal{V}=\mathbb{R}^3$, so $\mathcal{W}\subseteq\mathbb{R}^3$. Then,
+	\begin{itemize}
+		\item $\begin{pmatrix}0\\0\\0\end{pmatrix}\in\mathcal{W}$
+		\item $\begin{pmatrix}x\\y\\z\end{pmatrix}+\begin{pmatrix}x^\prime\\y^\prime\\z^\prime\end{pmatrix}=\begin{pmatrix}x+x^\prime\\y+y^\prime\\z+z^\prime\end{pmatrix}=[(x+x^\prime)+2(y+y^\prime)-(z+z^\prime)]\in\mathcal{W}$
+		\item $\lambda\begin{pmatrix}x\\y\\z\end{pmatrix}=\begin{pmatrix}\lambda x\\ \lambda y\\ \lambda z\end{pmatrix}=\lambda x + 2 \lambda y - \lambda z = \lambda(x+2y-x)\in\mathcal{W}$
+	\end{itemize}
+	All the other conditions follow for free with the next theorem, but feel free
+	complete the proof without this information.
+\end{exm}
+
+\subsubsection{Vector Subspaces}\label{subsubsec-vector-subspaces}
+
+\begin{thm}\label{thm-supspace}
+	Let $\mathcal{W}$ be a non-empty subset of $\mathcal{V}$ where $\mathcal{V}$
+	is a vector space. Then $\mathcal{W}$ is also a vector subspace if and only
+	if $\mathcal{W}$ is closed under addition and multiplication by a scalar.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-supspace}.
+	\begin{flushleft}
+		\proofright: If $\mathcal{W}$ is already a
+		vector subspace then there is nothing left to prove.
+	\end{flushleft}
+	\begin{flushleft}
+		\proofleft: For any vector $w\in\mathcal{W}$ we know that
+		$0=0\cdot w \in\mathcal{W}$ since $w$ is closed under scalar
+		multiplication. For the same reasons, $-w=-1\cdot w \in\mathcal{W}$.
+		The remaining axioms follow automatically from the ambient vector space
+		$\mathcal{V}$.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-homogeneous-solution-subspace}
+	The solutions of a homogeneous system of linear equations is a subspace.
+	\footnote{The solutions of an inhomogeneous system are not a subspace, since
+		by definition 0 is not a solution to this kind of a system.}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-homogeneous-solution-subspace}.
+	\begin{flushleft}
+		Let $Ax=0$ and $\mathcal{W}$ be the set of solutions that solves this
+		homogeneous system of linear equations.
+		\begin{enumerate}
+			\item[(i)] As noted earlier, in a homogeneous there always exists
+				the trivial solution $0$, therefore $0\in\mathcal{W}$.
+			\item[(ii)] Let $x_1, x_2\in\mathcal{W}$. That immediately implies
+				that $x_1+x_2\in\mathcal{W}$ because $A(x_1+x_2)=Ax_1+Ax_2=0+0=0\in\mathcal{W}$
+			\item[(iii)] Let $x\in\mathcal{W},\lambda\in\mathbb{R}$. Then
+				$A(\lambda x)=\lambda(Ax)=0\implies\lambda\cdot0=0\in\mathcal{W}$.
+		\end{enumerate}
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}
+	Let $\mathcal{V}=\mathcal{M}_{3 \times 3}(\mathbb{R})$ be the ambient vector
+	space. Now suppose we want to create a subspace that contains the matrix
+	$I_3=\inlinematrix{1&0&0\\0&1&0\\0&0&1}$.
+	Then we'd also have to include
+	\begin{itemize}
+		\item $\inlinematrix{0&0&0\\0&0&0\\0&0&0}$ as additive identity matrix
+		\item $\lambda\inlinematrix{1&0&0\\0&1&0\\0&0&1}$ for some $\lambda\in\mathbb{R}$, which will also
+		      ensure closure under addition
+	\end{itemize}
+	To summarize, the smallest possible subspace that includes $I_3$ would then be
+	\begin{equation*}
+		\mathcal{W}=\left\{\lambda\in\mathbb{R}\setbuild\begin{pmatrix}
+			\lambda & 0       & 0       \\
+			0       & \lambda & 0       \\
+			0       & 0       & \lambda
+		\end{pmatrix}\right\}
+	\end{equation*}
+	Now suppose we want to include an another matrix as well, namely
+	$\inlinematrix{0&0&1\\0&1&0\\1&0&0}$.
+	Then the new subspace would look like
+	\begin{equation*}
+		\mathcal{U}=\left\{\lambda,\mu\in\mathbb{R}\setbuild\lambda\begin{pmatrix}
+			1 & 0 & 0 \\
+			0 & 1 & 0 \\
+			0 & 0 & 1
+		\end{pmatrix}+\mu\begin{pmatrix}
+			0 & 0 & 1 \\
+			0 & 1 & 0 \\
+			1 & 0 & 0
+		\end{pmatrix}\right\}
+	\end{equation*}
+\end{exm}
+
+\subsubsection{Intersection of Vector Subspaces}\label{subsubsec-intersection-vector-subspaces}
+
+\begin{thm}\label{thm-intersection-vector-subspace}
+	If $\mathcal{U}$ and $\mathcal{W}$ are vector subspaces of $\mathcal{V}$, then
+	so is their intersection $\mathcal{U}\cap\mathcal{W}$.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-intersection-vector-subspace}.
+	\begin{flushleft}
+		We use \pref{theorem}{thm-supspace} to perform this proof:
+		\begin{enumerate}
+			\item[(i)] Since $\mathcal{U}$ and $\mathcal{W}$ are vector subspaces
+				we know that $0\in\mathcal{U}$ and $0\in\mathcal{W}$. Therefore,
+				$0\in\mathcal{U}\cap\mathcal{W}$.
+			\item[(ii)] Let $v_1,v_2\in\mathcal{U}\cap\mathcal{W}$. Then
+				$v_1,v_2\in\mathcal{U}\implies(v_1+v_2)\in\mathcal{U}$ since $\mathcal{U}$
+				is a vector subspace. For the exact same reason this sum is also going
+				to be in $\mathcal{W}$, thus $(v_1+v_2)\in\mathcal{U}\cap\mathcal{W}$.
+			\item[(iii)] Let $v\in\mathcal{U}\cap\mathcal{W}$ and $\lambda\in\mathcal{F}$.
+				Then $\lambda v\in\mathcal{U}$ and $\lambda v\in\mathcal{W}$, which in
+				turn implies that $\lambda v\in\mathcal{U}\cap\mathcal{W}$.
+		\end{enumerate}
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}\label{exm-intersection-union-subspace}
+	Building on the idea of \pref{theorem}{thm-intersection-vector-subspace},
+	could $\mathcal{U}\cup\mathcal{W}$ be also a candidate for a vector subspace?
+	Suppose we have $\mathcal{V}=\mathbb{R}^2$ as an ambient vector space and
+	$\mathcal{U}=\left\{\lambda\in\mathbb{R}\setbuild\inlinematrix{\lambda\\0}\right\}$
+	together with
+	$\mathcal{W}=\left\{\mu\in\mathbb{R}\setbuild\inlinematrix{0\\\mu}\right\}$.
+	Then $\mathcal{U}\cap\mathcal{W}=\left\{\inlinematrix{0\\0}\right\}$ is a
+	vector subspace, but $\mathcal{U}\cup\mathcal{W}$ is not a vector subspace.
+	For example, the sum
+	$\inlinematrix{1\\0}+\inlinematrix{0\\1}=\inlinematrix{1\\1}\notin\mathcal{U}\cup\mathcal{W}$
+	does not belong to the union even though both terms of the sum belong to
+	$\mathcal{U}$ and $\mathcal{W}$, respectively. So in general it is closure
+	under addition that fails this suspected theorem.
+\end{exm}
+
+\begin{definition}\label{def-sum-of-subsets}
+	Let $\mathcal{U},\mathcal{W}\subseteq\mathcal{V}$ be subsets of the ambient
+	vector space. Then we define the sum of both these subsets as
+	\begin{equation}
+		\mathcal{U}+\mathcal{W}=\left\{
+		u\in\mathcal{U},w\in\mathcal{W}\setbuild u+w
+		\right\}
+	\end{equation}
+\end{definition}
+
+\subsubsection{Sum of Vector Subspaces}\label{subsubsec-sum-subspace}
+
+\begin{thm}\label{thm-sum-subspace}
+	If $\mathcal{U},\mathcal{W}$ are subspaces of $\mathcal{V}$, then so is their
+	sum.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-sum-subspace}.
+	\begin{flushleft}
+		We use \pref{theorem}{thm-supspace}
+		again prove this theorem. Let $u\in\mathcal{U},w\in\mathcal{W}$ and
+		$\lambda\in\mathcal{F}$. Then,
+		\begin{enumerate}
+			\item[(i)] The additive identity $0$ is contained in this sum since
+				\begin{equation*}
+					0_\mathcal{U}+0_\mathcal{W}=0\in\mathcal{U}+\mathcal{W}
+				\end{equation*}
+			\item[(ii)] Since $\mathcal{V}$ is a vector space we can use the fact that
+				\begin{equation*}
+					\lambda(u+w)=\lambda u + \lambda w \in\mathcal{U}+\mathcal{W}
+				\end{equation*}
+			\item[(iii)] Let $u_1,u_2\in\mathcal{U}$ and $w_1,w_2\in\mathcal{W}$. Then,
+				\begin{equation*}
+					(u_1+w_1)+(u_2+w_2)=\left(\underbrace{(u_1+u_2)}_{\in\mathcal{U}}+
+					\underbrace{(w_1+w_2)}_{\in\mathcal{W}}
+					\right)\in\mathcal{U}+\mathcal{W}
+				\end{equation*}
+		\end{enumerate}
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}
+	Take $\mathcal{U}$ and $\mathcal{W}$ from \pref{example}{exm-intersection-union-subspace}.
+	Then the sum
+	\begin{equation*}
+		\mathcal{U}+\mathcal{W}=\left\{
+		\lambda,\mu\in\mathbb{R}\setbuild
+		\begin{pmatrix}
+			\lambda \\0
+		\end{pmatrix}+
+		\begin{pmatrix}
+			0 \\\mu
+		\end{pmatrix}
+		\right\}=\mathbb{R}^2=\mathcal{V}
+	\end{equation*}
+	is also a vector subspace.
+\end{exm}
+
+\begin{exm}
+	Let $\mathcal{V}=\mathbb{R}^3$ the ambient vector space and
+	$\mathcal{U}=\left\{\lambda\in\mathbb{R}\setbuild\inlinematrix{\lambda\\0\\0}\right\}$
+	and
+	$\mathcal{W}=\left\{\mu\in\mathbb{R}\setbuild\inlinematrix{0\\\mu\\0}\right\}$.
+	Then their sum
+	\begin{equation*}
+		\mathcal{U}+\mathcal{W}=\left\{
+		\lambda,\mu\in\mathbb{R}\setbuild
+		\begin{pmatrix}
+			\lambda \\\mu\\0
+		\end{pmatrix}
+		\right\}
+	\end{equation*}
+	is also a vector subspace.
+\end{exm}
+
+\subsubsection{Direct Sum}\label{subsubsec-direct-sum}
+
+\begin{definition}\label{def-direct-sum}
+	We call $\mathcal{U}\oplus\mathcal{W}$ a direct sum if any element in
+	$\mathcal{U}+\mathcal{W}$ can be expressed uniquely as $u+w$ where
+	$u\in\mathcal{U}$ and $w\in\mathcal{W}$.
+\end{definition}
+
+\begin{exm}
+	Here are two examples to illustrate the point made in \pref{definition}{def-direct-sum}:
+	\begin{enumerate}
+		\item \textbf{Example for a direct sum}:
+		      Let
+		      $\mathcal{W}=\left\{a,b\in\mathbb{R}\setbuild\inlinematrix{a\\b\\0}\right\}$
+		      and
+		      $\mathcal{U}=\left\{c\in\mathbb{R}\setbuild\inlinematrix{0\\0\\c}\right\}$.
+		      Then
+		      $\mathcal{U}+\mathcal{W}=\left\{a,b,c\in\mathbb{R}\setbuild\inlinematrix{a\\b\\c}\right\}=\mathbb{R}^3$
+		      and
+		      \begin{equation*}
+			      \begin{pmatrix}
+				      a \\b\\0
+			      \end{pmatrix}+
+			      \begin{pmatrix}
+				      0 \\0\\c
+			      \end{pmatrix}=
+			      \begin{pmatrix}
+				      a \\b\\c
+			      \end{pmatrix}\in\mathcal{U}+\mathcal{W}
+		      \end{equation*}
+		      is the only non-trivial representation for a vector in this vector space.
+		      The trivial case is implied in the intersection
+		      \begin{equation*}
+			      \mathcal{U}\cap\mathcal{W}=\left\{\begin{pmatrix}
+				      0 \\0\\0
+			      \end{pmatrix}\right\}
+		      \end{equation*}
+		      and therefore is the sum of both vector spaces by
+		      definition (\ref{def-direct-sum}) called a \textit{direct sum}.
+		\item \textbf{Example for an indirect sum}:
+		      Let
+		      $\mathcal{U}=\left\{a,b\in\mathbb{R}\setbuild\inlinematrix{a\\b\\0}\right\}$
+		      and
+		      $\mathcal{W}=\left\{c,d\in\mathbb{R}\setbuild\inlinematrix{0\\c\\d}\right\}$.
+		      Then
+		      $\mathcal{U}+\mathcal{W}=\left\{a,b,c\in\mathbb{R}\setbuild\inlinematrix{a\\b\\c}\right\}=\mathbb{R}^3$
+		      and
+		      \begin{equation*}
+			      \begin{pmatrix}
+				      a \\b\\0
+			      \end{pmatrix}+
+			      \begin{pmatrix}
+				      0 \\c\\d
+			      \end{pmatrix}=
+			      \begin{pmatrix}
+				      a \\b+c\\d
+			      \end{pmatrix}\in\mathcal{U}+\mathcal{W}
+		      \end{equation*}
+		      But this time there is no longer a unique way to represent a vector from
+		      this sum, e.g.
+		      \begin{equation*}
+			      \begin{pmatrix}
+				      1 \\2\\3
+			      \end{pmatrix}=
+			      \begin{pmatrix}
+				      1 \\2\\0
+			      \end{pmatrix}+
+			      \begin{pmatrix}
+				      0 \\0\\3
+			      \end{pmatrix}=
+			      \begin{pmatrix}
+				      1 \\0\\0
+			      \end{pmatrix}+
+			      \begin{pmatrix}
+				      0 \\2\\3
+			      \end{pmatrix}
+		      \end{equation*}
+		      since
+		      \begin{equation*}
+			      \mathcal{U}\cap\mathcal{W}=\left\{e\in\mathbb{R}\setbuild\begin{pmatrix}
+				      0 \\e\\0
+			      \end{pmatrix}\right\}
+		      \end{equation*}
+		      contains more than the trivial intersection
+		      $\inlinematrix{0\\0\\0}$. Hence, this
+		      is not a \textit{direct sum}.
+	\end{enumerate}
+\end{exm}
+
+\begin{thm}\label{thm-direct-sum}
+	Let $\mathcal{U},\mathcal{W}\subseteq\mathcal{V}$ be subspaces. Then,
+	\begin{equation}
+		\mathcal{U}\oplus\mathcal{W}\Leftrightarrow
+		\mathcal{U}\cap\mathcal{W}=
+		\left\{\inlinematrix{0\\0\\0}\right\}
+	\end{equation}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-direct-sum}:
+	\begin{flushleft}
+		\proofright: Let $v\in\mathcal{W}\cap\mathcal{W}$.
+		Then,
+		\begin{equation*}
+			v=\underbrace{v}_{\in\mathcal{U}}+\underbrace{0}_{\in\mathcal{W}}
+			=\underbrace{0}_{\in\mathcal{U}}+\underbrace{v}_{\in\mathcal{W}}
+		\end{equation*}
+		but since there is supposed to a unique representation of $v$ then
+		$v=0$ and $0=v$.
+	\end{flushleft}
+	\begin{flushleft}
+		\proofleft: Now let $\mathcal{U}$ and $\mathcal{W}$ only have a trivial
+		intersection, i.e. $\mathcal{U}\cap\mathcal{W}=\{0\}$. Then take an arbitrary
+		element $v\in\mathcal{U}+\mathcal{W}$ and write
+		\begin{equation*}
+			v=u_1+w_1=u_2+w_2
+		\end{equation*}
+		We show that $u_1=u_2$ and $w_1=w_2$ by manipulating the equation to
+		\begin{equation*}
+			\underbrace{u_1-u_2}_{\in\mathcal{U}}=\underbrace{w_2-w_1}_{\in\mathcal{W}}=0
+		\end{equation*}
+		since $\mathcal{U}$ and $\mathcal{W}$ come both with closure under addition
+		and the intersection was assumed to be trivial from the very start, so
+		$u_1=u_2$ and $w_1=w_2$, therefore we can write $\mathcal{U}\oplus\mathcal{W}$.
+	\end{flushleft}
+\end{proof}

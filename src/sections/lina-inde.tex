@@ -1,0 +1,497 @@
+\subsection{Linear Independence}
+
+\begin{definition}\label{def-linear-independence}
+	The vectors $v_1,\dots,v_n\in\mathcal{V}$ are called linearly independent if
+	\begin{equation}
+		\exists\lambda_1, \dots,\lambda_n\in\mathcal{F}:\sum_{i=1}^n \lambda_i v_i = 0
+		\implies \lambda_1 = \dots = \lambda_n = 0\label{eq-linearly-independence}
+	\end{equation}
+	The empty set is linearly independent. If the conditions in \pref{equation}{eq-linearly-independence}
+	cannot be met, then the vectors are linearly dependent.
+\end{definition}
+
+\begin{exm}\label{exm-show-linearly-independency}
+	Let
+	$v_1=\inlinematrix{1\\1\\0}$, $v_2=\inlinematrix{1\\0\\1}$, and
+	$v_3=\inlinematrix{0\\1\\1}$. Show that these vectors are linearly independent.
+	\begin{flushleft}
+		\textbf{Answer}: If they are linearly independent, then there exists no
+		$\lambda_i\neq0$ such that
+		\begin{equation*}
+			\lambda_1\begin{pmatrix}
+				1 \\1\\0
+			\end{pmatrix}+\lambda_2\begin{pmatrix}
+				1 \\0\\1
+			\end{pmatrix}+\lambda_3\begin{pmatrix}
+				0 \\1\\1
+			\end{pmatrix}=
+			\begin{pmatrix}
+				0 \\0\\0
+			\end{pmatrix}
+		\end{equation*}
+		This question also translates to
+		\begin{equation*}
+			\begin{cases}
+				\lambda_1 + \lambda_2 = 0 \\
+				\lambda_1 + \lambda_3 = 0 \\
+				\lambda_2 + \lambda_3 = 0
+			\end{cases}
+		\end{equation*}
+		But we can also rewrite this to augmented matrix again which in this case
+		describes homogeneous system in particular:
+		\begin{align*}
+			\implies & \begin{pmatrix}
+				1 & 1 & 0 \\
+				1 & 0 & 1 \\
+				0 & 1 & 1
+			\end{pmatrix}
+			\begin{pmatrix}
+				\lambda_1 \\ \lambda_2 \\ \lambda_3
+			\end{pmatrix}=
+			\begin{pmatrix}
+				0 \\
+				0 \\
+				0
+			\end{pmatrix}             \\
+			\Longrightarrow
+			         & \begin{pmatrix}[ccc|c]
+				1 & 1 & 0 & 0 \\
+				1 & 0 & 1 & 0 \\
+				0 & 1 & 1 & 0
+			\end{pmatrix} \\
+			\xRightarrow{\substack{T_{23}}}
+			         & \begin{pmatrix}[ccc|c]
+				1 & 1 & 0 & 0 \\
+				1 & 0 & 1 & 0 \\
+				0 & 1 & 1 & 0
+			\end{pmatrix} \\
+			\xRightarrow{\substack{L_{13}(-1)}}
+			         & \begin{pmatrix}[ccc|c]
+				1 & 1  & 0 & 0 \\
+				0 & 1  & 1 & 0 \\
+				0 & -1 & 1 & 0
+			\end{pmatrix} \\
+			\xRightarrow{\substack{L_{32}(1)}}
+			         & \begin{pmatrix}[ccc|c]
+				1 & 1 & 0 & 0 \\
+				0 & 1 & 1 & 0 \\
+				0 & 0 & 2 & 0
+			\end{pmatrix}
+		\end{align*}
+		Here we can see that $\frank(A)=\frank(A^*)=m=3$, so the system has a
+		unique solution which is the trivial solution since this system of
+		equations is homogeneous, \textit{cf.} \pref{theorem}{thm-rank};
+		meaning $\{v_1,v_2,v_3\}$ is \textit{linearly independent}.
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-row-equivalent-matrices-linearly-dependent}
+	Let $A$ and $B$ be row-equivalent matrices. Then the rows of $A$ are linearly
+	dependent if and only if the rows of $B$ are linearly dependent
+	\footnote{i.e. as vectors}.
+\end{thm}
+
+\begin{thm}\label{thm-non-zero-rows-echelon-form-linearly-independent}
+	The non-zero rows of a matrix in row-echelon form are linearly independent.
+\end{thm}
+
+\begin{thm}\label{thm-zero-vector-linearly-dependent}
+	Any set that includes the zero vector is linearly dependent.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-zero-vector-linearly-dependent}. Let
+	$v_1,v_2,\dots,\vec{0},\dots,v_n$ be a set of vectors that includes
+	zero vector. Then
+	\begin{equation*}
+		0 \cdot v_1 + 0 \cdot v_2 \cdots + 1\cdot\vec{0} + 0 \cdot v_n = 0 \cdot v_k
+	\end{equation*}
+	So this is a linear combination for the zero vector where not all coefficients
+	are zero. Well this is exactly the opposite of what \pref{definition}{def-linear-independence}
+	for linear dependency says.
+\end{proof}
+
+\begin{exm}
+	Let
+	$v_1=\inlinematrix{1\\2\\3}$, $v_2=\inlinematrix{1\\0\\6}$, and
+	$v_3=\inlinematrix{3\\2\\15}$.
+	Show that these vectors are linearly dependent.
+	\begin{flushleft}
+		\textbf{Answer}:
+		First we start off by arranging the vectors as row in a matrix:
+		\begin{align*}
+			 & \begin{pmatrix}
+				1 & 2 & 3  \\
+				1 & 0 & 6  \\
+				3 & 2 & 15
+			\end{pmatrix}     \\
+			\xRightarrow{\substack{L_{21}(-1) \\ L_{31}(-3)}}
+			 & \begin{pmatrix}
+				1 & 2  & 3 \\
+				0 & -2 & 3 \\
+				0 & -4 & 6
+			\end{pmatrix}     \\
+			\xRightarrow{\substack{L_{32}(-2)}}
+			 & \begin{pmatrix}
+				1         & 2         & 3         \\
+				0         & -2        & 3         \\
+				\boxed{0} & \boxed{0} & \boxed{0}
+			\end{pmatrix}
+		\end{align*}
+		Because the matrix was brought into the row-echelon form and has a row
+		of zeros, the vectors in question were determined to be \textit{linearly dependent}.
+	\end{flushleft}
+\end{exm}
+
+\begin{thm}\label{thm-vector-linearly-dependent-scalar-multiple}
+	Two vectors are linearly dependent \textit{iff}\footnote{if and only if} one
+	vector is a scalar multiple of the other.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-vector-linearly-dependent-scalar-multiple}.
+	\begin{flushleft}
+		\proofright: Let $v_1,v_2\in\mathcal{V}$ be two linearly dependent
+		vectors. Then we can write
+		\begin{equation*}
+			\lambda_1 v_1 + \lambda_2 v_2 = 0
+		\end{equation*}
+		where $\lambda_1\neq0$ or $\lambda_2\neq0$. Without loss of generality
+		assume that $\lambda_1\neq0$. Then,
+		\begin{align*}
+			v_1 + \frac{\lambda_2}{\lambda_1} v_2 & = 0 \\
+			\implies v_1 = -\frac{\lambda_2}{\lambda_1} v_2
+		\end{align*}
+		which means that $v_1$ is a scalar multiple of $v_2$.
+	\end{flushleft}
+	\begin{flushleft}
+		\proofleft: Let $v_1$ be a scalar multiple of $v_2$ with some scalar
+		$\lambda\in\mathcal{F}$. Then,
+		\begin{align*}
+			v_1                         & = \lambda v_2 \\
+			\implies 1v_1 - \lambda v_2 & = 0
+		\end{align*}
+		is a linear combination equal to the zero vector where not all coefficients
+		are equal to zero, therefore $v_1$ and $v_2$ are linearly dependent.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-linearly-dependent-subset}
+	Any set that contains a linearly dependent set is also linearly dependent.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-linearly-dependent-subset}.
+	\begin{flushleft}
+		Let $\{v_1,\dots,v_n\}$ be a linearly dependent set. Next consider the
+		ambient set $\{v_1,\dots,v_n,v_{n+1},\dots,v_m\}$. We know that there exists
+		$\lambda_1,\dots,\lambda_n$ not all zero such that
+		\begin{equation*}
+			\lambda_1 v_1 + \dots + \lambda_n v_n = 0
+		\end{equation*}
+		But,
+		\begin{equation*}
+			\lambda_1 v_1 + \dots + \lambda_n v_n + 0 v_{n+1} + \dots 0 v_m = 0
+		\end{equation*}
+		is still going to have coefficients that are not equal to zero everywhere,
+		so the ambient set is linearly dependent as well.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-linearly-independent-subset}
+	A set contained in a linearly independent set is also linearly independent.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-linearly-independent-subset}.
+	\begin{flushleft}
+		Let $\mathcal{U}_1$ be a linearly independent set, and let
+		$\mathcal{U}_2\subseteq\mathcal{U}_1$. Had $\mathcal{U}_2$ been
+		linearly dependent, then so would $\mathcal{U}_1$ by theorem
+		(\ref{thm-linearly-dependent-subset}), however, this would contradict
+		the initial assumption. Therefore, $\mathcal{U}_2$ has to be
+		linearly dependent, too.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-linear-dependency-linear-combinations}
+	Let $S=\{v_1,\dots,v_n\}$ be a set of vectors where not all vectors are zero.
+	Without loss of generality assume that $v_1\neq0$. Then,
+	\begin{enumerate}
+		\item $S$ is linearly dependent \textit{iff} one of the vectors is a
+		      linear combination of the others.
+		      \label{thm-linear-dependency-linear-combinations:1}
+		\item $S$ is linearly dependent \textit{iff} one of the vectors is a
+		      linear combination of its predecessors.
+		      \label{thm-linear-dependency-linear-combinations:2}
+	\end{enumerate}
+\end{thm}
+
+\begin{proof}
+	Of \pref{property}{thm-linear-dependency-linear-combinations:1} in
+	\pref{theorem}{thm-linear-dependency-linear-combinations}.
+	\begin{flushleft}
+		\proofleft: If one of the vectors $v_i$ is a linear combination
+		of the others, i.e.
+		\begin{equation*}
+			v_i = \lambda_1 v_1 + \cdots + \lambda_{i-1} v_{i-1} +
+			\lambda_{i+1} v_{i+1} + \cdots + \lambda_n v_n
+		\end{equation*}
+		then
+		\begin{equation*}
+			0 = \lambda_1 v_1 + \cdots + \lambda_{i-1} v_{i-1} + (-1) v_i +
+			\lambda_{i+1} v_{i+1} + \cdots + \lambda_n v_n
+		\end{equation*}
+		yields a linear combination of the zero vector in which not all coefficients
+		are zero, so $S$ is linearly dependent.
+	\end{flushleft}
+	\begin{flushleft}
+		\proofright: This direction is a special case of
+		\pref{property}{thm-linear-dependency-linear-combinations:2}
+		in \pref{theorem}{thm-linear-dependency-linear-combinations},
+		in particular direction \proofright.
+	\end{flushleft}
+\end{proof}
+
+\begin{proof}
+	Of \pref{property}{thm-linear-dependency-linear-combinations:2} in
+	\pref{theorem}{thm-linear-dependency-linear-combinations}.
+	\begin{flushleft}
+		\proofright: Since $S$ is linearly dependent, there exists
+		$\lambda_1 v_1 + \cdots + \lambda_n v_n = 0$ where not all
+		$\lambda_i$'s are equal to zero. Let $j$ be the greatest index
+		such that $\lambda_j\neq0$. Then we can write
+		\begin{align*}
+			\lambda_1 v_1 + \cdots + \lambda_j v_j               & = 0   \\
+			\implies -\frac{\lambda_1}{\lambda_j}v_1 + \cdots +
+			\left(-\frac{\lambda_{j-1}}{\lambda_j}v_{j-1}\right) & = v_j
+		\end{align*}
+	\end{flushleft}\
+	\begin{flushleft}
+		\proofleft: This direction is a special case of
+		\pref{property}{thm-linear-dependency-linear-combinations:1} in
+		\pref{theorem}{thm-linear-dependency-linear-combinations},
+		in particular direction \proofleft.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-col-linearly-dependent-nontrivial-solution}
+	A homogeneous system of linear equations $Ax=0$ has a non-trivial solution
+	\textit{iff} the columns of $A$ are linearly dependent.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-col-linearly-dependent-nontrivial-solution}.
+	\begin{flushleft}
+		Recall that $Ax=0$ can be written as
+		\begin{equation*}
+			x_1 A^1 + x_2 A^2 + \cdots + x_n A^n = 0
+		\end{equation*}
+		where $A^i$ denotes the $i$-th column of $A$. But this is precisely the
+		same as saying $Ax=0$ has a non-trivial solution \textit{iff}
+		$\{A^1,\dots,A^n\}$ are linearly dependent since there exists a linear
+		combination of the columns of $A$ where not all the coefficients are zero.
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-span-equality}
+	The generators
+	\begin{equation*}
+		\fspan\{v_1,\dots,v_n\}=\fspan\{w_1,\dots,w_m\}
+	\end{equation*}
+	are equal \textit{iff} every $v_i$ is a linear combination of the $w_j$'s and
+	$w_j$ is a linear combination of every $v_i$'s.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-span-equality}.
+	\begin{flushleft}
+		\proofright: This follows from the definition of what is a span,
+		\textit{cf.} \pref{definition}{def-linear-span} if both spans are
+		assumed to be equal.
+	\end{flushleft}
+	\begin{flushleft}
+		\proofleft: Take any arbitrary $v\in\fspan\{v_1,\dots,v_n\}$. Then
+		for any $\lambda,\mu\in\mathcal{F}$ follows that
+		\begin{align*}
+			v & = \sum_{i=1}^n \lambda_i v_i                                       \\
+			  & = \sum_{i=1}^n \lambda_i \left(\sum_{j=1}^m \mu_{ij} w_j\right)    \\
+			  & = \sum_{j=1}^m \left(\sum_{i=1}^n \lambda_i \mu_{ij} \right) w_{j}
+		\end{align*}
+	\end{flushleft}
+	so any general vector $v$ in this span is a linear combination of the $w_j$'s
+	and likewise any $w_j$'s is a linear combination of the $v_i$'s.
+\end{proof}
+
+\begin{crl}\label{crl-span-equality}
+	From \pref{theorem}{thm-span-equality} follows automatically that
+	\begin{equation*}
+		\fspan\{v_1,\dots,v_n\}=\fspan\{v_1,\dots,v_n,w\}
+	\end{equation*}
+	\textit{iff} $w$ is a linear combination of the $v_i$'s.
+\end{crl}
+
+\begin{thm}\label{thm-span-expand-linearly-independence}
+	Let $\{v_1,\dots,v_n\}$ be linearly independent. Then $\{v_1,\dots,v_n,w\}$
+	is linearly independent \textit{iff} $w$ is not a linear combination of the
+	$v_i$'s.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-span-expand-linearly-independence}.
+	\begin{flushleft}
+		\proofright: If $\{v_1,\dots,v_n,w\}$ is linearly independent, then no
+		vector in this set is a linear combination of the others, and in particular
+		not $w$.
+	\end{flushleft}
+	\begin{flushleft}
+		\proofleft: We will show that if $\{v_1,\dots,v_n,w\}$ is linearly dependent,
+		then $w$ is a linear combination of the $v_i$'s. By
+		\pref{theorem}{thm-linear-dependency-linear-combinations},
+		\pref{statement}{thm-linear-dependency-linear-combinations:2}, there exists a vector
+		that is a linear combination of its predecessors. Since $\{v_1,\dots,v_n\}$
+		is linear independent, that vector in question cam only be $w$. Using logic
+		we can conclude this direction of the proof with the fact that
+		$(B\Rightarrow A) \Leftrightarrow (\neg A \Rightarrow \neg B)$ where $A$
+		represent the left hand-side of this proof (\textit{$\{v_1,\dots,v_n,w\}$
+			is linearly independent}) and $B$ the right hand-side of this proof
+		(\textit{$w$ is not a linear combination of the $v_i$'s}).
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-row-equivalent-matrices}
+	If $A$ and $B$ are row-equivalent matrices, then\footnote{The converse is
+		also true but more difficult to prove} $\frow(A)=\frow(B)$.
+\end{thm}
+
+\subsubsection{Vector Space Base}\label{subsubsec-vector-space-base}
+
+\begin{definition}\label{def-vector-space-base}
+	A set of linearly independent vectors that spans the entire space of
+	$\mathcal{V}$ is called a basis and is denoted by $\mathcal{B}$.
+\end{definition}
+
+\begin{exm}\label{exm-vector-basis:1}
+	Let $\mathcal{V}=\mathbb{R}^3$. Then
+	\begin{equation*}
+		\mathcal{B}_\mathcal{V}=\left\{
+		\begin{pmatrix}
+			1 \\0\\0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 \\1\\0
+		\end{pmatrix},
+		\begin{pmatrix}
+			0 \\0\\1
+		\end{pmatrix}
+		\right\}
+	\end{equation*}
+	forms the standard basis for $\mathbb{R}^3$.\footnote{For the standard basis
+		we often use the letter $\mathcal{E}$}
+\end{exm}
+
+\begin{exm}\label{exm-vector-basis:2}
+	Let $\mathcal{V}=\mathbb{R}^3$ and $v_1=\inlinematrix{1\\1\\0}$,
+	$v_2=\inlinematrix{1\\0\\1}$ and $v_3=\inlinematrix{0\\1\\1}$. Then
+	from \pref{example}{exm-show-linearly-independency} we already know
+	that these three vectors are linearly independent. Once this has been
+	verified all that is left to do is to show that $\{v_1,v_2,v_3\}$ span the
+	entirety of $\mathbb{R}^3$:
+	\begin{align*}
+		 & \begin{pmatrix}
+			a \\b\\c
+		\end{pmatrix}=
+		\lambda\begin{pmatrix}
+			1 \\1\\0
+		\end{pmatrix}+\mu\begin{pmatrix}
+			1 \\0\\1
+		\end{pmatrix}+\nu\begin{pmatrix}
+			0 \\1\\1
+		\end{pmatrix} \\
+		\Longrightarrow
+		 & \begin{pmatrix}[ccc|c]
+			1 & 1 & 0 & a \\
+			1 & 0 & 1 & b \\
+			0 & 1 & 1 & c
+		\end{pmatrix}                                                                 \\
+		\xRightarrow{\substack{L_{21}(-1)}}
+		 & \begin{pmatrix}[ccc|c]
+			1 & 1  & 0 & a   \\
+			0 & -1 & 1 & b-a \\
+			0 & 1  & 1 & c
+		\end{pmatrix}                                                                 \\
+		\xRightarrow{\substack{L_{23}(1)}}
+		 & \begin{pmatrix}[ccc|c]
+			1 & 1 & 0 & a     \\
+			0 & 0 & 2 & b-a+c \\
+			0 & 1 & 1 & c
+		\end{pmatrix}                                                                 \\
+		\xRightarrow{\substack{T_{23}}}
+		 & \begin{pmatrix}[ccc|c]
+			1 & 1 & 0 & a     \\
+			0 & 1 & 1 & c     \\
+			0 & 0 & 2 & b-a+c
+		\end{pmatrix}                                                                 \\
+		\xRightarrow{\substack{D_3(\frac{1}{2})}}
+		 & \begin{pmatrix}[ccc|c]
+			1 & 1 & 0 & a               \\
+			0 & 1 & 1 & c               \\
+			0 & 0 & 1 & \frac{b-a+c}{2}
+		\end{pmatrix}                                                                 \\
+		\xRightarrow{\substack{L_{23}(-1)}}
+		 & \begin{pmatrix}[ccc|c]
+			1 & 1 & 0 & a                            \\
+			0 & 1 & 0 & \frac{2c}{2}-\frac{b-a+c}{2} \\
+			0 & 0 & 1 & \frac{b-a+c}{2}
+		\end{pmatrix}                                                                 \\
+		\xRightarrow{\substack{L_{12}(-1)}}
+		 & \begin{pmatrix}[ccc|c]
+			1 & 0 & 0 & \frac{2a}{2}-\frac{c-b+a}{2} \\
+			0 & 1 & 0 & \frac{c-b+a}{2}              \\
+			0 & 0 & 1 & \frac{b-a+c}{2}
+		\end{pmatrix}                                                                 \\
+		\Longrightarrow
+		 & \begin{pmatrix}[ccc|c]
+			1 & 0 & 0 & \frac{a-c+b}{2} \\
+			0 & 1 & 0 & \frac{c-b+a}{2} \\
+			0 & 0 & 1 & \frac{b-a+c}{2}
+		\end{pmatrix}
+	\end{align*}
+	In conclusion, any general vector can be written as
+	\begin{equation*}
+		\begin{pmatrix}
+			a \\b\\c
+		\end{pmatrix}=
+		\frac{a-c+b}{2}\begin{pmatrix}
+			1 \\1\\0
+		\end{pmatrix}+\frac{c-b+a}{2}\begin{pmatrix}
+			1 \\0\\1
+		\end{pmatrix}+\frac{b-a+c}{2}\begin{pmatrix}
+			0 \\1\\1
+		\end{pmatrix}
+	\end{equation*}
+	so the set of vectors $\{v_1,v_2,v_3\}$ is a basis for $\mathbb{R}^3$.
+	\footnote{As demonstrated in \pref{example}{exm-vector-basis:1} and
+		\pref{example}{exm-vector-basis:2}, a non-standard basis is not unique
+		as opposed to \textit{the} standard basis.}
+\end{exm}
+
+\begin{rem}\label{rem-polynomial-vector-space}
+	The set
+	\begin{equation}
+		\mathbb{R}[x]_{\leq n}\defines\left\{p\in\mathbb{R}[x]\setbuild\deg(p)\leq n\right\}
+	\end{equation}
+	denotes the vector space of polynomials of degree less than or equal to $n$
+	over $\mathbb{R}$ with respect to $x$.
+\end{rem}
+
+\begin{exm}\label{exm-vector-basis:3}
+	Let $\mathcal{V}=\mathbb{R}[t]_{\leq n}$ be a vector space. Check if the
+	set $\{1,t,t^2,\dots,t^n\}$ is a basis for $\mathcal{V}$.
+	\begin{equation*}
+		\sum_{i=1}^n \lambda_i t^{i-1} = 0 \implies \lambda_1=\cdots=\lambda_n=0
+	\end{equation*}
+	which immediately satisfy the definition for linear independence. Furthermore,
+	the left hand-side most definitely suggests that these vectors also span
+	the entirety of $\mathcal{V}$ - they are in fact the standard basis.
+\end{exm}

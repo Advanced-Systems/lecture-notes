@@ -1,0 +1,172 @@
+\subsection{Morphism}\label{subsec-morphism}
+
+\subsubsection{Isomorphism}\label{subsubsec-isomorphism}
+
+\begin{definition}\label{def-isomorphism}
+	Let $\mathcal{V}$ and $\mathcal{W}$ be two vector spaces over the field $\mathcal{F}$.
+	Then, $\mathcal{V}$ and $\mathcal{W}$ are called isomorphic if there exists a bijective
+	linear map $T:\mathcal{V}\to\mathcal{W}$. Such a $T$ is called an isomorphism and is
+	denoted by $\mathcal{V}\cong\mathcal{W}$.
+\end{definition}
+
+\begin{exm}\label{exm-isomorphic:1}
+	Let $T:\mathbb{R}^4\to\mathcal{M}_2(\mathbb{R})$ be a map with
+	\begin{equation*}
+		T\begin{pmatrix}
+			a \\ b \\ c \\ d
+		\end{pmatrix}=\begin{pmatrix}
+			a & b \\
+			c & d
+		\end{pmatrix}
+	\end{equation*}
+	Then it can be easily check that this is a bijective linear map. Therefore,
+	$T$ is isomorphic and $\mathbb{R}^4\cong\mathcal{M}_2(\mathbb{R})$.
+\end{exm}
+
+\begin{exm}\label{exm-isomorphic:2}
+	Let $T:\mathcal{M}_2(\mathbb{R})\to\mathbb{R}[x]_{\leq3}$ be a map with
+	\begin{equation*}
+		T\begin{pmatrix}
+			a & b \\
+			c & d
+		\end{pmatrix}=ax^3+bx^2+cx+d
+	\end{equation*}
+	Then it can be easily check that this is a bijective linear map. Therefore,
+	$T$ is isomorphic and $\mathcal{M}_2(\mathbb{R})\cong\mathbb{R}[x]_{\leq3}$.
+\end{exm}
+
+\begin{exm}\label{exm-isomorphic:3}
+	There is no isomorphism between $\mathbb{R}^3$ and $\mathcal{M}_2(\mathbb{R})$ since
+	\begin{equation*}
+		\dim(\mathbb{R}^3)=3\neq\dim(\mathcal{M}_2(\mathbb{R}))=4,
+	\end{equation*}
+	wherefore there exists no $T:\mathbb{R}^3\to\mathcal{M}_2(\mathbb{R})$ or
+	$T:\mathcal{M}_2(\mathbb{R})\to\mathbb{R}^3$ that is bijective by
+	\pref{corollary}{crl-bijective-linear-map}, and by extension, isomorphic,
+	\textit{i.e.} there is no way that under these circumstances we can find a
+	$T$ that meets all requirements for \pref{definition}{def-isomorphism}.
+\end{exm}
+
+\begin{definition}\label{def-equivalence-relation}
+	Let $M$ be a set. A relation $R$ on $M$ is called
+	\begin{enumerate}
+		\item Reflexive \textit{iff} for all $x \in M$ we have that $x\sim x$
+		\item Symmetric \textit{iff} for all $x,y \in M$ we have that $x \sim y \implies y \sim x$
+		\item Transitive \textit{iff} for all $x,y,z \in M$ we have that $x \sim y \land y \sim z \implies x \sim z$
+	\end{enumerate}
+	If $R$ is reflexive, symmetric and transitive, we called it an equivalence relation on $M$ \cite[p.20]{liesenMehrmann2015}.
+\end{definition}
+
+\begin{rem}
+	The isomorphism of vector spaces is an equivalence relation.
+\end{rem}
+
+\begin{thm}\label{thm-isomorphism-same-dim}
+	Let $\mathcal{V},\mathcal{W}$ be two vector spaces. Then
+	\begin{equation}
+		\mathcal{V}\cong\mathcal{W}\Leftrightarrow\dim(\mathcal{V})=\dim(\mathcal{W})
+	\end{equation}
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-isomorphism-same-dim}.
+	\begin{flushleft}
+		\proofleft: Let $\{v_1,\dots,v_n\}$ be a basis for $\mathcal{V}$ and
+		$\{w_1,\dots,w_n\}$ be a basis for $\mathcal{W}$. Then
+		\begin{equation*}
+			T(\lambda_1v_1+\cdots+\lambda_nv_n)=\lambda_1w_1+\cdots+\lambda_nw_n
+		\end{equation*}
+		is a linear bijective map by \pref{theorem}{thm-unique-bijective-linear-map}.
+		Hence, it implements an isomorphism $T:\mathcal{V}\to\mathcal{W}$.
+	\end{flushleft}
+	\begin{flushleft}
+		\proofright: Let $\mathcal{B}=\{v_1,\dots,v_n\}$ be a basis for $\mathcal{V}$.
+		Denote
+		\begin{equation*}
+			A=\{T(v_1),\dots,T(v_n)\}\subseteq\mathcal{W}
+		\end{equation*}
+		where $T$ is an
+		isomorphism $T:\mathcal{V}\to\mathcal{W}$. Then by \pref{theorem}{thm-linear-map-span}
+		$A$ spans $\fim{T}$. Furthermore, since $T$ is also surjective we know
+		that $\fim{T}=\mathcal{W}$ by \pref{theorem}{thm-kernel-image-subspace}.
+		Additionally (by the same theorem), if $T$ is injective, then the kernel is
+		trivial. It follows that
+		\begin{align*}
+			         & \lambda_1T(v_1)+\cdots+\lambda_nT(v_n)=0                                                           \\
+			\implies & T(\lambda_1v_1+\cdots+\lambda_nv_n)=0    &  & \text{\pref{definition}{def-linear-maps-operations}} \\
+			\implies & \lambda_1v_1+\cdots+\lambda_nv_n=0       &  & \text{trivial kernel}                                \\
+			\implies & \lambda_1 =\cdots=\lambda_n=0
+		\end{align*}
+		since the basis elements are linearly independent. So the $A$ is linearly
+		independent and forms a basis for $\mathcal{W}$ where $\dim(\mathcal{V})=\dim(\mathcal{W})$.
+	\end{flushleft}
+\end{proof}
+
+\begin{crl}
+	Every vector space of dimension $n$ over some field $\mathcal{F}$ is isomorphic
+	to $\mathcal{F}^n$.
+\end{crl}
+
+\subsubsection{Homomorphism}\label{subsubsec-homomorphism}
+
+\begin{definition}\label{def-homomorphism}
+	Let $\mathcal{V}$ and $\mathcal{W}$ be two vector spaces over some field $\mathcal{F}$.
+	The collection of all linear maps from $\mathcal{V}$ to $\mathcal{W}$ is called a homomorphism
+	and is denoted by $\fhom(\mathcal{V},\mathcal{W})$.
+\end{definition}
+
+\begin{thm}\label{thm-homomorphism-vector-space}
+	$\fhom(\mathcal{V},\mathcal{W})$ is a vector space over the field $\mathcal{F}$
+	with respect to addition of linear maps and multiplication with a scalar.
+\end{thm}
+
+\begin{thm}\label{thm-hom-linear-maps}
+	Let $m=\dim(\mathcal{W})$ and $n=\dim(\mathcal{V})$. Let also $\mathcal{E}$ and
+	$\mathcal{F}$ be two bases for the vector spaces $\mathcal{V}$ and $\mathcal{W}$,
+	respectively. The map
+	\begin{align}
+		 & \varphi:\fhom(\mathcal{V},\mathcal{W})\to\mathcal{M}_{m \times n}(\mathcal{F}),\nonumber \\
+		 & \varphi(T)\defines[T]_\mathcal{E}^\mathcal{F}
+	\end{align}
+	is a linear map.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-hom-linear-maps}.
+	\begin{flushleft}
+		By \pref{theorem}{thm-isomorphism-same-dim} it suffices to show that
+		$\varphi$ is bijective, \textit{i.e.}
+		\begin{equation}\label{eq-hom-linear-maps-equivalency}
+			\fhom(\mathcal{V},\mathcal{W})\cong\mathcal{M}_{m \times n}(\mathcal{F})
+			\Leftrightarrow \dim(\fhom(\mathcal{V},\mathcal{W}))=\dim(\mathcal{V})\dim(\mathcal{W})
+		\end{equation}
+		We already know from \pref{theorem}{thm-linear-operators-matrix-rep} $\varphi$
+		is a linear map.
+		\begin{itemize}
+			\item Injectivity: By \pref{theorem}{thm-kernel-image-subspace} this
+			      is equivalent to showing that the kernel is trivial. Let $T\in\fker{\varphi}$,
+			      and $\mathcal{E}=\{e_1,\dots,e_n\}$ and $\mathcal{F}=\{f_1,\dots,f_m\}$.
+			      Then, $\varphi(T)=0$, \textit{i.e.} $[T]_\mathcal{E}^\mathcal{F}=0$ is the zero
+			      matrix. Recall that
+			      \begin{align*}
+				       & T(e_1) = 0f_1+\cdots+0f_m = 0  \\
+				       & \vdots                         \\
+				       & T(e_n) = 0f_1+\cdots+0f_m = 0,
+			      \end{align*}
+			      so $T(v)=T(\lambda_1e_1+\cdots+\lambda_ne_n)=0$ for all $v\in\mathcal{V}$.
+			\item Surjectivity: Let $A\in\mathcal{M}_{m \times n}(\mathcal{F})$. Then
+			      find a $T\in\fhom(\mathcal{V},\mathcal{W})$ s.t. $\varphi(T)=[T]_\mathcal{E}^\mathcal{F}=(a_{ij})$.
+			      Define
+			      \begin{align*}
+				       & T(e_1)=a_{11}f_1+\cdots+a_{m1}f_m \\
+				       & \vdots                            \\
+				       & T(e_1)=a_{1n}f_n+\cdots+a_{mn}f_m \\
+			      \end{align*}
+		\end{itemize}
+		Then $T$ gives rise to a linear map by
+		\begin{equation*}
+			T(v)=T(\lambda_1e_1+\cdots+\lambda_ne_n)=\lambda_1T(v_1)+\cdots+\lambda_n T(v_n)
+		\end{equation*}
+		whose matrix representation is $A$.
+	\end{flushleft}
+\end{proof}

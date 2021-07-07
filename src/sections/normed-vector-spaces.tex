@@ -1,0 +1,52 @@
+\subsection{Normed Vector Spaces}\label{subsec-normed-vector-spaces}
+
+\begin{definition}\label{def-norm}
+	Let $\mathcal{V}$ be an inner product space. Then the map
+	\begin{equation}
+		\norm{\cdot}:\mathcal{V}\to\mathbb{R},
+		\quad v\mapsto\norm{v}\defines\sqrt{\left<v,v\right>}
+	\end{equation}
+	defines a norm on $\mathcal{V}$ \textit{iff} for all $v,w\in\mathcal{V}$ and
+	$\lambda\in\mathcal{F}$ the following holds:
+	\begin{enumerate}
+		\item $\norm{\lambda\cdot v}=\abs{\lambda}\cdot\norm{v}\quad\text{(Multiplication with a scalar)}$
+		\item $\norm{v}\geq0\quad\text{(Definite positivity)}$\footnote{$\norm{v}=0 \Leftrightarrow v=0$}
+		\item $\norm{v+w}\leq\norm{v}+\norm{w}\quad\text{(Triangle inequality)}$
+	\end{enumerate}
+	An inner product spaces equipped with a norm is called normed vector space.
+\end{definition}
+
+\begin{proof}
+	Of \pref{definition}{def-norm}.
+	\begin{flushleft}
+		With this proof we will make sure that the norm is sensible defined. For
+		this purpose with will use the axioms laid out in \pref{definition}{def-inner-product}.
+		\begin{enumerate}
+			\item Multiplication with a scalar:
+			      \begin{align*}
+				      \norm{\lambda\cdot v} & = \sqrt{\left<\lambda\cdot v, \lambda\cdot v\right>}                                                 \\
+				                            & = \sqrt{\lambda\cdot \left<v,\lambda\cdot v\right>}     &  & \text{axiom 1}                          \\
+				                            & = \sqrt{\lambda\overline{\lambda}\cdot\left<v,v\right>} &  & \text{\pref{remark}{rem-inner-product}} \\
+				                            & = \sqrt{\abs{\lambda}^2}\cdot\sqrt{\left<v,v\right>}                                                 \\
+				                            & = \abs{\lambda}\cdot\norm{v}
+			      \end{align*}
+			\item Definite positivity:
+			      \begin{align*}
+				      \norm{v} & = \sqrt{\left<v,v\right>}                     \\
+				               & \geq 0                    &  & \text{axiom 3}
+			      \end{align*}
+			\item Triangle inequality:
+			      \begin{align*}
+				      \norm{v+w}^2 & = \left<v+w,v+w\right>                                                                                                               \\
+				                   & = \left<v,v+w\right> + \left<w,v+w\right>                                   &  & \text{axiom 2}                                      \\
+				                   & = \left<v,v\right> + \left<v,w\right> + \left<w,v\right> + \left<w,w\right> &  & \text{\pref{remark}{rem-inner-product}}             \\
+				                   & = \norm{v}^2 + \left<v,w\right> + \overline{\left<v,w\right>} + \norm{w}^2  &  & \text{axiom 1}                                      \\
+				                   & = \norm{v}^2 + 2\Re(\left<v,w\right>) + \norm{y}^2                                                                                   \\
+				                   & \leq \norm{v}^2 + 2\abs{\left<v,w\right>} + \norm{y}^2                                                                               \\
+				                   & \leq \norm{v}^2 + 2\norm{v}\norm{w} + \norm{2}^2                            &  & \text{\pref{remark}{rem-cauchy-schwarz-inequality}} \\
+				                   & =\left(\norm{v}+\norm{w}\right)^2
+			      \end{align*}
+			      Hence, $\norm{v+w}\leq\norm{v}+\norm{w}$.
+		\end{enumerate}
+	\end{flushleft}
+\end{proof}

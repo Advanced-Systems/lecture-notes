@@ -1,0 +1,195 @@
+\subsection{Inner Product Space}\label{subsec-inner-product-space}
+
+\begin{flushleft}
+	We know that plain vector spaces such as $\mathbb{R}^2$ or $\mathbb{R}^3$
+	have a \enquote{richer} structure. If we think of vectors in $\mathbb{R}^2$
+	as arrows, then we can discuss angles. But so far this hasn't showed up when
+	we talked about vector spaces. It turns out that there's another notion we
+	haven't thought off yet: the length of vectors, \textit{i.e.} the distance
+	between two points. What's more, we can even measure the distance between two
+	vectors. So, these concepts of angles, length and distance turn $\mathbb{R}^2$
+	or $\mathbb{R}^3$ into Euclidean vector spaces. The goal of this subsection is
+	finding a finding a definition for an abstract vector space $\mathcal{V}$. For
+	this purpose the key concept is going to be the inner product.
+\end{flushleft}
+
+\begin{definition}\label{def-inner-product}
+	Let $\mathcal{V}$ be a vector space over the field $\mathcal{F}$. An inner
+	product on $\mathcal{V}$ is an operation defined on pairs of elements, which
+	returns a scalar and is usually denoted by
+	\begin{equation}
+		\left<\cdot,\cdot\right>:\mathcal{V}\times\mathcal{V}\to\mathcal{F},
+		\quad(v,w)\mapsto\left<v,w\right>
+	\end{equation}
+	This operation satisfy the following three axioms for all $u,v,w\in\mathcal{V}$ and
+	$\lambda\in\mathcal{F}$:
+	\begin{enumerate}
+		\item Conjugate symmetry, \textit{i.e.} $\left<u,v\right>=\overline{\left<v,u\right>}$
+		      \footnote{Note that over $\mathbb{R}$, $\left<u,v\right>=\left<v,u\right>$}
+		\item Linearity in the first component, \textit{i.e.}
+		      \begin{enumerate}
+			      \item $\left<\lambda\cdot u,v\right>=\lambda\left<u,v\right>$
+			      \item $\left<u+w,v\right>=\left<u,v\right>+\left<w,v\right>$
+		      \end{enumerate}
+		\item Definite positivity, \textit{i.e.} $\left<v,v\right>\geq0$ with equality
+		      \textit{iff} $v=0$
+	\end{enumerate}
+	If $\mathcal{V}$ admits an inner product, $\mathcal{V}$ is called an inner product space.
+\end{definition}
+
+\begin{rem}\label{rem-inner-product}
+	\hfill
+	\begin{enumerate}
+		\item $\left<v,v\right>=\overline{\left<v,v\right>} \implies \left<v,v\right>\in\mathbb{R}$
+		      for all $v\in\mathcal{F}$
+		\item Let $u,v\in\mathcal{V}$ and $\lambda\in\mathcal{F}$. Then by
+		      \pref{definition}{def-inner-product} it follows that the inner
+		      product is conjugate linear in the second component:
+		      \begin{align*}
+			      \left<u,\lambda\cdot v\right> & = \overline{\left<\lambda v,u\right>}                &  & \text{axiom 1} \\
+			                                    & = \overline{\lambda\cdot\left<v,u\right>}            &  & \text{axiom 2} \\
+			                                    & = \overline{\lambda}\cdot\overline{\left<v,u\right>}                     \\
+			                                    & = \overline{\lambda}\cdot\left<u,v\right>            &  & \text{axiom 1}
+		      \end{align*}
+		\item As for the addition of the inner product it turns out that it is also linear in the
+		      second component:
+		      \begin{align*}
+			      \left<u,v+w\right> & = \overline{\left<v+w,u\right>}                           &  & \text{axiom 1} \\
+			                         & = \overline{\left<v,u\right>+\left<w,u\right>}            &  & \text{axiom 2} \\
+			                         & = \overline{\left<v,u\right>}+\overline{\left<w,u\right>}                     \\
+			                         & = \left<u,v\right> + \left<u,w\right>                     &  & \text{axiom 1}
+		      \end{align*}
+		\item What's also interesting to notice is that with the second observation of
+		      this remarks one can derive that
+		      \begin{align*}
+			      \left<-v,v\right> & = -1\cdot \left<v,v\right>            &  & \text{axiom 2}       \\
+			                        & = \overline{-1}\cdot \left<v,v\right>                           \\
+			                        & = \left<v,-v\right>                   &  & \text{observation 2}
+		      \end{align*}
+	\end{enumerate}
+\end{rem}
+
+\begin{exm}\label{exm-inner-product:1}
+	Let $\mathcal{V}=\mathbb{R}$. Define
+	\begin{equation}
+		\left<\cdot,\cdot\right>:\mathbb{R}\times\mathbb{R}\to\mathbb{R},\quad(x,y)\mapsto\left<x,y\right>\defines x \cdot y
+	\end{equation}
+	Verify that this operation defines an inner product in $\mathbb{R}$.
+	\begin{flushleft}
+		\textbf{Answer}: We can use the field properties of $\mathbb{R}$ to justify
+		each step along the way for all $x,y,z,\lambda\in\mathbb{R}$:
+		\begin{enumerate}
+			\item Symmetry is ensured by:
+			      \begin{align*}
+				      \left<x,y\right> & =x \cdot y         \\
+				                       & = y \cdot x        \\
+				                       & = \left<y,x\right>
+			      \end{align*}
+			\item Linearity
+			      \begin{enumerate}
+				      \item Multiplication with a scalar is ensured by:
+				            \begin{align*}
+					            \left<\lambda\cdot x,y\right> & = (\lambda\cdot x)\cdot y       \\
+					                                          & = \lambda\cdot (x\cdot y)       \\
+					                                          & = \lambda \cdot\left<x,y\right>
+				            \end{align*}
+				      \item Addition is ensured by:
+				            \begin{align*}
+					            \left<x+y,z\right> & = (x+y)\cdot z                       \\
+					                               & = x \cdot z + y \cdot z              \\
+					                               & =\left<x,z\right> + \left<y,z\right>
+				            \end{align*}
+			      \end{enumerate}
+			\item Definite positivity is ensured by:
+			      \begin{align*}
+				      \left<x,x\right> & = x \cdot x \\
+				                       & = x^2       \\
+				                       & \geq 0
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-inner-product:2}
+	Let $\mathcal{V}=\mathbb{R}^n$, and let $x=\inlinematrix{x_1\\x_2\\\vdots\\x_n}$,
+	$y=\inlinematrix{y_1\\y_2\\\vdots\\y_n}$ be elements of this vector space. Define
+	\begin{equation}
+		\left<\cdot,\cdot\right>:\mathbb{R}^n\times\mathbb{R}^n\to\mathbb{R},
+		\quad(x,y)\mapsto\left<x,y\right>\defines x^T \cdot y
+	\end{equation}
+	Verify that this operation defines an inner product in $\mathbb{R}^n$.
+	\begin{flushleft}
+		\textbf{Answer}: Note that
+		\begin{equation*}
+			\left<x,y\right>\defines x^T \cdot y = \sum_{i=1}^n x_iy_i
+		\end{equation*}
+		With this in mind we can verify the axioms in \pref{definition}{def-inner-product}:
+		\begin{enumerate}
+			\item Symmetry is ensured by:
+		\end{enumerate}
+	\end{flushleft}
+\end{exm}
+
+\begin{rem}
+	The inner product defined in \pref{example}{exm-inner-product:2} is known as
+	the standard inner product in $\mathbb{R}^n$. Futhermore,
+	the standard inner product in $\mathbb{R}^n$. Futhermore, \pref{example}{exm-inner-product:1}
+	is a special case ($n=1$) of the standard product.
+\end{rem}
+
+\begin{exm}\label{exm-inner-product:3}
+	Let $\mathcal{V}=\mathcal{M}_n(\mathbb{R})$. Define
+	\begin{equation}
+		\left<\cdot,\cdot\right>:\mathcal{M}_n(\mathbb{R})\times\mathcal{M}_n(\mathbb{R})\to\mathbb{R},
+		\quad(A,B)\mapsto\left<A,B\right>\defines\ftrace\left(AB^T\right)
+	\end{equation}
+	Verify that this operation defines an inner product in $\mathcal{M}_n(\mathbb{R})$.
+	\begin{flushleft}
+		\textbf{Answer}:
+		\begin{enumerate}
+			\item Symmetry is ensured by the fact that:
+			      \begin{align*}
+				      \left<A,B\right> & = \ftrace\left(AB^T\right)                                                        \\
+				                       & = \ftrace\left((BA^T)^T\right) &  & \text{\pref{lemma}{lemma-transpose-matrices}} \\
+				                       & = \ftrace\left(BA^T\right)     &  & \text{\pref{remark}{rem-trace-of-transposed}} \\
+				                       & = \left<B,A\right>
+			      \end{align*}
+			\item Linearity\footnote{Recall that the trace is a linear map}
+			      \begin{enumerate}
+				      \item Multiplication with a scalar is ensured by:
+				            \begin{align*}
+					            \left<\lambda A, B\right> & = \ftrace\left((\lambda A)B^T\right) \\
+					                                      & = \ftrace\left(\lambda (AB^T)\right) \\
+					                                      & = \lambda\ftrace(AB^T)               \\
+					                                      & = \lambda\left<A,B\right>
+				            \end{align*}
+				      \item Addition is ensured by:
+				            \begin{align*}
+					            \left<A+B,C\right> & = \ftrace\left((A+B)C^T\right)                        \\
+					                               & = \ftrace\left(AC^T+BC^T\right)                       \\
+					                               & = \ftrace\left(AC^T\right) + \ftrace\left(BC^T\right) \\
+					                               & = \left<A,C\right>+\left<B,C\right>
+				            \end{align*}
+			      \end{enumerate}
+			\item Definite positivity is ensured by:
+			      \begin{align*}
+				      \left<A,A\right> & = \ftrace\left(AA^T\right)                  \\
+				                       & = \sum_{i=1}^n\left(AA^T\right)_{ii}        \\
+				                       & = \sum_{i=1}^n \sum_{k=1}^n A_{ik} A_{ki}^T \\
+				                       & = \sum_{i=1}^n \sum_{k=1}^n A_{ik} A_{ik}   \\
+				                       & =\sum_{i=1}^n \sum_{k=1}^n A_{ik}^2         \\
+				                       & \geq0
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}\label{exm-inner-product:4}
+	Let $\mathcal{V}$ be the vector space of real-valued integrable functions on
+	$[\alpha,\beta]$. Define
+	\begin{equation}
+		\left<\cdot,\cdot\right>:\mathcal{V}\times\mathcal{V}\to\mathbb{R},
+		\quad(f,g)\mapsto\left<f,g\right>\defines\int_\alpha^\beta f(x)g(x)\diff x
+	\end{equation}
+	Verify that this operation defines an inner product in $\mathcal{V}$.
+\end{exm}
