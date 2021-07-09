@@ -50,3 +50,102 @@
 		\end{enumerate}
 	\end{flushleft}
 \end{proof}
+
+\begin{rem}
+	The norm coincides with the usual Euclidean length, and will later give rise
+	to the notion of an angle.
+\end{rem}
+
+\begin{rem}\label{rem-cauchy-schwarz-inequality}
+	The Cauchy-Schwartz-Inequality states that
+	\begin{equation}
+		\abs{\left<u,v\right>}\leq\norm{u}\cdot\norm{v}
+	\end{equation}
+\end{rem}
+
+\begin{exm}\label{exm-norm:1}
+	In \pref{example}{exm-inner-product:2} we first encountered the standard inner
+	product. The norm built on top of the standard inner product (for any dimension)
+	is defined by
+	\begin{equation}
+		\norm{v}_2\defines\sqrt{v^Tv}
+	\end{equation}
+	Now let $v=\inlinematrix{v_1\\v_2}\in\mathbb{R}^2$.
+	The Euclidean norm is then given by
+	\begin{align*}
+		\norm{v} & = \sqrt{\left<v,v\right>}                                                  \\
+		         & = \sqrt{\left<\begin{pmatrix}v_1\\v_2\end{pmatrix},\begin{pmatrix}v_1\\v_2\end{pmatrix}\right>} \\
+		         & = \sqrt{\begin{pmatrix}v_1&v_2\end{pmatrix}\cdot\begin{pmatrix}v_1\\v_2\end{pmatrix}}         \\
+		         & = \sqrt{v_1^2+v_2^2}
+	\end{align*}
+	So, the Euclidean norm defined by the standard inner product in $\mathbb{R}^2$
+	gives the familiar length of a vector in the Euclidean structure initially
+	derived from the Pythagorean theorem.
+\end{exm}
+
+\begin{definition}\label{def-dot-product}
+	Let $u,v\in\mathcal{V}$ over $\mathcal{F}$. If we define the dot product to be
+	\begin{equation}\label{eq-dot-product}
+		u \cdot v \defines \norm{u}\norm{v}\cos(\alpha)
+	\end{equation}
+	where $\alpha$ denotes the angle between $u$ and $v$. When we define the dot
+	product like this we can show that this satisfies the axioms for an inner product.
+	This is part of the reason why define the cosine of alpha as
+	\begin{equation}\label{eq-cos-of-vectors}
+		\cos(\alpha)\defines\frac{\abs{\left<u,v\right>}}{\norm{u}\norm{v}}
+	\end{equation}
+	or, alternatively:
+	\begin{equation}\label{eq-angle-of-vectors}
+		\alpha\defines\arccos\left(\frac{\abs{\left<u,v\right>}}{\norm{u}\norm{v}}\right)
+	\end{equation}
+\end{definition}
+
+\begin{rem}
+	Note that by \pref{remark}{rem-cauchy-schwarz-inequality},
+	\begin{equation*}
+		\abs{\left<u,v\right>}\leq\norm{u}\norm{v}\overset{(\ref{eq-cos-of-vectors})}{\implies}\abs{\cos(\alpha)}\leq1
+	\end{equation*}
+\end{rem}
+
+\begin{proof}
+	Of \pref{definition}{def-dot-product}.
+	\begin{flushleft}
+		Let $u=\inlinematrix{u_1\\u_2}\in\mathbb{R}^2$
+		with $\mathcal{B}=\{\hat{e}_x,\hat{e}_y\}$ as the canonical basis. Then we can
+		write $u$ as
+		\begin{equation*}
+			u = u_1\hat{e}_x + u_2\hat{e}_y
+		\end{equation*}
+		Likewise, for a different vector
+		$v=\inlinematrix{v_1\\v_2}$
+		we write
+		\begin{equation*}
+			v = v_1\hat{e}_x + v_2\hat{e}_y
+		\end{equation*}
+		Then by equation (\ref{eq-dot-product}) we have that
+		\begin{align*}
+			\hat{e}_x\cdot\hat{e}_x & = \norm{\hat{e}_x}\norm{\hat{e}_x}\cos(0) \\
+			                        & = \norm{\hat{e}_x}^2                      \\
+			                        & = 1
+		\end{align*}
+		For the same reason we can argue that $\hat{e}_y\cdot\hat{e}_y=1$. More
+		interestingly,
+		\begin{align*}
+			\hat{e}_x\cdot\hat{e}_y & = \norm{\hat{e}_x}\norm{\hat{e}_y}\cos\left(\frac{\pi}{2}\right) \\
+			                        & = 0
+		\end{align*}
+		So, $\hat{e}_x\cdot\hat{e}_y=\hat{e}_y\cdot\hat{e}_x$. Putting this all
+		together we get
+		\begin{align*}
+			u \cdot v & = (u_1\hat{e}_x + u_2\hat{e}_y)(v_1\hat{e}_x + v_2\hat{e}_y)                                                \\
+			          & = u_1v_1\hat{e}_x\hat{e}_x + u_1v_2\hat{e}_x\hat{e}_y + u_2v_1\hat{e}_y\hat{e}_x + u_2v_2\hat{e}_y\hat{e}_y \\
+			          & = u_1v_1 + u_2v_2                                                                                           \\
+			          & = \left<u,v\right>
+		\end{align*}
+	\end{flushleft}
+\end{proof}
+
+\begin{rem}
+	The dot product product\footnote{Sometimes also called the scalar product}
+	is the standard inner product in Euclidean vector spaces.
+\end{rem}
