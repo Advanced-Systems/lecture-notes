@@ -234,6 +234,16 @@
 					"label": "TODO: Solve example"
 				}
 			]
+		},
+		{
+			"path": "src/sections/acknowledgements.tex",
+			"bookmarks": [
+				{
+					"line": 16,
+					"column": 19,
+					"label": "TODO: Citation needed (lecture) when incorporated"
+				}
+			]
 		}
 	]
 }
