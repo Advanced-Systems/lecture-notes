@@ -1,0 +1,395 @@
+\subsection{Metric Vector Spaces}\label{subsec-metric-spaces}
+
+\begin{rem}
+	This is the introduction paragraph to Terrence Tao's Analysis II lecture notes.
+	It's from Chapter I of his \texttt{MAT2400} course, and marks an important mile
+	stone for many future theorems.
+	\begin{displayquote}
+		Many of the arguments you have seen in several variable calculus are almost
+		identical to the corresponding arguments in one variable calculus, especially
+		arguments concerning convergence and continuity. The reason is that the notions
+		of convergence and continuity can be formulated in terms of distance, and that
+		the notion of distance between numbers that you need in the one variable theory,
+		is very similar to the notion of distance between points or vectors that you need
+		in the theory of functions of several variables. In more advanced mathematics,
+		we need to find the distance between more complicated objects than numbers or vectors,
+		\textit{e.g.} between sequences, sets and functions. These new notions of distance
+		lead to new notions of convergence and continuity, and these again lead to new
+		arguments surprisingly similar to those we have already seen in one and several
+		variable calculus. \par
+		After a while it becomes quite boring to perform almost the same arguments over
+		and over again in new settings, and one begins to wonder if there is a general
+		theory that cover all these examples --- is it possible to develop a
+		general theory of distance where we can prove the results we need once and for all?
+		The answer is yes, and the theory is called the theory of metric spaces. \par
+		A metric space is just a set $X$ equipped with a function $\diff$ of two variables
+		which measures the distance between points: $\diff(x,y)$ is the distance between
+		two points $x$ and $y$ in $X$. It turns out that if we put mild and natural conditions
+		on the function $\diff$, we can develop a general notion of distance that covers
+		distances between numbers, vectors, sequences, functions, sets, and much more. Within
+		this theory we can formulate and prove results about convergence and continuity once
+		and for all. The purpose of this chapter is to develop the basis theory of metric spaces.
+		In later chapters we shall meet some of the applications of this theory.
+	\end{displayquote}
+\end{rem}
+
+\begin{definition}\label{def-metric}
+	A metric space $(\mathcal{V},\diff)$ defined on an non-empty set $\mathcal{V}$
+	is equipped with a function
+	\begin{align}
+		 & \diff:\mathcal{V}\times\mathcal{V}\to[0,\infty),\nonumber            \\
+		 & (u,v)\mapsto\diff(u,v)\defines\norm{u-v}=\sqrt{\left<u-v,u-v\right>}
+	\end{align}
+	satisfying the following three axioms for all $u,v,w\in\mathcal{V}$:
+	\begin{enumerate}
+		\item $\diff(u,v)\geq0\quad\text{(Definite positivity)}$\footnote{$\diff(u,v)=0\Leftrightarrow u=v$}
+		\item $\diff(u,v)=\diff(v,u)\quad\text{(Symmetry)}$
+		\item $\diff(u,w)\leq\diff(u,v)+\diff(v,w)\quad\text{(Triangle inequality)}$
+	\end{enumerate}
+	A function satisfying all of these axioms is called a metric on $\mathcal{V}$.
+\end{definition}
+
+\begin{rem}
+	The equation in \pref{definition}{def-metric} coincides with the familiar
+	distance equations for $\mathbb{R}^2$ or $\mathbb{R}^3$ when we use the
+	standard inner product.
+\end{rem}
+
+\begin{proof}
+	Of \pref{definition}{def-metric}.
+	\begin{flushleft}
+		\begin{enumerate}
+			\item Definite positivity
+			      \begin{align*}
+				      \diff(u,v) & = \sqrt{\left<u-v,u-v\right>}                                                  \\
+				                 & \geq0                         &  & \text{\pref{definition}{def-inner-product}}
+			      \end{align*}
+			\item Symmetry
+			      \begin{align*}
+				      \diff(u,v) & = \sqrt{\left<u-v,u-v\right>}                                                                                                 \\
+				                 & = \sqrt{\left<u,u\right>-\left<u,v\right>-\left<v,u\right>+\left<v,v\right>} &  & \text{\pref{definition}{def-inner-product}} \\
+				                 & = \sqrt{\left<v,v\right>-\left<v,u\right>-\left<u,v\right>+\left<u,u\right>}                                                  \\
+				                 & = \sqrt{\left<v-u,v-u\right>}                                                &  & \text{\pref{definition}{def-inner-product}} \\
+				                 & = \diff(v,u)
+			      \end{align*}
+			\item Triangle inequality
+			      \begin{align*}
+				      \diff(u,w) & = \norm{u-v}                                                      \\
+				                 & = \norm{u-w+w-v}                                                  \\
+				                 & = \norm{u-w} + \norm{w-v} &  & \text{\pref{definition}{def-norm}} \\
+				                 & = \diff(u,w) + \diff(w,v)
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{proof}
+
+\begin{rem}
+	Any inner product space $(\mathcal{V},\left<\cdot,\cdot\right>)$ is a normed
+	vector space $(\mathcal{V},\norm{\cdot})$ and a metric space $(\mathcal{V},\diff)$.
+	These algebraic structures provide geometric properties on $\mathcal{V}$. Note
+	that there are many different norms and metrics, but not every inner product
+	can be promoted to a norm, nor does every norm give rise to a metric.
+\end{rem}
+
+\begin{definition}\label{def-hamming-metric}
+	Let $X$ be a non-empty set and $x,y,z\in X$ be vectors of length $n$, \textit{i.e.}
+	$x_i=\inlinematrix{x_1&x_2&\cdots&x_n}$ such that $x_i\in\{0,1\}$. Then we define
+	the Hamming metric as
+	\begin{equation*}
+		\diff(x,y) = \sum_{i=1}^n \abs{x_i-y_i},
+	\end{equation*}
+	that is the number of indices $k$ such that $x_k\neq y_k$.
+\end{definition}
+
+\begin{proof}
+	Of \pref{definition}{def-hamming-metric}.
+	\begin{flushleft}
+		We will prove that the Hamming metric is indeed a metric.
+		\begin{enumerate}
+			\item Definite positivity: If $x=y$, then
+			      \begin{align*}
+				      \diff(x,x) & = \sum_{i=1}^n \abs{x_i-x_i} \\
+				                 & = 0
+			      \end{align*}
+			\item Symmetry:
+			      \begin{align*}
+				      \diff(x,y) & = \sum_{i=1}^n \abs{x_i-y_i}          \\
+				                 & = \sum_{i=1}^n \abs{-1\cdot(x_i-y_i)} \\
+				                 & = \sum_{i=1}^n \abs{y_i-x_i}          \\
+				                 & = \diff(y,x)
+			      \end{align*}
+			\item Triangle inequality:
+			      \begin{align*}
+				      \diff(x,y) & = \sum_{i=1}^n \abs{x_i-y_i}                              \\
+				                 & = \sum_{i=1}^n \abs{x_i-z_i+z_i-y_i}                      \\
+				                 & = \sum_{i=1}^n \left(\abs{x_i-z_i}+\abs{z_i-y_i}\right)   \\
+				                 & = \sum_{i=1}^n \abs{x_i-z_i} + \sum_{i=1}^n \abs{z_i-y_i} \\
+				                 & = \diff(x,z) + \diff(z,y)
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{proof}
+
+\begin{thm}\label{thm-metric-inequality}
+	Let $(X,\diff)$ be a metric space. Then
+	\begin{equation}
+		\abs{\diff(x,y)-\diff(x,z)}\leq\diff(z,y)
+	\end{equation}
+	for all $x,y,z\in X$.
+\end{thm}
+
+\begin{proof}
+	Of \pref{theorem}{thm-metric-inequality}.
+	\begin{flushleft}
+		The triangle inequality for metrics imply that
+		\begin{align}
+			 & \diff(x,y) \leq \diff(x,z) + \diff(z,y) \nonumber                      \\
+			\implies
+			 & \diff(x,y) - \diff(x,z) \leq \diff(z,y) \label{eq-metric-inequality:1}
+		\end{align}
+		but also
+		\begin{align}
+			 & \diff(x,z) \leq \diff(x,y) + \diff(y,z) \nonumber                                                               \\
+			\implies
+			 & \diff(x,z) - \diff(x,y) \leq \diff(z,y) \nonumber                                          &  & \text{symmetry} \\
+			\implies
+			 & -1\cdot\left(\diff(x,y) - \diff(x,z)\right) \leq \diff(z,y) \label{eq-metric-inequality:2}
+		\end{align}
+		But by the definition of an an absolute value, \pref{equation}{eq-metric-inequality:1}
+		together with \pref{equation}{eq-metric-inequality:2} are precisely what
+		we wanted to show:
+		\begin{equation*}
+			\abs{\diff(x,y) - \diff(x,z)} \leq \diff(z,y)
+		\end{equation*}
+	\end{flushleft}
+\end{proof}
+
+\begin{exm}
+	A sequence $\{x_n\}_{n\in\mathbb{N}}$ of real numbers is called bounded if there
+	is a number $m\in\mathbb{R}$ such that $\abs{x_n}\leq M$ for all $n\in\mathbb{N}$.
+	Let $X$ be the set of all bounded sequences. Show that
+	\begin{equation*}
+		\diff(\{x_n\},\{y_n\})\defines\sup\{\abs{x_n-y_n}:n\in\mathbb{N}\}
+	\end{equation*}
+	defines a metric on $X$.
+	\begin{flushleft}
+		\textbf{Answer}:
+		\begin{enumerate}
+			\item Definite positivity: Let $x_n=y_n$. Then,
+			      \begin{align*}
+				      \diff(\{x_n\},\{x_n\}) & = \sup\{\abs{x_n-x_n}\} \\
+				                             & = \sup\{\abs{0}\}       \\
+				                             & = 0
+			      \end{align*}
+			      Suppose that $x_n\neq y_n$. Then,
+			      \begin{align*}
+				      \diff(\{x_n\},\{y_n\}) & = \sup\{\abs{x_n-y_n}\} \\
+				                             & \geq \abs{x_n-y_n}      \\
+				                             & > 0
+			      \end{align*}
+			\item Symmetry:
+			      \begin{align*}
+				      \diff(\{x_n\},\{y_n\}) & = \sup\{\abs{x_n-y_n}\}          \\
+				                             & = \sup\{\abs{-1\cdot(y_n-x_n)}\} \\
+				                             & = \sup\{\abs{y_n-x_n}\}          \\
+				                             & = \diff(\{y_n\},\{x_n\})
+			      \end{align*}
+			\item Triangle inequality:
+			      \begin{align*}
+				      \abs{x_n-y_n} & = \abs{x_y-z_n+z_n-y_n}                                              \\
+				                    & \leq \abs{x_y-z_n} + \abs{z_n-y_n}                                   \\
+				                    & \leq \sup\{\abs{x_y-z_n}\} + \sup\{\abs{z_n-y_n}\} &  & \text{lemma} \\
+				                    & = \diff(\{x_n\},\{z_n\}) + \diff(\{z_n\},\{y_n\})
+			      \end{align*}
+			\item Lemma: Before we can complete the proof of the triangle inequality
+			      we need to show the following:
+			      \begin{equation*}
+				      \{\abs{x_n-y_n}:n\in\mathbb{N}\}\leq L \implies \sup_{n\in\mathbb{N}} \{\abs{x_n-y_n}\}\leq L
+			      \end{equation*}
+			      This will be shown with a proof of contradiction: Suppose that
+			      \begin{equation*}
+				      s\defines \sup_{n\in\mathbb{N}} \{\abs{x_n-y_n}\}> L
+			      \end{equation*}
+			      so $s > L$. Then it follows that $s \geq \{\abs{x_n-y_n}\}$ by the definition
+			      of the supremum. We already proved that
+			      \begin{equation*}
+				      \{\abs{x_n-y_n}\} \leq \diff(\{x_n\},\{z_n\}) + \diff(\{z_n\},\{y_n\}) = L
+			      \end{equation*}
+			      This in turn implies that
+			      \begin{equation*}
+				      \{\abs{x_n-y_n}\} \leq L < s,
+			      \end{equation*}
+			      but then $s$ is no longer a least upper bound anymore, \textit{i.e.}
+			      \begin{equation*}
+				      s \neq \sup_{n\in\mathbb{N}} \{\abs{x_n-y_n}\}
+			      \end{equation*}
+			      So, our initial assumption was wrong all along. Thus,
+			      \begin{align*}
+				       & \{\abs{x_n-y_n}\} \leq L                       \\
+				      \implies
+				       & \sup_{n\in\mathbb{N}} \{\abs{x_n-y_n}\} \leq L \\
+				      \implies
+				       & \diff(\{x_n\},\{y_n\}) \leq L
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}
+	This example demonstrates what metric compositions are good for. Let $\diff_1$
+	and $\diff_2$ be two metrics on an non-empty set $X$. We will show that
+	\begin{equation*}
+		\diff(x,y) = \diff_1(x,y)+ \diff_2(x,y)
+	\end{equation*}
+	defines a metric on $X$.
+	\begin{flushleft}
+		\textbf{Proof}: Let $x=y$. Then,
+		\begin{align*}
+			\diff(x,x) & = \underbrace{\diff_1(x,x)}_{=0} + \underbrace{\diff_2(x,x)}_{=0} \\
+			           & = 0
+		\end{align*}
+		Next, suppose that $x\neq y$. Then
+		\begin{align*}
+			\diff(x,y) & = \underbrace{\diff_1(x,y)}_{\geq0} + \underbrace{\diff_2(x,y)}_{\geq0} \\
+			           & \geq 0
+		\end{align*}
+		shows definite positivity for $\diff$. As for symmetry we have that
+		\begin{align*}
+			\diff(x,y) & = \diff_1(x,y) + \diff_2(x,y) \\
+			           & = \diff_1(y,x) + \diff_2(y,x) \\
+			           & = \diff(y,x)
+		\end{align*}
+		Last but not least we also show that the triangle inequality holds:
+		\begin{align*}
+			\diff(x,y) & = \diff_1(x,y) + \diff_2(x,y)                                                            \\
+			           & \leq \left(\diff_1(x,z) + \diff_1(z,y)\right) + \left(\diff_2(x,z) + \diff_2(z,y)\right) \\
+			           & = \left(\diff_1(x,z) + \diff_2(x,z)\right) + \left(\diff_1(z,y) + \diff_2(z,y)\right)    \\
+			           & = \diff(x,z) + \diff(z,y)
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}
+	Let $X$ be a non-empty set, and let $\rho:X \times X \to \mathbb{R}$ be a function
+	satisfying for all $x,y,z\in X$ that
+	\begin{enumerate}
+		\item $\rho(x,y)\geq0$ with equality if $x=y$
+		\item $\rho(x,y)\leq\rho(x,z)+\rho(z,y)$
+	\end{enumerate}
+	Define $\diff: X \times X \to \mathbb{R}$ by
+	\begin{equation*}
+		\diff(x,y)\defines \max\{\rho(x,y),\rho(y,x)\}
+	\end{equation*}
+	Show that $\diff$ is a metric on $X$.
+	\begin{flushleft}
+		\textbf{Answer}: First we show definite positivity for $\diff$. Let $x=y$. Then,
+		\begin{align*}
+			\diff(x,x) & = \max\{\rho(x,x),\rho(x,x)\} \\
+			           & = \rho(x,x)                   \\
+			           & = 0
+		\end{align*}
+		Next comes symmetry:
+		\begin{align*}
+			\diff(x,y) & = \max\{\rho(x,y),\rho(y,x)\}  \\
+			           & = \max\{\rho(y,x), \rho(x,y)\} \\
+			           & = \diff(y,x)
+		\end{align*}
+		Finally, we verify the triangle inequality:
+		\begin{align*}
+			\diff(x,y) & = \max\{\rho(x,y),\rho(y,x)\}                        \\
+			           & \leq \max\{\rho(x,z)+\rho(z,y),\rho(y,z)+\rho(z,x)\} \\
+			           & = \begin{cases}
+				\rho(x,z)+\rho(z,y)\text{ if } \rho(x,z)+\rho(z,y) \geq \rho(y,z)+\rho(z,x) \\
+				\rho(y,z)+\rho(z,x)\text{ otherwise}
+			\end{cases}                         \\
+			           & = \begin{cases}
+				\max\{\rho(x,z),\rho(z,x)\}+\max\{\rho(z,y),\rho(y,z)\} \\
+				\max\{\rho(y,z),\rho(z,y)\}+\max\{\rho(z,x),\rho(x,z)\}
+			\end{cases}                         \\
+			           & = \begin{cases}
+				\diff(x,z)+\diff(z,y) \\
+				\diff(y,z)+\diff(z,x)
+			\end{cases}                         \\
+			           & = \diff(x,z)+\diff(z,y)
+		\end{align*}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}
+	Assume that $(X,\diff_X)$ and $(Y,\diff_Y)$ are two metric spaces. Define a function
+	\begin{align*}
+		 & \diff:(X \times Y)\times(X \times Y)\to\mathbb{R},                  \\
+		 & \diff((x_1,y_1),(x_2,y_2))\defines\diff_X(x_1,x_2)+\diff_Y(y_1,y_2)
+	\end{align*}
+	Show that this function defines a metric on $X \times Y$.
+	\begin{flushleft}
+		\textbf{Answer}:
+		\begin{enumerate}
+			\item Definite positivity: Let $(x_1,y_1)=(x_2,y_2)$. Then,
+			      \begin{align*}
+				      \diff((x_1,y_1),(x_1,y_1)) & = \underbrace{\diff_X(x_1,x_1)}_{=0}+\underbrace{\diff_Y(y_1,y_1)}_{=0} \\
+				                                 & = 0
+			      \end{align*}
+			      Next consider the case where $(x_1,y_1)\neq(x_2,y_2)$. Then,
+			      \begin{align*}
+				      \diff((x_1,y_1),(x_2,y_2)) & = \underbrace{\diff_X(x_1,x_2)}_{\geq0}+\underbrace{\diff_Y(y_1,y_2)}_{\geq0} \\
+				                                 & \geq 0
+			      \end{align*}
+			\item Symmetry:
+			      \begin{align*}
+				      \diff((x_1,y_1),(x_2,y_2)) & = \diff_X(x_1,x_2) + \diff_Y(y_1,y_2) \\
+				                                 & = \diff_X(x_2,x_1) + \diff_Y(y_2,y_1) \\
+				                                 & = \diff((x_2,y_2),(x_1,y_1))
+			      \end{align*}
+			\item Triangle inequality:
+			      \begin{align*}
+				      \diff((x_1,y_1),(x_2,y_2)) & = \diff_X(x_1,x_2) + \diff_Y(y_1,y_2)                     \\
+				                                 & \leq \left(\diff_X(x_1,x_3) + \diff_X(x_3,x_2)\right)
+				      +\left(\diff_Y(y_1,y_3)+\diff_Y(y_3,y_2)\right)                                        \\
+				                                 & = \left(\diff_X(x_1,x_3)+\diff_Y(y_1,y_3)\right)
+				      +\left(\diff_X(x_3,x_2)+\diff_Y(y_3,y_2)\right)                                        \\
+				                                 & = \diff((x_1,y_1),(x_3,y_3)) + \diff((x_3,y_3),(x_2,y_2))
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{exm}
+
+\begin{exm}
+	Let $X$ be the set of all continuos functions $f:[a,b]\to\mathbb{R}$. Show that
+	\begin{equation*}
+		\diff(f,g)=\int_a^b \abs{f(x)-g(x)}\diff x
+	\end{equation*}
+	is a metric on $X$.
+	\begin{flushleft}
+		\textbf{Answer}:
+		\begin{enumerate}
+			\item Definite positivity: Let $f(x)=g(x)$ for all $x\in[a,b]$. Then,
+			      \begin{align*}
+				      \diff(f,f) & = \int_a^b \abs{f(x)-f(x)}\diff x \\
+				                 & = \int_a^b 0 \diff x              \\
+				                 & = 0
+			      \end{align*}
+			      Else, if $f(x)\neq g(x)$ on $[a,b]$, then
+			      \begin{align*}
+				      \diff(f,g) & = \int_a^b \underbrace{\abs{f(x)-g(x)}}_{\geq}\diff x \\
+				                 & \geq 0
+			      \end{align*}
+			      since the absolute value ensures positivity.
+			\item Symmetry:
+			      \begin{align*}
+				      \diff(f,g) & = \int_a^b \abs{f(x)-g(x)}\diff x              \\
+				                 & = \int_a^b \abs{-1\cdot(g(x)-f(x))}\diff x     \\
+				                 & = \int_a^b \abs{-1}\cdot\abs{g(x)-f(x)}\diff x \\
+				                 & = \diff(g,f)
+			      \end{align*}
+			\item Triangle inequality:
+			      \begin{align*}
+				      \diff(f,g) & = \int_a^b \abs{f(x)-g(x)}\diff x                                     \\
+				                 & = \int_a^b \abs{f(x)-h(x)+h(x)-g(x)}\diff x                           \\
+				                 & \leq \int_a^b \left(\abs{f(x)-h(x)}+\abs{h(x)-g(x)}\right)\diff x     \\
+				                 & = \int_a^b \abs{f(x)-h(x)} \diff x + \int_a^b \abs{h(x)-g(x)} \diff x \\
+				                 & = \diff(f,h) + \diff(h,g)
+			      \end{align*}
+		\end{enumerate}
+	\end{flushleft}
+\end{exm}
