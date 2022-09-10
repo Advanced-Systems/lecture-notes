@@ -1,0 +1,84 @@
+\subsection{First Order Linear Differential Equations}\label{subsec-folde}
+
+\begin{flushleft}
+	The concepts of \gls{folde} are deeply tied to \hyperref[sec-single-var-calc]{calculus};
+	in fact chances are very high that you already recognize some differential equations.
+	Take for example the equation
+\end{flushleft}
+
+\begin{equation}\label{eq-folde-simple}
+	\frac{\diff y}{\diff x} = f(x)
+\end{equation}
+
+\begin{flushleft}
+	To find a solution to this equation means that one finds a function $y=y(x)$ such
+	that its derivative is equal to $f(x)$. By using the \hyperref[thm-the-fundamental-theorem-of-calculus]{Fundamental Theorem of Calculus}
+	we can a one-parameter family of solutions to this equation with
+\end{flushleft}
+
+\begin{equation}\label{eq-folde-general-solution}
+	y(x) = y_0 + \int_{x_0}^{x} f(s) \diff s
+\end{equation}
+
+\begin{flushleft}
+	where $f$ is a continuous function defined on $[a,b]$ subject to the initial
+	condition $y(x_0)=y_0$.
+\end{flushleft}
+
+\begin{definition}\label{def-separable-equation}
+	If the right-hand side of the equation
+	\begin{equation}
+		\frac{\diff y}{\diff x} = f(x,y)
+	\end{equation}
+	can be expressed as a function $g(x)$ that depends only on $x$ times a function
+	$p(y)$ which in turn only depends on $y$, then the differential equation is
+	said to be separable \cite[p.41]{nagle2010}.
+\end{definition}
+
+\begin{flushleft}
+	We can generalize \pref{equation}{eq-folde-simple} and replace the right-hand
+	side of this equation by a function that depends on two independent variables
+	$x$ and $y$:
+\end{flushleft}
+
+\begin{equation}\label{eq-folde-simple2}
+	\frac{\diff y}{\diff x} = f(x, y)
+\end{equation}
+
+\begin{flushleft}
+	This equation can be further rewritten so that $f(x,y)$ linearly depends on
+	$y$, \emph{i.e.} $f(x,y) = g(x) - p(x)y$. Thus, we are lead to study
+\end{flushleft}
+
+\begin{equation}\label{eq-folde-simple3}
+	\frac{\diff y}{\diff x} + p(x)y = g(x)
+\end{equation}
+
+\begin{flushleft}
+	where $g(x)$ and $p(x)$ are continuous functions of $x$.
+\end{flushleft}
+
+\begin{exm}\label{exm-diff-eq-euler}
+	Take \pref{equation}{eq-folde-simple3} and make this \gls{ode} subject to
+	the initial conditions that $p(x)=-1$ and $g(x)=0$. Then this becomes a
+	homogeneous \gls{folde} and assumes the form of
+	\begin{equation}\label{eq-diff-eq-euler}
+		\frac{\diff y}{\diff x} = y
+	\end{equation}
+	In \hyperref[sec-single-var-calc]{single variable calculus} we already
+	studied a function thoroughly that satisfies this equation, namely
+	the limit mentioned in \pref{equation}{eq-euler-limit}, which can also
+	be expressed as the solution $y=y(x)$ to the equation:
+	\begin{equation*}
+		x = \int_1^y \frac{1}{t} \diff t
+	\end{equation*}
+	One could go on to use \pref{equation}{eq-diff-eq-euler} to prove that the
+	derivative of $\exp(x)$ is equal to itself by noting that this function can
+	also be defined as the unique solution which satisfies $y(0)=1$. Another
+	interesting fact about this differential equation follows from the fact
+	that it immediately implies the taylor expansion by using the forward difference
+	formula:
+	\begin{equation*}
+		\exp(x) = \sum_{n=0}^\infty \frac{x^n}{n!}
+	\end{equation*}
+\end{exm}
