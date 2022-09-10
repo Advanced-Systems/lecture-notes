@@ -3,7 +3,6 @@
 \usepackage[american]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage[activate={true,nocompatibility},final,tracking=true,kerning=true,spacing=true,factor=1100,stretch=10,shrink=10]{microtype}
 \usepackage{graphicx}
 \usepackage[table,dvipsnames]{xcolor}
 \usepackage{caption}
@@ -26,7 +25,7 @@
 \usepackage[acronym]{glossaries}
 \usepackage[backend=biber,style=phys]{biblatex}
 
-\makeatletter 
+\makeatletter
 % extension method for amsmath matrix environments
 \renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
   \hskip -\arraycolsep
@@ -48,18 +47,13 @@
 \newcommand*{\pref}[2]{#1 (\ref{#2})}
 \definecolor{lightgray}{rgb}{0.9725,0.9725,0.9725}
 
-% microtype
-\SetTracking{encoding={*}, shape=sc}{0}
-
 % pgfplots
 \pgfplotsset{compat=newest}
 
 \addbibresource{bibliography.bib}
 
 \makenoidxglossaries
-\newacronym{dne}{DNE}{does not exist}
-\newacronym{pfd}{PFD}{partial fraction decomposition}
-\newacronym{wlog}{WLOG}{without loss of generality}
+\include{acronyms}
 
 % mathematicians
 \newcommand*{\lhoptial}{L'H{\^o}pital}
@@ -89,100 +83,65 @@
 
 \newpage
 
-\microtypesetup{protrusion=false}
-\clearpage
-\printnoidxglossaries
+\printnoidxglossary[type=\acronymtype]
+
 \newpage
+
 \tableofcontents
-\microtypesetup{protrusion=false}
 
 \newpage
 
 % === Begin Section Includes ===
 
 \include{sections/acknowledgements}
-
 \include{sections/introduction}
-
+% Linear Algebra
 \include{sections/lina}
-
 \include{sections/matrices}
-
 \include{sections/sys-of-lina-eq}
-
 \include{sections/vector-spaces}
-
 \include{sections/lina-comb}
-
 \include{sections/lina-inde}
-
 \include{sections/vector-space-props}
-
 \include{sections/coord-vectors}
-
 \include{sections/dim-row-col}
-
 \include{sections/invert-matrices}
-
 \include{sections/determinants}
-
 \include{sections/adjugate}
-
 \include{sections/cramers-rule}
-
 \include{sections/linear-maps}
-
 \include{sections/morphism}
-
 \include{sections/sim-matrices}
-
 \include{sections/diagonalization}
-
 \include{sections/inner-product-space}
-
 \include{sections/normed-vector-spaces}
-
 \include{sections/metric-vector-spaces}
-
 \include{sections/orthogonality}
-
+% Analysis
 \include{sections/analysis}
-
 \include{sections/logic}
-
 \include{sections/sets}
-
 \include{sections/functions}
-
 \include{sections/limit-prerequisites}
-
 \include{sections/limits}
-
 \include{sections/sequences}
-
 \include{sections/subsequences}
-
 \include{sections/continuity}
-
+% Single Variable Calculus
 \include{sections/single-variable-calculus}
-
 \include{sections/derivatives}
-
 \include{sections/higher-order-derivatives}
-
 \include{sections/curve-sketching}
-
 \include{sections/taylor-polynomial}
-
 \include{sections/indefinite-integrals}
-
 \include{sections/definite-integrals}
-
 \include{sections/improper-integrals}
-
 \include{sections/series}
-
+% Multi Variable Calculus
 \include{sections/multi-var-calc}
+% Differential Equations
+\include{sections/diff-eq}
+\include{sections/folde}
 
 \include{sections/appendix}
 
