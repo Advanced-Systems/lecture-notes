@@ -104,7 +104,7 @@
 			"path": "src/document.tex",
 			"bookmarks": [
 				{
-					"line": 63,
+					"line": 57,
 					"column": 16,
 					"label": "TODO: Move these macros to mathtools"
 				}
