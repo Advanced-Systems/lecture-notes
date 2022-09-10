@@ -19,16 +19,16 @@ Update all submodules:
 git submodule update --init --recursive
 ```
 
-Compile a new PDF in `/build`:
+Compile a new PDF in `src`:
 
 ```cli
-latexmk src/document.tex -outdir=build -pdf
+latexmk -cd "src/document.tex" -pdf
 ```
 
 ## Clear Cache
 
 ```cli
-latexmk -C -outdir=build
+latexmk -C -outdir=src
 ```
 
 ## Misc Notes
