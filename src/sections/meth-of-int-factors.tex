@@ -1,0 +1,68 @@
+\subsection{Method of Integrating Factors}\label{subsec-meth-of-int-factors}
+
+\begin{flushleft}
+	The method of integrating factors is an algorithm for solving differential equations
+	of the form described in \pref{equation}{eq-folde-simple3}. If this differential
+	equation were already in the form of \pref{equation}{def-separable-equation} it
+	would be a separable differential equation whose exact solution could be immediately
+	determined by integrating both sides. However, for $p(x)\neq0$ this is not an option
+	until we find an \emph{integrating factor} $\mu(x)$ and multiply this function to
+	\pref{equation}{eq-folde-simple3}. The reason why we would do that is that we did
+	like to transform the left-hand of the equation below such that it can be written
+	in terms of a derivative with respect to $x$ which is how the method of integrating
+	factors implements a solution for a \gls{folde} written	in general form.
+\end{flushleft}
+
+\begin{equation*}
+	\mu(x)\frac{\diff y}{\diff x} + \mu(x)p(x)y = \mu(x)g(x)
+\end{equation*}
+
+\begin{flushleft}
+	From here on we can make the following observation: as far as the right-hand
+	side of the	aforementioned equation is concerned, it would be beneficial to our
+	objective to find a function $\mu(x)$ (the so called \emph{integrating factor})
+	such that
+\end{flushleft}
+
+\begin{equation}\label{eq-meth-of-int-factors-tmp1}
+	\mu(x)g(x) = \frac{\diff}{\diff x}\left(\mu(x)y\right)
+\end{equation}
+
+\begin{flushleft}
+	Based on this assumption we further note that if this were to be the
+	case, then we can simplify this expression with the product rule, so from
+	\pref{equation}{eq-meth-of-int-factors-tmp1} it follows that
+\end{flushleft}
+
+\begin{align*}
+	\mu(x)\frac{\diff y}{\diff x} + \mu(x)p(x)y & = \frac{\diff}{\diff x}\left(\mu(x)y\right) \\
+	\implies \mu(x)p(x)                         & = \frac{\diff \mu(x)}{\diff x}
+\end{align*}
+
+\begin{flushleft}
+	By separation of variables this differential equation reveals the integrating
+	factor which takes on the form of
+\end{flushleft}
+
+\begin{align}
+	\int \frac{\mu^\prime(x)}{\mu(x)} \diff x & = \int p(x) \diff x                 \nonumber                            \\
+	\implies \ln\abs{\mu(x)} + C              & = \int p(x) \diff x                  \nonumber                           \\
+	\overset{C=0}{\implies} \mu(x)            & = \exp\left(\int p(x) \diff x\right) \label{eq-meth-of-int-factors-tmp2}
+\end{align}
+
+\begin{flushleft}
+	Notice that imposing $C=0$ on \pref{equation}{eq-meth-of-int-factors-tmp2}
+	does not cause a loss of generality. Taking this into account, we solve
+	\pref{equation}{eq-meth-of-int-factors-tmp1} for $\mu(x)$ which yields
+	the final transformation
+\end{flushleft}
+
+\begin{equation}\label{eq-meth-of-int-factors}
+	y = \frac{1}{\mu(x)}\int \mu(x)g(x)\diff x
+\end{equation}
+
+\begin{flushleft}
+	The most noticeably constraint for this technique is that we limit ourselves
+	to integrals that we are able to solve analytically which is something that is
+	going to haunt is in the next sections.
+\end{flushleft}
