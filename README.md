@@ -11,27 +11,46 @@
 This document is a compilation of lecture notes for intermediate mathematics. It
 is intended to serve as a study guide for members of the Advanced System organization.
 
-## Compile
+## Prerequisites
 
-Update all submodules:
+You can use `texliveonfly` to install document-specific packages on the fly from
+the terminal automatically:
+
+```cli
+tlmgr install texliveonfly
+```
+
+You then this program like this:
+
+```cli
+texliveonfly ./src/document.tex
+```
+
+This example also uses the Advanced Systems' [Math Macros](https://github.com/Advanced-Systems/mathmacros)
+as a git submodule, although you can easily remove references to this library if
+you don't need these macros.
 
 ```cli
 git submodule update --init --recursive
 ```
 
-Compile a new PDF in `src`:
+## Compile
+
+Both TeX Live and MikTeX come with `latexmk`, though since this is a
+perl script you need to have perl installed on your system to run
+this command. Alternatively, use the `pdflatex` command.
 
 ```cli
-latexmk -cd "src/document.tex" -pdf
+latexmk -cd ./src/document.tex -outdir='../build' -pdf --interaction=batchmode
 ```
 
 ## Clear Cache
 
 ```cli
-latexmk -C -outdir=src
+latexmk -C -outdir=build
 ```
 
-## Misc Notes
+## Editors Notes
 
 This project uses `.editorconfig` to ensure that consisting formatting is applied
 everywhere. If you are using a fresh `texlive` installation, chances are that you
